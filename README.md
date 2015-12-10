@@ -10,3 +10,6 @@
 * Command ini akan menginstall package-package yang dibutuhkan oleh proyek
 * Selanjutnya ketikkan command berikut: `php artisan key:generate` untuk menggenerate key app pada .env
 * Terakhir ketikkan command berikut: `php artisan migrate` untuk melakukan migrasi ke database
+* Proyek siap digunakan pada komputer masing-masing
+
+### Kelompok lain silahkan mengikuti cara ini

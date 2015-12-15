@@ -18,6 +18,7 @@
                     <th>Output</th>
                     <th>Kode Sub Output</th>
                     <th>Uraian</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +28,8 @@
 	                    <td><a href="">{{ $suboutput->output->uraian }}</a></td>
 	                    <td><a href="">{{ $suboutput->kode_suboutput }}</a></td>
 	                    <td>{{ $suboutput->uraian }}</td>
+                        <td><button type="button" class="btn btn-info">Edit</button>
+                            <button type="button" class="btn btn-danger">Delete</button></td>
 	                </tr>
                 @endforeach
             </tbody>

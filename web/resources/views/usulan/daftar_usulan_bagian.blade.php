@@ -3,6 +3,9 @@
 @section('isi')
 <br>
 <br>
+<a href=""><button type="button" class="btn btn-primary">Tambah</button></a>
+<br>
+<br>
 	<div class="table-responsive">
         <form id="calx">
         <table class="table table-bordered table-hover table-striped">

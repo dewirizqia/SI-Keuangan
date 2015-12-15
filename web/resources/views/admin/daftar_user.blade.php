@@ -16,10 +16,10 @@
                 <tr>
                     <th>NO</th>
                     <th>Nama</th>
-                    <th>NIP</th>
                     <th>Level</th>
                     <th>Email</th>
                     <th>Username</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,14 +27,11 @@
 	                <tr>
 	                    <td>{{ $no++ }}</td>
 	                    <td><a href="">{{ $user->nama }}</a></td>
-	                    @if($user->nip = 0)
-	                    <td>{{ $user->nip }}</td>
-	                    @else
-	                    <td>-</td>
-	                    @endif
 	                    <td>{{ $user->jabatan }}</td>
 	                    <td>{{ $user->email }}</td>
 	                    <td>{{ $user->name }}</td>
+                        <td><button type="button" class="btn btn-info">Edit</button>
+                            <button type="button" class="btn btn-danger">Delete</button></td>
 	                </tr>
                 @endforeach
             </tbody>

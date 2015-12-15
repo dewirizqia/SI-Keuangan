@@ -79,8 +79,16 @@ class AdminController extends Controller
 
             public function buat_usulan_bagian($bagian)
     {
-        
-        return view('usulan.buat_usulan_bagian', compact('bagian'));
+        $no_suboutput = 0;
+        $no_input = 0;
+        $no_akun = 0;
+        $no_subinput = 0;
+        $databagian = Bagian::whereId($bagian)->firstOrFail();
+        $suboutput = Sub_Output::latest()->get();
+        $input = Input::latest()->get();
+        $subinput = Sub_Input::latest()->get();
+        $akun = Akun::orderBy('id', 'asc')->get();
+        return view('usulan.buat_usulan_bagian', compact('databagian', 'suboutput','input', 'subinput', 'akun', 'no_suboutput', 'no_input', 'no_subinput', 'no_akun'));
     }
 
     public function daftar_user()
@@ -88,6 +96,10 @@ class AdminController extends Controller
         $no = "1";
         $suser = User::orderBy('jabatan', 'asc')->get();
         return view('admin.daftar_user', compact('suser', 'no'));
+    }
+    public function buat_user()
+    {
+        return view('admin.tambah_user');
     }
     public function daftar_output()
     {

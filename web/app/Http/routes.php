@@ -18,7 +18,7 @@ if (Schema::hasTable('Bagian'))
 }
 
 
-Route::get('/', ['as'=>'home','middleware' => 'auth', function () {return view('home.admin');}]);
+Route::get('/', ['as'=>'home','middleware' => 'auth', function () {return view('@layout.base_admin');}]);
 Route::get('/admin', function () {return view('home.admin');});
 Route::get('/keuangan', function () {return view('home.keuangan');});
 Route::get('/dekan', function () {return view('home.dekan');});

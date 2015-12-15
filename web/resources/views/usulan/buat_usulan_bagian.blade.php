@@ -6,31 +6,74 @@
 @stop
 
 @section('isi')
-<form>
+<form id="calx">
 <table id="usulan" class="table table-bordered table-hover table-striped">
 </table>
+
 </form>
 
 @stop
 
 @section('script')
 
+<script type="text/javascript" src="css/jquery-1.9.1.min.js"></script>
+    <script src="css/jquery-calx-1.1.9.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('#calx').calx();
+    });
+    </script>
+
+
 <script>
 $(function () {
 $('#usulan').appendGrid({
-caption: 'Usulan ',
+caption: 'Usulan {{$databagian->detail}}',
 initRows: 1,
 columns: [
 { name: 'tahun', display: 'Tahun', type: 'text', ctrlAttr: { maxlength: 4 }, ctrlCss: { width: '40px'} },
+{ name: 'sub_output', display: 'Sub Output', type: 'select', ctrlOptions: { 
+		@foreach($suboutput as $daftar_suboutput)
+			{{$no_suboutput++}}: '{{ $daftar_suboutput->uraian }}',
+		@endforeach
+	} },
+{ name: 'input', display: 'Input', type: 'select', ctrlOptions: { 
+		@foreach($input as $daftar_input)
+			{{$no_input++}}: '{{ $daftar_input->uraian }}',
+		@endforeach
+	} },
+{ name: 'sub_input', display: 'Sub Input', type: 'text', type: 'select', ctrlOptions: {
+ 		@foreach($subinput as $daftar_subinput)
+			{{$no_subinput++}}: '{{ $daftar_subinput->uraian }}',
+		@endforeach
 
-{ name: 'Album', display: 'Album', type: 'text', ctrlAttr: { maxlength: 100 }, ctrlCss: { width: '160px'} },
-{ name: 'Artist', display: 'Artist', type: 'text', ctrlAttr: { maxlength: 100 }, ctrlCss: { width: '100px'} },
-{ name: 'Origin', display: 'Origin', type: 'select', ctrlOptions: { 0: '{Choose}', 1: 'Hong Kong', 2: 'Taiwan', 3: 'Japan', 4: 'Korea', 5: 'US', 6: 'Others'} },
-{ name: 'Poster', display: 'With Poster?', type: 'checkbox' },
-{ name: 'Price', display: 'Price', type: 'text', ctrlAttr: { maxlength: 10 }, ctrlCss: { width: '50px', 'text-align': 'right' }, value: 0 }
+	} },
+{ name: 'akun', display: 'Akun', type: 'select', ctrlOptions: { 
+		@foreach($akun as $daftar_akun)
+			{{$no_akun++}}: '{{ $daftar_akun->uraian_akun }}',
+		@endforeach
+	} },
+
+{ name: 'detail', display: 'Detail', type: 'text',  ctrlCss: { width: '100px'} },
+{ name: 'harga', display: 'Harga', type: 'text', ctrlAttr: { maxlength: 10 }, ctrlCss: { width: '50px', 'text-align': 'right' }, value: 0 },
+
+{ name: 'nominal1', display: 'Nominal', type: 'text',  ctrlCss: { width: '100px'} },
+{ name: 'satuan1', display: 'Satuan', type: 'text',  ctrlCss: { width: '100px'} },
+{ name: 'nominal2', display: 'Nominal', type: 'text',  ctrlCss: { width: '100px'} },
+{ name: 'satuan2', display: 'Satuan', type: 'text',  ctrlCss: { width: '100px'} },
+{ name: 'nominal3', display: 'Nominal', type: 'text',  ctrlCss: { width: '100px'} },
+{ name: 'satuan3', display: 'Satuan', type: 'text',  ctrlCss: { width: '100px'} },
+{ name: 'nominal4', display: 'Nominal', type: 'text',  ctrlCss: { width: '100px'} },
+{ name: 'satuan4', display: 'Satuan', type: 'text',  ctrlCss: { width: '100px'} },
+
+{ name: 'jumlah_rincian', display: 'Jumlah Rincian', type: 'text',  formula: '$harga*($nominal1*$nominal2*$nominal3*$nominal4)', ctrlCss: { width: '100px'} }
+
 ]
 });
 });
+
+
+
 </script>
 
 <script type="text/javascript">

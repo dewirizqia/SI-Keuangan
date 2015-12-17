@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sistem Informasi Keuangan Fakultas Teknik UNLAM</title>
+    <title>SI Keuangan Fakultas Teknik UNLAM</title>
 
     <!-- Bootstrap Core CSS -->
     <!-- mengatur responsive nya -->

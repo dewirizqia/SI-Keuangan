@@ -52,7 +52,7 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Surat <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
 	                            <li>
-	                                <a href="#">SK</a>
+	                                <a href="#">Daftar Nominatif</a>
 	                            </li>
 	                            <li>
 	                                <a href="#">SPJ</a>

@@ -54,7 +54,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ route('home')}}">SI Keuangan Fakultas Teknik UNLAM</a>
+                 <a class="navbar-brand" ><img src="{{asset('user/images/logo1.png') }}" alt="" width="65" height="65"/></a>
+
+                <a class="navbar-brand" font-size="20"  href="{{ route('home')}}"><b>Sistem Informasi Keuangan<br>
+                <b>Fakultas Teknik<br>
+                Universitas Lambung Mangkurat</b></a>
+                <br>
+                <br>
+                <br>
+                <br>
+              
             </div>
             <!-- /.navbar-header -->
 
@@ -267,11 +276,14 @@
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
-
+            <br>
+            <br>
+          
             <div class="navbar-default sidebar" role="navigation">
+
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        
+                    
                         <li>
                             <a href="{{ route('home')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
@@ -316,8 +328,12 @@
         <div class="row">
 		@section('isi')
 
-			<h1 class="page-header">Halo, {{ Auth::user()->name}} !</h1>
+			{{--
+
+            <h1 class="page-header">Halo, {{ Auth::user()->name}} </h1>
         	Selamat datang di halaman administrator Sistem Informasi Keuangan Universitas Lambung Mangkurat.
+            
+            --}}
         @show
 
 		</div>
@@ -351,6 +367,15 @@
     });
     </script>
     @section('script')
+    <div class="footer">
+          
+            <div class="copy wow fadeInRight" data-wow-delay="0.4s">
+              <p>&copy; SI Keuangan FT Unlam @2015 <a href="http://ftunlam.ac.id/" target="_blank">ftunlam.ac.id</a> </p>
+            </div>
+         
+          <div class="clearfix"> </div>
+       </div>
+
     @show
 </body>
 

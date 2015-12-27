@@ -5,9 +5,7 @@
 
 
 
-<br>
-<a href="{{ route('buat_pagu') }}"><button type="button" class="btn btn-primary">Tambah</button></a>
-<br>
+
 <br>
 	@if ($spagu->count())
 	<div class="table-responsive">

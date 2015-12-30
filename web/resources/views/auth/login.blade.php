@@ -86,7 +86,7 @@
                                     <div class="form-group">
                                         <input type="checkbox" name="remember"> Ingat Saya
                                     </div>
-                                    <button type="submit" class="btn">Sign in!</button>
+                                    <button type="submit" class="btn">Login</button>
                                 </form>
                             </div>
                         </div>

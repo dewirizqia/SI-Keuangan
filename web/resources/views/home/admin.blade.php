@@ -2,13 +2,13 @@
 
 @section('sidebar')
 						<li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Usulan Anggaran</span></a>
+                            <a href="#"><i class="glyphicon glyphicon-folder-open"></i> Usulan Anggaran</span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-table fa-fw"></i>Rekap Belanja</a>
+                            <a href="#"><i class="glyphicon glyphicon-tasks"></i>Rekap Belanja</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Serapan Dana<span class="fa arrow"></span></a>
+                            <a href="#"><i class="glyphicon glyphicon-calendar"></i> Serapan Dana<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="">Kegiatan</a>
@@ -20,6 +20,6 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Ajuan Revisi</span></a>
+                            <a href="#"><i class="glyphicon glyphicon-duplicate"></i> Ajuan Revisi</span></a>
                         </li>
 @stop

@@ -32,7 +32,7 @@
 
     </head>
 
-    <body style="background-image:url('{{ asset('css/assets/img/backgrounds/1.jpg') }}'); background-size:cover">
+    <body style="background-image:url('{{ asset('css/assets/img/backgrounds/bg.jpg') }}'); background-size:cover">
 
         <!-- Top content -->
         <div class="top-content">
@@ -41,17 +41,22 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-2 text">
-                            <h1> Login Form</h1>
+                            <h1><b>Login Form</b></h1>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3 form-box">
                             <div class="form-top">
                                 <div class="form-top-left">
+                             <a class="navbar-brand" ><img src="{{asset('user/images/logo.png') }}" alt="" width="90" height="90"/></a>
+                                 
                                     <h3>SI Keuangan FT UNLAM</h3>
-                                    <p>Masukkan username dan password untuk login:</p>
+                                    <p>Masukkan username dan password</p>
+
                                 </div>
+                               <br>
                                 <div class="form-top-right">
+                                    
                                     <i class="fa fa-lock"></i>
                                 </div>
                             </div>

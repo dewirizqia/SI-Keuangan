@@ -54,22 +54,28 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                 <a class="navbar-brand" ><img src="{{asset('user/images/logo1.png') }}" alt="" width="65" height="65"/></a>
+                 <a class="navbar-brand" ><img src="{{asset('user/images/logo.png') }}" alt="" width="100" height="100"/></a>
 
-                <a class="navbar-brand" font-size="20"  href="{{ route('home')}}"><b>Sistem Informasi Keuangan<br>
+                <a class="navbar-brand" href="{{ route('home')}}"><b>Sistem Informasi Keuangan<br>
                 <b>Fakultas Teknik<br>
                 Universitas Lambung Mangkurat</b></a>
                 <br>
                 <br>
                 <br>
                 <br>
+        
+              
               
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
+                <br>
+                <br>
+                <br>
+               <br>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <!-- <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
@@ -120,7 +126,7 @@
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  <!--  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-tasks">
@@ -199,10 +205,10 @@
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <!--   <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-alerts">
+                 <ul class="dropdown-menu dropdown-alerts">
                         <li>
                             <a href="#">
                                 <div>
@@ -263,9 +269,8 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        
+                        <li><a href="#"><i class="glyphicon glyphicon-briefcase"></i> Ubah Password</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="{{ url('auth/logout')}}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -278,21 +283,22 @@
             <!-- /.navbar-top-links -->
             <br>
             <br>
-          
+            <br>
+            <br>
             <div class="navbar-default sidebar" role="navigation">
 
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                     
                         <li>
-                            <a href="{{ route('home')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="{{ route('home')}}"><i class="glyphicon glyphicon-home"></i> Dashboard</a>
                         </li>
                         @section('sidebar')
                                 <li>
-                            <a href="#"><i class="fa fa-table fa-fw"></i>Manajemen User</a>
+                            <a href="#"><i class="glyphicon glyphicon-lock"></i>Manajemen User</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Manajemen Kode Input<span class="fa arrow"></span></a>
+                            <a href="#"><i class="glyphicon glyphicon-sort"></i> Manajemen Kode Input<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="">Output</a>

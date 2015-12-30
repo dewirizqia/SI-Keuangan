@@ -1,7 +1,7 @@
 @extends('@layout.base_admin')
 
 @section('sidebar')		<li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Pagu<span class="fa arrow"></span></a>
+                            <a href="#"><i class="glyphicon glyphicon-credit-card"></i> Pagu<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="">Pagu Output</a>
@@ -14,10 +14,10 @@
                         </li>
 
 						<li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Anggaran FT</span></a>
+                            <a href="#"><i class="glyphicon glyphicon-hdd"></i> Anggaran FT</span></a>
                         </li>
                         <li>
-	                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Usulan Anggaran<span class="fa arrow"></span></a>
+	                        <a href="#"><i class="glyphicon glyphicon-folder-open"></i> Usulan Anggaran<span class="fa arrow"></span></a>
 	                        <ul class="nav nav-second-level">
 	                            @foreach ($sbagian as $bagian)
 
@@ -29,7 +29,7 @@
 	                        <!-- /.nav-second-level -->
 	                    </li>
 	                    <li>
-	                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Rekap Belanja<span class="fa arrow"></span></a>
+	                        <a href="#"><i class="glyphicon glyphicon-tasks"></i> Rekap Belanja<span class="fa arrow"></span></a>
 	                        <ul class="nav nav-second-level">
 	                            @foreach ($sbagian as $bagian)
 
@@ -41,13 +41,13 @@
 	                        <!-- /.nav-second-level -->
 	                    </li>
                         <li>
-                            <a href="#"><i class="fa fa-table fa-fw"></i>Permintaan Belanja</a>
+                            <a href="#"><i class="glyphicon glyphicon-shopping-cart"></i>Permintaan Belanja</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Ajuan Revisi</span></a>
+                            <a href="#"><i class="glyphicon glyphicon-duplicate"></i> Ajuan Revisi</span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Surat <span class="fa arrow"></span></a>
+                            <a href="#"><i class="glyphicon glyphicon-envelope"></i> Surat <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
 	                            <li>
 	                                <a href="#">Daftar Nominatif</a>

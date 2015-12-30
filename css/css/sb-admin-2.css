@@ -5,7 +5,7 @@
  */
 
 body {
-    background-color: #428bca; /*warna bg menu*/
+    background-color: #5bc0de; /*warna bg menu*/
 }
 
 #wrapper {
@@ -15,7 +15,7 @@ body {
 #page-wrapper {
     padding: 0 15px;
     min-height: 568px;
-    background-color: white;/*warna bg konten=selamat datang*/
+    background-color: #eee;/*warna bg konten=selamat datang*/
 }
 
 @media(min-width:768px) {

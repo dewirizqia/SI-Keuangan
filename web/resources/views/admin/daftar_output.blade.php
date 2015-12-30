@@ -17,6 +17,7 @@
                     <th>NO</th>
                     <th>Kode Output</th>
                     <th>Uraian</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,6 +26,8 @@
 	                    <td>{{ $no++ }}</td>
 	                    <td><a href="">{{ $output->kode_output }}</a></td>
 	                    <td>{{ $output->uraian }}</td>
+                        <td><button type="button" class="btn btn-info">Edit</button>
+                            <button type="button" class="btn btn-danger">Delete</button></td>
 	                </tr>
                 @endforeach
             </tbody>

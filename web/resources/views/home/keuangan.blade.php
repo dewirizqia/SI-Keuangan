@@ -18,6 +18,7 @@
                         </li>
                         <li>
 	                        <a href="#"><i class="glyphicon glyphicon-folder-open"></i> Usulan Anggaran<span class="fa arrow"></span></a>
+
 	                        <ul class="nav nav-second-level">
 	                            @foreach ($sbagian as $bagian)
 

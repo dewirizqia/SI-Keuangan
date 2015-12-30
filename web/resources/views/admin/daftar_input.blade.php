@@ -18,6 +18,7 @@
                     <th>Sub Output</th>
                     <th>Kode Input</th>
                     <th>Uraian</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +28,8 @@
                         <td><a href="">{{ $input->sub_output->kode_suboutput }}</a></td>
 	                    <td><a href="">{{ $input->kode_input }}</a></td>
 	                    <td>{{ $input->uraian }}</td>
+                        <td><button type="button" class="btn btn-info">Edit</button>
+                            <button type="button" class="btn btn-danger">Delete</button></td>
 	                </tr>
                 @endforeach
             </tbody>

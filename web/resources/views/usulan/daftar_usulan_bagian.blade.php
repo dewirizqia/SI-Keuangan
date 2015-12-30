@@ -3,6 +3,19 @@
 @section('isi')
 <br>
 <br>
+<form role="form" method="POST" action="{{ route('tambah_usulan_bagian',$id_bagian) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
+    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+        <div class="form-group">
+            <div class="col-md-3">
+               <input class="form-control" name="tahun">
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary">Tambah Usulan</button>
+            </div>
+        </div>
+</form>
+<br>
+<br>
 	<div class="table-responsive">
         <form id="calx">
         <table class="table table-bordered table-hover table-striped">
@@ -22,7 +35,7 @@
                         <td><a href="">{{ $usulan->tahun }}</a></td>
                         <td>{{ $usulan->status }}</td>
                         <td>{{ $usulan->revisi }}</td>
-                        <td><button><a href="{{ route('detail_usulan',$usulan->id) }}">detail</a></button></td>
+                        <td><button><a href="{{ route('buat_usulan_bagian', $usulan->id) }}">detail</a></button></td>
                     </tr>
                 @endforeach
             </tbody>

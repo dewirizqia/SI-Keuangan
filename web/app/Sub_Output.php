@@ -8,7 +8,7 @@ class Sub_Output extends Model
 {
     protected $table = 'sub_output';
 
-    protected $fillable = ['kode_suboutput', 'uraian'];
+    protected $fillable = ['kode_suboutput', 'uraian', 'id_output'];
 
     public function output()
     {

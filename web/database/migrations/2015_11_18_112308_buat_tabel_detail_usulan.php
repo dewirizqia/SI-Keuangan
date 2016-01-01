@@ -15,7 +15,8 @@ class BuatTabelDetailUsulan extends Migration
         Schema::create('detail_usulan', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_usulan');
-            $table->integer('jumlah_rincian');
+            $table->integer('nominal');
+            $table->string('satuan');
             $table->string('detail');
             $table->integer('harga_satuan');
             $table->integer('jumlah');

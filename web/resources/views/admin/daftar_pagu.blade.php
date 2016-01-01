@@ -15,7 +15,8 @@
                 <tr>
                     <th>NO</th>
                     <th>TAHUN</th>
-                    <th>ALOKASI</th>
+                    <th>BATASAN</th>
+                    <th>PAGU RKAKL</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +24,7 @@
 	                <tr>
 	                    <td>{{ $no++ }}</td>
 	                    <td><a href="">{{ $pagu->tahun }}</a></td>
+                        <td></td>
 	                    <td id="alokasi[{{$alokasi++}}]" data-format="0,0[.]" data-formula="1*( {{$pagu->alokasi}} )">Rp {{ $pagu->alokasi }}</td>
 	                </tr>
                 @endforeach

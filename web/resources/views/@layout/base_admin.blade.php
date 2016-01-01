@@ -335,12 +335,12 @@
         <div class="row">
 		@section('isi')
 
-			{{--
+			
 
             <h1 class="page-header">Halo, {{ Auth::user()->name}} </h1>
         	Selamat datang di halaman administrator Sistem Informasi Keuangan Universitas Lambung Mangkurat.
          
-            --}}
+            
         @show
 
 		</div>
@@ -349,7 +349,7 @@
 
     </div>
     <!-- /#wrapper -->
-
+    @section('script')
     <!-- jQuery -->
     <script src="{{ asset('css/jquery/dist/jquery.min.js') }}"></script>
 
@@ -367,13 +367,6 @@
     <!-- Custom Theme JavaScript -->
     <!-- dropdownmenu -->
     <script src="{{ asset('css/dist/js/sb-admin-2.js') }}"></script>
-    <script src="{{ asset('css/jquery-calx-1.1.9.min.js') }}"></script>
-    <script type="text/javascript">
-    $(document).ready(function(){
-        $('#calx').calx();
-    });
-    </script>
-    @section('script')
     <div class="footer">
           
             <div class="copy wow fadeInRight" data-wow-delay="0.4s">

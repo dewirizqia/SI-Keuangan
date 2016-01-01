@@ -18,7 +18,7 @@
 	    </div>
 	@endif
 
-<form role="form" method="POST" action="" accept-charset="UTF-8" enctype ="multipart/form-data">
+<form role="form" id="calx" method="POST" action="" accept-charset="UTF-8" enctype ="multipart/form-data">
 	<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
 
     <div class="form-group">
@@ -36,61 +36,21 @@
 
     <div class="form-group">
     	<label>Harga Satuan</label>
-         <input class="form-control" name="harga_satuan">
+         <input class="form-control" name="harga_satuan" id="harga_satuan">
+    </div>
+    <div class="form-group">
+        <div class="col-md-6">
+        <label>Nominal</label> 
+        <input class="form-control" name="nominal" id="nominal">
+        </div>    
+    </div>
+    <div class="form-group">
+        <div class="col-md-6">
+           <label>Satuan</label>
+           <input class="form-control" name="satuan">
+        </div>
     </div>
 
-    <div class="form-group">
-        <div class="col-md-3">
-    	   <label>Nominal</label>
-           <input class="form-control" name="nom1">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-3">
-           <label>Satuan</label>
-           <input class="form-control" name="sat1">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-3">
-           <label>Nominal</label>
-           <input class="form-control" name="nom2">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-3">
-           <label>Satuan</label>
-           <input class="form-control" name="sat2">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-3">
-           <label>Nominal</label>
-           <input class="form-control" name="nom3">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-3">
-           <label>Satuan</label>
-           <input class="form-control" name="sat3">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-3">
-           <label>Nominal</label>
-           <input class="form-control" name="nom4">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-3">
-           <label>Satuan</label>
-           <input class="form-control" name="sat4">
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Jumlah Rincian</label>
-        <input class="form-control" name="jumlah_rincian">
-    </div>
     <div class="form-group">
         <label>Jumlah</label>
         <input class="form-control" name="jumlah">
@@ -98,6 +58,7 @@
     <br>
     <button type="submit" class="btn btn-primary">Tambah Detail</button>
 </form>
+<br>
 <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
@@ -115,8 +76,7 @@
                                             <th>Komponen</th>
                                             <th>Detail</th>
                                             <th>Harga Satuan</th>
-                                            <th>Nominal x Satuan</th>
-                                            <th>Jumlah Rincian</th>
+                                            <th>Nominal</th>
                                             <th>Jumlah</th>
                                         </tr>
                                     </thead>
@@ -126,12 +86,7 @@
                                             <td>{{ $data->jenis_komponen }}</td>
                                             <td>{{ $data->detail }}</td>
                                             <td>{{ $data->harga_satuan }}</td>
-                                            <td class="center">
-                                                @foreach ($data->rincian as $rincian)
-                                                        {{ $rincian->nominal }} {{ $rincian->satuan }}  
-                                                @endforeach
-                                            </td>
-                                            <td class="center">{{ $data->jumlah_rincian }}</td>
+                                            <td class="center">{{ $data->nominal }} {{ $data->satuan }}</td>
                                             <td class="center">{{ $data->jumlah }}</td>
                                         </tr>
                                         @endforeach
@@ -153,9 +108,8 @@
 <!-- jQuery -->
 <script src="{{ asset('css/bower_components/jquery/dist/jquery.min.js') }}"></script>
 <!-- DataTables JavaScript -->
-    <script src="{{ asset('css/bower_components/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js') }}"></script>
-
+<script src="{{ asset('css/bower_components/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js') }}"></script>
     <script>
     $(document).ready(function() {
         $('#dataTables-example').DataTable({

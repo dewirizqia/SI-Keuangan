@@ -11,10 +11,10 @@
                             <a href="#"><i class="glyphicon glyphicon-calendar"></i> Serapan Dana<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="">Kegiatan</a>
+                                    <a href="#">Kegiatan</a>
                                 </li>
                                 <li>
-                                    <a href="">Prodi</a>
+                                    <a href="#">Prodi</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

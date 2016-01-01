@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 //model
 use App\Pagu;
 use App\User;
-use App\Output;
-use App\Sub_Output;
-use App\Input;
-use App\Sub_Input;
-use App\Akun;
 use App\Usulan;
 use App\Detail_Usulan;
 use App\Bagian;
@@ -89,40 +84,9 @@ class AdminController extends Controller
         $suser = User::orderBy('jabatan', 'asc')->get();
         return view('admin.daftar_user', compact('suser', 'no'));
     }
-    public function daftar_output()
-    {
-        $no = "1";
-        $soutput = Output::orderBy('kode_output', 'asc')->get();
-        return view('admin.daftar_output', compact('soutput', 'no'));
-    }
-    public function daftar_suboutput()
-    {
-        $no = "1";
-        $ssuboutput = Sub_Output::orderBy('kode_suboutput', 'asc')->get();
-        return view('admin.daftar_suboutput', compact('ssuboutput', 'no'));
-    }
-
-    public function daftar_input()
-    {
-        $no = "1";
-        $sinput = Input::orderBy('kode_input', 'asc')->get();
-        return view('admin.daftar_input', compact('sinput', 'no'));
-    }
-    public function daftar_subinput()
-    {
-        $no = "1";
-        $ssubinput = Sub_Input::orderBy('kode_subinput', 'asc')->get();
-        return view('admin.daftar_subinput', compact('ssubinput', 'no'));
-    }
-
-        public function daftar_akun()
-    {
-        $no = "1";
-        $sakun = Akun::orderBy('id', 'asc')->get();
-        return view('admin.daftar_akun', compact('sakun', 'no'));
-    }
-
-            public function daftar_bagian()
+    
+    #bagian
+    public function daftar_bagian()
     {
         $no = "1";
         $daftar_bagian = Bagian::orderBy('bagian', 'asc')->get();
@@ -141,6 +105,15 @@ class AdminController extends Controller
         $daftar_pagu_output = Pagu_Output::orderBy('id_pagu', 'dsc')->get();
         return view('admin.daftar_pagu_output', compact('daftar_pagu_output', 'no'));
     }
+//Halaman Belanja
+public function belanja_buat()
+{
+    return view('admin.belanja_buat');
+}
+public function belanja_daftar()
+{
+    return view('admin.belanja_daftar');
+}
 
 
 }

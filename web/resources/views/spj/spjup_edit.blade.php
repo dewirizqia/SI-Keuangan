@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Tambah SPJ UP</h1>
+        <h1 class="page-header">Edit SPJ UP</h1>
     </div>
 </div>
 
@@ -102,7 +102,7 @@
                         <hr>                        
                         <div class="form-group">
                             <div class="col-md-6">
-                                <input type="submit" value="Tambahkan" class="form-control btn-primary">
+                                <input type="submit" value="Simpan" class="form-control btn-success">
                             </div>
                             <div class="col-md-6">
                                 <input type="reset" value="Ulangi" class="form-control btn-warning">

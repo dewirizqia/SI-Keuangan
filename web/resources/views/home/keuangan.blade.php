@@ -1,17 +1,22 @@
 @extends('@layout.base_admin')
 
-@section('sidebar')		<li>
+@section('sidebar')			
+							<li>
                             <a href="#"><i class="glyphicon glyphicon-credit-card"></i> Pagu<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="">Pagu Output</a>
+                                    <a href="#">Pagu Output</a>
                                 </li>
                                 <li>
-                                    <a href="">Pagu Prodi</a>
+                                    <a href="#">Pagu Prodi</a>
+                                </li>
+                                <li>
+                                    <a href="#">Pagu Kegiatan</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        
 
 						<li>
                             <a href="#"><i class="glyphicon glyphicon-hdd"></i> Anggaran FT</span></a>
@@ -48,6 +53,7 @@
                             <a href="#"><i class="glyphicon glyphicon-duplicate"></i> Ajuan Revisi</span></a>
                         </li>
                         <li>
+
                             <a href="#"><i class="glyphicon glyphicon-envelope"></i> Surat <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
 	                            <li>
@@ -58,4 +64,5 @@
 	                            </li>
 	                        </ul>
                         </li>
+
 @stop

@@ -44,10 +44,10 @@
             <thead>
                 <tr>
                     <th>NO</th>
-                    <th>Output</th>
-                    <th>Sub Output</th>
+                    <th width="100">Output</th>
+                    <th >Sub Output</th>
                     <th>Input</th>
-                    <th>Kode Sub Input</th>
+                    <th>Kode</th>
                     <th>Uraian</th>
                     <th>Aksi</th>
                 </tr>
@@ -61,6 +61,7 @@
 	                    <td><a href="">{{ $subinput->input->uraian }}</a></td>
 	                    <td><a href="">{{ $subinput->kode_subinput }}</a></td>
 	                    <td>{{ $subinput->uraian }}</td>
+
                         <td> 
                             <table> 
                                 <td>

@@ -23,4 +23,8 @@ class Detail_Usulan extends Model
     {
     	return $this->hasMany('App\Rincian_Perhitungan', 'id_detail_usulan');
     }
+    public function akun()
+    {
+        return $this->belongsTo('App\Akun', 'id_akun');
+    }
 }

@@ -18,59 +18,83 @@
 	    </div>
 	@endif
 
-<form role="form" method="POST" action="{{ route('nilai_detail', $usulan->id) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
+<form role="form" method="POST" action="" accept-charset="UTF-8" enctype ="multipart/form-data">
 	<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
 
-	<div class="form-group">
-        <label>Tahun</label>
-        <input class="form-control" name="tahun" value="{{ $usulan->tahun }}" disabled>
-    </div>
-
     <div class="form-group">
-    	<label>OUTPUT</label>
-    <select class="form-control" name="output">
-    	@foreach($output as $u_output)
-        <option value="{{ $u_output->id }}">{{ $u_output->uraian }}</option>
-        @endforeach
+    	<label>Komponen</label>
+    <select class="form-control" name="jenis_komponen">
+        <option value="utama">Utama</option>
+        <option value="pendukung">Pendukung</option>
     </select>
     </div>
 
     <div class="form-group">
-    	<label>SUB OUTPUT</label>
-     <select id="suboutput" class="form-control" name="sub_output">
-    	@foreach($suboutput as $u_suboutput)
-        <option value="{{ $u_suboutput->id }}">{{ $u_suboutput->uraian }}</option>
-        @endforeach
-    </select>
+        <label>Detail</label>
+        <input class="form-control" name="detail">
     </div>
 
     <div class="form-group">
-    	<label>KOMPONEN INPUT</label>
-    <select class="form-control" name="input">
-    	@foreach($input as $u_input)
-        <option value="{{ $u_input->id }}">{{ $u_input->uraian }}</option>
-        @endforeach
-    </select>
+    	<label>Harga Satuan</label>
+         <input class="form-control" name="harga_satuan">
     </div>
 
     <div class="form-group">
-    	<label>SUB KOMPONEN INPUT</label>
-    <select class="form-control" name="sub_input">
-    	@foreach($subinput as $u_subinput)
-        <option value="{{ $u_subinput->id }}">{{ $u_subinput->uraian }}</option>
-        @endforeach
-    </select>
+        <div class="col-md-3">
+    	   <label>Nominal</label>
+           <input class="form-control" name="nom1">
+        </div>
     </div>
-
     <div class="form-group">
-    	<label>AKUN</label>
-    <select class="form-control" name="akun">
-    	@foreach($akun as $u_akun)
-        <option value="{{ $u_akun->id }}">{{ $u_akun->uraian_akun }}</option>
-        @endforeach
-    </select>
+        <div class="col-md-3">
+           <label>Satuan</label>
+           <input class="form-control" name="sat1">
+        </div>
     </div>
-
+    <div class="form-group">
+        <div class="col-md-3">
+           <label>Nominal</label>
+           <input class="form-control" name="nom2">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3">
+           <label>Satuan</label>
+           <input class="form-control" name="sat2">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3">
+           <label>Nominal</label>
+           <input class="form-control" name="nom3">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3">
+           <label>Satuan</label>
+           <input class="form-control" name="sat3">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3">
+           <label>Nominal</label>
+           <input class="form-control" name="nom4">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3">
+           <label>Satuan</label>
+           <input class="form-control" name="sat4">
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Jumlah Rincian</label>
+        <input class="form-control" name="jumlah_rincian">
+    </div>
+    <div class="form-group">
+        <label>Jumlah</label>
+        <input class="form-control" name="jumlah">
+    </div>
     <br>
     <button type="submit" class="btn btn-primary">Tambah Detail</button>
 </form>
@@ -78,7 +102,9 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Daftar Detail Usulan Tahun:                            
+                            Daftar Detail Usulan Tahun:
+                            <br>Akun: {{ $d_akun->uraian_akun }}, 
+                            <br>Sub Komponen Input: {{ $d_subinput->uraian }}
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -86,8 +112,6 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th>Sub Input</th>
-                                            <th>Akun</th>
                                             <th>Komponen</th>
                                             <th>Detail</th>
                                             <th>Harga Satuan</th>
@@ -99,8 +123,6 @@
                                     <tbody>
                                         @foreach($detail as $data)
                                         <tr class="odd gradeX">
-                                            <td>{{ $data->sub_input->uraian }}</td>
-                                            <td>{{ $data->akun->uraian_akun }}</td>
                                             <td>{{ $data->jenis_komponen }}</td>
                                             <td>{{ $data->detail }}</td>
                                             <td>{{ $data->harga_satuan }}</td>

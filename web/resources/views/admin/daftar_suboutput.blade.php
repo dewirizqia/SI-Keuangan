@@ -47,6 +47,7 @@
 	                    <td><a href="">{{ $suboutput->output->uraian }}</a></td>
 	                    <td><a href="">{{ $suboutput->kode_suboutput }}</a></td>
 	                    <td>{{ $suboutput->uraian }}</td>
+
                         <td> 
                             <table> 
                                 <td>

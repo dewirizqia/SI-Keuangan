@@ -41,6 +41,7 @@
 	                    <td>{{ $no++ }}</td>
 	                    <td><a href="">{{ $input->kode_input }}</a></td>
 	                    <td>{{ $input->uraian }}</td>
+
                         <td> 
                              <table> 
                                 <td>

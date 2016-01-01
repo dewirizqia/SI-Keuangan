@@ -14,6 +14,7 @@
     <!-- Bootstrap Core CSS -->
     <!-- mengatur responsive nya -->
     <link href="{{ asset('css/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+     <link href="{{ asset('css/update.css') }}" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
     <link href="{{ asset('css/metisMenu/dist/metisMenu.min.css') }}" rel="stylesheet">
@@ -63,8 +64,6 @@
                 <br>
                 <br>
                 <br>
-        
-              
               
             </div>
             <!-- /.navbar-header -->
@@ -264,15 +263,17 @@
                     <!-- /.dropdown-alerts -->
                 </li>
                 <!-- /.dropdown -->
+
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        
                         <li><a href="#"><i class="glyphicon glyphicon-briefcase"></i> Ubah Password</a>
                         </li>
                         <li class="divider"></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-lock"></i> Ubah Password</a>
+                        </li>
                         <li><a href="{{ url('auth/logout')}}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
@@ -341,7 +342,7 @@
 
             <h1 class="page-header">Halo, {{ Auth::user()->name}} </h1>
         	Selamat datang di halaman administrator Sistem Informasi Keuangan Universitas Lambung Mangkurat.
-            
+         
             --}}
         @show
 

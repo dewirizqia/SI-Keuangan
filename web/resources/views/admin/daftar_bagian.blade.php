@@ -6,7 +6,23 @@
 
 
 <br>
-<a href=""><button type="button" class="btn btn-primary">Tambah</button></a>
+<form role="form" method="POST" action="{{ route('tambah_bagian') }}" accept-charset="UTF-8" enctype ="multipart/form-data">
+    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+        <div class="form-group">
+            <div class="col-md-3">
+               <select class="form-control" name="bagian">
+                    <option value="prodi">Prodi</option>
+                    <option value="subbag">Sub Bagian</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+               <input class="form-control" name="detail">
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary">Tambah Prodi/Bagian</button>
+            </div>
+        </div>
+</form>
 <br>
 <br>
 	@if ($daftar_bagian->count())
@@ -22,7 +38,7 @@
             	@foreach ($daftar_bagian as $bagian)
 	                <tr>
 	                    <td>{{ $no++ }}</td>
-	                    <td><a href="">{{ $bagian->bagian }}</a></td>
+	                    <td><a href="">{{ $bagian->detail }}</a></td>
 	                </tr>
                 @endforeach
             </tbody>

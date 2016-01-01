@@ -14,6 +14,8 @@ use App\Pagu_Bagian;
 use App\Pagu_Output;
 use App\Rincian_Perhitungan;
 
+use Log;
+
 use App\Http\Requests\PaguRequest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -55,28 +57,9 @@ class AdminController extends Controller
     }
 
 
-        public function daftar_usulan_bagian($id)
-    {
-        $no = "1";
-        $dftrusulan = Usulan::whereId_bagian($id)->get();
-        return view('usulan.daftar_usulan_bagian', compact('id','no', 'dftrusulan'));
-    }
-
-        public function detail_usulan($id)
-    {
-        $no = "1";
-        $usulan = Usulan::whereId($id)->get();
-        $detail_usulan = Detail_Usulan::whereId_usulan($id)->get();
-        return view('usulan.detail_usulan', compact('id','no', 'usulan', 'detail_usulan'));
-    }
-
-
-
-            public function buat_usulan_bagian($bagian)
-    {
         
-        return view('usulan.buat_usulan_bagian', compact('bagian'));
-    }
+
+
 
     public function daftar_user()
     {
@@ -93,6 +76,17 @@ class AdminController extends Controller
         return view('admin.daftar_bagian', compact('daftar_bagian', 'no'));
     }
 
+    public function tambah_bagian(Request $request)
+    {
+        $input = $request->all();
+        $simpan = Bagian::create([
+            'bagian' => $input['bagian'],
+            'detail' => $input['detail']
+            ]);
+
+        return redirect()->route('daftar_bagian');
+    }
+
             public function daftar_pagu_bagian()
     {
         $no = "1";
@@ -105,6 +99,7 @@ class AdminController extends Controller
         $daftar_pagu_output = Pagu_Output::orderBy('id_pagu', 'dsc')->get();
         return view('admin.daftar_pagu_output', compact('daftar_pagu_output', 'no'));
     }
+
 //Halaman Belanja
 public function belanja_buat()
 {
@@ -114,6 +109,5 @@ public function belanja_daftar()
 {
     return view('admin.belanja_daftar');
 }
-
 
 }

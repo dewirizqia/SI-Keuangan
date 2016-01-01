@@ -1,6 +1,7 @@
 <?php
 
 use App\Bagian;
+use App\Sub_Output;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,7 @@ if (Schema::hasTable('Bagian'))
 }
 
 
-Route::get('/', ['as'=>'home','middleware' => 'auth', function () {return view('home.admin');}]);
+Route::get('/', ['as'=>'home','middleware' => 'auth', function () {return view('@layout.base_admin');}]);
 Route::get('/admin', function () {return view('home.admin');});
 Route::get('/keuangan', function () {return view('home.keuangan');});
 Route::get('/dekan', function () {return view('home.dekan');});
@@ -66,10 +67,19 @@ Route::post('pagu/bagian/daftar', array('as'=>'simpan_pagu_bagian', 'uses'=> 'Ad
 Route::get('pagu/output/daftar', array('as'=>'daftar_pagu_output', 'uses'=> 'AdminController@daftar_pagu_output'));
 Route::get('pagu/output/buat', array('as'=>'buat_pagu_output', 'uses'=> 'AdminController@buat_pagu_output'));
 Route::post('pagu/output/daftar', array('as'=>'simpan_pagu_output', 'uses'=> 'AdminController@simpan_pagu_output'));
-//usulan
-Route::get('usulan/bagian/{id}/daftar', array('as'=>'daftar_usulan_bagian', 'uses'=> 'AdminController@daftar_usulan_bagian'));
-Route::get('usulan/bagian/{id}/buat', array('as'=>'buat_usulan_bagian', 'uses'=> 'AdminController@buat_usulan_bagian'));
-Route::get('usulan/{id}/detail', array('as'=>'detail_usulan', 'uses'=> 'AdminController@detail_usulan'));
+
+//usulan Bagian
+Route::get('usulan/bagian/{id}/daftar', array('as'=>'daftar_usulan_bagian', 'uses'=> 'UsulanController@daftar_usulan_bagian'));
+Route::post('usulan/bagian/{id}/daftar', array('as'=>'tambah_usulan_bagian', 'uses'=> 'UsulanController@tambah_usulan_bagian'));
+// Route::get('usulan/{id}/detail', array('as'=>'detail_usulan', 'uses'=> 'UsulanController@detail_usulan'));
+
+//detail usulan bagian
+Route::post('usulan/bagian/{id_bagian}', array('as'=>'tambah_detail','uses'=> 'UsulanController@buat_detail'));
+Route::get('usulan/bagian/{usulan}/buat', array('as'=>'buat_usulan_bagian', 'uses'=> 'UsulanController@buat_usulan_bagian'));
+Route::post('usulan/bagian/{usulan}/nilai', array('as'=>'nilai_detail', 'uses'=> 'UsulanController@nilai_detail'));
+Route::get('usulan/bagian/{id_bagian}/{tahun}/{subkom}/{akun}/buat', array('as'=>'buat_detail_usulan_bagian', 'uses'=> 'UsulanController@buat_detail_usulan_bagian'));
+Route::post('usulan/bagian/{id_bagian}/{tahun}/{subkom}/{akun}/buat', array('as'=>'detail_usulan_bagian_simpan', 'uses'=> 'UsulanController@detail_usulan_bagian_simpan'));
+
 //bagian
 Route::get('bagian/daftar', array('as'=>'daftar_bagian', 'uses'=> 'AdminController@daftar_bagian'));
 Route::get('bagian/buat', array('as'=>'buat_bagian', 'uses'=> 'AdminController@buat_bagian'));

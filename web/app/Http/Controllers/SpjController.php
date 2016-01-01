@@ -81,4 +81,5 @@ class SpjController extends Controller
     {
         return view('spj.nominatif_buat');
     }
+
 }

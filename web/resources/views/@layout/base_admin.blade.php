@@ -269,8 +269,6 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="glyphicon glyphicon-briefcase"></i> Ubah Password</a>
-                        </li>
                         <li class="divider"></li>
                         <li><a href="#"><i class="glyphicon glyphicon-lock"></i> Ubah Password</a>
                         </li>
@@ -302,22 +300,22 @@
                             <a href="#"><i class="glyphicon glyphicon-sort"></i> Manajemen Kode Input<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="">Kegiatan</a>
+                                    <a href="{{ route('daftar_kegiatan')}}">Kegiatan</a>
                                 </li>
                                 <li>
-                                    <a href="">Output</a>
+                                    <a href="{{ route('daftar_output')}}">Output</a>
                                 </li>
                                 <li>
-                                    <a href="">Sub Output</a>
+                                    <a href="{{ route('daftar_suboutput')}}">Sub Output</a>
                                 </li>
                                 <li>
-                                    <a href="">Komponen Input</a>
+                                    <a href="{{ route('daftar_input')}}">Komponen Input</a>
                                 </li>
                                 <li>
-                                    <a href="">Sub Komponen Input</a>
+                                    <a href="{{ route('daftar_subinput')}}">Sub Komponen Input</a>
                                 </li>
                                 <li>
-                                    <a href="">Akun</a>
+                                    <a href="{{ route('daftar_akun')}}">Akun</a>
                                 </li>
                                 
                             </ul>

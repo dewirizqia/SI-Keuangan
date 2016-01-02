@@ -5,10 +5,10 @@
 
 <form role="form" method="POST" action="{{ route('simpan_akun')}}" accept-charset="UTF-8" enctype ="multipart/form-data">
      
-    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">     
+     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">   
     <div class="form-group input-group">
         <label>Akun</label>
-        <input class="form-control" name="kode_akun">
+        <input class="form-control" name="kode_akun"> 
     </div>
 
     <label>Uraian</label>

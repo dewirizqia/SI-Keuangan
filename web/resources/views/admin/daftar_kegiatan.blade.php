@@ -5,8 +5,8 @@
 <br>
 
 <form role="form" method="POST" action="{{ route('simpan_kegiatan') }}" accept-charset="UTF-8" enctype ="multipart/form-data">
-   
-    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">     
+<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">    
+
     <div class="form-group input-group">
         <label>Kode Kegiatan</label>
         <input class="form-control" name="kode_kegiatan">
@@ -24,7 +24,7 @@
 <br>
 <h3 align="center"><b>Daftar Kegiatan</b></h3>
 
-	@if ($soutput->count())
+	@if ($skegiatan->count())
 	<div class="table-responsive">
         <table class="table table-bordered table-hover table-striped">
             <thead>
@@ -36,7 +36,7 @@
                 </tr>
             </thead>
             <tbody>
-            	@foreach ($skegiatan as $kegiatan)
+            	@foreach ($skegiatan as $kegiatan) 
 	                <tr>
 	                    <td>{{ $no++ }}</td>
 	                    <td><a href="">{{ $kegiatan->kode_kegiatan}}</a></td>

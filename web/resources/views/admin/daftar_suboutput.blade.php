@@ -8,12 +8,12 @@
     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">     
     <div class="form-group input-group">
         <label>Output</label>
-        <input class="form-control" name="output">
+        <input class="form-control" name="id_output">
     </div>
 
     <div class="form-group input-group">
         <label>Kode Sub Output</label>
-        <input class="form-control" name="suboutput">
+        <input class="form-control" name="Kode_suboutput">
     </div>
 
     <label>Uraian</label>
@@ -48,17 +48,17 @@
 	                    <td><a href="">{{ $suboutput->kode_suboutput }}</a></td>
 	                    <td>{{ $suboutput->uraian }}</td>
 
-                        <td> 
+                      <td> 
                             <table> 
                                 <td>
-                                    <a href="" class="btn btn-primary">Edit</a>
+                                    <a href="{{ route('edit_suboutput', $suboutput->id)}}" class="btn btn-primary">Edit</a>
                                 </td>
                                 <td>&nbsp</td>
                                 <td>
-                                    <form method="POST" action="#" accept-charset="UTF-8" style="margin:0 auto">
+                                    <form method="POST" action="{{route('delete_suboutput', $suboutput->id)}}" accept-charset="UTF-8" style="margin:0 auto">
                                         <input name="_method" type="hidden" value="DELETE">
                                         <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
-                                        <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Hapus">
+                                        <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete">
                                     </form> 
                                 </td>
                             </table>

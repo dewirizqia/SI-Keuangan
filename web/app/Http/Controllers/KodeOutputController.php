@@ -28,7 +28,7 @@ class KodeOutputController extends Controller
     {
         $this->middleware('auth');
     }
-#output
+#kegiatan
 public function daftar_kegiatan()
 {
     $no = "1";
@@ -146,12 +146,12 @@ public function simpan_suboutput(SubOutputRequest $request)
 public function edit_suboutput($id)
 {
     $no = "1";
-    $soutput = Output::FindOrFail($id);
+    $ssuboutput = Sub_Output::FindOrFail($id);
     return view('admin.edit_suboutput', compact('ssuboutput', 'no'));
 }
 public function update_suboutput(SubOutputRequest $request, $id)
 {
-    $ssuboutput = Output::whereId($id)->firstOrFail();
+    $ssuboutput = Sub_Output::whereId($id)->firstOrFail();
     $input = $request->all();
     try 
     {
@@ -165,7 +165,7 @@ public function update_suboutput(SubOutputRequest $request, $id)
 public function delete_suboutput($id)
 {
     
-        $ssuboutput = Output::FindOrFail($id);
+        $ssuboutput = Sub_Output::FindOrFail($id);
         $ssuboutput->delete();
         
         return redirect()->route('daftar_suboutput');
@@ -193,7 +193,7 @@ public function simpan_input(InputRequest $request)
 public function edit_input($id)
 {
     $no = "1";
-    $soutput = Input::FindOrFail($id);
+    $sinput = Input::FindOrFail($id);
     return view('admin.edit_input', compact('sinput', 'no'));
 }
 public function update_input(InputRequest $request, $id)
@@ -240,7 +240,7 @@ public function simpan_subinput(SubInputRequest $request)
 public function edit_subinput($id)
 {
     $no = "1";
-    $ssubinput = Output::FindOrFail($id);
+    $ssubinput = Sub_Input::FindOrFail($id);
     return view('admin.edit_subinput', compact('ssubinput', 'no'));
 }
 public function update_subinput(SubInputRequest $request, $id)

@@ -10,7 +10,7 @@
     <div class="form-group input-group">
         <label>Kode Input</label>
         <input class="form-control" name="kode_input">
-    </div>
+    </div> 
 
     <label>Uraian</label>
     <div class="form-group ">

@@ -6,14 +6,20 @@
 
 <form role="form" method="POST" action="{{ route('simpan_suboutput')}}" accept-charset="UTF-8" enctype ="multipart/form-data">
     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">     
-    <div class="form-group input-group">
-        <label>Output</label>
-        <input class="form-control" name="id_output">
+    
+    <div class="form-group">
+        <label>OUTPUT</label>
+    <select class="form-control" name="id_output" id="output">
+        <option value="">--</option>
+        @foreach($soutput as $u_output)
+        <option value="{{ $u_output->id }}">{{ $u_output->uraian }}</option>
+        @endforeach
+    </select>
     </div>
 
     <div class="form-group input-group">
         <label>Kode Sub Output</label>
-        <input class="form-control" name="Kode_suboutput">
+        <input class="form-control" name="kode_suboutput">
     </div>
 
     <label>Uraian</label>
@@ -78,4 +84,5 @@
 @stop
 
 @section('script')
+@parent
 @stop

@@ -8,7 +8,7 @@ class Sub_Input extends Model
 {
     protected $table = 'sub_input';
 
-    protected $fillable = ['kode_subinput', 'uraian'];
+    protected $fillable = ['kode_subinput', 'uraian', 'id_input'];
 
     public function input()
     {

@@ -1,4 +1,4 @@
-@extends('@layout.base_keuangan')
+@extends('home.keuangan')
 
 @section('isi')
 <br>

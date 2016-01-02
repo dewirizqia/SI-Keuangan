@@ -7,7 +7,7 @@
      
      <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">   
     <div class="form-group input-group">
-        <label>Akun</label>
+        <label>Kode Akun</label>
         <input class="form-control" name="kode_akun"> 
     </div>
 
@@ -29,7 +29,7 @@
             <thead>
                 <tr>
                     <th>NO</th>
-                    <th>Akun</th>
+                    <th>Kode Akun</th>
                     <th>Uraian</th>
                     <th>Aksi</th>
                 </tr>

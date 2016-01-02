@@ -127,12 +127,14 @@ public function delete_output($id)
 public function daftar_suboutput()
     {
         $no = "1";
+        $soutput = Output::orderBy('kode_output', 'asc')->get();
         $ssuboutput = Sub_Output::orderBy('kode_suboutput', 'asc')->get();
-        return view('admin.daftar_suboutput', compact('ssuboutput', 'no'));
+        return view('admin.daftar_suboutput', compact('soutput','ssuboutput', 'no'));
     }
 public function simpan_suboutput(SubOutputRequest $request)
 {
     $input = $request->all();
+
     try 
     {
     Sub_Output::create($input);
@@ -174,8 +176,10 @@ public function delete_suboutput($id)
 public function daftar_input()
 {
     $no = "1";
+    $soutput = Output::orderBy('kode_output', 'asc')->get();
+    $ssuboutput = Sub_Output::orderBy('kode_suboutput', 'asc')->get();
     $sinput = Input::orderBy('kode_input', 'asc')->get();
-    return view('admin.daftar_input', compact('sinput', 'no'));
+    return view('admin.daftar_input', compact('soutput','ssuboutput', 'sinput', 'no'));
 }
 public function simpan_input(InputRequest $request)
 {
@@ -221,8 +225,11 @@ public function delete_input($id)
 public function daftar_subinput()
 {
     $no = "1";
+    $soutput = Output::orderBy('kode_output', 'asc')->get();
+    $ssuboutput = Sub_Output::orderBy('kode_suboutput', 'asc')->get();
+    $sinput = Input::orderBy('kode_input', 'asc')->get();
     $ssubinput = Sub_Input::orderBy('kode_subinput', 'asc')->get();
-    return view('admin.daftar_subinput', compact('ssubinput', 'no'));
+    return view('admin.daftar_subinput', compact('soutput','ssuboutput','sinput','ssubinput', 'no'));
 }
 public function simpan_subinput(SubInputRequest $request)
 {

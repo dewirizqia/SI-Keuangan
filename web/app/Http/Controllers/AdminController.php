@@ -29,34 +29,7 @@ class AdminController extends Controller
     }
 
 
-    public function daftar_pagu()
-    {
-        $no = "1";
-        $alokasi = "1";
-        $spagu = Pagu::orderBy('tahun', 'desc')->get();
-
-        return view('admin.daftar_pagu', compact('spagu', 'no', 'alokasi'));
-    }
-
-        public function buat_pagu()
-    {
     
-        return view('admin.tambah_pagu');
-    }
-    public function simpan_pagu(PaguRequest $request)
-    {
-        $input = $request->all();
-        try 
-        {
-        Pagu::create($input);
-        } 
-        catch (QueryException $e) {
-            return redirect()->route('buat_pagu');
-        }
-        
-        return redirect()->route('daftar_pagu'); 
-    }
-
     // User
     public function daftar_user()
     {
@@ -86,7 +59,23 @@ class AdminController extends Controller
         
         return redirect()->route('daftar_user'); 
     }
-    #bagian
+
+    public function edit_user($id)
+    {
+        $user = User::FindOrFail($id);
+        return view('admin.edit_user', compact('user'));
+    }
+
+    public function delete_user($id)
+    {
+        
+            $user = User::FindOrFail($id);
+            $user->delete();
+            
+            return redirect()->route('daftar_user');
+    }
+
+    #Prodi/Subbagian
     public function daftar_bagian()
     {
         $no = "1";
@@ -105,16 +94,4 @@ class AdminController extends Controller
         return redirect()->route('daftar_bagian');
     }
 
-            public function daftar_pagu_bagian()
-    {
-        $no = "1";
-        $daftar_pagu_bagian = Pagu_Bagian::orderBy('id_pagu', 'dsc')->get();
-        return view('admin.daftar_pagu_bagian', compact('daftar_pagu_bagian', 'no'));
-    }
-            public function daftar_pagu_output()
-    {
-        $no = "1";
-        $daftar_pagu_output = Pagu_Output::orderBy('id_pagu', 'dsc')->get();
-        return view('admin.daftar_pagu_output', compact('daftar_pagu_output', 'no'));
-    }
 }

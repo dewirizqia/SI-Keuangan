@@ -18,4 +18,8 @@ class Pagu extends Model
     {
     	return $this->hasMany('App\Pagu_Output');
     }
+    public function pagu_kegiatan()
+    {
+        return $this->hasMany('App\Pagu_Kegiatan');
+    }
 }

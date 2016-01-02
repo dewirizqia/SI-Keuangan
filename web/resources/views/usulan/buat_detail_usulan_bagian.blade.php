@@ -1,4 +1,4 @@
-@extends('@layout.base_keuangan')
+@extends('home.keuangan')
 
 @section('head')
 <link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
@@ -105,18 +105,6 @@
 
 
 @section('script')
-<!-- jQuery -->
-<script src="{{ asset('css/bower_components/jquery/dist/jquery.min.js') }}"></script>
-<!-- DataTables JavaScript -->
-<script src="{{ asset('css/bower_components/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js') }}"></script>
-    <script>
-    $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-                responsive: true
-        });
-    });
-    </script>
-
+@parent
  
 @stop

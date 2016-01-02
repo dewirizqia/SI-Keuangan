@@ -302,9 +302,6 @@
                             <a href="#"><i class="glyphicon glyphicon-sort"></i> Manajemen Kode Input<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="">Kegiatan</a>
-                                </li>
-                                <li>
                                     <a href="">Output</a>
                                 </li>
                                 <li>
@@ -352,7 +349,7 @@
 
     </div>
     <!-- /#wrapper -->
-    @section('script')
+
     <!-- jQuery -->
     <script src="{{ asset('css/jquery/dist/jquery.min.js') }}"></script>
 
@@ -369,16 +366,42 @@
 
     <!-- Custom Theme JavaScript -->
     <!-- dropdownmenu -->
+    <script src="{{ asset('css/dist/js/sb-admin-2.js') }}"></script>
+    <script src="{{ asset('css/jquery-calx-1.1.9.min.js') }}"></script>
+
+    <!-- confirmasi delete -->
     <script type="text/javascript" src="{{{ asset('css/js/bootstrap-confirmation.min.js') }}}"></script>
+
+    <!-- DataTables JavaScript -->
+        <script src="{{ asset('css/bower_components/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js') }}"></script>
+            <script>
+            $(document).ready(function() {
+                $('#dataTables-example').DataTable({
+                        responsive: true,
+                        "scrollX": true
+
+                });
+            });
+            </script>
+            
     <script type="text/javascript">
-    $('[data-toggle="confirmation"]').confirmation('hide');
+    $(document).ready(function(){
+        $('#calx').calx();
+    });
     </script>
 
-    <script src="{{ asset('css/dist/js/sb-admin-2.js') }}"></script>
+    <script type="text/javascript">
+        $('[data-toggle="confirmation"]').confirmation('hide');
+    </script>
+
+
+    @section('script')
+
+
     <div class="footer">
-          
             <div class="copy wow fadeInRight" data-wow-delay="0.4s">
-              <p>&copy; SI Keuangan FT Unlam @2015 <a href="http://ftunlam.ac.id/" target="_blank">ft.unlam.ac.id</a> </p>
+              <p>&copy; SI Keuangan FT Unlam @2015 <a href="http://ftunlam.ac.id/" target="_blank">ftunlam.ac.id</a> </p>
             </div>
          
           <div class="clearfix"> </div>

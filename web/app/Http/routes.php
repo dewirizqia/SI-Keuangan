@@ -82,7 +82,7 @@ Route::post('usulan/bagian/{id_bagian}/{tahun}/{subkom}/{akun}/buat', array('as'
 
 //bagian
 Route::get('bagian/daftar', array('as'=>'daftar_bagian', 'uses'=> 'AdminController@daftar_bagian'));
-Route::get('bagian/buat', array('as'=>'buat_bagian', 'uses'=> 'AdminController@buat_bagian'));
+Route::get('bagian/buat', array('as'=>'tambah_bagian', 'uses'=> 'AdminController@buat_bagian'));
 Route::post('bagian/daftar', array('as'=>'simpan_bagian', 'uses'=> 'AdminController@simpan_bagian'));
 //kegiatan
 Route::get('kegiatan/daftar', array('as'=>'daftar_kegiatan', 'uses'=> 'KodeOutputController@daftar_kegiatan'));

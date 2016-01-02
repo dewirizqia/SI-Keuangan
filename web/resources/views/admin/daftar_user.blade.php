@@ -6,7 +6,7 @@
 
 
 <br>
-<a href=""><button type="button" class="btn btn-primary">Tambah</button></a>
+<a href="{{ route('buat_user')}}"><button type="button" class="btn btn-primary">Tambah</button></a>
 <br>
 <br>
 	@if ($suser->count())
@@ -27,12 +27,18 @@
 	                <tr>
 	                    <td>{{ $no++ }}</td>
 	                    <td><a href="">{{ $user->nama }}</a></td>
-	                    @if($user->nip = 0)
-	                    <td>{{ $user->nip }}</td>
-	                    @else
-	                    <td>-</td>
-	                    @endif
-	                    <td>{{ $user->jabatan }}</td>
+    	                    @if($user->nip == '')
+                                <td>-</td>
+                            @else
+                                <td>{{ $user->nip }}</td>
+                            @endif
+	                    
+	                    
+                        <td>
+                            @foreach($user->detail_user as $detail)
+                                {{$detail->jabatan}}<br>
+                            @endforeach
+	                    </td>
 	                    <td>{{ $user->email }}</td>
 	                    <td>{{ $user->name }}</td>
 	                </tr>

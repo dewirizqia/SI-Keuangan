@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 //model
 use App\Pagu;
 use App\User;
+use App\Detail_User;
 use App\Usulan;
 use App\Detail_Usulan;
 use App\Bagian;
@@ -56,18 +57,35 @@ class AdminController extends Controller
         return redirect()->route('daftar_pagu'); 
     }
 
-
-        
-
-
-
+    // User
     public function daftar_user()
     {
         $no = "1";
-        $suser = User::orderBy('jabatan', 'asc')->get();
+        $suser = User::orderBy('id', 'asc')->get();
         return view('admin.daftar_user', compact('suser', 'no'));
     }
-    
+    public function buat_user()
+    {
+        $sbagian = Bagian::orderBy('id', 'asc')->get();
+        return view('admin.tambah_user', compact('sbagian'));
+    }
+    public function simpan_user(Request $request)
+    {
+        $input = $request->all();
+        $input['password'] = bcrypt($request->input('password'));
+        try 
+        {
+        $simpan_user = User::create($input);
+        $id_user = $simpan_user->id;
+        $input['id_user'] = $id_user;
+        Detail_User::create($input);
+        } 
+        catch (QueryException $e) {
+            return redirect()->route('buat_user');
+        }
+        
+        return redirect()->route('daftar_user'); 
+    }
     #bagian
     public function daftar_bagian()
     {

@@ -294,7 +294,7 @@
                         </li>
                         @section('sidebar')
                                 <li>
-                            <a href="#"><i class="glyphicon glyphicon-lock"></i>Manajemen User</a>
+                            <a href="{{ route('daftar_user')}}"><i class="glyphicon glyphicon-lock"></i>Manajemen User</a>
                         </li>
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-sort"></i> Manajemen Kode Input<span class="fa arrow"></span></a>

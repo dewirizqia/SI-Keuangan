@@ -4,18 +4,18 @@
 
 
 <br>
-					@if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <strong>Whoops!</strong> Sepertinya ada kesalahan.<br><br>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+@if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <strong>Whoops!</strong> Sepertinya ada kesalahan.<br><br>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
-<form role="form" method="POST" action="{{ route('simpan_pagu')}}" accept-charset="UTF-8" enctype ="multipart/form-data">
+<form role="form" method="POST" action="{{ route('simpan_user')}}" accept-charset="UTF-8" enctype ="multipart/form-data">
 	<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
 
 	<div class="form-group">
@@ -26,15 +26,29 @@
         <label>NIP</label>
         <input class="form-control" name="nip">
     </div>
-    <select class="form-control" name="jabatan">
-        <option>Admin Bagian</option>
-        <option>Dekan</option>
-        <option>Wakil Dekan II</option>
-        <option>Subbag Keuangan</option>
-        <option>BPP</option>
-        <option>PPK</option>
-        <option>KTU</option>
-    </select>
+
+    <div class="form-group">
+        <label>Level</label>
+        <select class="form-control" name="jabatan">
+            <option value="dekan">Dekan</option>
+            <option value="wd">Wakil Dekan II</option>
+            <option value="keuangan">Subbagian Keuangan</option>
+            <option value="bpp">BPP</option>
+            <option value="ppk">PPK</option>
+            <option value="ktu">KTU</option>
+            <option value="bagian">Admin Prodi</option>
+            <option value="bagian">Admin Subbagian</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Bagian</label>
+        <select class="form-control" name="bagian_id">
+            @foreach($sbagian as $bagian)
+            <option value="{{ $bagian->id}}">{{ $bagian->detail}}</option>
+            @endforeach
+        </select>
+    </div>
 
     <div class="form-group">
         <label>username</label>
@@ -60,6 +74,7 @@
     <br>
     <button type="submit" class="btn btn-primary">Tambah User</button>
 </form>
+    <br>
 
 
 @stop

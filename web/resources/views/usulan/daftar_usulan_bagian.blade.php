@@ -1,10 +1,10 @@
-@extends('@layout.base_keuangan')
+@extends('home.keuangan')
 
 @section('isi')
 <br>
 <br>
 <form role="form" method="POST" action="{{ route('tambah_usulan_bagian',$id_bagian) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
-    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+    <input type="hidden" name="_token" value="<? php echo csrf_token(); ?>">
         <div class="form-group">
             <div class="col-md-3">
                <input class="form-control" name="tahun">

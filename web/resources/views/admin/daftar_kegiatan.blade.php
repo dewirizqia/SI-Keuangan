@@ -1,32 +1,51 @@
 @extends('@layout.base_admin')
 
+@section('head')
+<link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
+@stop
+
 @section('isi')
-
-<br>
-
-<form role="form" method="POST" action="{{ route('simpan_kegiatan') }}" accept-charset="UTF-8" enctype ="multipart/form-data">
-<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">    
-
-    <div class="form-group input-group">
-        <label>Kode Kegiatan</label>
-        <input class="form-control" name="kode_kegiatan">
+<br>    
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Tambah Kode Kegiatan
     </div>
+    <div class="panel-body">
+        <form role="form" method="POST" action="{{ route('simpan_kegiatan') }}" accept-charset="UTF-8" enctype ="multipart/form-data">
+            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">    
 
-      <div class="form-group input-group">
-        <label>Sumber Dana Kegiatan</label>
-        <input class="form-control" name="sumberdana_kegiatan">
+            <div class="form-group">
+                <label class="col-md-2" background="">Kode Kegiatan</label>
+                <div  class="col-md-4">
+                    <input type="text" class="form-control" name="kode_kegiatan">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2">Sumber Dana Kegiatan</label>
+                <div  class="col-md-4">
+                    <input type="text" class="form-control" name="sumberdana_kegiatan">
+                </div>
+            </div><br><br><br>
+            <div class="form-group">
+                <div  class="col-md-3">
+                    <input type="submit" value="Tambahkan" class="form-control btn-primary">
+                </div>
+            </div>
+        </form>
     </div>
-   
-    <button type="submit" class="btn btn-primary">Tambah Kegiatan</button>
-</form>
+</div>
 
-<br>
-<br>
-<h3 align="center"><b>Daftar Kegiatan</b></h3>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Daftar Kode Kegiatan
+    </div>
+    <div class="panel-body">
+    
 
-	@if ($skegiatan->count())
-	<div class="table-responsive">
-        <table class="table table-bordered table-hover table-striped">
+    @if ($skegiatan->count())
+    <div class="dataTable_wrapper">                
+        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
             <thead>
                 <tr>
                     <th>NO</th>
@@ -36,11 +55,11 @@
                 </tr>
             </thead>
             <tbody>
-            	@foreach ($skegiatan as $kegiatan) 
-	                <tr>
-	                    <td>{{ $no++ }}</td>
-	                    <td><a href="">{{ $kegiatan->kode_kegiatan}}</a></td>
-	                    <td>{{ $kegiatan->sumberdana_kegiatan }}</td>
+                @foreach ($skegiatan as $kegiatan) 
+                    <tr>
+                        <td>{{ $no++ }}</td>
+                        <td><a href="">{{ $kegiatan->kode_kegiatan}}</a></td>
+                        <td>{{ $kegiatan->sumberdana_kegiatan }}</td>
                           <td> 
                             <table> 
                                 <td>
@@ -56,19 +75,19 @@
                                 </td>
                             </table>
                         </td>
-	                </tr>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
+    </div>    
+    @else
+        <div class="panel-heading"><h3><center>Data Kegiatan Belum di Tambahkan</center></h3></div>
+    @endif
+
     </div>
-@else
-    <div class="panel-heading"><h3><center>Data Kegiatan Belum di Tambahkan<center></h3></div>
-@endif
-
-
-
-
+</div>
 @stop
 
 @section('script')
+
 @stop

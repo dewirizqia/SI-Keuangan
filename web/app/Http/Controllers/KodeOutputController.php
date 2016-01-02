@@ -127,6 +127,7 @@ public function delete_output($id)
 public function daftar_suboutput()
     {
         $no = "1";
+      
         $ssuboutput = Sub_Output::orderBy('kode_suboutput', 'asc')->get();
         return view('admin.daftar_suboutput', compact('ssuboutput', 'no'));
     }

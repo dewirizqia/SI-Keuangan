@@ -44,20 +44,20 @@
                                     </a>
                                 </td>
                                 <td style="text-align:center;vertical-align:middle">
-                                    <table margin="0">
-                                    <tr><td>
-                                        <a href="{{ route('spjup_edit') }}" title="Edit" class="btn btn-link">
-                                            <h4><span class="glyphicon glyphicon-edit"></span></h4>
-                                        </a>
-                                    </td><td>
-                                        <form method="POST" action="">
-                                            <input name="_method" type="hidden" value="DELETE">
-                                            <input name="_token" type="hidden" value="{{ csrf_token() }}">
-                                            <button type="submit" class="btn btn-link"  id="confirm" data-toggle="confirmation" data-popout="true">
-                                                <h4 title="Hapus"><span class="glyphicon glyphicon-trash"></span></h4>
-                                            </button>
-                                        </form>
-                                    </td></tr>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <a href="" class="btn btn-primary">Edit</a>
+                                            </td>
+                                            <td>&nbsp</td>
+                                            <td>
+                                                <form method="POST" action="">
+                                                    <input name="_method" type="hidden" value="DELETE">
+                                                    <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
+                                                    <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete">
+                                                </form>
+                                            </td>
+                                        </tr>
                                     </table>                                    
                                 </td>
                             </tr>

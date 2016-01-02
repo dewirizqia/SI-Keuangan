@@ -38,12 +38,14 @@
             </div>
             <div class="form-group">
                 <label class="col-md-1">Input</label>
-                <select class="form-control" name="id_input" id="input">
-                    <option value="">--</option>
-                    @foreach($sinput as $u_input)
-                    <option value="{{ $u_input->id }}" class="{{ $u_input->id_suboutput }}">{{ $u_input->uraian }}</option>
-                    @endforeach
-                </select>
+                <div  class="col-md-3">
+                    <select class="form-control" name="id_input" id="input">
+                        <option value="">--</option>
+                        @foreach($sinput as $u_input)
+                        <option value="{{ $u_input->id }}" class="{{ $u_input->id_suboutput }}">{{ $u_input->uraian }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div><br><br><br>
             <div class="form-group">
                 <label class="col-md-1" background="">Kode Sub Input</label>

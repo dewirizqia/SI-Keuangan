@@ -14,25 +14,28 @@
         <form role="form" method="POST" action="{{ route('simpan_input') }}" accept-charset="UTF-8" enctype ="multipart/form-data">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <div class="form-group">
-                <label>OUTPUT</label>
-            <select class="form-control" name="output" id="output">
-                <option value="">--</option>
-                @foreach($soutput as $u_output)
-                <option value="{{ $u_output->id }}">{{ $u_output->uraian }}</option>
-                @endforeach
-            </select>
+                <label class="col-md-2" background="">Ouput</label>
+                <div  class="col-md-4">
+                <select class="form-control" name="output" id="output">
+                    <option value="">--</option>
+                    @foreach($soutput as $u_output)
+                    <option value="{{ $u_output->id }}">{{ $u_output->uraian }}</option>
+                    @endforeach
+                </select>
+                </div>
             </div>
 
             <div class="form-group">
-                <label>SUB OUTPUT</label>
-             <select class="form-control" name="id_suboutput" id="sub_output">
-                <option value="">--</option>
-                @foreach($ssuboutput as $u_suboutput)
-                <option value="{{ $u_suboutput->id }}" class="{{ $u_suboutput->id_output }}">{{ $u_suboutput->uraian }}</option>
-                @endforeach
-            </select>
-            </div>
-
+                <label class="col-md-2" background="">Sub Ouput</label>
+                <div  class="col-md-4">
+                    <select class="form-control" name="id_suboutput" id="sub_output">
+                        <option value="">--</option>
+                        @foreach($ssuboutput as $u_suboutput)
+                        <option value="{{ $u_suboutput->id }}" class="{{ $u_suboutput->id_output }}">{{ $u_suboutput->uraian }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>&nbsp
             <div class="form-group">
                 <label class="col-md-2" background="">Kode Input</label>
                 <div  class="col-md-4">
@@ -49,16 +52,10 @@
                 <div  class="col-md-3">
                     <input type="submit" value="Tambahkan" class="form-control btn-primary">
                 </div>
-            </div>
-            
+            </div>        
         </form>
-<br>
-<br>
-<h3 align="center"><b>Daftar Komponen Input</b></h3>
-
     </div>
 </div>
-
 <div class="panel panel-primary">
     <div class="panel-heading">
         Daftar Komponen Input

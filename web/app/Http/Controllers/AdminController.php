@@ -99,15 +99,4 @@ class AdminController extends Controller
         $daftar_pagu_output = Pagu_Output::orderBy('id_pagu', 'dsc')->get();
         return view('admin.daftar_pagu_output', compact('daftar_pagu_output', 'no'));
     }
-
-//Halaman Belanja
-public function belanja_buat()
-{
-    return view('admin.belanja_buat');
-}
-public function belanja_daftar()
-{
-    return view('admin.belanja_daftar');
-}
-
 }

@@ -4,11 +4,20 @@
 <link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
 @stop
 
+<<<<<<< HEAD
 @section('isi')
 <br>    
 <div class="panel panel-primary">
     <div class="panel-heading">
         Tambah Kode Akun
+=======
+<form role="form" method="POST" action="{{ route('simpan_akun')}}" accept-charset="UTF-8" enctype ="multipart/form-data">
+     
+     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">   
+    <div class="form-group input-group">
+        <label>Kode Akun</label>
+        <input class="form-control" name="kode_akun"> 
+>>>>>>> 90411187fb3abcb3ac16cd3a208e710c2759ec41
     </div>
     <div class="panel-body">
         <form role="form" method="POST" action="{{ route('simpan_output') }}" accept-charset="UTF-8" enctype ="multipart/form-data">
@@ -34,6 +43,7 @@
     </div>
 </div>
 
+<<<<<<< HEAD
 <div class="panel panel-primary">
     <div class="panel-heading">
         Daftar Kode Akun
@@ -71,6 +81,38 @@
                                             </form> 
                                         </td>
                                     </table>
+=======
+	@if ($sakun->count())
+	<div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>NO</th>
+                    <th>Kode Akun</th>
+                    <th>Uraian</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+            	@foreach ($sakun as $akun)
+	                <tr>
+	                    <td>{{ $no++ }}</td>
+	                    <td><a href="">{{ $akun->kode_akun }}</a></td>
+	                    <td>{{ $akun->uraian_akun }}</td>
+                        
+                        <td> 
+                            <table> 
+                                <td>
+                                    <a href="{{ route('edit_akun', $akun->id)}}" class="btn btn-primary">Edit</a>
+                                </td>
+                                <td>&nbsp</td>
+                                <td>
+                                    <form method="POST" action="{{route('delete_akun', $akun->id)}}" accept-charset="UTF-8" style="margin:0 auto">
+                                        <input name="_method" type="hidden" value="DELETE">
+                                        <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
+                                        <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete">
+                                    </form> 
+>>>>>>> 90411187fb3abcb3ac16cd3a208e710c2759ec41
                                 </td>
 
         	                </tr>

@@ -13,11 +13,15 @@
     <div class="panel-body">
         <form role="form" method="POST" action="{{ route('simpan_suboutput') }}" accept-charset="UTF-8" enctype ="multipart/form-data">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">    
-
             <div class="form-group">
                 <label class="col-md-1" background="">Ouput</label>
                 <div  class="col-md-3">
-                    <input type="text" class="form-control" name="id_output">
+                    <select class="form-control" name="id_output" id="output">
+                        <option value="">--</option>
+                        @foreach($soutput as $u_output)
+                        <option value="{{ $u_output->id }}">{{ $u_output->uraian }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="form-group">
@@ -96,4 +100,5 @@
 @stop
 
 @section('script')
+@parent
 @stop

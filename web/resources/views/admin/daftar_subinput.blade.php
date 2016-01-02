@@ -17,31 +17,44 @@
             <div class="form-group">
                 <label class="col-md-1" background="">Ouput</label>
                 <div  class="col-md-3">
-                    <input type="text" class="form-control" name="id_output">
+                    <select class="form-control" name="output" id="output">
+                        <option value="">--</option>
+                        @foreach($soutput as $u_output)
+                        <option value="{{ $u_output->id }}">{{ $u_output->uraian }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-1" background="">Sub Ouput</label>
                 <div  class="col-md-3">
-                    <input type="text" class="form-control" name="">
+                     <select class="form-control" name="id_suboutput" id="sub_output">
+                        <option value="">--</option>
+                        @foreach($ssuboutput as $u_suboutput)
+                        <option value="{{ $u_suboutput->id }}" class="{{ $u_suboutput->id_output }}">{{ $u_suboutput->uraian }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-1">Input</label>
-                <div  class="col-md-3">
-                    <input type="text" class="form-control" name="">
-                </div>
+                <select class="form-control" name="id_input" id="input">
+                    <option value="">--</option>
+                    @foreach($sinput as $u_input)
+                    <option value="{{ $u_input->id }}" class="{{ $u_input->id_suboutput }}">{{ $u_input->uraian }}</option>
+                    @endforeach
+                </select>
             </div><br><br><br>
             <div class="form-group">
-                <label class="col-md-1" background="">Sub Input</label>
+                <label class="col-md-1" background="">Kode Sub Input</label>
                 <div  class="col-md-3">
-                    <input type="text" class="form-control" name="">
+                    <input type="text" class="form-control" name="kode_subinput">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-1" background="">Uraian</label>
                 <div  class="col-md-3">
-                    <input type="text" class="form-control" name="">
+                    <input type="text" class="form-control" name="uraian">
                 </div>
             </div>
             <div class="form-group">
@@ -110,9 +123,32 @@
     </div>
 </div>
 
-
-
 @stop
 
 @section('script')
+@parent
+<!-- script dropdown select -->
+<xscript type="text/javascript" src="{{ asset('css/js/dropdown/jquery.min.js') }}"></script>
+<xscript type="text/javascript" src="{{ asset('css/js/dropdown/zepto-1.0.1.js') }}"></script>
+<xscript type="text/javascript" src="{{ asset('css/js/dropdown/zepto-selector.js') }}"></script>
+
+<script src="{{ asset('css/js/jquery.chained.js') }}" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+$(function() {
+/* For jquery.chained.js */
+
+    $("#sub_output").chained("#output");
+    $("#input").chained("#sub_output");
+
+
+    $("#input").bind("change", function(event) {
+        if ("" != $("option:selected", this).val() && "" != $("option:selected", $("#sub_output")).val()) {
+            $("#button").fadeIn();
+        } else {
+            $("#button").hide();
+        }
+    });
+
+  });
+</script>
 @stop

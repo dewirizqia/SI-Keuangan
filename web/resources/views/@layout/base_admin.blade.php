@@ -297,7 +297,7 @@
                             <a href="{{ route('daftar_user')}}"><i class="glyphicon glyphicon-lock"></i>Manajemen User</a>
                         </li>
                         <li>
-                            <a href="#"><i class="glyphicon glyphicon-sort"></i> Manajemen Kode Input<span class="fa arrow"></span></a>
+                            <a href="#"><i class="glyphicon glyphicon-sort"></i> Manajemen Kode Output<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="{{ route('daftar_kegiatan')}}">Kegiatan</a>
@@ -403,7 +403,7 @@
 
     <div class="footer">
             <div class="copy wow fadeInRight" data-wow-delay="0.4s">
-              <p>&copy; SI Keuangan FT Unlam @2015 <a href="http://ftunlam.ac.id/" target="_blank">ftunlam.ac.id</a> </p>
+              <p>&copy; SI Keuangan FT Unlam @2015 <a href="http://ftunlam.ac.id/" target="_blank">ft.unlam.ac.id</a> </p>
             </div>
          
           <div class="clearfix"> </div>

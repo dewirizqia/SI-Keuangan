@@ -304,6 +304,7 @@
                                 </li>
                                 <li>
                                     <a href="{{ route('daftar_output')}}">Output</a>
+
                                 </li>
                                 <li>
                                     <a href="{{ route('daftar_suboutput')}}">Sub Output</a>
@@ -336,12 +337,12 @@
         <div class="row">
 		@section('isi')
 
-			{{--
+			
 
             <h1 class="page-header">Halo, {{ Auth::user()->name}} </h1>
         	Selamat datang di halaman administrator Sistem Informasi Keuangan Universitas Lambung Mangkurat.
          
-            --}}
+            
         @show
 
 		</div>
@@ -367,23 +368,42 @@
 
     <!-- Custom Theme JavaScript -->
     <!-- dropdownmenu -->
-    <script type="text/javascript" src="{{{ asset('css/js/bootstrap-confirmation.min.js') }}}"></script>
-    <script type="text/javascript">
-    $('[data-toggle="confirmation"]').confirmation('hide');
-    </script>
-
     <script src="{{ asset('css/dist/js/sb-admin-2.js') }}"></script>
     <script src="{{ asset('css/jquery-calx-1.1.9.min.js') }}"></script>
+
+    <!-- confirmasi delete -->
+    <script type="text/javascript" src="{{{ asset('css/js/bootstrap-confirmation.min.js') }}}"></script>
+
+    <!-- DataTables JavaScript -->
+        <script src="{{ asset('css/bower_components/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js') }}"></script>
+            <script>
+            $(document).ready(function() {
+                $('#dataTables-example').DataTable({
+                        responsive: true,
+                        "scrollX": true
+
+                });
+            });
+            </script>
+            
     <script type="text/javascript">
     $(document).ready(function(){
         $('#calx').calx();
     });
     </script>
+
+    <script type="text/javascript">
+        $('[data-toggle="confirmation"]').confirmation('hide');
+    </script>
+
+
     @section('script')
+
+
     <div class="footer">
-          
             <div class="copy wow fadeInRight" data-wow-delay="0.4s">
-              <p>&copy; SI Keuangan FT Unlam @2015 <a href="http://ftunlam.ac.id/" target="_blank">ft.unlam.ac.id</a> </p>
+              <p>&copy; SI Keuangan FT Unlam @2015 <a href="http://ftunlam.ac.id/" target="_blank">ftunlam.ac.id</a> </p>
             </div>
          
           <div class="clearfix"> </div>

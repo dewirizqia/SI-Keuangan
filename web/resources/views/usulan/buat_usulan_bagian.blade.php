@@ -1,4 +1,4 @@
-@extends('@layout.base_keuangan')
+@extends('home.keuangan')
 
 @section('head')
 <link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
@@ -28,7 +28,8 @@
 
     <div class="form-group">
     	<label>OUTPUT</label>
-    <select class="form-control" name="output">
+    <select class="form-control" name="output" id="output">
+        <option value="">--</option>
     	@foreach($output as $u_output)
         <option value="{{ $u_output->id }}">{{ $u_output->uraian }}</option>
         @endforeach
@@ -37,27 +38,30 @@
 
     <div class="form-group">
     	<label>SUB OUTPUT</label>
-     <select id="suboutput" class="form-control" name="sub_output">
+     <select class="form-control" name="sub_output" id="sub_output">
+        <option value="">--</option>
     	@foreach($suboutput as $u_suboutput)
-        <option value="{{ $u_suboutput->id }}">{{ $u_suboutput->uraian }}</option>
+        <option value="{{ $u_suboutput->id }}" class="{{ $u_suboutput->id_output }}">{{ $u_suboutput->uraian }}</option>
         @endforeach
     </select>
     </div>
 
     <div class="form-group">
     	<label>KOMPONEN INPUT</label>
-    <select class="form-control" name="input">
+    <select class="form-control" name="input" id="input">
+        <option value="">--</option>
     	@foreach($input as $u_input)
-        <option value="{{ $u_input->id }}">{{ $u_input->uraian }}</option>
+        <option value="{{ $u_input->id }}" class="{{ $u_input->id_suboutput }}">{{ $u_input->uraian }}</option>
         @endforeach
     </select>
     </div>
 
     <div class="form-group">
     	<label>SUB KOMPONEN INPUT</label>
-    <select class="form-control" name="sub_input">
+    <select class="form-control" name="sub_input" id="sub_input">
+        <option value="">--</option>
     	@foreach($subinput as $u_subinput)
-        <option value="{{ $u_subinput->id }}">{{ $u_subinput->uraian }}</option>
+        <option value="{{ $u_subinput->id }}" class="{{ $u_subinput->id_input }}">{{ $u_subinput->uraian }}</option>
         @endforeach
     </select>
     </div>
@@ -65,6 +69,7 @@
     <div class="form-group">
     	<label>AKUN</label>
     <select class="form-control" name="akun">
+        <option value="">--</option>
     	@foreach($akun as $u_akun)
         <option value="{{ $u_akun->id }}">{{ $u_akun->uraian_akun }}</option>
         @endforeach
@@ -74,6 +79,7 @@
     <br>
     <button type="submit" class="btn btn-primary">Tambah Detail</button>
 </form>
+
 <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
@@ -86,30 +92,30 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
+                                            <th>Output</th>
+                                            <th>Sub Output</th>
+                                            <th>Input</th>
                                             <th>Sub Input</th>
                                             <th>Akun</th>
                                             <th>Komponen</th>
                                             <th>Detail</th>
                                             <th>Harga Satuan</th>
-                                            <th>Nominal x Satuan</th>
-                                            <th>Jumlah Rincian</th>
+                                            <th>Nominal</th>
                                             <th>Jumlah</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($detail as $data)
                                         <tr class="odd gradeX">
+                                            <td>{{ $data->sub_input->input->sub_output->output->uraian }}</td>
+                                            <td>{{ $data->sub_input->input->sub_output->uraian }}</td>
+                                            <td>{{ $data->sub_input->input->uraian }}</td>
                                             <td>{{ $data->sub_input->uraian }}</td>
-                                            <td>{{ $data->akun->uraian_akun }}</td>
+                                            <td>{{ $data->akun->kode_akun }} - {{ $data->akun->uraian_akun }}</td>
                                             <td>{{ $data->jenis_komponen }}</td>
                                             <td>{{ $data->detail }}</td>
                                             <td>{{ $data->harga_satuan }}</td>
-                                            <td class="center">
-                                                @foreach ($data->rincian as $rincian)
-                                                        {{ $rincian->nominal }} {{ $rincian->satuan }}  
-                                                @endforeach
-                                            </td>
-                                            <td class="center">{{ $data->jumlah_rincian }}</td>
+                                            <td>{{ $data->nominal }} {{ $data->satuan }}</td>
                                             <td class="center">{{ $data->jumlah }}</td>
                                         </tr>
                                         @endforeach
@@ -128,19 +134,30 @@
 
 
 @section('script')
-<!-- jQuery -->
-<script src="{{ asset('css/bower_components/jquery/dist/jquery.min.js') }}"></script>
-<!-- DataTables JavaScript -->
-    <script src="{{ asset('css/bower_components/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js') }}"></script>
+@parent
+<!-- script dropdown select -->
+<xscript type="text/javascript" src="{{ asset('css/js/dropdown/jquery.min.js') }}"></script>
+<xscript type="text/javascript" src="{{ asset('css/js/dropdown/zepto-1.0.1.js') }}"></script>
+<xscript type="text/javascript" src="{{ asset('css/js/dropdown/zepto-selector.js') }}"></script>
 
-    <script>
-    $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-                responsive: true
-        });
+<script src="{{ asset('css/js/jquery.chained.js') }}" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+$(function() {
+/* For jquery.chained.js */
+
+    $("#sub_output").chained("#output");
+    $("#input").chained("#sub_output");
+    $("#sub_input").chained("#input");
+
+
+    $("#sub_input").bind("change", function(event) {
+        if ("" != $("option:selected", this).val() && "" != $("option:selected", $("#input")).val()) {
+            $("#button").fadeIn();
+        } else {
+            $("#button").hide();
+        }
     });
-    </script>
 
- 
+  });
+</script>
 @stop

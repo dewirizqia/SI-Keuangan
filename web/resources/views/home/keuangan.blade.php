@@ -66,3 +66,7 @@
                         </li>
 
 @stop
+
+@section('script')
+@parent
+@stop

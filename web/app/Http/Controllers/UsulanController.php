@@ -127,7 +127,8 @@ class UsulanController extends Controller
         $usulan = Usulan::whereTahun($tahun)->firstOrFail();
         $simpan = Detail_Usulan::create([
             'id_usulan' => $usulan->id,
-            'jumlah_rincian' => $input['jumlah_rincian'],
+            'nominal' => $input['nominal'],
+            'satuan' => $input['satuan'],
             'detail' => $input['detail'],
             'harga_satuan' => $input['harga_satuan'],
             'jumlah' => $input['jumlah'],
@@ -135,12 +136,6 @@ class UsulanController extends Controller
             'id_subinput' => $subkom,
             'id_akun' => $akun,
             ]);
-        $simpan_rincian = Rincian_Perhitungan::insert([
-            ['id_detail_usulan' => $simpan->id, 'nominal' => $input['nom1'], 'satuan' => $input['sat1']],
-            ['id_detail_usulan' => $simpan->id, 'nominal' => $input['nom2'], 'satuan' => $input['sat2']],
-            ['id_detail_usulan' => $simpan->id, 'nominal' => $input['nom3'], 'satuan' => $input['sat3']],
-            ['id_detail_usulan' => $simpan->id, 'nominal' => $input['nom4'], 'satuan' => $input['sat4']]            
-        ]);
         // return $id_usulan;
         // dd($simpan_rincian);
         return redirect()->route('buat_detail_usulan_bagian', compact('bagian', 'tahun', 'subkom', 'akun'));

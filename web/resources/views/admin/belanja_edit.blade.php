@@ -4,13 +4,13 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Tambah Belanja</h1>
+        <h1 class="page-header">Edit Belanja</h1>
     </div>
 </div>
 
 <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-primary">
+            <div class="panel panel-success">
                 <div class="panel-body">
                     <form action="" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -126,7 +126,7 @@
                         
                         <hr>                        
                         <div class="form-group">
-                            <input type="submit" value="Simpan" class="form-control btn-primary">
+                            <input type="submit" value="Simpan" class="form-control btn-success">
                             <input type="reset" value="Ulangi" class="form-control btn-warning">
                         </div>                        
                     </form>

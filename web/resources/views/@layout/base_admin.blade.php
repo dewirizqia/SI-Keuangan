@@ -340,7 +340,7 @@
 
 			
 
-            <h1 class="page-header">Halo, {{ Auth::user()->name}} </h1>
+            
         	Selamat datang di halaman administrator Sistem Informasi Keuangan Universitas Lambung Mangkurat.
          
             

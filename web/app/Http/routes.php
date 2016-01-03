@@ -76,9 +76,9 @@ Route::get('pagu/output/daftar/{id}/edit', array('as'=>'edit_pagu_output', 'uses
 Route::patch('pagu/output/daftar/{id}', array('as'=>'update_pagu_output', 'uses'=> 'PaguController@update_pagu_output'));
 Route::delete('pagu/output/daftar/{id}', ['as'=>'delete_pagu_output', 'uses'=>'PaguController@delete_pagu_output']);
 // pagu Kegiatan
-Route::get('pagu/kegiatan/daftar', array('as'=>'daftar_pagu_kegiatan', 'uses'=> 'AdminController@daftar_pagu_kegiatan'));
-Route::get('pagu/kegiatan/buat', array('as'=>'buat_pagu_kegiatan', 'uses'=> 'AdminController@buat_pagu_kegiatan'));
-Route::post('pagu/kegiatan/daftar', array('as'=>'simpan_pagu_kegiatan', 'uses'=> 'AdminController@simpan_pagu_kegiatan'));
+Route::get('pagu/kegiatan/daftar', array('as'=>'daftar_pagu_kegiatan', 'uses'=> 'PaguController@daftar_pagu_kegiatan'));
+Route::get('pagu/kegiatan/buat', array('as'=>'buat_pagu_kegiatan', 'uses'=> 'PaguController@buat_pagu_kegiatan'));
+Route::post('pagu/kegiatan/daftar', array('as'=>'simpan_pagu_kegiatan', 'uses'=> 'PaguController@simpan_pagu_kegiatan'));
 Route::get('pagu/kegiatan/daftar/{id}/edit', array('as'=>'edit_pagu_kegiatan', 'uses'=> 'PaguController@edit_pagu_kegiatan'));
 Route::patch('pagu/kegiatan/daftar/{id}', array('as'=>'update_pagu_kegiatan', 'uses'=> 'PaguController@update_pagu_kegiatan'));
 Route::delete('pagu/kegiatan/daftar/{id}', ['as'=>'delete_pagu_kegiatan', 'uses'=>'PaguController@delete_pagu_kegiatan']);

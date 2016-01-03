@@ -2,6 +2,18 @@
 
 namespace App\Http\Controllers;
 
+//model
+use App\Kegiatan;
+use App\Output;
+use App\Sub_Output;
+use App\Input;
+use App\Sub_Input;
+use App\Akun;
+use App\Pagu;
+use App\Pagu_Kegiatan;
+use App\Pagu_Output;
+use App\Pagu_Bagian;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -55,12 +67,13 @@ class PaguController extends Controller
             public function daftar_pagu_kegiatan()
     {
         $no = "1";
-        $soutput = Output::orderBy('kode_output', 'asc')->get();
         $ssuboutput = Sub_Output::orderBy('kode_suboutput', 'asc')->get();
         $sinput = Input::orderBy('kode_input', 'asc')->get();
         $ssubinput = Sub_Input::orderBy('kode_subinput', 'asc')->get();
-        $daftar_pagu_output = Pagu_Output::orderBy('id_pagu', 'dsc')->get();
-        return view('pagu.daftar_pagu_output', compact('daftar_pagu_output', 'no'));
+        $daftar_pagu = Pagu::orderBy('id', 'dsc')->get();
+        $daftar_pagu_output = Pagu_Output::orderBy('id', 'dsc')->get();
+        $daftar_pagu_kegiatan = Pagu_Kegiatan::orderBy('id', 'dsc')->get();
+        return view('pagu.daftar_pagu_kegiatan', compact('daftar_pagu','ssuboutput','daftar_pagu_output','sinput','ssubinput', 'no', 'daftar_pagu_kegiatan'));
     }
    
 

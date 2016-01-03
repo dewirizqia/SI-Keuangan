@@ -56,17 +56,32 @@ route::get('/mail', function() {
 
 
 // pagu
-Route::get('pagu/daftar', array('as'=>'daftar_pagu', 'uses'=> 'AdminController@daftar_pagu'));
-Route::get('pagu/buat', array('as'=>'buat_pagu', 'uses'=> 'AdminController@buat_pagu'));
-Route::post('pagu/daftar', array('as'=>'simpan_pagu', 'uses'=> 'AdminController@simpan_pagu'));
+Route::get('pagu/daftar', array('as'=>'daftar_pagu', 'uses'=> 'PaguController@daftar_pagu'));
+Route::post('pagu/daftar', array('as'=>'simpan_pagu', 'uses'=> 'PaguController@simpan_pagu'));
+Route::get('pagu/daftar/{id}/edit', array('as'=>'edit_pagu', 'uses'=> 'PaguController@edit_pagu'));
+Route::patch('pagu/daftar/{id}', array('as'=>'update_pagu', 'uses'=> 'PaguController@update_pagu'));
+Route::delete('pagu/daftar/{id}', ['as'=>'delete_pagu', 'uses'=>'PaguController@delete_pagu']);
 // pagu bagian
-Route::get('pagu/bagian/daftar', array('as'=>'daftar_pagu_bagian', 'uses'=> 'AdminController@daftar_pagu_bagian'));
-Route::get('pagu/bagian/buat', array('as'=>'buat_pagu_bagian', 'uses'=> 'AdminController@buat_pagu_bagian'));
-Route::post('pagu/bagian/daftar', array('as'=>'simpan_pagu_bagian', 'uses'=> 'AdminController@simpan_pagu_bagian'));
+Route::get('pagu/bagian/daftar', array('as'=>'daftar_pagu_bagian', 'uses'=> 'PaguController@daftar_pagu_bagian'));
+Route::get('pagu/bagian/buat', array('as'=>'buat_pagu_bagian', 'uses'=> 'PaguController@buat_pagu_bagian'));
+Route::post('pagu/bagian/daftar', array('as'=>'simpan_pagu_bagian', 'uses'=> 'PaguController@simpan_pagu_bagian'));
+Route::get('pagu/bagian/daftar/{id}/edit', array('as'=>'edit_pagu_bagian', 'uses'=> 'PaguController@edit_pagu_bagian'));
+Route::patch('pagu/bagian/daftar/{id}', array('as'=>'update_pagu_bagian', 'uses'=> 'PaguController@update_pagu_bagian'));
+Route::delete('pagu/bagian/daftar/{id}', ['as'=>'delete_pagu_bagian', 'uses'=>'PaguController@delete_pagu_bagian']);
 // pagu output
 Route::get('pagu/output/daftar', array('as'=>'daftar_pagu_output', 'uses'=> 'AdminController@daftar_pagu_output'));
 Route::get('pagu/output/buat', array('as'=>'buat_pagu_output', 'uses'=> 'AdminController@buat_pagu_output'));
 Route::post('pagu/output/daftar', array('as'=>'simpan_pagu_output', 'uses'=> 'AdminController@simpan_pagu_output'));
+Route::get('pagu/output/daftar/{id}/edit', array('as'=>'edit_pagu_output', 'uses'=> 'PaguController@edit_pagu_output'));
+Route::patch('pagu/output/daftar/{id}', array('as'=>'update_pagu_output', 'uses'=> 'PaguController@update_pagu_output'));
+Route::delete('pagu/output/daftar/{id}', ['as'=>'delete_pagu_output', 'uses'=>'PaguController@delete_pagu_output']);
+// pagu Kegiatan
+Route::get('pagu/kegiatan/daftar', array('as'=>'daftar_pagu_kegiatan', 'uses'=> 'PaguController@daftar_pagu_kegiatan'));
+Route::get('pagu/kegiatan/buat', array('as'=>'buat_pagu_kegiatan', 'uses'=> 'PaguController@buat_pagu_kegiatan'));
+Route::post('pagu/kegiatan/daftar', array('as'=>'simpan_pagu_kegiatan', 'uses'=> 'PaguController@simpan_pagu_kegiatan'));
+Route::get('pagu/kegiatan/daftar/{id}/edit', array('as'=>'edit_pagu_kegiatan', 'uses'=> 'PaguController@edit_pagu_kegiatan'));
+Route::patch('pagu/kegiatan/daftar/{id}', array('as'=>'update_pagu_kegiatan', 'uses'=> 'PaguController@update_pagu_kegiatan'));
+Route::delete('pagu/kegiatan/daftar/{id}', ['as'=>'delete_pagu_kegiatan', 'uses'=>'PaguController@delete_pagu_kegiatan']);
 
 //usulan Bagian
 Route::get('usulan/bagian/{id}/daftar', array('as'=>'daftar_usulan_bagian', 'uses'=> 'UsulanController@daftar_usulan_bagian'));
@@ -82,7 +97,7 @@ Route::post('usulan/bagian/{id_bagian}/{tahun}/{subkom}/{akun}/buat', array('as'
 
 //bagian
 Route::get('bagian/daftar', array('as'=>'daftar_bagian', 'uses'=> 'AdminController@daftar_bagian'));
-Route::get('bagian/buat', array('as'=>'buat_bagian', 'uses'=> 'AdminController@buat_bagian'));
+Route::get('bagian/buat', array('as'=>'tambah_bagian', 'uses'=> 'AdminController@buat_bagian'));
 Route::post('bagian/daftar', array('as'=>'simpan_bagian', 'uses'=> 'AdminController@simpan_bagian'));
 //kegiatan
 Route::get('kegiatan/daftar', array('as'=>'daftar_kegiatan', 'uses'=> 'KodeOutputController@daftar_kegiatan'));
@@ -121,9 +136,20 @@ Route::get('akun/daftar/{id}/edit', array('as'=>'edit_akun', 'uses'=> 'KodeOutpu
 Route::patch('akun/daftar/{id}', array('as'=>'update_akun', 'uses'=> 'KodeOutputController@update_akun'));
 Route::delete('akun/daftar/{id}', ['as'=>'delete_akun', 'uses'=>'KodeOutputController@delete_akun']);
 //rekap belanja
-Route::get('belanja/daftar', array('as'=>'belanja_daftar', 'uses'=> 'AdminController@belanja_daftar'));
-Route::get('belanja/buat', array('as'=>'belanja_buat', 'uses'=> 'AdminController@belanja_buat'));
-Route::post('belanja/simpan', array('as'=>'simpan_belanja', 'uses'=> 'AdminController@simpan_belanja'));
+Route::get('belanja/daftar', array('as'=>'belanja_daftar', 'uses'=> 'BelanjaController@belanja_daftar'));
+Route::get('belanja/buat', array('as'=>'belanja_buat', 'uses'=> 'BelanjaController@belanja_buat'));
+Route::post('belanja/simpan', array('as'=>'simpan_belanja', 'uses'=> 'BelanjaController@simpan_belanja'));
+//sk
+Route::get('sk/daftar', array('as'=>'daftar_sk', 'uses'=> 'AdminController@daftar_sk'));
+Route::get('sk/buat', array('as'=>'buat_sk', 'uses'=> 'AdminController@buat_sk'));
+Route::post('sk/daftar', array('as'=>'simpan_sk', 'uses'=> 'AdminController@simpan_sk'));
+//user
+Route::get('user/daftar', array('as'=>'daftar_user', 'uses'=> 'AdminController@daftar_user'));
+Route::post('user/daftar', array('as'=>'simpan_user', 'uses'=> 'AdminController@simpan_user'));
+Route::get('user/buat', array('as'=>'buat_user', 'uses'=> 'AdminController@buat_user'));
+Route::get('user/daftar/{id}/edit', array('as'=>'edit_user', 'uses'=> 'AdminController@edit_user'));
+Route::patch('user/daftar/{id}', array('as'=>'update_user', 'uses'=> 'AdminController@update_user'));
+Route::delete('user/daftar/{id}', ['as'=>'delete_user', 'uses'=>'AdminController@delete_user']);
 //SPJ UP
 Route::get('spj_up/daftar', array('as'=>'spjup_daftar', 'uses'=> 'SpjController@spjup_daftar'));
 Route::get('spj_up/buat', array('as'=>'spjup_buat', 'uses'=> 'SpjController@spjup_buat'));
@@ -131,14 +157,6 @@ Route::post('spj_up/daftar', array('as'=>'simpan_spjup', 'uses'=> 'SpjController
 Route::get('spj_up/edit', array('as'=>'spjup_edit', 'uses'=> 'SpjController@spjup_edit'));
 Route::get('spj_up/detail', array('as'=>'spjup_detail', 'uses'=> 'SpjController@spjup_detail'));
 Route::get('spj_up/detail/edit', array('as'=>'spjup_edit2', 'uses'=> 'SpjController@spjup_edit2'));
-//sk
-Route::get('sk/daftar', array('as'=>'daftar_sk', 'uses'=> 'AdminController@daftar_sk'));
-Route::get('sk/buat', array('as'=>'buat_sk', 'uses'=> 'AdminController@buat_sk'));
-Route::post('sk/daftar', array('as'=>'simpan_sk', 'uses'=> 'AdminController@simpan_sk'));
-//user
-Route::get('user/daftar', array('as'=>'daftar_user', 'uses'=> 'AdminController@daftar_user'));
-Route::get('user/buat', array('as'=>'buat_user', 'uses'=> 'AdminController@buat_user'));
-Route::post('user/daftar', array('as'=>'simpan_user', 'uses'=> 'AdminController@simpan_user'));
 //SPJ LS dan Daftar Nominatif
 Route::get('spj_ls/daftar', array('as'=>'spjls_daftar', 'uses'=> 'SpjController@spjls_daftar'));
 Route::get('spj_ls/buat', array('as'=>'spjls_buat', 'uses'=> 'SpjController@spjls_buat'));

@@ -28,7 +28,7 @@ class KodeOutputController extends Controller
     {
         $this->middleware('auth');
     }
-#output
+#kegiatan
 public function daftar_kegiatan()
 {
     $no = "1";
@@ -127,12 +127,14 @@ public function delete_output($id)
 public function daftar_suboutput()
     {
         $no = "1";
+        $soutput = Output::orderBy('kode_output', 'asc')->get();
         $ssuboutput = Sub_Output::orderBy('kode_suboutput', 'asc')->get();
-        return view('admin.daftar_suboutput', compact('ssuboutput', 'no'));
+        return view('admin.daftar_suboutput', compact('soutput','ssuboutput', 'no'));
     }
 public function simpan_suboutput(SubOutputRequest $request)
 {
     $input = $request->all();
+
     try 
     {
     Sub_Output::create($input);
@@ -146,12 +148,12 @@ public function simpan_suboutput(SubOutputRequest $request)
 public function edit_suboutput($id)
 {
     $no = "1";
-    $soutput = Output::FindOrFail($id);
+    $ssuboutput = Sub_Output::FindOrFail($id);
     return view('admin.edit_suboutput', compact('ssuboutput', 'no'));
 }
 public function update_suboutput(SubOutputRequest $request, $id)
 {
-    $ssuboutput = Output::whereId($id)->firstOrFail();
+    $ssuboutput = Sub_Output::whereId($id)->firstOrFail();
     $input = $request->all();
     try 
     {
@@ -165,7 +167,7 @@ public function update_suboutput(SubOutputRequest $request, $id)
 public function delete_suboutput($id)
 {
     
-        $ssuboutput = Output::FindOrFail($id);
+        $ssuboutput = Sub_Output::FindOrFail($id);
         $ssuboutput->delete();
         
         return redirect()->route('daftar_suboutput');
@@ -174,8 +176,10 @@ public function delete_suboutput($id)
 public function daftar_input()
 {
     $no = "1";
+    $soutput = Output::orderBy('kode_output', 'asc')->get();
+    $ssuboutput = Sub_Output::orderBy('kode_suboutput', 'asc')->get();
     $sinput = Input::orderBy('kode_input', 'asc')->get();
-    return view('admin.daftar_input', compact('sinput', 'no'));
+    return view('admin.daftar_input', compact('soutput','ssuboutput', 'sinput', 'no'));
 }
 public function simpan_input(InputRequest $request)
 {
@@ -193,7 +197,7 @@ public function simpan_input(InputRequest $request)
 public function edit_input($id)
 {
     $no = "1";
-    $soutput = Input::FindOrFail($id);
+    $sinput = Input::FindOrFail($id);
     return view('admin.edit_input', compact('sinput', 'no'));
 }
 public function update_input(InputRequest $request, $id)
@@ -221,8 +225,11 @@ public function delete_input($id)
 public function daftar_subinput()
 {
     $no = "1";
+    $soutput = Output::orderBy('kode_output', 'asc')->get();
+    $ssuboutput = Sub_Output::orderBy('kode_suboutput', 'asc')->get();
+    $sinput = Input::orderBy('kode_input', 'asc')->get();
     $ssubinput = Sub_Input::orderBy('kode_subinput', 'asc')->get();
-    return view('admin.daftar_subinput', compact('ssubinput', 'no'));
+    return view('admin.daftar_subinput', compact('soutput','ssuboutput','sinput','ssubinput', 'no'));
 }
 public function simpan_subinput(SubInputRequest $request)
 {
@@ -240,7 +247,7 @@ public function simpan_subinput(SubInputRequest $request)
 public function edit_subinput($id)
 {
     $no = "1";
-    $ssubinput = Output::FindOrFail($id);
+    $ssubinput = Sub_Input::FindOrFail($id);
     return view('admin.edit_subinput', compact('ssubinput', 'no'));
 }
 public function update_subinput(SubInputRequest $request, $id)

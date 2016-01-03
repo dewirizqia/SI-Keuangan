@@ -8,7 +8,12 @@ class Output extends Model
 {
     protected $table = 'output';
 
-    protected $fillable = ['kode_output', 'uraian'];
+    protected $fillable = ['kode_output', 'uraian', 'id_kegiatan'];
+
+    public function kegiatan()
+    {
+        return $this->belongsTo('App\Kegiatan', 'id_kegiatan');
+    }
 
     public function sub_output()
     {

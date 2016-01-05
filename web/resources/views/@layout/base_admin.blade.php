@@ -293,8 +293,11 @@
                             <a href="{{ route('home')}}"><i class="glyphicon glyphicon-home"></i> Dashboard</a>
                         </li>
                         @section('sidebar')
-                                <li>
+                        <li>
                             <a href="{{ route('daftar_user')}}"><i class="glyphicon glyphicon-lock"></i>Manajemen User</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="glyphicon glyphicon-list-alt"></i>Manajemen Bagian</a>
                         </li>
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-sort"></i> Manajemen Kode Output<span class="fa arrow"></span></a>

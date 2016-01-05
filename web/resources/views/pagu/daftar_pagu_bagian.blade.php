@@ -1,6 +1,59 @@
 @extends('@layout.base_admin')
-
+@section('head')
+<link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
+@stop
 @section('isi')
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Tambah Batasan Pagu Kegiatan
+    </div>
+    <div class="panel-body">
+        <form role="form" method="POST" action="{{ route('simpan_pagu_bagian') }}" accept-charset="UTF-8" enctype ="multipart/form-data">
+            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">    
+            
+            <div class="form-group">
+                <label class="col-md-1" background="">Bagian</label>
+                <div  class="col-md-3">
+                     <select class="form-control" name="id_bagian" id="bagian">
+                        <option value="">--</option>
+                        @foreach($sbagian as $bagian)
+                        <option value="{{ $bagian->id }}" >{{ $bagian->detail }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        
+
+            <div class="form-group">
+                <label class="col-md-2">Tahun</label>
+                <div  class="col-md-3">
+                    <select class="form-control" name="id_pagu" id="tahun">
+                        <option value="">--</option>
+                        @foreach($daftar_pagu as $pagu)
+                        <option value="{{ $pagu->id }}">{{ $pagu->tahun }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1">Batasan</label>
+                <div  class="col-md-3">
+                    <input type="text" class="form-control" name="batasan">
+                </div>
+            </div><br><br><br>
+            <div class="form-group">
+                <div  class="col-md-3">
+                    <input type="submit" value="Tambahkan" class="form-control btn-primary">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
 
 
 
@@ -40,6 +93,5 @@
 
 
 @stop
-
 @section('script')
 @stop

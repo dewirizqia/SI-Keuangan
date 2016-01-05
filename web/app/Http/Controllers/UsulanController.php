@@ -36,7 +36,8 @@ class UsulanController extends Controller
     {
         $no = "1";
         $dftrusulan = Usulan::whereId_bagian($id_bagian)->get();
-        return view('usulan.daftar_usulan_bagian', compact('id_bagian','no', 'dftrusulan'));
+        $bagian = Bagian::whereId($id_bagian)->get();
+        return view('usulan.daftar_usulan_bagian', compact('bagian','id_bagian','no', 'dftrusulan'));
     }
     public function tambah_usulan_bagian(Request $request, $id_bagian)
     {

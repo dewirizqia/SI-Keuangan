@@ -99,6 +99,9 @@ Route::post('usulan/bagian/{id_bagian}/{tahun}/{subkom}/{akun}/buat', array('as'
 Route::get('bagian/daftar', array('as'=>'daftar_bagian', 'uses'=> 'AdminController@daftar_bagian'));
 Route::get('bagian/buat', array('as'=>'tambah_bagian', 'uses'=> 'AdminController@buat_bagian'));
 Route::post('bagian/daftar', array('as'=>'simpan_bagian', 'uses'=> 'AdminController@simpan_bagian'));
+Route::get('bagian/daftar/{id}/edit', array('as'=>'edit_bagian', 'uses'=> 'AdminController@edit_bagian'));
+Route::patch('bagian/daftar/{id}', array('as'=>'update_bagian', 'uses'=> 'AdminController@update_bagian'));
+Route::delete('bagian/daftar/{id}', ['as'=>'delete_bagian', 'uses'=>'AdminController@delete_bagian']);
 //kegiatan
 Route::get('kegiatan/daftar', array('as'=>'daftar_kegiatan', 'uses'=> 'KodeOutputController@daftar_kegiatan'));
 Route::post('kegiatan/daftar', array('as'=>'simpan_kegiatan', 'uses'=> 'KodeOutputController@simpan_kegiatan'));

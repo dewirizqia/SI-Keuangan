@@ -1,5 +1,6 @@
 @extends('@layout.base_admin')
 
+
 @section('sidebar')			
 							<li>
                             <a href="#"><i class="glyphicon glyphicon-credit-card"></i> Pagu<span class="fa arrow"></span></a>
@@ -28,7 +29,7 @@
 	                            @foreach ($sbagian as $bagian)
 
 	                            <li>
-	                                <a href="{{ route('daftar_usulan_bagian',$bagian->id) }}">{{ $bagian->bagian }}</a>
+	                                <a href="{{ route('daftar_usulan_bagian',$bagian->id) }}">{{ $bagian->detail }}</a>
 	                            </li>
 	                            @endforeach
 	                        </ul>
@@ -40,7 +41,7 @@
 	                            @foreach ($sbagian as $bagian)
 
 	                            <li>
-	                                <a href="#">{{ $bagian->bagian }}</a>
+	                                <a href="#">{{ $bagian->detail }}</a>
 	                            </li>
 	                            @endforeach
 	                        </ul>

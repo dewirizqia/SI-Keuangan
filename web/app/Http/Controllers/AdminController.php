@@ -94,4 +94,12 @@ class AdminController extends Controller
         return redirect()->route('daftar_bagian');
     }
 
+    public function edit_bagian($id)
+    {
+        $no = "1";
+        $daftar_bagian = Bagian::orderBy('bagian', 'asc')->get();
+        $dbagian = Bagian::FindOrFail($id);
+        return view('admin.edit_bagian', compact('dbagian','daftar_bagian', 'no'));
+    }
+
 }

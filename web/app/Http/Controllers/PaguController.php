@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 //model
 use App\Kegiatan;
 use App\Output;
+use App\Bagian;
 use App\Sub_Output;
 use App\Input;
 use App\Sub_Input;
@@ -53,7 +54,8 @@ class PaguController extends Controller
     {
         $no = "1";
         $daftar_pagu_bagian = Pagu_Bagian::orderBy('id_pagu', 'dsc')->get();
-        return view('pagu.daftar_pagu_bagian', compact('daftar_pagu_bagian', 'no'));
+        $sbagian = Bagian::orderBy('id', 'dsc')->get();
+        return view('pagu.daftar_pagu_bagian', compact('sbagian','daftar_pagu_bagian', 'no'));
     }
 
 

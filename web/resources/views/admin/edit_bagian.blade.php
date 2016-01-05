@@ -2,10 +2,10 @@
 @section('head')
 <link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
 @stop
-@section('isi')
 
+@section('isi')
 <br>
-<form role="form" method="POST" action="{{ route('tambah_bagian') }}" accept-charset="UTF-8" enctype ="multipart/form-data">
+<form role="form" method="POST" action="{{ route('update_bagian', $dbagian->id) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
         <div class="form-group">
             <div class="col-md-3">
@@ -15,10 +15,10 @@
                 </select>
             </div>
             <div class="col-md-3">
-               <input class="form-control" name="detail">
+               <input class="form-control" name="detail" value="{{$dbagian->detail}}">
             </div>
             <div class="col-md-3">
-                <button type="submit" class="btn btn-primary">Tambah Prodi/Bagian</button>
+                <button type="submit" class="btn btn-primary">Update Prodi/Bagian</button>
             </div>
         </div>
 </form>
@@ -80,6 +80,7 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+
 @stop
 
 @section('script')

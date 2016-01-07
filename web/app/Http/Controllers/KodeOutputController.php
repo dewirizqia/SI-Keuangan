@@ -80,7 +80,8 @@ public function daftar_output()
 {
     $no = "1";
     $soutput = Output::orderBy('kode_output', 'asc')->get();
-    return view('admin.daftar_output', compact('soutput', 'no'));
+    $skegiatan = Kegiatan::orderBy('id', 'asc')->get();
+    return view('admin.daftar_output', compact('skegiatan','soutput', 'no'));
 }
 public function simpan_output(OutputRequest $request)
 {
@@ -149,7 +150,8 @@ public function edit_suboutput($id)
 {
     $no = "1";
     $ssuboutput = Sub_Output::FindOrFail($id);
-    return view('admin.edit_suboutput', compact('ssuboutput', 'no'));
+    $soutput = Output::orderBy('kode_output', 'asc')->get();
+    return view('admin.edit_suboutput', compact('soutput','ssuboutput', 'no'));
 }
 public function update_suboutput(SubOutputRequest $request, $id)
 {

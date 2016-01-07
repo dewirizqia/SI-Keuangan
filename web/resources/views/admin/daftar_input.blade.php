@@ -67,6 +67,7 @@
                 <thead>
                     <tr>
                         <th>NO</th>
+                        <th>Sub Output</th>
                         <th>Kode Input</th>
                         <th>Uraian</th>
                         <th>Aksi</th>
@@ -76,7 +77,8 @@
                 	@foreach ($sinput as $input)
     	                <tr>
     	                    <td>{{ $no++ }}</td>
-    	                    <td><a href="">{{ $input->kode_input }}</a></td>
+                            <td>{{ $input->sub_output->uraian }}</td>
+    	                    <td>{{ $input->kode_input }}</td>
     	                    <td>{{ $input->uraian }}</td>
 
                             <td> 

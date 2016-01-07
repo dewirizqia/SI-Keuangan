@@ -71,13 +71,14 @@
     <select class="form-control" name="akun">
         <option value="">--</option>
     	@foreach($akun as $u_akun)
-        <option value="{{ $u_akun->id }}">{{ $u_akun->uraian_akun }}</option>
+        <option value="{{ $u_akun->id }}">({{ $u_akun->kode_akun }})  {{ $u_akun->uraian_akun }}</option>
         @endforeach
     </select>
     </div>
 
     <br>
     <button type="submit" class="btn btn-primary">Tambah Detail</button>
+    <button class="btn btn-primary"><a href="{{ route('status_usulan', $usulan->id) }}">Selesai</a></button>
 </form>
 
 <div class="row">
@@ -88,8 +89,9 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
+                            @if ($detail->count())
                             <div class="dataTable_wrapper">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <table class="table table-striped table-bordered table-hover" id="usulan" class="display">
                                     <thead>
                                         <tr>
                                             <th>Output</th>
@@ -104,6 +106,20 @@
                                             <th>Jumlah</th>
                                         </tr>
                                     </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Output</th>
+                                            <th>Sub Output</th>
+                                            <th>Input</th>
+                                            <th>Sub Input</th>
+                                            <th>Akun</th>
+                                            <th>Komponen</th>
+                                            <th>Detail</th>
+                                            <th>Harga Satuan</th>
+                                            <th>Nominal</th>
+                                            <th>Jumlah</th>
+                                        </tr>
+                                    </tfoot>
                                     <tbody>
                                         @foreach($detail as $data)
                                         <tr class="odd gradeX">
@@ -123,6 +139,9 @@
                                 </table>
                             </div>
                             <!-- /.table-responsive -->
+                            @else
+                                <div class="panel-heading"><h3><center>Data Detail Usulan Belum di Tambahkan</center></h3></div>
+                            @endif
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -159,5 +178,32 @@ $(function() {
     });
 
   });
+</script>
+
+<script type="text/javascript" class="init">
+$(document).ready(function() {
+    $('#usulan').DataTable( {
+        initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
+    } );
+} );
 </script>
 @stop

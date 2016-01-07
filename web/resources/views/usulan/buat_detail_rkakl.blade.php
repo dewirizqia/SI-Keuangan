@@ -1,0 +1,1 @@
+buat_detail_rkakl.blade.php

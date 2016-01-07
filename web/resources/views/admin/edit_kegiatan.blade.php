@@ -7,8 +7,7 @@
         Edit Kode Kegiatan
     </div>
     <div class="panel-body">
-        <form role="form" method="POST" action="{{ route('update_kegiatan', $skegiatan->id) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
-            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">    
+        <form role="form" method="POST" action="{{ route('update_kegiatan', $skegiatan->id) }}" accept-charset="UTF-8" enctype ="multipart/form-data"> 
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">    
             <div class="form-group">
                 <label class="col-md-2" background="">Kode Kegiatan</label>

@@ -83,10 +83,18 @@ Route::get('pagu/kegiatan/daftar/{id}/edit', array('as'=>'edit_pagu_kegiatan', '
 Route::patch('pagu/kegiatan/daftar/{id}', array('as'=>'update_pagu_kegiatan', 'uses'=> 'PaguController@update_pagu_kegiatan'));
 Route::delete('pagu/kegiatan/daftar/{id}', ['as'=>'delete_pagu_kegiatan', 'uses'=>'PaguController@delete_pagu_kegiatan']);
 
+//Usulan
+Route::get('usulan/daftar', array('as'=>'daftar_usulan', 'uses'=> 'UsulanController@daftar_usulan'));
+Route::post('usulan/daftar', array('as'=>'tambah_usulan', 'uses'=> 'UsulanController@tambah_usulan'));
+Route::delete('usulan/daftar/{idd}', ['as'=>'delete_usulan', 'uses'=>'UsulanController@delete_usulan']);
+
+//Ubah Status Usulan
+Route::get('usulan/daftar/ubah/{id}', array('as'=>'status_usulan', 'uses'=> 'UsulanController@status_usulan'));
+
 //usulan Bagian
 Route::get('usulan/bagian/{id}/daftar', array('as'=>'daftar_usulan_bagian', 'uses'=> 'UsulanController@daftar_usulan_bagian'));
 Route::post('usulan/bagian/{id}/daftar', array('as'=>'tambah_usulan_bagian', 'uses'=> 'UsulanController@tambah_usulan_bagian'));
-// Route::get('usulan/{id}/detail', array('as'=>'detail_usulan', 'uses'=> 'UsulanController@detail_usulan'));
+Route::delete('usulan/bagian/{id}/daftar/{idd}', ['as'=>'delete_usulan_bagian', 'uses'=>'UsulanController@delete_usulan_bagian']);
 
 //detail usulan bagian
 Route::post('usulan/bagian/{id_bagian}', array('as'=>'tambah_detail','uses'=> 'UsulanController@buat_detail'));
@@ -94,6 +102,15 @@ Route::get('usulan/bagian/{usulan}/buat', array('as'=>'buat_usulan_bagian', 'use
 Route::post('usulan/bagian/{usulan}/nilai', array('as'=>'nilai_detail', 'uses'=> 'UsulanController@nilai_detail'));
 Route::get('usulan/bagian/{id_bagian}/{tahun}/{subkom}/{akun}/buat', array('as'=>'buat_detail_usulan_bagian', 'uses'=> 'UsulanController@buat_detail_usulan_bagian'));
 Route::post('usulan/bagian/{id_bagian}/{tahun}/{subkom}/{akun}/buat', array('as'=>'detail_usulan_bagian_simpan', 'uses'=> 'UsulanController@detail_usulan_bagian_simpan'));
+
+//RKAKL
+Route::get('rkakl/daftar', array('as'=>'daftar_rkakl', 'uses'=> 'UsulanController@daftar_rkakl'));
+Route::post('rkakl/daftar', array('as'=>'tambah_rkakl', 'uses'=> 'UsulanController@tambah_rkakl'));
+Route::delete('rkakl/daftar/{id}', ['as'=>'delete_rkakl', 'uses'=>'UsulanController@delete_rkakl']);
+
+//Detail RKAKL
+Route::get('rkakl/daftar/{rkakl}/buat', array('as'=>'buat_rkakl', 'uses'=> 'UsulanController@buat_rkakl'));
+Route::post('rkakl/daftar/{rkakl}/nilai', array('as'=>'nilai_rkakl', 'uses'=> 'UsulanController@nilai_rkakl'));
 
 //bagian
 Route::get('bagian/daftar', array('as'=>'daftar_bagian', 'uses'=> 'AdminController@daftar_bagian'));

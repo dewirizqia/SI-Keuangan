@@ -83,7 +83,7 @@
                     <tr>
                         <th>NO</th>
                         <th width="100">Output</th>
-                        <th >Sub Output</th>
+                        <th>Sub Output</th>
                         <th>Input</th>
                         <th>Kode</th>
                         <th>Uraian</th>

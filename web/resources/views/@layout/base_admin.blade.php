@@ -297,7 +297,7 @@
                             <a href="{{ route('daftar_user')}}"><i class="glyphicon glyphicon-lock"></i>Manajemen User</a>
                         </li>
                         <li>
-                            <a href="#"><i class="glyphicon glyphicon-list-alt"></i>Manajemen Bagian</a>
+                            <a href="{{ route('daftar_bagian')}}"><i class="glyphicon glyphicon-list-alt"></i>Manajemen Bagian</a>
                         </li>
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-sort"></i> Manajemen Kode Output<span class="fa arrow"></span></a>

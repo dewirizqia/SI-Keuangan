@@ -7,7 +7,8 @@
 <br>
 <div class="panel panel-primary">
 <form role="form" method="POST" action="{{ route('tambah_usulan_bagian',$id_bagian) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
-    <input type="hidden" name="_token" value="<? php echo csrf_token(); ?>">
+    <!-- <input type="hidden" name="_token" value="<? php echo csrf_token(); ?>"> -->
+    {{ csrf_field() }}
         <div class="form-group">
             <div class="col-md-3">
                <input class="form-control" name="tahun" placeholder="Masukkan Tahun Usulan">
@@ -51,7 +52,17 @@
                         <td>{{ $usulan->status }}</td>
                         <td>{{ $usulan->revisi }}</td>
                         <td><button><a href="{{ route('buat_usulan_bagian', $usulan->id) }}">detail</a></button></td>
-                        <th>Aksi</th>
+                        <td> 
+                            <table> 
+                                <td>
+                                    <form method="POST" action="{{route('delete_usulan_bagian', $usulan->id)}}" accept-charset="UTF-8" style="margin:0 auto">
+                                        <input name="_method" type="hidden" value="DELETE">
+                                        <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
+                                        <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete">
+                                    </form> 
+                                </td>
+                            </table>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

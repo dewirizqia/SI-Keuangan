@@ -26,6 +26,9 @@
 	                        <a href="#"><i class="glyphicon glyphicon-folder-open"></i> Usulan Anggaran<span class="fa arrow"></span></a>
 
 	                        <ul class="nav nav-second-level">
+	                        	<li>
+	                                <a href="{{ route('daftar_usulan') }}">Daftar Usulan</a>
+	                            </li>
 	                            @foreach ($sbagian as $bagian)
 
 	                            <li>

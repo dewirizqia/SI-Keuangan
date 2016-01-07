@@ -9,7 +9,8 @@
     <div class="panel-body">
         <form role="form" method="POST" action="{{ route('update_output', $soutput->id) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
             <input type="hidden" name="_method" value="PATCH">
-            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">  
+            <!-- <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">   -->
+            {{ csrf_field() }}
             <div class="form-group">
                 <label class="col-md-2" background="">Kode Ouput</label>
                 <div  class="col-md-4">

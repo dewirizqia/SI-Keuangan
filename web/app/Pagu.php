@@ -22,4 +22,8 @@ class Pagu extends Model
     {
         return $this->hasMany('App\Pagu_Kegiatan');
     }
+    public function rkakl()
+    {
+        return $this->hasOne('App\Rkakl');
+    }
 }

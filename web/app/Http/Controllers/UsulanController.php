@@ -215,5 +215,44 @@ class UsulanController extends Controller
         return view('usulan.buat_rkakl', compact('detail','rkakl','output','databagian', 'suboutput','input', 'subinput', 'akun', 'no_suboutput', 'no_input', 'no_subinput', 'no_akun'));
     }
 
+    public function buat_detail_rkakl($tahun, $subkom, $akun)
+    {
+        $pagu = Pagu::whereTahun($tahun)->firstOrFail();
+        $id_pagu = $pagu->id;
+        $rkakl = Rkakl::whereId_pagu($id_pagu)->firstOrFail();
+        $id_rkakl = $rkakl->id;
+        $detail = Detail_Rkakl::whereId_rkakl($id_rkakl)->get();
+        $total = Detail_Rkakl::whereId_rkakl($id_rkakl)->sum('jumlah_biaya');
+        $d_subinput = Sub_Input::whereId($subkom)->firstOrFail();
+        $d_akun = Akun::whereId($akun)->firstOrFail();
+        // return $total;
+        return view('usulan.buat_detail_rkakl', compact('tahun', 'id_subkomp', 'id_akun', 'd_subinput', 'd_akun', 'detail', 'rkakl', 'total'));
+    }
+
+    public function detail_rkakl_simpan(Request $request, $tahun, $subkom, $akun)
+    {
+        $input = $request->all();
+        $pagu = Pagu::whereTahun($tahun)->firstOrFail();
+        $id_pagu = $pagu->id;
+        $rkakl = Rkakl::whereId_pagu($id_pagu)->firstOrFail();
+        ['id_rkakl', 'id_akun', 'id_subinput', 'detail', 
+        'volume', 'satuan', 'harga_satuan', 'jumlah_biaya'];
+        $simpan = Detail_Rkakl::create([
+            'id_rkakl' => $rkakl->id,
+            'id_akun' => $akun,
+            'id_subinput' => $subkom,
+            'detail' => $input['detail'],
+            'volume' => $input['volume'],
+            'satuan' => $input['satuan'],
+            'harga_satuan' => $input['harga_satuan'],
+            'jumlah_biaya' => $input['jumlah_biaya'],
+            
+            
+            ]);
+        // return $id_usulan;
+        // dd($simpan_rincian);
+        return redirect()->route('buat_detail_rkakl', compact('bagian', 'tahun', 'subkom', 'akun'));
+    }
+
 
 }

@@ -18,12 +18,12 @@
 	    </div>
 	@endif
 
-<form role="form" method="POST" action="{{ route('nilai_rkakl', $usulan->id) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
+<form role="form" method="POST" action="{{ route('nilai_rkakl', $rkakl->id) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
 	<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
 
 	<div class="form-group">
         <label>Tahun</label>
-        <input class="form-control" name="tahun" value="{{ $usulan->tahun }}" disabled>
+        <input class="form-control" name="tahun" value="{{ $rkakl->pagu->tahun }}" disabled>
     </div>
 
     <div class="form-group">
@@ -78,14 +78,13 @@
 
     <br>
     <button type="submit" class="btn btn-primary">Tambah Detail</button>
-    <button class="btn btn-primary"><a href="{{ route('status_usulan', $usulan->id) }}">Selesai</a></button>
 </form>
 
 <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Daftar Detail Usulan Tahun:                            
+                            Daftar Detail RKA-KL Tahun:                            
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -140,7 +139,7 @@
                             </div>
                             <!-- /.table-responsive -->
                             @else
-                                <div class="panel-heading"><h3><center>Data Detail Usulan Belum di Tambahkan</center></h3></div>
+                                <div class="panel-heading"><h3><center>Data Detail RKA-KL Belum di Tambahkan</center></h3></div>
                             @endif
                         </div>
                         <!-- /.panel-body -->

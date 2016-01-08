@@ -20,7 +20,7 @@
                         
 
 						<li>
-                            <a href="#"><i class="glyphicon glyphicon-hdd"></i> Anggaran FT</span></a>
+                            <a href="{{ route('daftar_rkakl') }}"><i class="glyphicon glyphicon-hdd"></i> Anggaran FT</span></a>
                         </li>
                         <li>
 	                        <a href="#"><i class="glyphicon glyphicon-folder-open"></i> Usulan Anggaran<span class="fa arrow"></span></a>

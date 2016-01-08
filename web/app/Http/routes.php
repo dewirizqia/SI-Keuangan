@@ -107,6 +107,8 @@ Route::post('usulan/bagian/{id_bagian}/{tahun}/{subkom}/{akun}/buat', array('as'
 Route::get('rkakl/daftar', array('as'=>'daftar_rkakl', 'uses'=> 'UsulanController@daftar_rkakl'));
 Route::post('rkakl/daftar', array('as'=>'tambah_rkakl', 'uses'=> 'UsulanController@tambah_rkakl'));
 Route::delete('rkakl/daftar/{id}', ['as'=>'delete_rkakl', 'uses'=>'UsulanController@delete_rkakl']);
+Route::get('rkakl/detail/daftar/{tahun}/{subkom}/{akun}/buat', array('as'=>'buat_detail_rkakl', 'uses'=> 'UsulanController@buat_detail_rkakl'));
+Route::post('rkakl/detail/daftar/{tahun}/{subkom}/{akun}/buat', array('as'=>'detail_rkakl_simpan', 'uses'=> 'UsulanController@detail_rkakl_simpan'));
 
 //Detail RKAKL
 Route::get('rkakl/daftar/{rkakl}/buat', array('as'=>'buat_rkakl', 'uses'=> 'UsulanController@buat_rkakl'));

@@ -14,4 +14,8 @@ class Akun extends Model
     {
     	return $this->hasMany('App\Detail_Usulan', 'id_akun');
     }
+    public function rkakl()
+    {
+        return $this->hasMany('App\Detail_Rkakl');
+    }
 }

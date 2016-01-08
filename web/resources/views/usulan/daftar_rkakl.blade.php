@@ -61,11 +61,11 @@
                         <td>{{ $no++ }}</td>
                         <td>{{ $data->pagu->tahun }}</td>
                         <td>{{ $data->revisi }}</td>
-                        <td><button><a href="{{ route('buat_rkakl', $rkakl->id) }}">detail</a></button></td>
+                        <td><a href="{{ route('buat_rkakl', $data->id) }}">detail</a></td>
                         <td> 
                             <table> 
                                 <td>
-                                    <form method="POST" action="{{route('delete_rkakl', $data->id)}}" accept-charset="UTF-8" style="margin:0 auto">
+                                    <form method="POST" action="" accept-charset="UTF-8" style="margin:0 auto">
                                         <input name="_method" type="hidden" value="DELETE">
                                         <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
                                         <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete">

@@ -66,8 +66,9 @@
         </div>
         <br>
         <button type="submit" class="btn btn-primary">Tambah Detail</button>
-        <button class="btn btn-primary"><a href="{{ route('buat_usulan_bagian', $usulan->id) }}">Kembali</a></button>
+        
     </form>
+    <button class="btn btn-primary"><a href="{{ route('buat_usulan_bagian', $usulan->id) }}">Kembali</a></button>
     <br>   
     </div>
 </div>

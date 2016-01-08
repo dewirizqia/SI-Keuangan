@@ -8,7 +8,7 @@ class Pagu extends Model
 {
     protected $table = 'pagu';
 
-    protected $fillable = ['alokasi', 'tahun'];
+    protected $fillable = ['alokasi', 'tahun', 'batasan', 'sisa'];
 
     public function pagu_bagian()
     {

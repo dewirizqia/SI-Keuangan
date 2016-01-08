@@ -225,6 +225,8 @@ class UsulanController extends Controller
         $total = Detail_Rkakl::whereId_rkakl($id_rkakl)->sum('jumlah_biaya');
         $d_subinput = Sub_Input::whereId($subkom)->firstOrFail();
         $d_akun = Akun::whereId($akun)->firstOrFail();
+        $pagu->alokasi = $total;
+        $pagu->save();
         // return $total;
         return view('usulan.buat_detail_rkakl', compact('tahun', 'id_subkomp', 'id_akun', 'd_subinput', 'd_akun', 'detail', 'rkakl', 'total'));
     }

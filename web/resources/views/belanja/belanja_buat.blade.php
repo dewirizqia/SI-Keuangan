@@ -1,5 +1,7 @@
-@extends('@layout.base_admin')
-
+@extends('home.keuangan')
+@section('head')
+<link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
+@stop
 @section('isi')
 
 <div class="row">
@@ -18,52 +20,40 @@
                         <div class="form-group">
                             <label class="col-md-1">Output</label>
                             <div class="col-md-3">
-                                <select name="id_bagian" class="form-control">
+                                <select id="output" class="form-control" name="output">
                                     <option value="">-- Pilih  --</option>
-                                <!-- Gasan ambilan di database jadi dikomen ja dulu -->
-                                {{--    
-                                @foreach($daftarkategori as $kategori)
-                                    <option value="{{ $kategori -> id }}">{{ $kategori -> kategori}}</option>
+                                    @foreach($output as $u_output)
+                                    <option value="{{ $u_output->id }}">{{ $u_output->uraian }}</option>
                                     @endforeach
-                                --}}
                                 </select>
                             </div><div></div>
                             <label class="col-md-1">Sub Output</label>
                             <div class="col-md-3">
-                                <select name="id_bagian" class="form-control">
+                                <select name="sub_output" id="sub_output" class="form-control">
                                     <option value="">-- Pilih  --</option>
-                                <!-- Gasan ambilan di database jadi dikomen ja dulu -->
-                                {{--    
-                                @foreach($daftarkategori as $kategori)
-                                    <option value="{{ $kategori -> id }}">{{ $kategori -> kategori}}</option>
+                                    @foreach($suboutput as $u_suboutput)
+                                    <option value="{{ $u_suboutput->id }}" class="{{ $u_suboutput->id_output }}">{{ $u_suboutput->uraian }}</option>
                                     @endforeach
-                                --}}
                                 </select>
                             </div>
                             <label class="col-md-1">Input</label>
                             <div class="col-md-3">
-                                <select name="id_bagian" class="form-control">
+                                <select name="input" id="input" class="form-control">
                                     <option value="">-- Pilih  --</option>
-                                <!-- Gasan ambilan di database jadi dikomen ja dulu -->
-                                {{--    
-                                @foreach($daftarkategori as $kategori)
-                                    <option value="{{ $kategori -> id }}">{{ $kategori -> kategori}}</option>
+                                    @foreach($input as $u_input)
+                                    <option value="{{ $u_input->id }}" class="{{ $u_input->id_suboutput }}">{{ $u_input->uraian }}</option>
                                     @endforeach
-                                --}}
                                 </select>
                             </div>
                         </div>&nbsp
                         <div class="form-group">
                             <label class="col-md-1">Sub Input</label>
                             <div class="col-md-3">
-                                <select name="id_bagian" class="form-control">
+                                <select name="sub_input" id="sub_input" class="form-control">
                                     <option value="">-- Pilih  --</option>
-                                <!-- Gasan ambilan di database jadi dikomen ja dulu -->
-                                {{--    
-                                @foreach($daftarkategori as $kategori)
-                                    <option value="{{ $kategori -> id }}">{{ $kategori -> kategori}}</option>
+                                    @foreach($subinput as $u_subinput)
+                                    <option value="{{ $u_subinput->id }}" class="{{ $u_subinput->id_input }}">{{ $u_subinput->uraian }}</option>
                                     @endforeach
-                                --}}
                                 </select>
                             </div><div></div>
                             <label class="col-md-1">Akun</label>
@@ -137,18 +127,30 @@
 @stop
 
 @section('script')
-<!-- jQuery -->
-<script src="{{ asset('css/bower_components/jquery/dist/jquery.min.js') }}"></script>
-<!-- DataTables JavaScript -->
-    <script src="{{ asset('css/bower_components/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js') }}"></script>
+@parent
+<!-- script dropdown select -->
+<xscript type="text/javascript" src="{{ asset('css/js/dropdown/jquery.min.js') }}"></script>
+<xscript type="text/javascript" src="{{ asset('css/js/dropdown/zepto-1.0.1.js') }}"></script>
+<xscript type="text/javascript" src="{{ asset('css/js/dropdown/zepto-selector.js') }}"></script>
 
-    <script>
-    $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-                responsive: true
-        });
+<script src="{{ asset('css/js/jquery.chained.js') }}" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+$(function() {
+/* For jquery.chained.js */
+
+    $("#sub_output").chained("#output");
+    $("#input").chained("#sub_output");
+    $("#sub_input").chained("#input");
+
+
+    $("#sub_input").bind("change", function(event) {
+        if ("" != $("option:selected", this).val() && "" != $("option:selected", $("#input")).val()) {
+            $("#button").fadeIn();
+        } else {
+            $("#button").hide();
+        }
     });
-    </script>
 
+  });
+</script>
 @stop

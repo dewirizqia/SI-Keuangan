@@ -13,7 +13,7 @@
     <div class="panel-body">
 	    Total = {{ $total}}
 	    <br>Akun: {{ $d_akun->uraian_akun }}, 
-	    <br>Total Sub Komponen Input {{ $d_subinput->uraian }} = {{ $total_subinput }}
+	    <br>Total Sub Komponen Input {{ $d_subinput->uraian }} =
 
     </div>
 </div>

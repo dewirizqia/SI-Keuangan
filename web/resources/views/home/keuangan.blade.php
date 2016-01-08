@@ -5,6 +5,9 @@
 							<li>
                             <a href="#"><i class="glyphicon glyphicon-credit-card"></i> Pagu<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                            	<li>
+                                    <a href="{{ route('daftar_pagu') }}">Alokasi RKA-KL</a>
+                                </li>
                                 <li>
                                     <a href="#">Pagu Output</a>
                                 </li>
@@ -41,8 +44,10 @@
 	                    <li>
 	                        <a href="#"><i class="glyphicon glyphicon-tasks"></i> Rekap Belanja<span class="fa arrow"></span></a>
 	                        <ul class="nav nav-second-level">
+	                        	<li>
+	                                <a href="{{ route('belanja_daftar') }}">Daftar Rekap Belanja</a>
+	                            </li>
 	                            @foreach ($sbagian as $bagian)
-
 	                            <li>
 	                                <a href="#">{{ $bagian->detail }}</a>
 	                            </li>
@@ -50,9 +55,9 @@
 	                        </ul>
 	                        <!-- /.nav-second-level -->
 	                    </li>
-                        <li>
+                        <!-- <li>
                             <a href="#"><i class="glyphicon glyphicon-shopping-cart"></i>Permintaan Belanja</a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-duplicate"></i> Ajuan Revisi</span></a>
                         </li>

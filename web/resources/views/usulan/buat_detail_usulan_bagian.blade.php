@@ -2,6 +2,8 @@
 
 @section('head')
 <link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
+<script type="text/javascript" src="css/jquery-1.9.1.min.js"></script>
+<script src="css/jquery-calx-1.1.9.min.js"></script>
 @stop
 
 
@@ -85,6 +87,7 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="dataTable_wrapper">
+                                <form id="calx">
                                 <table class="table table-striped table-bordered table-hover" id="usulan" class="display">
                                     <thead>
                                         <tr>
@@ -117,20 +120,25 @@
                                     <tbody>
                                         @foreach($detail as $data)
                                         <tr class="odd gradeX">
-                                            <td>{{ $data->sub_input->input->sub_output->output->uraian }}</td>
-                                            <td>{{ $data->sub_input->input->sub_output->uraian }}</td>
-                                            <td>{{ $data->sub_input->input->uraian }}</td>
-                                            <td>{{ $data->sub_input->uraian }}</td>
-                                            <td>({{ $data->akun->kode_akun }}) {{ $data->akun->uraian_akun }}</td>
-                                            <td>{{ $data->jenis_komponen }}</td>
+                                            <td title="{{ $data->sub_input->input->sub_output->output->uraian }}">{{ $data->sub_input->input->sub_output->output->kode_output }}</td>
+                                            <td title="{{ $data->sub_input->input->sub_output->uraian }}">{{ $data->sub_input->input->sub_output->kode_suboutput }}</td>
+                                            <td title="{{ $data->sub_input->input->uraian }}">{{ $data->sub_input->input->kode_input }}</td>
+                                            <td title="{{ $data->sub_input->uraian }}">{{ $data->sub_input->kode_subinput }}</td>
+                                            <td title="{{ $data->akun->uraian_akun }}">{{ $data->akun->kode_akun }}</td>
+                                            @if($data->jenis_komponen = "utama")
+                                            <td title="{{ $data->jenis_komponen }}">U</td>
+                                            @else
+                                            <td title="{{ $data->jenis_komponen }}">P</td>
+                                            @endif
                                             <td>{{ $data->detail }}</td>
-                                            <td>{{ $data->harga_satuan }}</td>
+                                            <td id="harga[{{$no++}}]" data-format="0,0[.]00">{{ $data->harga_satuan }}</td>
                                             <td class="center">{{ $data->nominal }} {{ $data->satuan }}</td>
-                                            <td class="center">{{ $data->jumlah }}</td>
+                                            <td class="center" id="jumlah[{{$no++}}]" data-format="0,0[.]00">{{ $data->jumlah }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
+                                </form>
                             </div>
                             <!-- /.table-responsive -->
                         </div>
@@ -170,5 +178,11 @@ $(document).ready(function() {
         }
     } );
 } );
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#calx').calx();
+    });
 </script>
 @stop

@@ -10,7 +10,7 @@
         Daftar Usulan
     </div>
     <div class="panel-body">
-        @if ($dftrusulan->count())
+        @if ($daftar_revisi->count())
         <div class="dataTable_wrapper">                
             <form id="calx">
             <table class="table table-striped table-bordered table-hover" id="usulan" class="display">
@@ -37,20 +37,18 @@
 	                </tr>
 	            </tfoot>
             <tbody>
-                @foreach($dftrusulan as $usulan)
+                @foreach($daftar_revisi as $revisi)
                     <tr>
                         <td>{{ $no++ }}</td>
-                        <td>{{ $usulan->tahun }}</td>
-                        <td>{{ $usulan->ke_bagian->detail }}</td>
-                        <td>{{ $usulan->status }}</td>
-                        <td>{{ $usulan->revisi }}</td>
-                        <td><button><a href="">detail</a></button>
-                        	<button><a href="">Download</a></button>
-                        </td>
+                        <td>{{ $revisi->tahun }}</td>
+                        <td>{{ $revisi->ke_bagian->detail }}</td>
+                        <td>{{ $revisi->status }}</td>
+                        <td>{{ $revisi->revisi }}</td>
+                        <td><button><a href="">detail</a></button></td>
                         <td> 
                             <table> 
                                 <td>
-                                    <form method="POST" action="{{route('delete_usulan', $usulan->id)}}" accept-charset="UTF-8" style="margin:0 auto">
+                                    <form method="POST" action="{{route('delete_revisi', $revisi->id)}}" accept-charset="UTF-8" style="margin:0 auto">
                                         <input name="_method" type="hidden" value="DELETE">
                                         <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
                                         <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete">
@@ -65,7 +63,7 @@
             </form>
         </div>
         @else
-            <div class="panel-heading"><h3><center>Data Usulan Belum di Tambahkan</center></h3></div>
+            <div class="panel-heading"><h3><center>Data Revisi Belum Ada</center></h3></div>
         @endif
     </div>
 </div>

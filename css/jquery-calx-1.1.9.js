@@ -107,7 +107,7 @@
                 var output;
 
                 // figure out what kind of format we are dealing with
-                if (format.indexOf('$') > -1) { // currency!!!!!
+                if (format.indexOf('Rp') > -1) { // currency!!!!!
                     output = formatCurrency(n, format);
                 } else if (format.indexOf('%') > -1) { // percentage
                     output = formatPercentage(n, format);
@@ -165,20 +165,20 @@
             }
 
             function formatCurrency(n, format) {
-                var prependSymbol = (format.indexOf('$') <= 1) ? true : false;
+                var prependSymbol = (format.indexOf('Rp') <= 1) ? true : false;
 
                 // remove $ for the moment
                 var space = '';
 
                 // check for space before or after currency
-                if (format.indexOf(' $') > -1) {
+                if (format.indexOf(' Rp') > -1) {
                     space = ' ';
-                    format = format.replace(' $', '');
-                } else if (format.indexOf('$ ') > -1) {
+                    format = format.replace(' Rp', '');
+                } else if (format.indexOf('Rp ') > -1) {
                     space = ' ';
-                    format = format.replace('$ ', '');
+                    format = format.replace('Rp ', '');
                 } else {
-                    format = format.replace('$', '');
+                    format = format.replace('Rp', '');
                 }
 
                 // format the number
@@ -456,7 +456,7 @@
                     return (~~(number % 100 / 10) === 1) ? 'th' : (b === 1) ? 'st' : (b === 2) ? 'nd' : (b === 3) ? 'rd' : 'th';
                 },
                 currency: {
-                    symbol: '$'
+                    symbol: 'Rp'
                 }
             });
 
@@ -2812,7 +2812,7 @@
                 var $k;
                 for ($k in this.data[$key].dependency) {
                     var $v = this.data[$key].dependency[$k];
-                    $replaceVal['$' + $v] = this.value[$v];
+                    $replaceVal['Rp' + $v] = this.value[$v];
                     $stringVal += this.value[$v];
                 }
 
@@ -2823,7 +2823,7 @@
 
                     $equation = this.data[$key].formula.replace($formula_regex, function($range) {
                         $range = $range.replace(/\$\w+/g, function($key) {
-                            $key = $key.replace('$', '');
+                            $key = $key.replace('Rp', '');
                             $key = utility.translateCell($key, 'string');
                             return $key + '1';
                         });
@@ -2835,7 +2835,7 @@
                     });
 
                     //if all value matched, execute the formula
-                    if ($equation.indexOf('$') < 0) {
+                    if ($equation.indexOf('Rp') < 0) {
                         formula.key = this.key;
                         var $result = utility.parser.parse($equation);
                         this.data[$key].value = isNaN($result) ? 0 : $result;
@@ -3053,7 +3053,7 @@
                 var registerDependency = function() {
                     var match;
                     while (match = $placeholder.exec($formula)) {
-                        var $key = match[0].replace('$', '');
+                        var $key = match[0].replace('Rp', '');
                         if ($dependency.indexOf($key) < 0) {
                             $dependency.push($key);
                         }

@@ -23,4 +23,10 @@ class Akun extends Model
     {
         return $this->hasMany('App\SPJ_UP');
     }
+
+    public function pagu_kegiatan()
+    {
+        return $this->hasOne('App\Pagu_Kegiatan');
+
+    }
 }

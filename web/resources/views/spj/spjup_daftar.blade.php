@@ -1,5 +1,7 @@
-@extends('@layout.base_admin')
-
+@extends('home.keuangan')
+@section('head')
+<link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
+@stop
 @section('head')
 <link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
 @stop
@@ -76,5 +78,5 @@
 @stop
 
 @section('script')
-
+@parent
 @stop 

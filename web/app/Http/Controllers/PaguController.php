@@ -14,7 +14,7 @@ use App\Pagu;
 use App\Pagu_Kegiatan;
 use App\Pagu_Output;
 use App\Pagu_Bagian;
-
+use Auth;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -27,8 +27,11 @@ class PaguController extends Controller
         $no = "1";
         $alokasi = "1";
         $spagu = Pagu::orderBy('tahun', 'desc')->get();
-
-        return view('pagu.daftar_pagu', compact('spagu', 'no', 'alokasi'));
+        $user = Auth::user(); 
+        foreach( $user->detail_user as $detail){
+            $jabatan = $detail->jabatan;
+        }
+        return view('pagu.daftar_pagu', compact('jabatan','user','spagu', 'no', 'alokasi'));
     }
 
         public function edit_pagu($id)
@@ -55,7 +58,8 @@ class PaguController extends Controller
         $no = "1";
         $daftar_pagu_bagian = Pagu_Bagian::orderBy('id_pagu', 'dsc')->get();
         $sbagian = Bagian::orderBy('id', 'dsc')->get();
-        return view('pagu.daftar_pagu_bagian', compact('sbagian','daftar_pagu_bagian', 'no'));
+        $daftar_pagu = Pagu::latest()->get();
+        return view('pagu.daftar_pagu_bagian', compact('daftar_pagu','sbagian','daftar_pagu_bagian', 'no'));
     }
 
 

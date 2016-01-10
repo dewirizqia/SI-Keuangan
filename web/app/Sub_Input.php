@@ -26,4 +26,8 @@ class Sub_Input extends Model
     {
         return $this->hasOne('App\Pagu_Kegiatan');
     }
+     public function spj_up()
+    {
+        return $this->hasMany('App\SPJ_UP');
+    }
 }

@@ -18,4 +18,9 @@ class Akun extends Model
     {
         return $this->hasMany('App\Detail_Rkakl');
     }
+
+    public function spj_up()
+    {
+        return $this->hasMany('App\SPJ_UP');
+    }
 }

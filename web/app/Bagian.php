@@ -19,4 +19,9 @@ class Bagian extends Model
     {
     	return $this->belongsTo('App\Pagu_Bagian', 'id_bagian');
     }
+
+    public function spj_up()
+    {
+        return $this->hasMany('App\SPJ_UP', 'id_bagian');
+    }
 }

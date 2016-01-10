@@ -27,19 +27,22 @@
                                 <th>No.</th>
                                 <th>Sub Bagian/Program Studi</th>
                                 <th>Kode Kegiatan</th>
+                                <th>Kode Akun</th>
                                 <th>Untuk Pembayaran</th>
                                 <th>Detail</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                            @foreach($daftar_spjup as $spjup)
+                            <tr>   
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $spjup -> ke_bagian->detail }}</td>
+                                <td>{{ $spjup -> sub_input->input->sub_output->output->kode_output. "." .$spjup -> sub_input->input->sub_output->kode_suboutput. "." .$spjup -> sub_input->input->kode_input. "." .$spjup -> sub_input->kode_subinput }}</td>
+                                <td>{{ $spjup -> akun->kode_akun }}</td>
+                                <td>{{ $spjup -> untuk_pembayaran }}</td>
                                 <td>
-                                    <a href="{{ route('spjup_detail') }}" title="Lihat/tambahkan detail" class="btn btn-link">
+                                    <a href="{{ route('spjup_detail', $spjup->id) }}" title="Lihat/tambahkan detail" class="btn btn-link">
                                         Lihat/Tambah
                                     </a>
                                 </td>
@@ -47,11 +50,11 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                <a href="" class="btn btn-primary">Edit</a>
+                                                <a href="{{ route('spjup_edit', $spjup->id) }}" class="btn btn-primary">Edit</a>
                                             </td>
                                             <td>&nbsp</td>
                                             <td>
-                                                <form method="POST" action="">
+                                                <form method="POST" action="{{ route('spjup_delete', $spjup->id) }}">
                                                     <input name="_method" type="hidden" value="DELETE">
                                                     <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
                                                     <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete">
@@ -61,6 +64,7 @@
                                     </table>                                    
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

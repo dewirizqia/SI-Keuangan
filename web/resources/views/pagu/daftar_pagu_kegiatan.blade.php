@@ -1,7 +1,7 @@
 @extends('home.keuangan')
 
 @section('isi')
-
+<br>
 <div class="panel panel-primary">
     <div class="panel-heading">
         Tambah Batasan Pagu Kegiatan
@@ -42,9 +42,9 @@
                         @endforeach
                     </select>
                 </div>
-            </div>
+            </div>&nbsp
             <div class="form-group">
-                <label class="col-md-2">Tahun</label>
+                <label class="col-md-1">Tahun</label>
                 <div  class="col-md-3">
                     <select class="form-control" name="id_pagu" id="tahun">
                         <option value="">--</option>
@@ -59,7 +59,13 @@
                 <div  class="col-md-3">
                     <input type="text" class="form-control" name="batasan">
                 </div>
-            </div><br><br><br>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1"></label>
+                <div  class="col-md-3">
+                  &nbsp  
+                </div>
+            </div>&nbsp
             <div class="form-group">
                 <div  class="col-md-3">
                     <input type="submit" value="Tambahkan" class="form-control btn-primary">

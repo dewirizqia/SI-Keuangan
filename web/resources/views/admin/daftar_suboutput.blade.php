@@ -35,7 +35,7 @@
                 <div  class="col-md-3">
                     <input type="text" class="form-control" name="uraian">
                 </div>
-            </div><br><br><br>
+            </div><br><br><br><br>
             <div class="form-group">
                 <div  class="col-md-3">
                     <input type="submit" value="Tambahkan" class="form-control btn-primary">

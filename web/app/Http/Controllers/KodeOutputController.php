@@ -291,6 +291,9 @@ public function delete_subinput($id)
         
     return redirect()->route('daftar_akun'); 
     }
+
+
+    
 public function edit_akun($id)
 {
     $no = "1";

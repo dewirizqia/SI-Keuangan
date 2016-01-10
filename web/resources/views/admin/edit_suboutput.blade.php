@@ -7,19 +7,14 @@
         Edit Kode Sub Output
     </div>
     <div class="panel-body">
-        <<form role="form" method="POST" action="{{ route('update_output', $soutput->id) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
+        <form role="form" method="POST" action="{{ route('update_output', $ssuboutput->id) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
             <input type="hidden" name="_method" value="PATCH">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">    
-            <div class="form-group">
-                <label class="col-md-1" background="">Ouput</label>
-                <div  class="col-md-3">
-                    <input type="text" class="form-control" name="id_output">
-                </div>
-            </div>
+    
             <div class="form-group">
                 <label class="col-md-1" background="">Kode Sub Ouput</label>
                 <div  class="col-md-3">
-                    <input type="text" class="form-control" name="Kode_suboutput" value="{{ $ssuboutput -> kode_suboutput}}">
+                    <input type="text" class="form-control" name="kode_suboutput" value="{{ $ssuboutput -> kode_suboutput}}">
                 </div>
             </div>
             <div class="form-group">

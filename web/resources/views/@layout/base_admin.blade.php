@@ -42,12 +42,12 @@
 
 </head>
 
-<body>
+<body style="background-image:url('{{ asset('css/assets/img/backgrounds/bg5.jpg') }}'); background-size:cover">
 
     <div id="wrapper">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="background-image:url('{{ asset('css/assets/img/backgrounds/bg2.jpg') }}'); background-size:cover; margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -298,6 +298,9 @@
                         </li>
                         <li>
                             <a href="{{ route('daftar_bagian')}}"><i class="glyphicon glyphicon-list-alt"></i>Manajemen Bagian</a>
+                        </li>
+                         <li>
+                            <a href="#"><i class="glyphicon glyphicon-list-alt"></i>Manajemen Bagian</a>
                         </li>
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-sort"></i> Manajemen Kode Output<span class="fa arrow"></span></a>

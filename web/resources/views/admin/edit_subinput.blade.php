@@ -10,34 +10,17 @@
         <form role="form" method="POST" action="{{ route('update_subinput', $ssubinput->id) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
             <input type="hidden" name="_method" value="PATCH">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">  
-            <div class="form-group">
-                <label class="col-md-1" background="">Ouput</label>
-                <div  class="col-md-3">
-                    <input type="text" class="form-control" name="id_output">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-1" background="">Sub Ouput</label>
-                <div  class="col-md-3">
-                    <input type="text" class="form-control" name="">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-1">Input</label>
-                <div  class="col-md-3">
-                    <input type="text" class="form-control" name="">
-                </div>
-            </div><br><br><br>
+           
             <div class="form-group">
                 <label class="col-md-1" background="">Sub Input</label>
                 <div  class="col-md-3">
-                    <input type="text" class="form-control" name="">
+                    <input type="text" class="form-control" name="kode_subinput" value="{{ $ssubinput -> kode_subinput}}">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-1" background="">Uraian</label>
                 <div  class="col-md-3">
-                    <input type="text" class="form-control" name="">
+                    <input type="text" class="form-control" name="uraian" value="{{ $ssubinput -> uraian}}">
                 </div>
             </div>
             <div class="form-group">

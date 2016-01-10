@@ -339,13 +339,10 @@
         <div id="page-wrapper">
         <div class="row">
 		@section('isi')
-
-			
-
-            
-        	Selamat datang di halaman administrator Sistem Informasi Keuangan Universitas Lambung Mangkurat.
-         
-            
+            <div class="col-lg-12">
+                        <h2>Selamat datang di halaman administrator</h2>
+                        <h3>Sistem Informasi Keuangan Universitas Lambung Mangkurat.</h3>
+                    </div>
         @show
 
 		</div>

@@ -7,7 +7,7 @@
         Tambah Batasan Pagu Kegiatan
     </div>
     <div class="panel-body">
-        <form role="form" method="POST" action="{{ route('simpan_pagu_kegiatan') }}" accept-charset="UTF-8" enctype ="multipart/form-data">
+        <form role="form" method="POST" action="" accept-charset="UTF-8" enctype ="multipart/form-data">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">    
             
             <div class="form-group">
@@ -42,9 +42,9 @@
                         @endforeach
                     </select>
                 </div>
-            </div>
+            </div>&nbsp
             <div class="form-group">
-                <label class="col-md-2">Tahun</label>
+                <label class="col-md-1">Tahun</label>
                 <div  class="col-md-3">
                     <select class="form-control" name="id_pagu" id="tahun">
                         <option value="">--</option>
@@ -52,9 +52,7 @@
                         <option value="{{ $pagu->id }}">{{ $pagu->tahun }}</option>
                         @endforeach
                     </select>
-                </div>
-            </div>
-            <div class="form-group">
+                </div>            
                 <label class="col-md-1">Batasan</label>
                 <div  class="col-md-3">
                     <input type="text" class="form-control" name="batasan">

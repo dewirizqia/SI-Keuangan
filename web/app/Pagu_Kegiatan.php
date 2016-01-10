@@ -8,7 +8,7 @@ class Pagu_Kegiatan extends Model
 {
     protected $table = 'pagu_kegiatan';
 
-    protected $fillable = ['id_subinput', 'id_pagu', 'batasan', 'alokasi', 'sisa'];
+    protected $fillable = ['id_subinput', 'id_akun','id_pagu', 'batasan', 'alokasi', 'sisa'];
 
     public function pagu()
     {
@@ -17,5 +17,9 @@ class Pagu_Kegiatan extends Model
     public function subinput()
     {
     	return $this->belongsTo('App\Sub_Input', 'id_subinput');
+    }
+    public function akun()
+    {
+        return $this->belongsTo('App\Akun', 'id_akun');
     }
 }

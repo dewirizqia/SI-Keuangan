@@ -1,5 +1,7 @@
-@extends('@layout.base_admin')
-
+@extends('home.keuangan')
+@section('head')
+<link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
+@stop
 @section('isi')
 
 <div class="row">
@@ -17,17 +19,17 @@
                     <div class="form-group">
                         <label class="col-md-2">Sub Bagian/Program Studi</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control">      
+                            <input type="text" class="form-control" value="Prodi Teknik Sipil" disabled>      
                         </div>
                         <label class="col-md-2">Kode Kegiatan</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control">      
+                            <input type="text" class="form-control" value="5308 062 002 017J" disabled>     
                         </div>
                     </div>&nbsp&nbsp
                     <div class="form-group">
                         <label class="col-md-2">Untuk Pembayaran</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control">      
+                            <input type="text" class="form-control" value="Biaya Narasumber - Pemakalah Utama Temu Ilmiah Tahunan Rekayasa Sipil Peranan Riset di Bidang Rekayasa Sipil dan Built Environment Dalam Pengembangan Wilayah di Kalimantan" disabled>
                         </div>
                     </div>
                 </form>
@@ -97,14 +99,14 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td></td>
-                                <td><a href=""></a></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>1</td>
+                                <td>Wawan Gunawan, M.Eng</td>
+                                <td>Narasumber</td>
+                                <td>1.5</td>
+                                <td>Rp750.000</td>
+                                <td>Rp1.125.000</td>
+                                <td>Rp56.250</td>
+                                <td>Rp1.068.750</td>
                                 <td style="text-align:center;vertical-align:middle">
                                     <table margin="0">
                                      <tr>
@@ -134,17 +136,5 @@
 @stop
 
 @section('script')
-<!-- jQuery -->
-<script src="{{ asset('css/bower_components/jquery/dist/jquery.min.js') }}"></script>
-<!-- DataTables JavaScript -->
-    <script src="{{ asset('css/bower_components/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js') }}"></script>
-
-    <script>
-    $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-                responsive: true
-        });
-    });
-    </script>
+@parent
 @stop 

@@ -98,7 +98,6 @@
                                             <th>Input</th>
                                             <th>Sub Input</th>
                                             <th>Akun</th>
-                                            <th>Komponen</th>
                                             <th>Detail</th>
                                             <th>Harga Satuan</th>
                                             <th>Nominal</th>
@@ -112,7 +111,6 @@
                                             <th>Input</th>
                                             <th>Sub Input</th>
                                             <th>Akun</th>
-                                            <th>Komponen</th>
                                             <th>Detail</th>
                                             <th>Harga Satuan</th>
                                             <th>Nominal</th>
@@ -122,16 +120,15 @@
                                     <tbody>
                                         @foreach($detail as $data)
                                         <tr class="odd gradeX">
-                                            <td>{{ $data->sub_input->input->sub_output->output->uraian }}</td>
-                                            <td>{{ $data->sub_input->input->sub_output->uraian }}</td>
-                                            <td>{{ $data->sub_input->input->uraian }}</td>
-                                            <td>{{ $data->sub_input->uraian }}</td>
-                                            <td>{{ $data->akun->kode_akun }} - {{ $data->akun->uraian_akun }}</td>
-                                            <td>{{ $data->jenis_komponen }}</td>
+                                            <td title="{{ $data->sub_input->input->sub_output->output->uraian }}">{{ $data->sub_input->input->sub_output->output->kode_output }}</td>
+                                            <td title="{{ $data->sub_input->input->sub_output->uraian }}">{{ $data->sub_input->input->sub_output->kode_suboutput }}</td>
+                                            <td title="{{ $data->sub_input->input->uraian }}">{{ $data->sub_input->input->kode_input }}</td>
+                                            <td title="{{ $data->sub_input->uraian }}">{{ $data->sub_input->kode_subinput }}</td>
+                                            <td title="{{ $data->akun->uraian_akun }}">{{ $data->akun->kode_akun }}</td>
                                             <td>{{ $data->detail }}</td>
                                             <td>{{ $data->harga_satuan }}</td>
                                             <td>{{ $data->nominal }} {{ $data->satuan }}</td>
-                                            <td class="center">{{ $data->jumlah }}</td>
+                                            <td class="center">{{ $data->jumlah_biaya }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>

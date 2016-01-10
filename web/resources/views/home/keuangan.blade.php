@@ -9,10 +9,10 @@
                                     <a href="{{ route('daftar_pagu') }}">Alokasi RKA-KL</a>
                                 </li>
                                 <li>
-                                    <a href="#">Pagu Output</a>
+                                    <a href="{{ route('daftar_pagu_output') }}">Pagu Output</a>
                                 </li>
                                 <li>
-                                    <a href="#">Pagu Prodi</a>
+                                    <a href="{{ route('daftar_pagu_bagian') }}">Pagu Bagian</a>
                                 </li>
                                 <li>
                                     <a href="#">Pagu Kegiatan</a>
@@ -59,17 +59,20 @@
                             <a href="#"><i class="glyphicon glyphicon-shopping-cart"></i>Permintaan Belanja</a>
                         </li> -->
                         <li>
-                            <a href="#"><i class="glyphicon glyphicon-duplicate"></i> Ajuan Revisi</span></a>
+                            <a href="{{ route('daftar_revisi') }}"><i class="glyphicon glyphicon-duplicate"></i> Ajuan Revisi</span></a>
                         </li>
                         <li>
 
                             <a href="#"><i class="glyphicon glyphicon-envelope"></i> Surat <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
 	                            <li>
-	                                <a href="#">Daftar Nominatif</a>
+	                                <a href="{{ route('nominatif_buat') }}">Daftar Nominatif</a>
 	                            </li>
 	                            <li>
-	                                <a href="#">SPJ</a>
+	                                <a href="{{ route('spjup_daftar') }}">SPJ UP</a>
+	                            </li>
+	                            <li>
+	                                <a href="{{ route('spjls_daftar') }}">SPJ LS</a>
 	                            </li>
 	                        </ul>
                         </li>

@@ -15,14 +15,18 @@
             <!-- <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">  -->   
             {{ csrf_field() }}
             <div class="form-group">
-                <label class="col-md-1" background="">Ouput</label>
-                <div  class="col-md-3">
+                <label>Ouput</label>
                     <select class="form-control" name="id_output" id="output">
                         <option value="">--</option>
                         @foreach($soutput as $u_output)
                         <option value="{{ $u_output->id }}">{{ $u_output->uraian }}</option>
                         @endforeach
                     </select>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1" background="">Satuan</label>
+                <div  class="col-md-3">
+                    <input type="text" class="form-control" name="satuan">
                 </div>
             </div>
             <div class="form-group">
@@ -60,6 +64,7 @@
                         <th>Output</th>
                         <th>Kode Sub Output</th>
                         <th>Uraian</th>
+                        <th>Satuan</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -67,11 +72,11 @@
                 	@foreach ($ssuboutput as $suboutput)
     	                <tr>
     	                    <td>{{ $no++ }}</td>
-    	                    <td><a href="">{{ $suboutput->output->uraian }}</a></td>
-    	                    <td><a href="">{{ $suboutput->kode_suboutput }}</a></td>
-    	                    <td>{{ $suboutput->uraian }}</td>
-
-                          <td> 
+    	                    <td>{{ $suboutput->output->uraian }}</td>
+    	                    <td>{{ $suboutput->kode_suboutput }}</td>
+                            <td>{{ $suboutput->uraian }}</td>
+                            <td>{{ $suboutput->satuan }}</td>
+                            <td> 
                                 <table> 
                                     <td>
                                         <a href="{{ route('edit_suboutput', $suboutput->id)}}" class="btn btn-primary">Edit</a>

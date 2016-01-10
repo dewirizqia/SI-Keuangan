@@ -31,4 +31,9 @@ class BelanjaController extends Controller
     {
         return view('belanja.belanja_daftar');
     }
+    public function belanja_bagian_daftar()
+    {
+        return view('belanja.belanja_bagian_daftar');
+    }
 }
+

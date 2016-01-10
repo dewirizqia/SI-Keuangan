@@ -1,5 +1,7 @@
-@extends('@layout.base_admin')
-
+@extends('home.keuangan')
+@section('head')
+<link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
+@stop
 @section('head')
 <link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
 @stop
@@ -34,10 +36,10 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>1</td>
+                                <td>Prodi Teknik Sipil</td>
+                                <td>5308 062 002 017J</td>
+                                <td>Biaya Narasumber - Pemakalah Utama Temu Ilmiah Tahunan Rekayasa Sipil Peranan Riset di Bidang Rekayasa Sipil dan Built Environment Dalam Pengembangan Wilayah di Kalimantan</td>
                                 <td>
                                     <a href="{{ route('spjup_detail') }}" title="Lihat/tambahkan detail" class="btn btn-link">
                                         Lihat/Tambah
@@ -72,5 +74,5 @@
 @stop
 
 @section('script')
-
+@parent
 @stop 

@@ -12,7 +12,16 @@
     </div>
     <div class="panel-body">
         <form role="form" method="POST" action="{{ route('simpan_output') }}" accept-charset="UTF-8" enctype ="multipart/form-data">
-            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">    
+            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">  
+            <div class="form-group">
+                <label>Kegiatan</label>
+                <select class="form-control" name="id_kegiatan" id="kegiatan">
+                    <option value="">--</option>
+                    @foreach($skegiatan as $kegiatan)
+                    <option value="{{ $kegiatan->id }}">{{ $kegiatan->sumberdana_kegiatan }}</option>
+                    @endforeach
+                </select>
+            </div>  
             <div class="form-group">
                 <label class="col-md-2" background="">Kode Ouput</label>
                 <div  class="col-md-4">
@@ -45,6 +54,7 @@
                 <thead>
                     <tr>
                         <th>NO</th>
+                        <th>Kegiatan</th>
                         <th>Kode Output</th>
                         <th>Uraian</th>
                         <th>Aksi</th>
@@ -54,6 +64,7 @@
                 	@foreach ($soutput as $output)
     	                <tr>
     	                    <td>{{ $no++ }}</td>
+                            <td>{{ $output->kegiatan->sumberdana_kegiatan }}</td>
     	                    <td><a href="">{{ $output->kode_output }}</a></td>
     	                    <td>{{ $output->uraian }}</td>
                               <td> 

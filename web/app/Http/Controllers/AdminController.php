@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 //model
 use App\Pagu;
 use App\User;
+use App\Detail_User;
 use App\Usulan;
 use App\Detail_Usulan;
 use App\Bagian;
@@ -28,47 +29,53 @@ class AdminController extends Controller
     }
 
 
-    public function daftar_pagu()
-    {
-        $no = "1";
-        $alokasi = "1";
-        $spagu = Pagu::orderBy('tahun', 'desc')->get();
-
-        return view('admin.daftar_pagu', compact('spagu', 'no', 'alokasi'));
-    }
-
-        public function buat_pagu()
-    {
     
-        return view('admin.tambah_pagu');
-    }
-    public function simpan_pagu(PaguRequest $request)
-    {
-        $input = $request->all();
-        try 
-        {
-        Pagu::create($input);
-        } 
-        catch (QueryException $e) {
-            return redirect()->route('buat_pagu');
-        }
-        
-        return redirect()->route('daftar_pagu'); 
-    }
-
-
-        
-
-
-
+    // User
     public function daftar_user()
     {
         $no = "1";
-        $suser = User::orderBy('jabatan', 'asc')->get();
+        $suser = User::orderBy('id', 'asc')->get();
         return view('admin.daftar_user', compact('suser', 'no'));
     }
-    
-    #bagian
+    public function buat_user()
+    {
+        $sbagian = Bagian::orderBy('id', 'asc')->get();
+        return view('admin.tambah_user', compact('sbagian'));
+    }
+    public function simpan_user(Request $request)
+    {
+        $input = $request->all();
+        $input['password'] = bcrypt($request->input('password'));
+        try 
+        {
+        $simpan_user = User::create($input);
+        $id_user = $simpan_user->id;
+        $input['id_user'] = $id_user;
+        Detail_User::create($input);
+        } 
+        catch (QueryException $e) {
+            return redirect()->route('buat_user');
+        }
+        
+        return redirect()->route('daftar_user'); 
+    }
+
+    public function edit_user($id)
+    {
+        $user = User::FindOrFail($id);
+        return view('admin.edit_user', compact('user'));
+    }
+
+    public function delete_user($id)
+    {
+        
+            $user = User::FindOrFail($id);
+            $user->delete();
+            
+            return redirect()->route('daftar_user');
+    }
+
+    #Prodi/Subbagian
     public function daftar_bagian()
     {
         $no = "1";
@@ -87,16 +94,12 @@ class AdminController extends Controller
         return redirect()->route('daftar_bagian');
     }
 
-            public function daftar_pagu_bagian()
+    public function edit_bagian($id)
     {
         $no = "1";
-        $daftar_pagu_bagian = Pagu_Bagian::orderBy('id_pagu', 'dsc')->get();
-        return view('admin.daftar_pagu_bagian', compact('daftar_pagu_bagian', 'no'));
+        $daftar_bagian = Bagian::orderBy('bagian', 'asc')->get();
+        $dbagian = Bagian::FindOrFail($id);
+        return view('admin.edit_bagian', compact('dbagian','daftar_bagian', 'no'));
     }
-            public function daftar_pagu_output()
-    {
-        $no = "1";
-        $daftar_pagu_output = Pagu_Output::orderBy('id_pagu', 'dsc')->get();
-        return view('admin.daftar_pagu_output', compact('daftar_pagu_output', 'no'));
-    }
+
 }

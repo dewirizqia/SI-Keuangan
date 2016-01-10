@@ -12,7 +12,8 @@
     </div>
     <div class="panel-body">
         <form role="form" method="POST" action="{{ route('simpan_suboutput') }}" accept-charset="UTF-8" enctype ="multipart/form-data">
-            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">    
+            <!-- <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">  -->   
+            {{ csrf_field() }}
             <div class="form-group">
                 <label class="col-md-1" background="">Ouput</label>
                 <div  class="col-md-3">
@@ -27,7 +28,7 @@
             <div class="form-group">
                 <label class="col-md-1" background="">Kode Sub Ouput</label>
                 <div  class="col-md-3">
-                    <input type="text" class="form-control" name="Kode_suboutput">
+                    <input type="text" class="form-control" name="kode_suboutput">
                 </div>
             </div>
             <div class="form-group">
@@ -78,8 +79,9 @@
                                     <td>&nbsp</td>
                                     <td>
                                         <form method="POST" action="{{route('delete_suboutput', $suboutput->id)}}" accept-charset="UTF-8" style="margin:0 auto">
+                                            <!-- <input type="hidden" name="_token" value="<?php echo csrf_token();?>"> -->
+                                            {{ csrf_field() }}
                                             <input name="_method" type="hidden" value="DELETE">
-                                            <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
                                             <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete">
                                         </form> 
                                     </td>

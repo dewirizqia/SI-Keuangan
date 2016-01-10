@@ -6,10 +6,23 @@
 
 
 @section('isi')
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Rincian Anggaran RKA-KL Tahun: {{ $rkakl->pagu->tahun }}
+    </div>
+    <div class="panel-body">
+	    Total = {{ $total}}
+	    <br>Akun: {{ $d_akun->uraian_akun }}, 
+	    <br>Total Sub Komponen Input {{ $d_subinput->uraian }} =
+
+    </div>
+</div>
+
+
 
 <div class="panel panel-primary">
     <div class="panel-heading">
-        Tambah Detail Usulan Tahun: {{ $usulan->tahun }}
+        Tambah Detail RKA-KL Tahun: {{ $rkakl->pagu->tahun }}
         <br>Akun: {{ $d_akun->uraian_akun }}, 
         <br>Sub Komponen Input: {{ $d_subinput->uraian }}
     </div>
@@ -29,15 +42,6 @@
 
     <form role="form" id="calx" method="POST" action="" accept-charset="UTF-8" enctype ="multipart/form-data">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
-
-        <div class="form-group">
-            <label>Komponen</label>
-        <select class="form-control" name="jenis_komponen">
-            <option value="utama">Utama</option>
-            <option value="pendukung">Pendukung</option>
-        </select>
-        </div>
-
         <div class="form-group">
             <label>Detail</label>
             <input class="form-control" name="detail">
@@ -50,7 +54,7 @@
         <div class="form-group">
             <div class="col-md-6">
             <label>Nominal</label> 
-            <input class="form-control" name="nominal" id="nominal">
+            <input class="form-control" name="volume" id="volume">
             </div>    
         </div>
         <div class="form-group">
@@ -62,14 +66,14 @@
 
         <div class="form-group">
             <label>Jumlah</label>
-            <input class="form-control" name="jumlah">
+            <input class="form-control" name="jumlah_biaya">
         </div>
         <br>
         <button type="submit" class="btn btn-primary">Tambah Detail</button>
         
+
     </form>
-    <button class="btn btn-primary"><a href="{{ route('buat_usulan_bagian', $usulan->id) }}">Kembali</a></button>
-    <br>   
+    <br><button class="btn btn-primary"><a href="{{ route('buat_rkakl', $rkakl->id) }}">Kembali</a></button>   
     </div>
 </div>
 
@@ -80,7 +84,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Daftar Detail Usulan Tahun: {{ $usulan->tahun }}
+                            Daftar Detail RKA-KL Tahun: {{ $rkakl->pagu->tahun }}
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -107,11 +111,10 @@
                                             <th>Input</th>
                                             <th>Sub Input</th>
                                             <th>Akun</th>
-                                            <th>Komponen</th>
                                             <th>Detail</th>
+                                            <th>Volume Satuan</th>
                                             <th>Harga Satuan</th>
-                                            <th>Nominal</th>
-                                            <th>Jumlah</th>
+                                            <th>Jumlah Biaya</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -122,11 +125,11 @@
                                             <td>{{ $data->sub_input->input->uraian }}</td>
                                             <td>{{ $data->sub_input->uraian }}</td>
                                             <td>({{ $data->akun->kode_akun }}) {{ $data->akun->uraian_akun }}</td>
-                                            <td>{{ $data->jenis_komponen }}</td>
                                             <td>{{ $data->detail }}</td>
+                                            <td>{{ $data->volume }} {{ $data->satuan }}</td>
                                             <td>{{ $data->harga_satuan }}</td>
                                             <td class="center">{{ $data->nominal }} {{ $data->satuan }}</td>
-                                            <td class="center">{{ $data->jumlah }}</td>
+                                            <td class="center">{{ $data->jumlah_biaya }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>

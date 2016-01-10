@@ -12,7 +12,7 @@
         Tambah Kode Akun
     </div>
     <div class="panel-body">
-        <form role="form" method="POST" action="{{ route('simpan_output') }}" accept-charset="UTF-8" enctype ="multipart/form-data">
+        <form role="form" method="POST" action="{{ route('simpan_akun') }}" accept-charset="UTF-8" enctype ="multipart/form-data">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">    
             <div class="form-group">
                 <label class="col-md-2" background="">Kode Akun</label>

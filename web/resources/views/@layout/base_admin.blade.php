@@ -293,8 +293,11 @@
                             <a href="{{ route('home')}}"><i class="glyphicon glyphicon-home"></i> Dashboard</a>
                         </li>
                         @section('sidebar')
-                                <li>
-                            <a href="#"><i class="glyphicon glyphicon-lock"></i>Manajemen User</a>
+                        <li>
+                            <a href="{{ route('daftar_user')}}"><i class="glyphicon glyphicon-lock"></i>Manajemen User</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('daftar_bagian')}}"><i class="glyphicon glyphicon-list-alt"></i>Manajemen Bagian</a>
                         </li>
                          <li>
                             <a href="#"><i class="glyphicon glyphicon-list-alt"></i>Manajemen Bagian</a>
@@ -342,7 +345,7 @@
 
 			
 
-            <h1 class="page-header">Halo, {{ Auth::user()->name}} </h1>
+            
         	Selamat datang di halaman administrator Sistem Informasi Keuangan Universitas Lambung Mangkurat.
          
             

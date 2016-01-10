@@ -8,7 +8,7 @@ class Pagu extends Model
 {
     protected $table = 'pagu';
 
-    protected $fillable = ['alokasi', 'tahun'];
+    protected $fillable = ['alokasi', 'tahun', 'batasan', 'sisa'];
 
     public function pagu_bagian()
     {
@@ -17,5 +17,13 @@ class Pagu extends Model
     public function pagu_output()
     {
     	return $this->hasMany('App\Pagu_Output');
+    }
+    public function pagu_kegiatan()
+    {
+        return $this->hasMany('App\Pagu_Kegiatan');
+    }
+    public function rkakl()
+    {
+        return $this->hasOne('App\Rkakl');
     }
 }

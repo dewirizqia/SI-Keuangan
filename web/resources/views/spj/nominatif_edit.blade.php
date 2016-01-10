@@ -41,7 +41,7 @@
                     </div><br><br>
                     <div class="form-group">
                         <div class="col-md-6">
-                            <input type="submit" value="Tambahkan" class="form-control btn-primary">
+                            <input type="submit" value="Tambahkan" class="form-control btn-success">
                         </div>
                         <div class="col-md-6">
                             <input type="reset" value="Ulangi" class="form-control btn-warning">

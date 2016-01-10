@@ -5,16 +5,32 @@
 
 @section('isi')
 <br>
-<a href="{{ route('buat_user')}}"><button type="button" class="btn btn-primary">Tambah</button></a>
+<form role="form" method="POST" action="{{ route('update_bagian', $dbagian->id) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
+    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+        <div class="form-group">
+            <div class="col-md-3">
+               <select class="form-control" name="bagian">
+                    <option value="prodi">Prodi</option>
+                    <option value="subbag">Sub Bagian</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+               <input class="form-control" name="detail" value="{{$dbagian->detail}}">
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary">Update Prodi/Bagian</button>
+            </div>
+        </div>
+</form>
 <br>
 <br>
 
 <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
-                        @if ($suser->count())
+                        @if ($daftar_bagian->count())
                         <div class="panel-heading">
-                            Daftar User:                            
+                            Daftar Prodi dan Subbagian:                            
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -22,42 +38,24 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                 <tr>
-                    <th>NO</th>
+                    <th width=50px>NO</th>
                     <th>Nama</th>
-                    <th>NIP</th>
-                    <th>Level</th>
-                    <th>Email</th>
-                    <th>Username</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($suser as $user)
+                @foreach ($daftar_bagian as $bagian)
                     <tr>
                         <td>{{ $no++ }}</td>
-                        <td><a href="">{{ $user->nama }}</a></td>
-                            @if($user->nip == '')
-                                <td>-</td>
-                            @else
-                                <td>{{ $user->nip }}</td>
-                            @endif
-                        
-                        
-                        <td>
-                            @foreach($user->detail_user as $detail)
-                                {{$detail->jabatan}}<br>
-                            @endforeach
-                        </td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->name }}</td>
+                        <td><a href="">{{ $bagian->detail }}</a></td>
                         <td> 
                             <table> 
                                 <td>
-                                    <a href="{{ route('edit_user', $user->id)}}" class="btn btn-primary">Edit</a>
+                                    <a href="{{ route('edit_bagian', $bagian->id)}}" class="btn btn-primary">Edit</a>
                                 </td>
                                 <td>&nbsp</td>
                                 <td>
-                                    <form method="POST" action="{{route('delete_user', $user->id)}}" accept-charset="UTF-8" style="margin:0 auto">
+                                    <form method="POST" action="{{route('delete_bagian', $bagian->id)}}" accept-charset="UTF-8" style="margin:0 auto">
                                         <input name="_method" type="hidden" value="DELETE">
                                         <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
                                         <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete">
@@ -74,7 +72,7 @@
                         </div>
 
                         @else
-                            <div class="panel-heading"><h3><center>Data User Belum di Tambahkan<center></h3></div>
+                            <div class="panel-heading"><h3><center>Data Bagian Belum di Tambahkan<center></h3></div>
                         @endif
                         <!-- /.panel-body -->
                     </div>
@@ -82,6 +80,7 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+
 @stop
 
 @section('script')

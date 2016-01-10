@@ -4,13 +4,13 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Tambah Belanja</h1>
+        <h1 class="page-header">Edit Belanja</h1>
     </div>
 </div>
 
 <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-primary">
+            <div class="panel panel-success">
                 <div class="panel-body">
                     <form action="" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -19,7 +19,7 @@
                             <label class="col-md-1">Output</label>
                             <div class="col-md-3">
                                 <select name="id_bagian" class="form-control">
-                                    <option value="">-- Pilih  --</option>
+                                    <option value="">Layanan Pendididkan</option>
                                 <!-- Gasan ambilan di database jadi dikomen ja dulu -->
                                 {{--    
                                 @foreach($daftarkategori as $kategori)
@@ -31,7 +31,7 @@
                             <label class="col-md-1">Sub Output</label>
                             <div class="col-md-3">
                                 <select name="id_bagian" class="form-control">
-                                    <option value="">-- Pilih  --</option>
+                                    <option value="">Layanan Pendidikan S1</option>
                                 <!-- Gasan ambilan di database jadi dikomen ja dulu -->
                                 {{--    
                                 @foreach($daftarkategori as $kategori)
@@ -43,7 +43,7 @@
                             <label class="col-md-1">Input</label>
                             <div class="col-md-3">
                                 <select name="id_bagian" class="form-control">
-                                    <option value="">-- Pilih  --</option>
+                                    <option value="">Penerimaan Mahasiswa Baru</option>
                                 <!-- Gasan ambilan di database jadi dikomen ja dulu -->
                                 {{--    
                                 @foreach($daftarkategori as $kategori)
@@ -57,7 +57,7 @@
                             <label class="col-md-1">Sub Input</label>
                             <div class="col-md-3">
                                 <select name="id_bagian" class="form-control">
-                                    <option value="">-- Pilih  --</option>
+                                    <option value="">Promosi dan Sosialisasi Penerimaan Mahasiswa Baru</option>
                                 <!-- Gasan ambilan di database jadi dikomen ja dulu -->
                                 {{--    
                                 @foreach($daftarkategori as $kategori)
@@ -69,7 +69,7 @@
                             <label class="col-md-1">Akun</label>
                             <div class="col-md-3">
                                 <select name="id_bagian" class="form-control">
-                                    <option value="">-- Pilih  --</option>
+                                    <option value="">Belanja Bahan</option>
                                 <!-- Gasan ambilan di database jadi dikomen ja dulu -->
                                 {{--    
                                 @foreach($daftarkategori as $kategori)
@@ -126,7 +126,7 @@
                         
                         <hr>                        
                         <div class="form-group">
-                            <input type="submit" value="Simpan" class="form-control btn-primary">
+                            <input type="submit" value="Simpan" class="form-control btn-success">
                             <input type="reset" value="Ulangi" class="form-control btn-warning">
                         </div>                        
                     </form>

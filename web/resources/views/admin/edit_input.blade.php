@@ -14,7 +14,7 @@
             <div class="form-group">
                 <label class="col-md-2" background="">Kode Input</label>
                 <div  class="col-md-4">
-                    <input type="text" class="form-control" name="kode_intput" value="{{ $sinput -> kode_input}}">
+                    <input type="text" class="form-control" name="kode_input" value="{{ $sinput -> kode_input}}">
                 </div>
             </div>
             <div class="form-group">

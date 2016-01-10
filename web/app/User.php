@@ -28,7 +28,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'jabatan', 'nama', 'nip'];
+    protected $fillable = ['name', 'email', 'nama', 'password', 'nip'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -36,4 +36,9 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public function detail_user()
+    {
+        return $this->hasMany('App\Detail_User', 'id_user');
+    }
 }

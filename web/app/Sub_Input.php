@@ -14,8 +14,16 @@ class Sub_Input extends Model
     {
     	return $this->belongsTo('App\Input', 'id_input');
     }
-    public function dusulan()
+    public function usulan()
     {
-    	return $this->hasMany('App\Detail_Usulan', 'id_input');
+    	return $this->hasMany('App\Detail_Usulan');
+    }
+    public function rkakl()
+    {
+        return $this->hasMany('App\Detail_Rkakl');
+    }
+    public function pagu_kegiatan()
+    {
+        return $this->hasOne('App\Pagu_Kegiatan');
     }
 }

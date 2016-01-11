@@ -53,7 +53,7 @@ route::get('/mail', function() {
 	}
 		);
 });
-
+Route::get('export', ['as'=>'export', 'uses'=> 'ReportController@export']);
 
 // pagu
 Route::get('pagu/daftar', array('as'=>'daftar_pagu', 'uses'=> 'PaguController@daftar_pagu'));

@@ -7,28 +7,120 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Bagian;
+use App\Kegiatan;
+use App\Output;
+use App\Sub_Output;
+use App\Input;
+use App\Sub_Input;
+use App\Akun;
+use App\SPJ_UP;
+use App\SPJ_UP_Detail;
 use App\SPJ_LS;
 use App\Daftar_Nominatif;
+
 
 class SpjController extends Controller
 {
 //Halaman SPJ
     public function spjup_buat()
     {
-        return view('spj.spjup_buat');
+        $soutput = Output::orderBy('kode_output', 'asc')->get();
+        $ssuboutput = Sub_Output::orderBy('kode_suboutput', 'asc')->get();
+        $sinput = Input::orderBy('kode_input', 'asc')->get();
+        $ssubinput = Sub_Input::orderBy('kode_subinput', 'asc')->get();
+        $akun = Akun::orderBy('kode_akun', 'asc')->get();
+        $bagian = Bagian::orderBy('id', 'dsc')->get();
+
+        return view('spj.spjup_buat', compact('soutput','ssuboutput','sinput','ssubinput', 'akun', 'bagian'));
     }
-    public function spjup_edit()
+
+    public function spjup_simpan(Request $request)
     {
-        return view('spj.spjup_edit');
+        $input = $request->all();
+
+        try {
+            SPJ_UP::create($input);
+        } 
+        catch (QueryException $e) {
+            return redirect()->route('spjup_buat');
+        }
+            
+        return redirect()->route('spjup_daftar');
     }
+
+    public function spjup_edit($id)
+    {
+        $spjup = SPJ_UP::find($id);
+        $soutput = Output::orderBy('kode_output', 'asc')->get();
+        $ssuboutput = Sub_Output::orderBy('kode_suboutput', 'asc')->get();
+        $sinput = Input::orderBy('kode_input', 'asc')->get();
+        $ssubinput = Sub_Input::orderBy('kode_subinput', 'asc')->get();
+        $akun = Akun::orderBy('kode_akun', 'asc')->get();
+        $bagian = Bagian::orderBy('id', 'dsc')->get();
+
+        return view('spj.spjup_edit', compact('spjup', 'soutput','ssuboutput','sinput','ssubinput', 'akun', 'bagian'));
+    }
+
+    public function spjup_update(Request $request, $id)
+    {
+        $spjup = SPJ_UP::FindOrFail($id);
+        $input = $request->all();
+        
+        try 
+        {
+            $spjup->update($input);
+        } 
+        catch (QueryException $e) {
+            return redirect()->back();
+        }
+        
+        return redirect()->route('spjup_daftar');
+    }
+
     public function spjup_daftar()
     {
-        return view('spj.spjup_daftar');
+        $no = "1";
+        $daftar_spjup = SPJ_UP::latest()->get();
+        return view('spj.spjup_daftar', compact('no', 'daftar_spjup'));
     }
-    public function spjup_detail()
+
+    public function spjup_delete($id)
     {
-        return view('spj.spjup_detail');
+        $spjup = SPJ_UP::FindOrFail($id);
+        $spjup->delete();
+        
+        return redirect()->route('spjup_daftar');
     }
+    
+    public function spjup_detail($id)
+    {
+        $no = "1";
+        $spjup = SPJ_UP::FindOrFail($id);
+        $daftar_detail = SPJ_UP_Detail::whereId_spj($id)->get();
+        return view('spj.spjup_detail', compact('no', 'spjup', 'daftar_detail'));
+    }
+
+    public function spjup_detail_simpan(Request $request, $id)
+    {
+        $input = $request->all();
+        $input['terima_kotor'] = $request['jumlah_jam'] * $request['satuan'];
+        $input['pajak'] = $input['terima_kotor'] * ($request['pajak']/100);
+        $input['terima_bersih'] = $input['terima_kotor'] - $input['pajak'];
+        
+        try {
+            SPJ_UP_Detail::create($input);
+        } 
+        catch (QueryException $e) {
+            return redirect()->route('spjup_detail');
+        }
+        
+        $no = "1";    
+        $spjup = SPJ_UP::FindOrFail($id);
+        $daftar_detail = SPJ_UP_Detail::whereId_spj($id)->get();
+        return view('spj.spjup_detail', compact('no','spjup', 'daftar_detail'));
+    }
+
     public function spjup_edit2()
     {
         return view('spj.spjup_edit2');

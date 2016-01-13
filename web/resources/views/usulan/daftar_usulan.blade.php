@@ -45,7 +45,7 @@
                         <td>{{ $usulan->status }}</td>
                         <td>{{ $usulan->revisi }}</td>
                         <td><button><a href="">detail</a></button>
-                        	<button><a href="">Download</a></button>
+                        	<button><a href="{{ route('export') }}">Download</a></button>
                         </td>
                         <td> 
                             <table> 

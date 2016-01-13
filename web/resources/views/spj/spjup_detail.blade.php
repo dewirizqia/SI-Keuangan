@@ -1,7 +1,9 @@
 @extends('home.keuangan')
+
 @section('head')
 <link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
 @stop
+
 @section('isi')
 
 <div class="row">
@@ -13,26 +15,27 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-primary">
-            <div class="panel-body">
-                <form action="" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <div class="form-group">
-                        <label class="col-md-2">Sub Bagian/Program Studi</label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" value="Prodi Teknik Sipil" disabled>      
-                        </div>
-                        <label class="col-md-2">Kode Kegiatan</label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" value="5308 062 002 017J" disabled>     
-                        </div>
-                    </div>&nbsp&nbsp
-                    <div class="form-group">
-                        <label class="col-md-2">Untuk Pembayaran</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" value="Biaya Narasumber - Pemakalah Utama Temu Ilmiah Tahunan Rekayasa Sipil Peranan Riset di Bidang Rekayasa Sipil dan Built Environment Dalam Pengembangan Wilayah di Kalimantan" disabled>
-                        </div>
+            <div class="panel-body">                    
+                <div class="form-group">
+                    <label class="col-md-2">Sub Bagian/Program Studi</label>
+                    <div class="col-md-3">
+                        <fieldset disabled><input type="text" class="form-control" id="disabledTextInput" value="{{ $spjup->ke_bagian->detail }}"></fieldset>
                     </div>
-                </form>
+                    <label class="col-md-1">Kode Kegiatan</label>
+                    <div class="col-md-3">
+                        <fieldset disabled><input type="text" class="form-control" value="{{ $spjup -> sub_input->input->sub_output->output->kode_output. "." .$spjup -> sub_input->input->sub_output->kode_suboutput. "." .$spjup -> sub_input->input->kode_input. "." .$spjup -> sub_input->kode_subinput }}"></fieldset>
+                    </div>
+                    <label class="col-md-1">Kode Akun</label>
+                    <div class="col-md-2">
+                        <fieldset disabled><input type="text" class="form-control" value="{{ $spjup -> akun->kode_akun}}"></fieldset>
+                    </div>
+                </div>&nbsp&nbsp
+                <div class="form-group">
+                    <label class="col-md-2">Untuk Pembayaran</label>
+                    <div class="col-md-10">
+                        <fieldset disabled><input type="text" class="form-control" value="{{ $spjup -> untuk_pembayaran}}"></fieldset>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -42,36 +45,39 @@
     <div class="col-lg-12">
         <div class="panel panel-primary">
             <div class="panel-body">
-                <form action="" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <form action="{{ route('spjup_detail_simpan', $spjup->id) }}" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                    <input type="hidden"  name="id_spj" value="{{ $spjup->id }}">
                     <div class="form-group">
-                        <label class="col-md-1 control-label">Nama</label>
-                        <div class="col-md-3">
+                        <div class="col-md-6">
+                            <label class="control-label">Nama</label>
                             <input type="text" class="form-control" name="nama">
-                        </div><div></div>
-                        <label class="col-md-1 control-label">Jabatan</label>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" name="jabatan">
                         </div>
-                        <label class="col-md-1 control-label">Jumlah Jam</label>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" name="jumlah_jam">
+                        <div class="col-md-6">
+                            <label class=" control-label">Jabatan</label>
+                            <input type="text" class="form-control" name="jabatan">
                         </div>
                     </div>&nbsp
                     <div class="form-group">
-                        <label class="col-md-1 control-label">Satuan</label>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" name="satuan">
-                        </div><div></div>
-                        <label class="col-md-1 control-label">Terima Kotor</label>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" name="jabatan">
+                        <div class="col-md-4">
+                            <label class="control-label">Jumlah Jam</label>                        
+                            <input type="text" class="form-control" name="jumlah_jam">
                         </div>
-                        <label class="col-md-1 control-label">Pajak</label>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" name="pajak">
+                        <div class="col-md-4">
+                            <label class=" control-label">Satuan</label>
+                            <div class="input-group ">
+                                <span class="input-group-addon" id="basic-addon1">Rp.</span>
+                                <input type="text" class="form-control" name="satuan">
+                            </div>
+                        </div>                        
+                        <div class="col-md-4">
+                        <label class=" control-label">Pajak</label>
+                        <div class="input-group ">                            
+                            <input type="text" class="form-control" name="pajak">                        
+                            <span class="input-group-addon" id="basic-addon1">%</span>
                         </div>
-                    </div><br><br>
+                        </div>
+                    </div><br><br><br>
                     <div class="form-group">
                         <div class="col-md-6">
                             <input type="submit" value="Tambahkan" class="form-control btn-primary">
@@ -90,23 +96,24 @@
                                 <th>Nama</th>
                                 <th>Jabatan</th>
                                 <th>Jumlah Jam</th>
-                                <th>Satuan</th>
-                                <th>Terima Kotor</th>
-                                <th>Pajak</th>
-                                <th>Terima Bersih</th>
+                                <th>Satuan (Rp.)</th>
+                                <th>Terima Kotor (Rp.)</th>
+                                <th>Pajak (Rp.)</th>
+                                <th>Terima Bersih (Rp.)</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($daftar_detail as $detail)
                             <tr>
-                                <td>1</td>
-                                <td>Wawan Gunawan, M.Eng</td>
-                                <td>Narasumber</td>
-                                <td>1.5</td>
-                                <td>Rp750.000</td>
-                                <td>Rp1.125.000</td>
-                                <td>Rp56.250</td>
-                                <td>Rp1.068.750</td>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $detail -> nama }}</td>
+                                <td>{{ $detail -> jabatan }}</td>
+                                <td>{{ $detail -> jumlah_jam }}</td>
+                                <td>{{ number_format($detail -> satuan, 0, ',', '.') }}</td>
+                                <td>{{ number_format($detail -> terima_kotor, 0, ',', '.') }}</td>
+                                <td>{{ number_format($detail -> pajak, 0, ',', '.') }}</td>
+                                <td>{{ number_format($detail -> terima_bersih, 0, ',', '.') }}</td>
                                 <td style="text-align:center;vertical-align:middle">
                                     <table margin="0">
                                      <tr>
@@ -125,6 +132,7 @@
                                     </table>                                    
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -137,4 +145,5 @@
 
 @section('script')
 @parent
+
 @stop 

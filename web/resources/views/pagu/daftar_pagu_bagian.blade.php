@@ -1,6 +1,8 @@
 @extends('home.keuangan')
 @section('head')
 <link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
+<script type="text/javascript" src="css/jquery-1.9.1.min.js"></script>
+<script src="css/jquery-calx-1.1.9.min.js"></script>
 @stop
 @section('isi')
 
@@ -77,21 +79,13 @@
                 @foreach ($daftar_pagu_bagian as $pagu_bagian)
                     <tr>
                         <td>{{ $no++ }}</td>
-                        <td><a href="">{{ $pagu_bagian->pagu->tahun }}</a></td>
-                        <td><a href="">{{ $pagu_bagian->ke_bagian->detail }}</a></td>
-                        <td><a href="">{{ $pagu_bagian->jumlah }}</a></td>
+                        <td>{{ $pagu_bagian->pagu->tahun }}</td>
+                        <td>{{ $pagu_bagian->ke_bagian->detail }}</td>
+                        <td id="jumlah[{{$no++}}]" data-format="0,0[.]00">{{ $pagu_bagian->jumlah }}</td>
                         <td> 
                             <table> 
                                 <td>
                                     <a href="" class="btn btn-primary">Edit</a>
-                                </td>
-                                <td>&nbsp</td>
-                                <td>
-                                    <form method="POST" action="" accept-charset="UTF-8" style="margin:0 auto">
-                                        <input name="_method" type="hidden" value="DELETE">
-                                        <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
-                                        <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete">
-                                    </form> 
                                 </td>
                             </table>
                         </td>
@@ -117,4 +111,10 @@
 
 @stop
 @section('script')
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#calx').calx();
+    });
+    </script>
+
 @stop

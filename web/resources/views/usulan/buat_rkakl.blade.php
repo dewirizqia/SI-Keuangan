@@ -6,6 +6,15 @@
 
 
 @section('isi')
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Rincian Anggaran RKA-KL Tahun: {{ $rkakl->pagu->tahun }}
+    </div>
+    <div class="panel-body">
+        Total = {{ $total}}
+    </div>
+</div>
+
 <br>
 	@if (count($errors) > 0)
 	    <div class="alert alert-danger">
@@ -137,6 +146,73 @@
                             <!-- /.table-responsive -->
                             @else
                                 <div class="panel-heading"><h3><center>Data Detail RKA-KL Belum di Tambahkan</center></h3></div>
+                            @endif
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Daftar Detail Usulan Tahun:                            
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            @if ($detail_usulan->count())
+                            <div class="dataTable_wrapper">
+                                <table class="table table-striped table-bordered table-hover" id="usulan" class="display">
+                                    <thead>
+                                        <tr>
+                                            <th>Output</th>
+                                            <th>Sub Output</th>
+                                            <th>Input</th>
+                                            <th>Sub Input</th>
+                                            <th>Akun</th>
+                                            <th>Detail</th>
+                                            <th>Harga Satuan</th>
+                                            <th>Nominal</th>
+                                            <th>Jumlah</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Output</th>
+                                            <th>Sub Output</th>
+                                            <th>Input</th>
+                                            <th>Sub Input</th>
+                                            <th>Akun</th>
+                                            <th>Detail</th>
+                                            <th>Harga Satuan</th>
+                                            <th>Nominal</th>
+                                            <th>Jumlah</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        @foreach($detail_usulan as $dusulan)
+                                        <tr class="odd gradeX">
+                                            <td title="{{ $dusulan->sub_input->input->sub_output->output->uraian }}">{{ $dusulan->sub_input->input->sub_output->output->kode_output }}</td>
+                                            <td title="{{ $dusulan->sub_input->input->sub_output->uraian }}">{{ $dusulan->sub_input->input->sub_output->kode_suboutput }}</td>
+                                            <td title="{{ $dusulan->sub_input->input->uraian }}">{{ $dusulan->sub_input->input->kode_input }}</td>
+                                            <td title="{{ $dusulan->sub_input->uraian }}">{{ $dusulan->sub_input->kode_subinput }}</td>
+                                            <td title="{{ $dusulan->akun->uraian_akun }}">{{ $dusulan->akun->kode_akun }}</td>
+                                            <td>{{ $dusulan->detail }}</td>
+                                            <td>{{ $dusulan->harga_satuan }}</td>
+                                            <td>{{ $dusulan->nominal }} {{ $dusulan->satuan }}</td>
+                                            <td class="center">{{ $dusulan->jumlah_biaya }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                            @else
+                                <div class="panel-heading"><h3><center>Data Detail Usulan Belum di Tambahkan</center></h3></div>
                             @endif
                         </div>
                         <!-- /.panel-body -->

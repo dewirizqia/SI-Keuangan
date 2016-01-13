@@ -19,4 +19,8 @@ class Bagian extends Model
     {
     	return $this->belongsTo('App\Pagu_Bagian', 'id_bagian');
     }
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'id');
+    }
 }

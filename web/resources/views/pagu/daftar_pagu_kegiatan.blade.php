@@ -44,6 +44,17 @@
                 </div>
             </div>&nbsp
             <div class="form-group">
+                <label class="col-md-1">Akun</label>
+                <div  class="col-md-3">
+                    <select class="form-control" name="id_akun" id="akun">
+                        <option value="">--</option>
+                        @foreach($sakun as $akun)
+                        <option value="{{ $akun->id }}" class="{{ $u_subinput->id_input }}">{{ $u_subinput->uraian }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>&nbsp
+            <div class="form-group">
                 <label class="col-md-1">Tahun</label>
                 <div  class="col-md-3">
                     <select class="form-control" name="id_pagu" id="tahun">
@@ -85,10 +96,8 @@
                     <tr>
                         <th>NO</th>
                         <th>Tahun</th>
-                        <th>Kegiatan</th>
-                        <th>Batasan</th>
-                        <th>Alokasi Kegiatan</th>
-                        <th>Aksi</th>
+                        <th>Kode Kegiatan</th>
+                        <th>PAgu Kegiatan</th>
                     </tr>
                 </thead>
                 <tbody>

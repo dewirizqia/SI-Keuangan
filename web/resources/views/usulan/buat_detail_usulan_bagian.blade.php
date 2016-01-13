@@ -1,4 +1,4 @@
-@extends('home.keuangan')
+@extends('home.admin')
 
 @section('head')
 <link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
@@ -8,6 +8,14 @@
 
 
 @section('isi')
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Rincian Anggaran Tahun: {{ $usulan->tahun }}
+    </div>
+    <div class="panel-body">
+        Total = {{ $total}}
+    </div>
+</div>
 
 <div class="panel panel-primary">
     <div class="panel-heading">
@@ -152,7 +160,11 @@
 
 
 @section('script')
-
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#calx').calx();
+    });
+</script>
 <script type="text/javascript" class="init">
 $(document).ready(function() {
     $('#usulan').DataTable( {
@@ -178,11 +190,5 @@ $(document).ready(function() {
         }
     } );
 } );
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('#calx').calx();
-    });
 </script>
 @stop

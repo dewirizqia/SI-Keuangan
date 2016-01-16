@@ -184,7 +184,7 @@ class SpjController extends Controller
         $ssubinput = Sub_Input::orderBy('kode_subinput', 'asc')->get();
         $akun = Akun::orderBy('kode_akun', 'asc')->get();
         $bagian = Bagian::orderBy('id', 'dsc')->get();
-        
+
         return view('spj.spjls_buat', compact('soutput','ssuboutput','sinput','ssubinput', 'akun', 'bagian'));
     }
 
@@ -297,6 +297,7 @@ class SpjController extends Controller
     }
     
     public function spjls_detail_edit($id)
+
     {
         $detail = SPJ_LS_Detail::FindOrFail($id);
         $pph = $detail->pph / $detail->terima * 100;    

@@ -131,6 +131,7 @@ return [
         //LS
             'jlh_hari'          => 'Jumlah Hari',
             'pph'               => 'PPh',
+
         //Belanja
             'sub_output'        => 'Sub Output',
             'input'             => 'Input',
@@ -159,6 +160,7 @@ return [
         //Akun
             'kode_akun'         => 'Kode Akun',
             'uraian_akun'       => 'Uraian Akun',
+
     ],
 
 ];

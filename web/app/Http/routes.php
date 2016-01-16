@@ -191,15 +191,6 @@ Route::get('keuangan/spj_up/detail/{id}/edit', array('as'=>'spjup_edit2', 'uses'
 Route::patch('keuangan/spj_up/daftar/{id}/detail', array('as'=>'spjup_detail_update', 'uses'=> 'SpjController@spjup_detail_update'));
 Route::delete('keuangan/spj_up/daftar/{id}/detail', ['as'=>'spjup_detail_delete', 'uses'=>'SpjController@spjup_detail_delete']);
 
-
-
-
-
-Route::get('spj_ls/daftar', array('as'=>'spjls_daftar', 'uses'=> 'SpjController@spjls_daftar'));
-Route::get('spj_ls/buat', array('as'=>'spjls_buat', 'uses'=> 'SpjController@spjls_buat'));
-
-
-
 //SPJ LS dan Daftar Nominatif
 Route::get('keuangan/spj_ls/daftar', array('as'=>'spjls_daftar', 'uses'=> 'SpjController@spjls_daftar'));
 Route::get('keuangan/spj_ls/buat', array('as'=>'spjls_buat', 'uses'=> 'SpjController@spjls_buat'));
@@ -212,7 +203,8 @@ Route::post('keuangan/spjls/daftar/{id}/detail', array('as'=>'spjls_detail_simpa
 Route::get('keuangan/spj_ls/detail/{id}/edit', array('as'=>'spjls_detail_edit', 'uses'=> 'SpjController@spjls_detail_edit'));
 Route::patch('keuangan/spj_ls/daftar/{id}/detail', array('as'=>'spjls_detail_update', 'uses'=> 'SpjController@spjls_detail_update'));
 Route::delete('keuangan/spj_ls/daftar/{id}/detail', ['as'=>'spjls_detail_delete', 'uses'=>'SpjController@spjls_detail_delete']);
-
+Route::get('keuangan/nominatif', array('as'=>'nominatif_menu', 'uses'=> 'SpjController@nominatif_menu'));
+Route::post('keuangan/nominatif/daftar', array('as'=>'nominatif_daftar', 'uses'=> 'SpjController@nominatif_daftar'));
 
 /////////////////////////////////////HALAMAN ADMIN PRODI/SUBBAGIAN//////////////////////////////////////////////////////////
 //Serapan Dana
@@ -235,6 +227,21 @@ Route::post('bagian/usulan/bagian/{id}/nilai', array('as'=>'nilai_detail', 'uses
 Route::get('bagian/usulan/bagian/{id_bagian}/{tahun}/{subkom}/{akun}/buat', array('as'=>'buat_detail_usulan_bagian', 'uses'=> 'UsulanController@buat_detail_usulan_bagian'));
 Route::post('bagian/usulan/bagian/{id_bagian}/{tahun}/{subkom}/{akun}/buat', array('as'=>'detail_usulan_bagian_simpan', 'uses'=> 'UsulanController@detail_usulan_bagian_simpan'));
 
-//halaman Belanja bagian
+//rekap belanja
 Route::get('bagian/belanja/daftar', array('as'=>'belanja_bagian_daftar', 'uses'=> 'BelanjaController@belanja_bagian_daftar'));
+Route::get('bagian/belanja/buat', array('as'=>'belanja_buat', 'uses'=> 'BelanjaController@belanja_buat'));
+Route::post('bagian/belanja/buat', array('as'=>'belanja_simpan', 'uses'=> 'BelanjaController@belanja_simpan'));
+Route::get('bagian/belanja/edit/{id}', array('as'=>'belanja_edit', 'uses'=> 'BelanjaController@belanja_edit'));
+Route::patch('bagian/belanja/edit/{id}', array('as'=>'belanja_update', 'uses'=> 'BelanjaController@belanja_update'));
+Route::delete('bagian/belanja/daftar/{id}', array('as'=>'belanja_delete', 'uses'=> 'BelanjaController@belanja_delete'));
+
+
+////////////////////////////////////EXPORT TO EXCEL///////////////////////////////////////////
+Route::get('excelrab/{id}', ['as'=>'excelrab', 'uses'=> 'ExcelController@rab']);
+
+Route::get('excelup/{id}', ['as'=>'excelup', 'uses'=> 'ExcelController@up']);
+
+Route::get('excells/{id}', ['as'=>'excells', 'uses'=> 'ExcelController@ls']);
+
+Route::get('excelnominatif/{id}', ['as'=>'excelnominatif', 'uses'=> 'ExcelController@nominatif']);
 

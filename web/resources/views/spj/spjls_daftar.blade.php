@@ -41,7 +41,17 @@
                             <td>{{ $spjls -> tgl_sk}}</td>
                             <td>{{ $spjls -> nama_kegiatan}}</td>
                             <td>
-                                <a href="{{ route('spjls_detail', $spjls->id) }}" title="Lihat/Tambah Detail" class="btn btn-link">Lihat/Tambah</a>
+                                <table>
+                                <tr>
+                                <td>
+                                    <a href="{{ route('spjls_detail', $spjls->id) }}" class="btn btn-primary" class="btn btn-link">Lihat</a>
+                                </td>
+                                <td>&nbsp</td>
+                                <td>
+                                    <a href="{{ route('excells', $spjls->id) }}" class="btn btn-success">Download</a>
+                                </td>
+                                </tr>
+                                </table>
                             </td>
                             <td style="text-align:center;vertical-align:middle">
                                 <table margin="0">

@@ -16,7 +16,9 @@
     <div class="col-lg-12">
         <div class="panel panel-primary">
             <div class="panel-body">
-                <form action="" method="POST" enctype="multipart/form-data">
+
+                <form action="{{ route('excelnominatif',$spjls->id) }}" method="GET" enctype="multipart/form-data">
+
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
                         <label class="col-md-2">Subbag/ Prodi</label>
@@ -35,9 +37,13 @@
                         <label class="col-md-4">: {{ $jumlah_penerima}}</label>
                         <label class="col-md-2">Banyaknya</label>
                         <label class="col-md-4">: Rp. {{ number_format($jumlah_kotor, 0, ',', '.') }}</label>
-                    </div>&nbsp                    
+
+                    </div>&nbsp    
+                    <div class="col-md-6">
+                            <input type="submit" value="Export to Excel" class="form-control btn-success">
+                    </div>                
                 </form>
-            </div>
+
         </div>
     </div>
 </div>

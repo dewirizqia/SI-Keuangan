@@ -43,6 +43,7 @@ class BelanjaController extends Controller
         return view('belanja.belanja_buat', compact('output', 'suboutput','input', 'subinput', 'akun'));
     }
 
+
     public function belanja_simpan(BelanjaRequest $request)
     {
         $qoutput = Output::FindOrFail($request['output']);

@@ -47,11 +47,11 @@
                         <td style="text-align:center;vertical-align:middle">
                             <table margin="0">
                             <tr><td>
-                                    <a href="" class="btn btn-primary">Edit</a>
+                                    <a href="{{ route('belanja_edit', $belanja->id) }}" class="btn btn-primary">Edit</a>
                                 </td>
                                 <td>&nbsp</td>
                                 <td>
-                                    <form method="POST" action="" accept-charset="UTF-8" style="margin:0 auto">
+                                    <form method="POST" action="{{ route('belanja_delete', $belanja->id) }}" accept-charset="UTF-8" style="margin:0 auto">
                                         <input name="_method" type="hidden" value="DELETE">
                                         <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
                                         <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete">

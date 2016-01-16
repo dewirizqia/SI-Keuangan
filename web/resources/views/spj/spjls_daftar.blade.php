@@ -22,7 +22,9 @@
                         <th>No.</th>
                         <th>Subbag/ Prodi</th>
                         <th>Kode Anggaran</th>
+                        <th>Kode Akun</th>
                         <th>Nomor SK</th>
+                        <th>Tanggal SK</th>
                         <th>Nama Kegiatan</th>
                         <th>Detail</th>
                         <th>Aksi</th>
@@ -34,7 +36,9 @@
                             <td>{{ $no++ }}</td>
                             <td>{{ $spjls -> ke_bagian->detail}}</td>
                             <td>{{ $spjls -> kode_anggaran}}</td>
+                            <td>{{ $spjls -> kode_akun}}</td>
                             <td>{{ $spjls -> no_sk}}</td>
+                            <td>{{ $spjls -> tgl_sk}}</td>
                             <td>{{ $spjls -> nama_kegiatan}}</td>
                             <td>
                                 <table>

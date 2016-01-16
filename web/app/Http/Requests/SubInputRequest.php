@@ -24,7 +24,11 @@ class SubInputRequest extends Request
     public function rules()
     {
         return [
-            //
+            'output'        => 'required',
+            'id_suboutput'  => 'required',
+            'id_input'      => 'required',
+            'kode_subinput' => 'required',
+            'uraian'        => 'required',
         ];
     }
 }

@@ -1,8 +1,18 @@
 @extends('@layout.base_admin')
 
 @section('isi')
-
-<br>    
+<br>
+@if($errors->count())
+    <div class="col-md-12 alert alert-danger" role="alert">
+        <ul>
+        @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    </div>
+    &nbsp
+@endif
+    
 <div class="panel panel-success">
     <div class="panel-heading">
         Edit Kode Input

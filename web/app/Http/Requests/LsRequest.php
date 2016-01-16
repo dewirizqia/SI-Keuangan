@@ -29,10 +29,11 @@ class LsRequest extends Request
             'id_suboutput'  => 'required',
             'id_input'      => 'required',
             'id_subinput'   => 'required',
-            'id_akun'       => 'required',
+            'kode_akun'     => 'required',
             'nama_kegiatan' => 'required',
             'nomor'         => 'required',
             'tahun'         => 'required',
+            'tgl_sk'         => 'required',
         ];
     }
 }

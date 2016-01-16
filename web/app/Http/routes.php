@@ -140,7 +140,7 @@ Route::delete('bagian/daftar/{id}', ['as'=>'delete_bagian', 'uses'=>'AdminContro
 Route::get('kegiatan/daftar', array('as'=>'daftar_kegiatan', 'uses'=> 'KodeOutputController@daftar_kegiatan'));
 Route::post('kegiatan/daftar', array('as'=>'simpan_kegiatan', 'uses'=> 'KodeOutputController@simpan_kegiatan'));
 Route::get('kegiatan/daftar/{id}/edit', array('as'=>'edit_kegiatan', 'uses'=> 'KodeOutputController@edit_kegiatan'));
-Route::patch('kegiatan/daftar/{id}', array('as'=>'update_kegiatan', 'uses'=> 'KodeOutputController@update_kegiatan'));
+Route::patch('kegiatan/daftar/{id}/edit', array('as'=>'update_kegiatan', 'uses'=> 'KodeOutputController@update_kegiatan'));
 Route::delete('kegiatan/daftar/{id}', ['as'=>'delete_kegiatan', 'uses'=>'KodeOutputController@delete_kegiatan']);
 //output
 Route::get('output/daftar', array('as'=>'daftar_output', 'uses'=> 'KodeOutputController@daftar_output'));
@@ -176,6 +176,10 @@ Route::delete('akun/daftar/{id}', ['as'=>'delete_akun', 'uses'=>'KodeOutputContr
 Route::get('belanja/daftar', array('as'=>'belanja_daftar', 'uses'=> 'BelanjaController@belanja_daftar'));
 Route::get('belanja/buat', array('as'=>'belanja_buat', 'uses'=> 'BelanjaController@belanja_buat'));
 Route::post('belanja/buat', array('as'=>'belanja_simpan', 'uses'=> 'BelanjaController@belanja_simpan'));
+
+Route::get('belanja/edit/{id}', array('as'=>'belanja_edit', 'uses'=> 'BelanjaController@belanja_edit'));
+Route::patch('belanja/edit/{id}', array('as'=>'belanja_update', 'uses'=> 'BelanjaController@belanja_update'));
+Route::delete('belanja/daftar/{id}', array('as'=>'belanja_delete', 'uses'=> 'BelanjaController@belanja_delete'));
 //rekap belanja bagian
 Route::get('belanja/bagian/daftar', array('as'=>'belanja_bagian_daftar', 'uses'=> 'BelanjaController@belanja_bagian_daftar'));
 
@@ -217,8 +221,6 @@ Route::delete('spj_ls/daftar/{id}/detail', ['as'=>'spjls_detail_delete', 'uses'=
 
 Route::get('nominatif', array('as'=>'nominatif_menu', 'uses'=> 'SpjController@nominatif_menu'));
 Route::post('nominatif/daftar', array('as'=>'nominatif_daftar', 'uses'=> 'SpjController@nominatif_daftar'));
-
-
 
 Route::get('excelrab/{id}', ['as'=>'excelrab', 'uses'=> 'ExcelController@rab']);
 

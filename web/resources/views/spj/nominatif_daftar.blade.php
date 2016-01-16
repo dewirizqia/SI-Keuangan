@@ -1,1 +1,0 @@
-nominatif_daftar.blade.php

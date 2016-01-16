@@ -127,6 +127,36 @@ return [
         //LS
             'jlh_hari'          => 'Jumlah Hari',
             'pph'               => 'PPh',
+
+        //Belanja
+            'sub_output'        => 'Sub Output',
+            'input'             => 'Input',
+            'sub_input'         => 'Sub Input',
+            'MAK'               => 'Akun',
+            'no_tanda_bukti'    => 'No. Tanda Bukti',
+            'tgl'               => 'Tanggal',
+            'no_bku'            => 'No. BKU',
+            'penerima'          => 'Penerima',
+            'uraian'            => 'Uraian',
+            'jumlah'            => 'Jumlah',
+        //Kegiatan
+            'kode_kegiatan'        => 'Kode Kegiatan',
+            'sumberdana_kegiatan'  => 'Sumber Dana Kegiatan',
+        //Output
+            'id_kegiatan'       => 'Kegiatan',
+            'kode_output'       => 'Kode Output',
+            'uraian'            => 'Uraian',
+        //Suboutput
+            'id_output'         => 'Output',
+            'kode_suboutput'    => 'Kode Sub Output',
+        //Input
+            'kode_input'        => 'Kode Input',
+        //SubInput
+            'kode_subinput'     => 'Kode Sub Input',
+        //Akun
+            'kode_akun'         => 'Kode Akun',
+            'uraian_akun'       => 'Uraian Akun',
+
     ],
 
 ];

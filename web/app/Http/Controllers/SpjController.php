@@ -184,7 +184,7 @@ class SpjController extends Controller
         $ssubinput = Sub_Input::orderBy('kode_subinput', 'asc')->get();
         $akun = Akun::orderBy('kode_akun', 'asc')->get();
         $bagian = Bagian::orderBy('id', 'dsc')->get();
-        
+
         return view('spj.spjls_buat', compact('soutput','ssuboutput','sinput','ssubinput', 'akun', 'bagian'));
     }
 
@@ -194,11 +194,12 @@ class SpjController extends Controller
         $qsuboutput = Sub_Output::FindOrFail($request['id_suboutput']);
         $qinput = Input::FindOrFail($request['id_input']);
         $qsubinput = Sub_Input::FindOrFail($request['id_subinput']);
-        $qakun = Akun::FindOrFail($request['id_akun']);
         
         $input = $request->all();
         $input['kode_anggaran'] = $qoutput->kode_output. '.' .$qsuboutput->kode_suboutput. '.' .$qinput->kode_input.$qsubinput->kode_subinput;
         $input['no_sk'] = $request['nomor']. '/UN8.1.31/KU/' .$request['tahun'];
+        
+
         try {
             SPJ_LS::create($input);
         } 
@@ -296,6 +297,7 @@ class SpjController extends Controller
     }
     
     public function spjls_detail_edit($id)
+
     {
         $detail = SPJ_LS_Detail::FindOrFail($id);
         $pph = $detail->pph / $detail->terima * 100;    

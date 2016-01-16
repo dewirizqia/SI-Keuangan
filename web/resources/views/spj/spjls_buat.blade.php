@@ -69,10 +69,10 @@
                             </div><div></div>
                             <label class="col-md-1">Akun</label>
                             <div class="col-md-3">
-                                <select name="id_akun" class="form-control">
+                                <select name="kode_akun" class="form-control">
                                     <option value="">-- Pilih  --</option>
                                     @foreach($akun as $u_akun)
-                                    <option value="{{ $u_akun->id }}">({{ $u_akun->kode_akun }})  {{ $u_akun->uraian_akun }}</option>
+                                    <option value="{{ $u_akun->kode_akun }}">({{ $u_akun->kode_akun }})  {{ $u_akun->uraian_akun }}</option>
                                     @endforeach
                                 </select>
                             </div><br>
@@ -101,10 +101,16 @@
                             <div class="col-md-4">
                                <input type="text" name="tahun" class="form-control">
                             </div>
-                        </div>
+                        </div>&nbsp
                         <div class="form-group">
-                            <label>Keterangan</label>
-                            <input type="text" name="keterangan" class="form-control">
+                            <label class="col-md-2">Tanggal Sk</label>
+                            <div class="col-md-4">
+                               <input type="date" name="tgl_sk" class="form-control">
+                            </div>
+                            <label class="col-md-2">Keterangan</label>
+                            <div class="col-md-4">
+                               <input type="text" name="keterangan" class="form-control">
+                            </div>
                         </div>&nbsp
                         <div class="form-group">
                             <div class="col-md-6">

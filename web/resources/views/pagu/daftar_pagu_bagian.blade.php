@@ -11,6 +11,21 @@
         Tambah Alokasi Pagu Prodi/Bagian
     </div>
     <div class="panel-body">
+        @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <strong>Whoops!</strong> Sepertinya ada yang salah.<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    @if (Session::has('pesan'))
+         <div class="alert alert-info">
+            <h3>{{ Session::get('pesan') }}</h3>
+         </div>   
+    @endif
         <form role="form" method="POST" action="{{ route('simpan_pagu_bagian') }}" accept-charset="UTF-8" enctype ="multipart/form-data">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">    
             
@@ -30,7 +45,7 @@
             <div class="form-group">
                 <label class="col-md-1">Tahun</label>
                 <div  class="col-md-3">
-                    <select class="form-control" name="id_pagu" id="tahun">
+                    <select class="form-control" name="id_pagu" id="tahun" disabled>
                         <option value="">--</option>
                         @foreach($daftar_pagu as $pagu)
                         <option value="{{ $pagu->id }}">{{ $pagu->tahun }}</option>
@@ -41,7 +56,7 @@
             <div class="form-group">
                 <label class="col-md-1">Alokasi</label>
                 <div  class="col-md-3">
-                    <input type="text" class="form-control" name="batasan">
+                    <input type="text" class="form-control" name="jumlah">
                 </div>
             </div><br><br><br>
             <div class="form-group">
@@ -79,9 +94,9 @@
                 @foreach ($daftar_pagu_bagian as $pagu_bagian)
                     <tr>
                         <td>{{ $no++ }}</td>
-                        <td>{{ $pagu_bagian->pagu->tahun }}</td>
-                        <td>{{ $pagu_bagian->ke_bagian->detail }}</td>
-                        <td id="jumlah[{{$no++}}]" data-format="0,0[.]00">{{ $pagu_bagian->jumlah }}</td>
+                        <td>{{ $pagu_bagian->ke_pagu->tahun }}</td>
+                        <td><a href="{{ route('detail_pagu_bagian', $pagu_bagian->id)}}">{{ $pagu_bagian->ke_bagian->detail }}</a></td>
+                        <td>Rp. {{ number_format($pagu_bagian->jumlah, 0, ',', '.')}}</td>
                         <td> 
                             <table> 
                                 <td>

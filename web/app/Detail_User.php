@@ -10,7 +10,7 @@ class Detail_User extends Model
 
     protected $fillable = [ 'id_user', 'jabatan'];
 
-    public function user()
+    public function ke_user()
     {
         return $this->belongsTo('App\User', 'id_user');
     }

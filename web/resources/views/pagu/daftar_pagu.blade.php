@@ -3,11 +3,6 @@
 <link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
 <script type="text/javascript" src="css/jquery-1.9.1.min.js"></script>
 <script src="css/jquery-calx-1.1.9.min.js"></script>
-<style type="text/css">
-    .rp {
-        before: "Rp";
-    }
-</style>
 @stop
 @section('isi')
 <br>
@@ -16,9 +11,25 @@
     <div class="panel-heading">
         Tambah Alokasi
     </div>
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <strong>Whoops!</strong> Sepertinya ada yang salah.<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    @if (Session::has('pesan'))
+         <div class="alert alert-info">
+            <h3>{{ Session::get('pesan') }}</h3>
+         </div>   
+    @endif
     <div class="panel-body">
         <form role="form" method="POST" action="{{ route('simpan_pagu') }}" accept-charset="UTF-8" enctype ="multipart/form-data">
-            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">    
+            <!-- <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">     -->
+            {{ csrf_field() }}
             <div class="form-group">
                 <label class="col-md-2" background="">Tahun</label>
                 <div  class="col-md-4">
@@ -66,15 +77,11 @@
             <tbody>
                 @foreach ($spagu as $pagu)
                     <tr>
-                        <td>{{ $no++ }} {{$jabatan}}</td>
-                        <td><a href="">{{ $pagu->tahun }}
-                            
-                            </a></td>
-                        <td id="batasan[{{$no++}}]" data-format="0,0[.]00">{{ $pagu->batasan }}</td>
-                        <td id="alokasi[{{$no++}}]" data-format="0,0[.]">{{ $pagu->alokasi }}</td>
-                        <td id="sisa[{{$no++}}]" data-format="0,0[.]">{{ $pagu->alokasi }} </td>
-                        @foreach( $user->detail_user as $detail)
-                            @if( $detail->jabatan = "admin")
+                        <td>{{ $no++ }}</td>
+                        <td>{{ $pagu->tahun }}</td>
+                        <td>Rp. {{ number_format($pagu->batasan, 0, ',', '.')}}</td>
+                        <td>Rp. {{ number_format($pagu->alokasi, 0, ',', '.')}}</td>
+                        <td>Rp. {{ number_format($pagu->sisa, 0, ',', '.')}}</td>
                             <td> 
                             <table> 
                                 <td>
@@ -90,10 +97,6 @@
                                 </td>
                             </table>
                             </td>
-                            @else
-                            @endif
-                        @endforeach
-                        
                     </tr>
                 @endforeach
             </tbody>

@@ -37,7 +37,7 @@ class AdminMiddleware
             }
         }
 
-        if (auth()->check() &&  Auth::user()->hasRole('admin')) 
+        if (auth()->check() &&  Auth::user()->hasRole('bagian')) 
         {
             
             return $next($request);

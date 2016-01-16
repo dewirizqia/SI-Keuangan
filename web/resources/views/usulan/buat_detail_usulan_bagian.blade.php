@@ -1,4 +1,5 @@
-@extends('home.admin')
+@extends('home.keuangan')
+
 
 @section('head')
 <link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
@@ -60,7 +61,7 @@
         <div class="form-group">
             <div class="col-md-6">
             <label>Nominal</label> 
-            <input class="form-control" name="nominal" id="nominal">
+            <input class="form-control" name="nominal" id="nominal"> 
             </div>    
         </div>
         <div class="form-group">
@@ -72,7 +73,7 @@
 
         <div class="form-group">
             <label>Jumlah</label>
-            <input class="form-control" name="jumlah">
+            <input class="form-control" name="jumlah" id="jumlah" data-formula="$harga_satuan*$nominal">
         </div>
         <br>
         <button type="submit" class="btn btn-primary">Tambah Detail</button>

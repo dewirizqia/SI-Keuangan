@@ -1,3 +1,3 @@
 <!-- resources/views/emails/password.blade.php -->
 
-Click here to reset your password: {{ url('password/reset/'.$token) }}
+Klik Link berikut untuk me-reset password Anda: {{ url('password/reset/'.$token) }}

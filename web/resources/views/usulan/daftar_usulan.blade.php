@@ -40,7 +40,7 @@
                 @foreach($dftrusulan as $usulan)
                     <tr>
                         <td>{{ $no++ }}</td>
-                        <td>{{ $usulan->tahun }}</td>
+                        <td><a href="{{ route('detail_usulan_tahun', $usulan->tahun) }}">{{ $usulan->tahun }}</a></td>
                         <td>{{ $usulan->ke_bagian->detail }}</td>
                         <td>{{ $usulan->status }}</td>
                         <td>{{ $usulan->revisi }}</td>

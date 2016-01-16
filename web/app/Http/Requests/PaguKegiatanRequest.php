@@ -24,7 +24,18 @@ class PaguKegiatanRequest extends Request
     public function rules()
     {
         return [
-            //
+            'id_subinput' => 'required',
+            'id_akun' => 'required',
+            'id_pagu' => 'required',
+            'batasan' => 'required',
         ];
+        
+    }
+    public function attributes(){
+        return [
+            'id_pagu' => 'Pagu',
+            'id_akun' => 'Akun',
+            'id_subinput' => 'Sub Input',
+            ];
     }
 }

@@ -17,9 +17,12 @@ use App\Pagu_Bagian;
 use Auth;
 use Illuminate\Http\Request;
 
+//request
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaguRequest;
+use App\Http\Requests\PaguKegiatanRequest;
+use App\Http\Requests\PaguBagianRequest;
 
 class PaguController extends Controller
 {
@@ -32,11 +35,20 @@ class PaguController extends Controller
         $no = "1";
         $alokasi = "1";
         $spagu = Pagu::orderBy('tahun', 'desc')->get();
-        $user = Auth::user(); 
-        foreach( $user->detail_user as $detail){
-            $jabatan = $detail->jabatan;
+        return view('pagu.daftar_pagu', compact('user','spagu', 'no', 'alokasi'));
+    }
+
+    public function simpan_pagu(PaguRequest $request)
+    {
+        $input = $request->all();
+        $tahun = $request->input('tahun');
+        $pagu = Pagu::whereTahun($tahun)->get();
+        if ($pagu->count()){
+            return redirect()->back()
+            ->with('pesan', 'Data Pagu Sudah ada!');
         }
-        return view('pagu.daftar_pagu', compact('jabatan','user','spagu', 'no', 'alokasi'));
+        Pagu::create($input);
+        return redirect()->route('daftar_pagu'); 
     }
 
         public function edit_pagu($id)
@@ -44,20 +56,27 @@ class PaguController extends Controller
         $pagu = Pagu::FindOrFail($id);   
         return view('pagu.edit_pagu', compact('pagu'));
     }
-    public function simpan_pagu(PaguRequest $request)
-    {
-        $input = $request->all();
-        try 
-        {
-        Pagu::create($input);
-        } 
-        catch (QueryException $e) {
-            return redirect()->route('daftar_pagu');
-        }
-        
-        return redirect()->route('daftar_pagu'); 
-    }
 
+    public function update_pagu(Request $request, $id)
+    {
+        $this->validate($request, [
+        'batasan' => 'required|numeric',
+        ]);
+        $pagu = Pagu::FindOrFail($id);
+        $input = $request->all();
+        $batasan = $request->input('batasan');
+        $pagu->batasan = $batasan;
+        $pagu->save();
+        return redirect()->route('daftar_pagu');
+    }
+    public function delete_pagu($id)
+    {
+        
+        $pagu = Pagu::FindOrFail($id);
+        $pagu->delete();
+        return redirect()->route('daftar_pagu');
+    }
+//////////////////////////////////////////PAGU BAGIAN/////////////////////////////////////////
             public function daftar_pagu_bagian()
     {
         $no = "1";
@@ -65,6 +84,79 @@ class PaguController extends Controller
         $sbagian = Bagian::orderBy('id', 'dsc')->get();
         $daftar_pagu = Pagu::latest()->get();
         return view('pagu.daftar_pagu_bagian', compact('daftar_pagu','sbagian','daftar_pagu_bagian', 'no'));
+    }
+       public function detail_pagu_bagian($id)
+    {
+        $no = 1;
+        $pagu = Pagu_Bagian::FindOrFail($id);
+        $bagian = $pagu->ke_bagian->detail;
+        $tahun = $pagu->ke_pagu->tahun;
+        $jpagu = $pagu->pagu;
+        $alokasi = $pagu->jumlah;
+        $sisa = $pagu->sisa;
+        $daftar_pagu_bagian = Pagu_Bagian::latest()->get();
+        return view('pagu.detail_pagu_bagian', compact('no','daftar_pagu_bagian','sisa','alokasi','jpagu','tahun','bagian','pagu'));
+    }
+
+        public function simpan_pagu_bagian(PaguBagianRequest $request)
+    {
+        $input = $request->all();
+        $id_pagu = $request->input('id_pagu');
+        $pagu = Pagu::FindOrFail($id_pagu);
+        $batasan_pagu = $pagu->batasan;
+        $id_bagian = $request->input('id_bagian');
+        $bagian = Bagian::FindOrFail($id_bagian);
+        $pagu_bagian = Pagu_Bagian::whereId_bagian($id_bagian)->whereId_pagu($id_pagu)->get();
+        if ($pagu_bagian->count()){
+            return redirect()->back()
+            ->with('pesan', 'Data Pagu Prodi/Bagian Sudah ada!');
+        }
+        $jumlah = $request->input('jumlah');
+        $total_pagu_bagian = Pagu_Bagian::whereId_pagu($id_pagu)->sum('jumlah');
+        $total_pagu_bagian = $total_pagu_bagian + $jumlah;
+        if($total_pagu_bagian > $batasan_pagu){
+            return redirect()->back()
+            ->with('pesan', 'Total Alokasi Pagu Bagian melebihi Alokasi Pagu RKAKL!');
+        }
+
+        Pagu_Bagian::create($input);
+        return redirect()->route('daftar_pagu_bagian'); 
+    }
+
+        public function edit_pagu_bagian($id)
+    {
+        $pagu_bagian = Pagu_Bagian::FindOrFail($id);   
+        $sbagian = Bagian::orderBy('id', 'dsc')->get();
+        $daftar_pagu = Pagu::latest()->get();
+        return view('pagu.edit_pagu_bagian', compact('pagu_bagian','sbagian','daftar_pagu'));
+    }
+
+    // public function update_pagu(Request $request, $id)
+    // {
+    //     $this->validate($request, [
+    //     'batasan' => 'required|numeric',
+    //     ]);
+    //     $pagu = Pagu::FindOrFail($id);
+    //     $input = $request->all();
+    //     $batasan = $request->input('batasan');
+    //     $pagu->batasan = $batasan;
+    //     $pagu->save();
+    //     return redirect()->route('daftar_pagu');
+    // }
+
+
+//////////////////////////////////////////PAGU OUTPUT/////////////////////////////////////////
+       public function detail_pagu_output($id)
+    {
+        $no = 1;
+        $pagu = Pagu_Output::FindOrFail($id);
+        $output = $pagu->ke_output->uraian;
+        $tahun = $pagu->ke_pagu->tahun;
+        $jpagu = $pagu->pagu;
+        $alokasi = $pagu->jumlah;
+        $sisa = $pagu->sisa;
+        $daftar_pagu_output = Pagu_Output::latest()->get();
+        return view('pagu.detail_pagu_output', compact('no','daftar_pagu_output','sisa','alokasi','jpagu','tahun','output','pagu'));
     }
 
 
@@ -74,6 +166,8 @@ class PaguController extends Controller
         $daftar_pagu_output = Pagu_Output::orderBy('id_pagu', 'dsc')->get();
         return view('pagu.daftar_pagu_output', compact('daftar_pagu_output', 'no'));
     }
+
+//////////////////////////////////////////PAGU KEGIATAN/////////////////////////////////////////
 
             public function daftar_pagu_kegiatan()
     {
@@ -101,7 +195,5 @@ class PaguController extends Controller
         }
         
         return redirect()->route('daftar_pagu_kegiatan'); 
-    }
-   
-
+    
 }

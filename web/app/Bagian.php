@@ -23,7 +23,7 @@ class Bagian extends Model
     public function user()
     {
         return $this->belongsTo('App\User', 'id');
-
+    }
     public function spj_up()
     {
         return $this->hasMany('App\SPJ_UP', 'id_bagian');

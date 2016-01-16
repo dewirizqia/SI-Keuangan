@@ -1,0 +1,1 @@
+Data Usulan {{ $prodi }} tahun {{ $tahun }} sudah ada.

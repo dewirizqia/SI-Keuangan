@@ -8,156 +8,6 @@
 @section('isi')
 <div class="panel panel-primary">
     <div class="panel-heading">
-        Rincian Anggaran RKA-KL Tahun: {{ $rkakl->pagu->tahun }}
-    </div>
-    <div class="panel-body">
-        Total = Rp. {{ number_format($total, 0, ',', '.')}}
-    </div>
-</div>
-
-<br>
-	@if (count($errors) > 0)
-	    <div class="alert alert-danger">
-	        <strong>Whoops!</strong> Sepertinya ada kesalahan.<br><br>
-	        <ul>
-	            @foreach ($errors->all() as $error)
-	                <li>{{ $error }}</li>
-	            @endforeach
-	        </ul>
-	    </div>
-	@endif
-
-<form role="form" method="POST" action="{{ route('nilai_rkakl', $rkakl->id) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
-	<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
-
-	<div class="form-group">
-        <label>Tahun</label>
-        <input class="form-control" name="tahun" value="{{ $rkakl->pagu->tahun }}" disabled>
-    </div>
-
-    <div class="form-group">
-    	<label>OUTPUT</label>
-    <select class="form-control" name="output" id="output">
-        <option value="">--</option>
-    	@foreach($output as $u_output)
-        <option value="{{ $u_output->id }}">{{ $u_output->uraian }}</option>
-        @endforeach
-    </select>
-    </div>
-
-    <div class="form-group">
-    	<label>SUB OUTPUT</label>
-     <select class="form-control" name="sub_output" id="sub_output">
-        <option value="">--</option>
-    	@foreach($suboutput as $u_suboutput)
-        <option value="{{ $u_suboutput->id }}" class="{{ $u_suboutput->id_output }}">{{ $u_suboutput->uraian }}</option>
-        @endforeach
-    </select>
-    </div>
-
-    <div class="form-group">
-    	<label>KOMPONEN INPUT</label>
-    <select class="form-control" name="input" id="input">
-        <option value="">--</option>
-    	@foreach($input as $u_input)
-        <option value="{{ $u_input->id }}" class="{{ $u_input->id_suboutput }}">{{ $u_input->uraian }}</option>
-        @endforeach
-    </select>
-    </div>
-
-    <div class="form-group">
-    	<label>SUB KOMPONEN INPUT</label>
-    <select class="form-control" name="sub_input" id="sub_input">
-        <option value="">--</option>
-    	@foreach($subinput as $u_subinput)
-        <option value="{{ $u_subinput->id }}" class="{{ $u_subinput->id_input }}">{{ $u_subinput->uraian }}</option>
-        @endforeach
-    </select>
-    </div>
-
-    <div class="form-group">
-    	<label>AKUN</label>
-    <select class="form-control" name="akun">
-        <option value="">--</option>
-    	@foreach($akun as $u_akun)
-        <option value="{{ $u_akun->id }}">({{ $u_akun->kode_akun }})  {{ $u_akun->uraian_akun }}</option>
-        @endforeach
-    </select>
-    </div>
-
-    <br>
-    <button type="submit" class="btn btn-primary">Tambah Detail</button>
-</form>
-
-<div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Daftar Detail RKA-KL Tahun:                            
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            @if ($detail->count())
-                            <div class="dataTable_wrapper">
-                                <table class="table table-striped table-bordered table-hover" id="usulan" class="display">
-                                    <thead>
-                                        <tr>
-                                            <th>Output</th>
-                                            <th>Sub Output</th>
-                                            <th>Input</th>
-                                            <th>Sub Input</th>
-                                            <th>Akun</th>
-                                            <th>Detail</th>
-                                            <th>Harga Satuan</th>
-                                            <th>Nominal</th>
-                                            <th>Jumlah</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Output</th>
-                                            <th>Sub Output</th>
-                                            <th>Input</th>
-                                            <th>Sub Input</th>
-                                            <th>Akun</th>
-                                            <th>Detail</th>
-                                            <th>Harga Satuan</th>
-                                            <th>Nominal</th>
-                                            <th>Jumlah</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        @foreach($detail as $data)
-                                        <tr class="odd gradeX">
-                                            <td title="{{ $data->sub_input->input->sub_output->output->uraian }}">{{ $data->sub_input->input->sub_output->output->kode_output }}</td>
-                                            <td title="{{ $data->sub_input->input->sub_output->uraian }}">{{ $data->sub_input->input->sub_output->kode_suboutput }}</td>
-                                            <td title="{{ $data->sub_input->input->uraian }}">{{ $data->sub_input->input->kode_input }}</td>
-                                            <td title="{{ $data->sub_input->uraian }}">{{ $data->sub_input->kode_subinput }}</td>
-                                            <td title="{{ $data->akun->uraian_akun }}">{{ $data->akun->kode_akun }}</td>
-                                            <td>{{ $data->detail }}</td>
-                                            <td>Rp. {{ number_format($data->harga_satuan, 0, ',', '.')}}</td>
-                                            <td>{{ $data->nominal }} {{ $data->satuan }}</td>
-                                            <td class="center">Rp. {{ number_format($data->jumlah_biaya, 0, ',', '.')}}</td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.table-responsive -->
-                            @else
-                                <div class="panel-heading"><h3><center>Data Detail RKA-KL Belum di Tambahkan</center></h3></div>
-                            @endif
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-
-
-<div class="panel panel-primary">
-    <div class="panel-heading">
         Rincian Anggaran RAB Tahun: {{ $tahun }}
     </div>
     <div class="panel-body">
@@ -169,7 +19,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Daftar Detail Usulan Tahun:                            
+                            Daftar Detail Usulan Tahun: {{$tahun}}                           
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -188,6 +38,10 @@
                                             <th>Harga Satuan</th>
                                             <th>Nominal</th>
                                             <th>Jumlah</th>
+                                            @if (Auth::user()->hasRole('subbag'))
+					                        <th>Aksi</th>
+					                        @else
+					                        @endif
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -202,6 +56,10 @@
                                             <th>Harga Satuan</th>
                                             <th>Nominal</th>
                                             <th>Jumlah</th>
+                                            @if (Auth::user()->hasRole('subbag'))
+					                        <th>Aksi</th>
+					                        @else
+					                        @endif
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -219,7 +77,24 @@
                                             <td>Rp. {{ number_format($rincian->harga_satuan, 0, ',', '.')}}</td>
                                             <td>{{ number_format($rincian->nominal, 0, ',', '.')}} {{ $rincian->satuan }}</td>
                                             <td class="center">Rp. {{ number_format($rincian->jumlah, 0, ',', '.')}}</td>
-                                            
+                                            @if (Auth::user()->hasRole('subbag'))
+					                        <td> 
+					                            <table> 
+					                            	<tr>
+						                            	<td><a href="{{ route('detail_usulan_edit', $rincian->id) }}" class="btn btn-primary">Edit</a></td>
+						                                <td>
+						                                    <form method="POST" action="{{ route('detail_usulan_delete', $rincian->id) }}" accept-charset="UTF-8" style="margin:0 auto">
+						                                        <input name="_method" type="hidden" value="DELETE">
+						                                        <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
+						                                        <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete">
+						                                    </form> 
+						                                </td>
+					                                </tr>
+					                            </table>
+					                        </td>
+					                        @else
+					                        </td>
+					                        @endif
                                             </tr>
                                             
                                             @endforeach

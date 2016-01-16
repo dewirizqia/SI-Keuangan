@@ -1,4 +1,4 @@
-@extends('home.keuangan')
+@extends('home.admin')
 
 @section('head')
 <link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
@@ -25,7 +25,7 @@
         <label>Tahun</label>
         <input class="form-control" name="tahun" value="{{ $usulan->tahun }}" disabled>
     </div>
-
+<!-- 
     <div class="form-group">
     	<label>OUTPUT</label>
     <select class="form-control" name="output" id="output">
@@ -54,11 +54,21 @@
         <option value="{{ $u_input->id }}" class="{{ $u_input->id_suboutput }}">{{ $u_input->uraian }}</option>
         @endforeach
     </select>
+    </div> -->
+
+    <div class="form-group">
+        <label>AKUN</label>
+    <select class="form-control" name="akun">
+        <option value="">--</option>
+        @foreach($akun as $u_akun)
+        <option value="{{ $u_akun->id }}">({{ $u_akun->kode_akun }})  {{ $u_akun->uraian_akun }}</option>
+        @endforeach
+    </select>
     </div>
 
     <div class="form-group">
     	<label>SUB KOMPONEN INPUT</label>
-    <select class="form-control" name="sub_input" id="sub_input">
+    <select class="form-control" name="sub_input">
         <option value="">--</option>
     	@foreach($subinput as $u_subinput)
         <option value="{{ $u_subinput->id }}" class="{{ $u_subinput->id_input }}">{{ $u_subinput->uraian }}</option>
@@ -66,20 +76,17 @@
     </select>
     </div>
 
-    <div class="form-group">
-    	<label>AKUN</label>
-    <select class="form-control" name="akun">
-        <option value="">--</option>
-    	@foreach($akun as $u_akun)
-        <option value="{{ $u_akun->id }}">({{ $u_akun->kode_akun }})  {{ $u_akun->uraian_akun }}</option>
-        @endforeach
-    </select>
-    </div>
-
+    
     <br>
     <button type="submit" class="btn btn-primary">Tambah Detail</button>
-    <button class="btn btn-primary"><a href="{{ route('status_usulan', $usulan->id) }}">Selesai</a></button>
-</form>
+    </form>
+    <form role="form" method="POST" action="{{ route('status_usulan', $usulan->id) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
+        <input type="hidden" name="_method" value="PATCH">
+        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+        <button class="btn btn-primary" type="submit" value="Selesai">Selesai</button>
+    </form>
+    
+
 <br>
 <br>
 

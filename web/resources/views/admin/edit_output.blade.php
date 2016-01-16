@@ -1,7 +1,18 @@
 @extends('@layout.base_admin')
 
 @section('isi')
-<br>    
+<br>
+@if($errors->count())
+    <div class="col-md-12 alert alert-danger" role="alert">
+        <ul>
+        @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    </div>
+    &nbsp
+@endif
+    
 <div class="panel panel-success">
     <div class="panel-heading">
         Edit Kode Output
@@ -9,8 +20,17 @@
     <div class="panel-body">
         <form role="form" method="POST" action="{{ route('update_output', $soutput->id) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
             <input type="hidden" name="_method" value="PATCH">
-            <!-- <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">   -->
-            {{ csrf_field() }}
+            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">  
+             <div class="form-group">
+                <label>Kegiatan</label>
+                <select class="form-control" name="id_kegiatan" id="kegiatan">
+                    <option value="{{ $soutput->kegiatan->id }}">{{ $soutput->kegiatan->sumberdana_kegiatan }}</option>
+                    <option value="">--</option>
+                    @foreach($skegiatan as $kegiatan)
+                    <option value="{{ $kegiatan->id }}">{{ $kegiatan->sumberdana_kegiatan }}</option>
+                    @endforeach
+                </select>
+            </div>  
             <div class="form-group">
                 <label class="col-md-2" background="">Kode Ouput</label>
                 <div  class="col-md-4">

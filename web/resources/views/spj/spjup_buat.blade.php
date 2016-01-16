@@ -1,4 +1,4 @@
-@extends('@layout.base_admin')
+@extends('home.keuangan')
 
 @section('isi')
 
@@ -7,6 +7,16 @@
         <h1 class="page-header">Tambah SPJ UP</h1>
     </div>
 </div>
+
+@if($errors->count())
+<div class="col-md-12 alert alert-danger" role="alert">
+    <ul>
+    @foreach($errors->all() as $error)
+        <li>{{ $error }}</li>
+    @endforeach
+    </ul>
+</div>
+@endif
 
 <div class="row">
         <div class="col-lg-12">

@@ -16,7 +16,9 @@ use App\Http\Requests\KegiatanRequest;
 use App\Http\Requests\OutputRequest;
 use App\Http\Requests\SubOutputRequest;
 use App\Http\Requests\InputRequest;
+use App\Http\Requests\InputEditRequest;
 use App\Http\Requests\SubInputRequest;
+use App\Http\Requests\SubInputEditRequest;
 use App\Http\Requests\AkunRequest;
 
 use App\Http\Requests;
@@ -100,7 +102,8 @@ public function edit_output($id)
 {
     $no = "1";
     $soutput = Output::FindOrFail($id);
-    return view('admin.edit_output', compact('soutput', 'no'));
+    $skegiatan = Kegiatan::orderBy('id', 'asc')->get();
+    return view('admin.edit_output', compact('soutput', 'no', 'skegiatan'));
 }
 public function update_output(OutputRequest $request, $id)
 {
@@ -202,7 +205,7 @@ public function edit_input($id)
     $sinput = Input::FindOrFail($id);
     return view('admin.edit_input', compact('sinput', 'no'));
 }
-public function update_input(InputRequest $request, $id)
+public function update_input(InputEditRequest $request, $id)
 {
     $sinput = Input::whereId($id)->firstOrFail();
     $input = $request->all();
@@ -252,7 +255,7 @@ public function edit_subinput($id)
     $ssubinput = Sub_Input::FindOrFail($id);
     return view('admin.edit_subinput', compact('ssubinput', 'no'));
 }
-public function update_subinput(SubInputRequest $request, $id)
+public function update_subinput(SubInputEditRequest $request, $id)
 {
     $ssubinput = Sub_Input::whereId($id)->firstOrFail();
     $input = $request->all();

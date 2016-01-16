@@ -66,7 +66,7 @@
                             <a href="#"><i class="glyphicon glyphicon-envelope"></i> Surat <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
 	                            <li>
-	                                <a href="{{ route('nominatif_buat') }}">Daftar Nominatif</a>
+	                                <a href="{{ route('nominatif_menu') }}">Daftar Nominatif</a>
 	                            </li>
 	                            <li>
 	                                <a href="{{ route('spjup_daftar') }}">SPJ UP</a>

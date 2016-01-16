@@ -1,13 +1,25 @@
 @extends('@layout.base_admin')
 
 @section('isi')
-<br>    
+<br>
+@if($errors->count())
+    <div class="col-md-12 alert alert-danger" role="alert">
+        <ul>
+        @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    </div>
+    &nbsp
+@endif
+    
 <div class="panel panel-success">
     <div class="panel-heading">
         Edit Kode Kegiatan
     </div>
     <div class="panel-body">
         <form role="form" method="POST" action="{{ route('update_kegiatan', $skegiatan->id) }}" accept-charset="UTF-8" enctype ="multipart/form-data"> 
+            <input type="hidden" name="_method" value="PATCH">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">    
             <div class="form-group">
                 <label class="col-md-2" background="">Kode Kegiatan</label>

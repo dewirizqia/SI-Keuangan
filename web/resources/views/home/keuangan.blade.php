@@ -6,7 +6,7 @@
                             <a href="#"><i class="glyphicon glyphicon-credit-card"></i> Pagu<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                             	<li>
-                                    <a href="{{ route('daftar_pagu') }}">Alokasi RKA-KL</a>
+                                    <a href="{{ route('daftar_pagu') }}">Pagu RKA-KL</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('daftar_pagu_output') }}">Pagu Output</a>
@@ -15,7 +15,7 @@
                                     <a href="{{ route('daftar_pagu_bagian') }}">Pagu Bagian</a>
                                 </li>
                                 <li>
-                                    <a href="#">Pagu Kegiatan</a>
+                                    <a href="{{ route('daftar_pagu_kegiatan') }}">Pagu Kegiatan</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

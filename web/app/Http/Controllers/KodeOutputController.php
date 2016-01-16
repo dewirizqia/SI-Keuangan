@@ -28,7 +28,7 @@ class KodeOutputController extends Controller
 {
       public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
 #kegiatan
 public function daftar_kegiatan()

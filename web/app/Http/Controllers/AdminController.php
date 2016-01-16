@@ -25,56 +25,9 @@ class AdminController extends Controller
 {
         public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
-
-
     
-    // User
-    public function daftar_user()
-    {
-        $no = "1";
-        $suser = User::orderBy('id', 'asc')->get();
-        return view('admin.daftar_user', compact('suser', 'no'));
-    }
-    public function buat_user()
-    {
-        $sbagian = Bagian::orderBy('id', 'asc')->get();
-        return view('admin.tambah_user', compact('sbagian'));
-    }
-    public function simpan_user(Request $request)
-    {
-        $input = $request->all();
-        $input['password'] = bcrypt($request->input('password'));
-        try 
-        {
-        $simpan_user = User::create($input);
-        $id_user = $simpan_user->id;
-        $input['id_user'] = $id_user;
-        Detail_User::create($input);
-        } 
-        catch (QueryException $e) {
-            return redirect()->route('buat_user');
-        }
-        
-        return redirect()->route('daftar_user'); 
-    }
-
-    public function edit_user($id)
-    {
-        $user = User::FindOrFail($id);
-        return view('admin.edit_user', compact('user'));
-    }
-
-    public function delete_user($id)
-    {
-        
-            $user = User::FindOrFail($id);
-            $user->delete();
-            
-            return redirect()->route('daftar_user');
-    }
-
     #Prodi/Subbagian
     public function daftar_bagian()
     {

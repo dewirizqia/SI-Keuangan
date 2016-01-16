@@ -2,6 +2,7 @@
 
 use App\Bagian;
 use App\Sub_Output;
+use App\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,10 @@ if (Schema::hasTable('Bagian'))
 }
 
 
-Route::get('/', ['as'=>'home','middleware' => 'auth', function () {return view('@layout.base_admin');}]);
+Route::get('/', ['as'=>'home','middleware' => 'admin', function () {return view('@layout.base_admin');}]);
 Route::get('/admin', function () {return view('home.admin');});
 Route::get('/keuangan', function () {return view('home.keuangan');});
+Route::get('/wd2', function () {return view('home.wd2');});
 Route::get('/dekan', function () {return view('home.dekan');});
 Route::get('/bpp', function () {return view('home.bpp');});
 Route::get('/ktu', function () {return view('home.ktu');});
@@ -34,7 +36,7 @@ Route::get('/ktu', function () {return view('home.ktu');});
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
-	// 'password' => 'Auth\PasswordController'
+	'password' => 'Auth\PasswordController'
 	]);
 
 // Password reset link request routes...
@@ -53,7 +55,7 @@ route::get('/mail', function() {
 	}
 		);
 });
-
+Route::get('export', ['as'=>'export', 'uses'=> 'ReportController@export']);
 
 // pagu
 Route::get('pagu/daftar', array('as'=>'daftar_pagu', 'uses'=> 'PaguController@daftar_pagu'));
@@ -129,7 +131,7 @@ Route::post('rkakl/daftar/{rkakl}/nilai', array('as'=>'nilai_rkakl', 'uses'=> 'U
 
 //bagian
 Route::get('bagian/daftar', array('as'=>'daftar_bagian', 'uses'=> 'AdminController@daftar_bagian'));
-// Route::get('bagian/buat', array('as'=>'tambah_bagian', 'uses'=> 'AdminController@buat_bagian'));
+Route::get('bagian/buat', array('as'=>'tambah_bagian', 'uses'=> 'AdminController@buat_bagian'));
 Route::post('bagian/daftar', array('as'=>'simpan_bagian', 'uses'=> 'AdminController@simpan_bagian'));
 Route::get('bagian/daftar/{id}/edit', array('as'=>'edit_bagian', 'uses'=> 'AdminController@edit_bagian'));
 Route::patch('bagian/daftar/{id}', array('as'=>'update_bagian', 'uses'=> 'AdminController@update_bagian'));
@@ -185,12 +187,12 @@ Route::get('sk/daftar', array('as'=>'daftar_sk', 'uses'=> 'AdminController@dafta
 Route::get('sk/buat', array('as'=>'buat_sk', 'uses'=> 'AdminController@buat_sk'));
 Route::post('sk/daftar', array('as'=>'simpan_sk', 'uses'=> 'AdminController@simpan_sk'));
 //user
-Route::get('user/daftar', array('as'=>'daftar_user', 'uses'=> 'AdminController@daftar_user'));
-Route::post('user/daftar', array('as'=>'simpan_user', 'uses'=> 'AdminController@simpan_user'));
-Route::get('user/buat', array('as'=>'buat_user', 'uses'=> 'AdminController@buat_user'));
-Route::get('user/daftar/{id}/edit', array('as'=>'edit_user', 'uses'=> 'AdminController@edit_user'));
-Route::patch('user/daftar/{id}', array('as'=>'update_user', 'uses'=> 'AdminController@update_user'));
-Route::delete('user/daftar/{id}', ['as'=>'delete_user', 'uses'=>'AdminController@delete_user']);
+Route::get('user/daftar', array('as'=>'daftar_user', 'uses'=> 'UserController@daftar_user'));
+Route::post('user/daftar', array('as'=>'simpan_user', 'uses'=> 'UserController@simpan_user'));
+Route::get('user/buat', array('as'=>'buat_user', 'uses'=> 'UserController@buat_user'));
+Route::get('user/daftar/{id}/edit', array('as'=>'edit_user', 'uses'=> 'UserController@edit_user'));
+Route::patch('user/daftar/{id}', array('as'=>'update_user', 'uses'=> 'UserController@update_user'));
+Route::delete('user/daftar/{id}', ['as'=>'delete_user', 'uses'=>'UserController@delete_user']);
 //SPJ UP
 Route::get('spj_up/daftar', array('as'=>'spjup_daftar', 'uses'=> 'SpjController@spjup_daftar'));
 Route::get('spj_up/buat', array('as'=>'spjup_buat', 'uses'=> 'SpjController@spjup_buat'));

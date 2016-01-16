@@ -30,7 +30,7 @@
 <br>
 <div class="panel panel-primary">
     <div class="panel-heading">
-        Daftar Usulan
+        Daftar RKA-KL
     </div>
     <div class="panel-body">
         @if ($dftr_rkakl->count())
@@ -43,7 +43,10 @@
 	                    <th>TAHUN</th>
 	                    <th>REVISI</th>
 	                    <th>DETAIL</th>
-	                    <th>Aksi</th>
+                        @if (Auth::user()->hasRole('subbag'))
+                        <th>Aksi</th>
+                        @else
+                        @endif
 	                </tr>
 	            </thead>
 	            <tfoot>
@@ -52,7 +55,10 @@
 	                    <th>TAHUN</th>
 	                    <th>REVISI</th>
 	                    <th>DETAIL</th>
-	                    <th>Aksi</th>
+                        @if (Auth::user()->hasRole('subbag'))
+                        <th>Aksi</th>
+                        @else
+                        @endif
 	                </tr>
 	            </tfoot>
             <tbody>
@@ -61,7 +67,9 @@
                         <td>{{ $no++ }}</td>
                         <td>{{ $data->pagu->tahun }}</td>
                         <td>{{ $data->revisi }}</td>
-                        <td><a href="{{ route('buat_rkakl', $data->id) }}">detail</a></td>
+                        <td><a href="{{ route('buat_rkakl', $data->id) }}" class="btn btn-success">detail</a>
+                        @if (Auth::user()->hasRole('subbag'))
+                        <a href="" class="btn btn-primary">Download</a></td>
                         <td> 
                             <table> 
                                 <td>
@@ -73,6 +81,11 @@
                                 </td>
                             </table>
                         </td>
+                        @else
+                        </td>
+                        @endif
+
+                        
                     </tr>
                 @endforeach
             </tbody>

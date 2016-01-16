@@ -3,9 +3,18 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
+use Illuminate\Contracts\Auth\Guard;
+
 
 class WDDekanMiddleware
 {
+    protected $auth;
+
+        public function __construct(Guard $auth)
+    {
+        $this->auth = $auth;
+    }
     /**
      * Handle an incoming request.
      *
@@ -15,6 +24,26 @@ class WDDekanMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if ($this->auth->guest())
+        {
+            if ($request->ajax())
+            {
+                return response('Unauthorized.', 401);
+            }
+            else
+            {
+                return redirect('/auth/login');
+                // return response('Unauthorized.', 401);
+                // return abort(401, 'Unauthorized.');
+            }
+        }
+
+        if (auth()->check() &&  Auth::user()->hasRole('wd2') OR Auth::user()->hasRole('dekan')) 
+        {
+            
+            return $next($request);
+
+        }
+        return abort(401, 'Unauthorized.');
     }
 }

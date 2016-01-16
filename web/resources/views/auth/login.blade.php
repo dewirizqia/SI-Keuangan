@@ -51,7 +51,9 @@
                              <a class="navbar-brand" ><img src="{{asset('user/images/logo.png') }}" alt="" width="90" height="90"/></a>
                                  
                                     <h3>SI Keuangan FT UNLAM</h3>
+                                    @section('keterangan')
                                     <p>Masukkan username dan password</p>
+                                    @show
 
                                 </div>
                                <br>
@@ -61,18 +63,18 @@
                                 </div>
                             </div>
                             <div class="form-bottom">
-                                                    @if (count($errors) > 0)
-                                                        <div class="alert alert-danger">
-                                                            <strong>Whoops!</strong> Sepertinya ada yang salah. <br><br>
-                                                            <ul>
-                                                                @foreach ($errors->all() as $error)
-                                                                    <li>{{ $error }}</li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </div>
-                                                    @endif
-                                
-                                    
+                                @if (count($errors) > 0)
+                                    <div class="alert alert-danger">
+                                        <strong>Whoops!</strong> Sepertinya ada yang salah. <a href="{{ url('/password/email') }}">Lupa Password?</a><br><br>
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+            
+                                @section('form')
                                 <form role="form" action="{{ url('/auth/login') }}" method="POST" class="login-form">
                                     {!! csrf_field() !!}
                                     <div class="form-group">
@@ -88,6 +90,7 @@
                                     </div>
                                     <button type="submit" class="btn">Login</button>
                                 </form>
+                                @show
                             </div>
                         </div>
                     </div>

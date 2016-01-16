@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class AkunRequest extends Request
+class SubInputEditRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class AkunRequest extends Request
     public function rules()
     {
         return [
-            'kode_akun'     => 'required',
-            'uraian_akun'   => 'required',
+            'kode_subinput' => 'required',
+            'uraian'        => 'required',
         ];
     }
 }

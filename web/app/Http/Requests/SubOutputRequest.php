@@ -24,7 +24,10 @@ class SubOutputRequest extends Request
     public function rules()
     {
         return [
-            //
+            'id_output'         => 'required',
+            'satuan'            => 'required',
+            'kode_suboutput'    => 'required',
+            'uraian'            => 'required',
         ];
     }
 }

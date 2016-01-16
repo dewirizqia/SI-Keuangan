@@ -24,7 +24,10 @@ class InputRequest extends Request
     public function rules()
     {
         return [
-            //
+            'output'        => 'required',
+            'id_suboutput'  => 'required',
+            'kode_input'    => 'required',
+            'uraian'        => 'required',
         ];
     }
 }

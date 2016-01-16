@@ -58,7 +58,7 @@ return [
     'not_in'               => 'The selected :attribute is invalid.',
     'numeric'              => 'The :attribute must be a number.',
     'regex'                => 'The :attribute format is invalid.',
-    'required'             => 'The :attribute field is required.',
+    'required'             => 'Kolom :attribute tidak boleh kosong.',
     'required_if'          => 'The :attribute field is required when :other is :value.',
     'required_with'        => 'The :attribute field is required when :values is present.',
     'required_with_all'    => 'The :attribute field is required when :values is present.',
@@ -104,6 +104,57 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+            'id_bagian'         => 'Sub Bagian/ Program Studi',
+            'output'            => 'Output',
+            'id_suboutput'      => 'Sub Input',
+            'id_input'          => 'Input',
+            'id_subinput'       => 'Sub Input',
+            'id_akun'           => 'Akun',
+        //SPJUP    
+            'untuk_pembayaran'  => 'Untuk Pembayaran',
+        //SPJLS    
+            'nama_kegiatan'     => 'Nama Kegiatan',
+            'nomor'             => 'Nomor',
+            'tahun'             => 'Tahun',
+        //Detail
+            'nama'              => 'Nama',
+            'jabatan'           => 'Jabatan',            
+            'satuan'            => 'Satuan',
+        //UP    
+            'volume'            => 'Volume',
+            'pajak'             => 'Pajak',
+        //LS
+            'jlh_hari'          => 'Jumlah Hari',
+            'pph'               => 'PPh',
+        //Belanja
+            'sub_output'        => 'Sub Output',
+            'input'             => 'Input',
+            'sub_input'         => 'Sub Input',
+            'MAK'               => 'Akun',
+            'no_tanda_bukti'    => 'No. Tanda Bukti',
+            'tgl'               => 'Tanggal',
+            'no_bku'            => 'No. BKU',
+            'penerima'          => 'Penerima',
+            'uraian'            => 'Uraian',
+            'jumlah'            => 'Jumlah',
+        //Kegiatan
+            'kode_kegiatan'        => 'Kode Kegiatan',
+            'sumberdana_kegiatan'  => 'Sumber Dana Kegiatan',
+        //Output
+            'id_kegiatan'       => 'Kegiatan',
+            'kode_output'       => 'Kode Output',
+            'uraian'            => 'Uraian',
+        //Suboutput
+            'id_output'         => 'Output',
+            'kode_suboutput'    => 'Kode Sub Output',
+        //Input
+            'kode_input'        => 'Kode Input',
+        //SubInput
+            'kode_subinput'     => 'Kode Sub Input',
+        //Akun
+            'kode_akun'         => 'Kode Akun',
+            'uraian_akun'       => 'Uraian Akun',
+    ],
 
 ];

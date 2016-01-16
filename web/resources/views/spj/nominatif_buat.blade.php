@@ -1,4 +1,4 @@
-@extends('@layout.base_admin')
+@extends('home.keuangan')
 
 @section('isi')
 
@@ -12,32 +12,31 @@
     <div class="col-lg-12">
         <div class="panel panel-primary">
             <div class="panel-body">
-                <form action="{{ route('spjls_tambah'}}" method="POST" enctype="multipart/form-data">
+                <form action="" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <input type="hidden" name="id_ls" value="{{$spjls->id}}">
+                    <input type="hidden" name="id_ls" value="">
                     <div class="form-group">
-                        <label class="col-md-1 control-label">Nama</label>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" name="nama" value="{{ $nominatif->nama }}">
+                        <label class="col-md-2 control-label">Nama</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="nama" >
                         </div><div></div>
-                        <label class="col-md-1 control-label">Jabatan</label>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" name="jabatan" alue="{{ $nominatif->jabatan }}">
-                        </div>
-                        <label class="col-md-1 control-label">Jumlah Hari</label>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" name="jlh_hari" alue="{{ $nominatif->jlh_hari }}">
-                        </div>
+                        <label class="col-md-2 control-label">Jabatan</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="jabatan" >
+                        </div>                        
                     </div>&nbsp
                     <div class="form-group">
-                        <label class="col-md-1 control-label">Satuan</label>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" name="satuan" alue="{{ $nominatif->satuan }}">
-                        </div><div></div>
-                        <label class="col-md-1 control-label">Terima</label>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" name="terima" alue="{{ $nominatif->terima }}">
+                        <label class="col-md-2 control-label">Jumlah Hari</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="jlh_hari" >
                         </div>
+                        <label class="col-md-2 control-label">Satuan</label>
+                        <div class="col-md-4">
+                            <div class="input-group ">
+                                <span class="input-group-addon" id="basic-addon1">Rp.</span>
+                                <input type="text" class="form-control" name="satuan">
+                            </div>
+                        </div><div></div> 
                     </div><br><br>
                     <div class="form-group">
                         <div class="col-md-6">
@@ -47,8 +46,7 @@
                             <input type="reset" value="Ulangi" class="form-control btn-warning">
                         </div>
                     </div>              
-                </form>
-                
+                </form>                
             </div>
         </div>
     </div>

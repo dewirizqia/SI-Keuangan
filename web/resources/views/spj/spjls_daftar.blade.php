@@ -22,10 +22,11 @@
                         <th>No.</th>
                         <th>Subbag/ Prodi</th>
                         <th>Kode Anggaran</th>
-                        <th>Rekapitulasi</th>
+                        <th>Kode Akun</th>
                         <th>Nomor SK</th>
+                        <th>Tanggal SK</th>
                         <th>Nama Kegiatan</th>
-                        <th>Detail & Daftar Nominatif</th>
+                        <th>Detail</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -33,23 +34,24 @@
                     @foreach($daftar_spjls as $spjls)
                         <tr>
                             <td>{{ $no++ }}</td>
-                            <td>{{ $spjls -> id_bagian}}</td>
+                            <td>{{ $spjls -> ke_bagian->detail}}</td>
                             <td>{{ $spjls -> kode_anggaran}}</td>
-                            <td>{{ $spjls -> rekapitulasi}}</td>
+                            <td>{{ $spjls -> kode_akun}}</td>
                             <td>{{ $spjls -> no_sk}}</td>
+                            <td>{{ $spjls -> tgl_sk}}</td>
                             <td>{{ $spjls -> nama_kegiatan}}</td>
                             <td>
-                                <a href="{{ route('spjls_detail', $spjls->id) }}" title="Lihat Detail" class="btn btn-link"><h4>Lihat/Tambah</h4></a>
+                                <a href="{{ route('spjls_detail', $spjls->id) }}" title="Lihat/Tambah Detail" class="btn btn-link">Lihat/Tambah</a>
                             </td>
                             <td style="text-align:center;vertical-align:middle">
                                 <table margin="0">
                                  <tr>
                                     <td>
-                                        <a href="" class="btn btn-primary">Edit</a>
+                                        <a href="{{ route('spjls_edit', $spjls->id) }}" class="btn btn-primary">Edit</a>
                                     </td>
                                     <td>&nbsp</td>
                                     <td>
-                                        <form method="POST" action="">
+                                        <form method="POST" action="{{ route('spjls_delete', $spjls->id) }}">
                                             <input name="_method" type="hidden" value="DELETE">
                                             <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
                                             <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete">

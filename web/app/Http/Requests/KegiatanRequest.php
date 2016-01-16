@@ -24,7 +24,9 @@ class KegiatanRequest extends Request
     public function rules()
     {
         return [
-            //
+            'kode_kegiatan'        => 'required',
+            'sumberdana_kegiatan'  => 'required',
+
         ];
     }
 }

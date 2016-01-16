@@ -6,7 +6,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Tambah Belanja</h1>
+        <h1 class="page-header">Edit Belanja</h1>
     </div>
 </div>
 
@@ -24,10 +24,10 @@
         <div class="col-lg-12">
             <div class="panel panel-primary">
                 <div class="panel-body">
-                    <form action="{{ route('belanja_simpan') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('belanja_update', $belanja->id) }}" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="_method" value="PATCH">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="id_user" value="{{ Auth::user()->id}}">
-                        <input type="hidden" name="status" value="diajukan">
+                        <input type="hidden" name="id_user" value="">
                         <div class="form-group">
                             <label class="col-md-1">Output</label>
                             <div class="col-md-3">
@@ -70,7 +70,8 @@
                             <label class="col-md-1">Akun</label>
                             <div class="col-md-3">
                                 <select name="MAK" class="form-control">
-                                    <option value="">-- Pilih  --</option>
+                                    <option value="{{ $mak->kode_akun }}">({{ $mak->kode_akun }})  {{ $mak->uraian_akun }}</option>
+                                    <option value="">-- Pilih  --</option>                                    
                                     @foreach($akun as $u_akun)
                                     <option value="{{ $u_akun->kode_akun }}">({{ $u_akun->kode_akun }})  {{ $u_akun->uraian_akun }}</option>
                                     @endforeach
@@ -84,40 +85,40 @@
                         <div class="form-group">
                             <label class="col-md-2">Nomor Tanda Bukti</label>
                             <div class="col-md-4">
-                                <input type="text" name="no_tanda_bukti" class="form-control">
+                                <input type="text" name="no_tanda_bukti" class="form-control" value="{{ $belanja->no_tanda_bukti }}">
                             </div>
                             <label class="col-md-2">Tanggal</label>
                             <div class="col-md-4">
-                                <input type="date" name="tgl" class="form-control">
+                                <input type="date" name="tgl" class="form-control" value="{{ $belanja->tgl }}">
                             </div>
                         </div>&nbsp
                         <div class="form-group">
                             <label class="col-md-2">Nomor BKU</label>
                             <div class="col-md-4">
-                                <input type="text" name="no_bku" class="form-control">
+                                <input type="text" name="no_bku" class="form-control" value="{{ $belanja->no_bku }}">
                             </div>
                             <label class="col-md-2">Penerima</label>
                             <div class="col-md-4">
-                                <input type="text" name="penerima" class="form-control">
+                                <input type="text" name="penerima" class="form-control" value="{{ $belanja->penerima }}">
                             </div>
                         </div>&nbsp
                         <div class="form-group">
                             <label class="col-md-2">Uraian</label>
                             <div class="col-md-4">
-                                <input type="text" name="uraian" class="form-control">
+                                <input type="text" name="uraian" class="form-control" value="{{ $belanja->uraian }}">
                             </div>
                             <label class="col-md-2">Jumlah</label>
                             <div class="col-md-4">
                                 <div class="input-group ">
                                     <span class="input-group-addon" id="basic-addon1">Rp.</span>
-                                    <input type="text" class="form-control" name="jumlah">
+                                    <input type="text" class="form-control" name="jumlah" value="{{ $belanja->jumlah }}">
                                 </div>
                             </div>
                         </div>&nbsp
                         
                         <hr>                        
                         <div class="form-group">
-                            <input type="submit" value="Simpan" class="form-control btn-primary">
+                            <input type="submit" value="Simpan" class="form-control btn-success">
                             <input type="reset" value="Ulangi" class="form-control btn-warning">
                         </div>                        
                     </form>

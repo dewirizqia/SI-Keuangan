@@ -24,7 +24,9 @@ class OutputRequest extends Request
     public function rules()
     {
         return [
-            //
+            'id_kegiatan'   => 'required',
+            'kode_output'   => 'required',
+            'uraian'        => 'required',
         ];
     }
 }

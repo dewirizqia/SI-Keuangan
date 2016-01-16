@@ -1,10 +1,14 @@
-@extends('@layout.base_admin')
+@extends('home.keuangan')
+
+@section('head')
+<link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
+@stop
 
 @section('isi')
 
 <div class="row">
     <div class="col-lg-12">
-        <h2 class="page-header">Tambah Daftar Nominatif</h2>
+        <h2 class="page-header">Detail SPJ LS</h2>
     </div>
 </div>
 
@@ -15,12 +19,10 @@
                 <form action="" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
-                        <label class="col-md-1">Subbag/ Prodi</label>
-                        <label class="col-md-3">: {{ $spjls->id_bagian}}</label>                        
-                        <label class="col-md-1">Kode Anggaran</label>
-                        <label class="col-md-3">: {{ $spjls->kode_anggaran}}</label>
-                        <label class="col-md-1">Rekapitulasi</label>
-                        <label class="col-md-3">: {{ $spjls -> rekapitulasi}}</label>
+                        <label class="col-md-2">Subbag/ Prodi</label>
+                        <label class="col-md-4">: {{ $spjls->ke_bagian->detail}}</label>                        
+                        <label class="col-md-2">Kode Anggaran</label>
+                        <label class="col-md-4">: {{ $spjls->kode_anggaran}}</label>
                     </div>&nbsp
                     <div class="form-group">
                         <label class="col-md-1">Nomor SK</label>
@@ -28,15 +30,15 @@
                         <label class="col-md-1">Nama Kegiatan</label>
                         <label class="col-md-3">: {{ $spjls -> nama_kegiatan}}</label>
                         <label class="col-md-1">Jumlah Penerima</label>
-                        <label class="col-md-3">: {{ $spjls -> jmlh_penerima}}</label>
+                        <label class="col-md-3">: {{ $jumlah_penerima}}</label>
                     </div>&nbsp
                     <div class="form-group">
                         <label class="col-md-1">Jumlah Kotor</label>
-                        <label class="col-md-3">: {{ $spjls -> jmlh_kotor}}</label>
-                        <label class="col-md-1">PPH</label>
-                        <label class="col-md-3">: {{ $spjls -> pph}}%</label>
+                        <label class="col-md-3">: Rp. {{ number_format($jumlah_kotor, 0, ',', '.') }}</label>
+                        <label class="col-md-1">PPh</label>
+                        <label class="col-md-3">: Rp. {{ number_format($total_pph, 0, ',', '.') }}</label>
                         <label class="col-md-1">Jumlah Bersih</label>
-                        <label class="col-md-3">: {{ $spjls -> jmlh_bersih}}</label>
+                        <label class="col-md-3">: Rp. {{ number_format($jumlah_bersih, 0, ',', '.') }}</label>
                     </div>&nbsp
                     <div class="form-group">
                         <label class="col-md-1">Keterangan</label>
@@ -48,37 +50,53 @@
     </div>
 </div>
 
+@if($errors->count())
+    <div class="col-md-12 alert alert-danger" role="alert">
+        <ul>
+        @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-primary">
             <div class="panel-body">
-                <form action="{{ route('spjls_tambah', $spjls->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('spjls_detail_simpan') }}" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="id_ls" value="{{$spjls->id}}">
                     <div class="form-group">
-                        <label class="col-md-1 control-label">Nama</label>
-                        <div class="col-md-3">
+                        <label class="col-md-2 control-label">Nama</label>
+                        <div class="col-md-4">
                             <input type="text" class="form-control" name="nama">
                         </div><div></div>
-                        <label class="col-md-1 control-label">Jabatan</label>
-                        <div class="col-md-3">
+                        <label class="col-md-2 control-label">Jabatan</label>
+                        <div class="col-md-4">
                             <input type="text" class="form-control" name="jabatan">
                         </div>
+                        
+                    </div>&nbsp
+                    <div class="form-group">
                         <label class="col-md-1 control-label">Jumlah Hari</label>
                         <div class="col-md-3">
                             <input type="text" class="form-control" name="jlh_hari">
                         </div>
-                    </div>&nbsp
-                    <div class="form-group">
                         <label class="col-md-1 control-label">Satuan</label>
                         <div class="col-md-3">
-                            <input type="text" class="form-control" name="satuan">
-                        </div><div></div>
-                        <label class="col-md-1 control-label">Terima</label>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" name="terima">
+                             <div class="input-group ">
+                                <span class="input-group-addon" id="basic-addon1">Rp.</span>
+                                <input type="text" class="form-control" name="satuan">
+                            </div>
                         </div>
-                    </div><br><br>
+                        <label class="col-md-1 control-label">PPh</label>
+                        <div class="col-md-3">
+                             <div class="input-group ">
+                                <input type="text" class="form-control" name="pph">
+                                <span class="input-group-addon" id="basic-addon1">%</span>
+                            </div>
+                        </div>&nbsp                        
                     <div class="form-group">
                         <div class="col-md-6">
                             <input type="submit" value="Tambahkan" class="form-control btn-primary">
@@ -97,29 +115,33 @@
                                 <th>Nama</th>
                                 <th>Jabatan</th>
                                 <th>Jumlah Hari</th>
-                                <th>Satuan</th>
-                                <th>Terima</th>
+                                <th>Satuan (Rp.)</th>
+                                <th>Terima (Rp.)</th>
+                                <th>PPh (Rp.)</th>
+                                <th>Terima Bersih (Rp.)</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($daftar_nominatif as $nominatif)
+                            @foreach($daftar_detail as $detail)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $nominatif->nama}}</td>
-                                    <td>{{ $nominatif->jabatan}}</td>
-                                    <td>{{ $nominatif->jlh_hari}}</td>
-                                    <td>{{ $nominatif->satuan}}</td>
-                                    <td>{{ $nominatif->terima}}</td>
+                                    <td>{{ $detail->nama}}</td>
+                                    <td>{{ $detail->jabatan}}</td>
+                                    <td>{{ $detail->jlh_hari}}</td>
+                                    <td>{{ number_format($detail->satuan, 0, ',', '.') }}</td>
+                                    <td>{{ number_format($detail->terima, 0, ',', '.') }}</td>
+                                    <td>{{ number_format($detail->pph, 0, ',', '.')  }}</td>
+                                    <td>{{ number_format($detail->terima_bersih, 0, ',', '.') }}</td>
                                     <td style="text-align:center;vertical-align:middle">
                                         <table margin="0">
                                             <tr>
                                                 <td>
-                                                    <a href="" class="btn btn-primary">Edit</a>
+                                                    <a href="{{ route('spjls_detail_edit', $detail->id) }}" class="btn btn-primary">Edit</a>
                                                 </td>
                                                 <td>&nbsp</td>
                                                 <td>
-                                                    <form method="POST" action="">
+                                                    <form method="POST" action="{{ route('spjls_detail_delete', $detail->id) }}">
                                                         <input name="_method" type="hidden" value="DELETE">
                                                         <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
                                                         <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete">
@@ -141,18 +163,5 @@
 @stop
 
 @section('script')
-<!-- jQuery -->
-<script src="{{ asset('css/bower_components/jquery/dist/jquery.min.js') }}"></script>
-<!-- DataTables JavaScript -->
-    <script src="{{ asset('css/bower_components/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js') }}"></script>
-
-    <script>
-    $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-                responsive: true
-        });
-    });
-    </script>
 
 @stop 

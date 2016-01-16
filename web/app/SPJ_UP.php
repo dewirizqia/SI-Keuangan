@@ -8,7 +8,7 @@ class SPJ_UP extends Model
 {
     protected $table = 'spj';
 
-    protected $fillable = ['id_bagian', 'id_subinput', 'id_akun', 'untuk_pembayaran'];
+    protected $fillable = ['id_bagian', 'id_subinput', 'id_akun', 'untuk_pembayaran', 'total', 'status'];
 
     public function ke_bagian()
     {

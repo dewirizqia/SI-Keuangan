@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TambahKolomTimestampSpj extends Migration
+class GantiKolomBelanja extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,9 @@ class TambahKolomTimestampSpj extends Migration
      */
     public function up()
     {
-        Schema::table('spj', function (Blueprint $table) {
-            $table->integer('id_akun')->after('id_subinput');
+        Schema::table('belanja', function (Blueprint $table) {
+            $table->dropColumn('no_buku');
+            $table->integer('no_bku')->after('tgl');
             $table->timestamps();
         });
     }
@@ -25,8 +26,9 @@ class TambahKolomTimestampSpj extends Migration
      */
     public function down()
     {
-        Schema::table('spj', function (Blueprint $table) {
-            $table -> dropColumn('id_akun');
+        Schema::table('belanja', function (Blueprint $table) {
+            $table->dropColumn('no_bku');
+            $table->integer('no_buku')->after('tgl');
             $table -> dropColumn('created_at');
             $table -> dropColumn('updated_at');
         });

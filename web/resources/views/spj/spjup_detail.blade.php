@@ -32,8 +32,12 @@
                 </div>&nbsp&nbsp
                 <div class="form-group">
                     <label class="col-md-2">Untuk Pembayaran</label>
-                    <div class="col-md-10">
+                    <div class="col-md-7">
                         <fieldset disabled><input type="text" class="form-control" value="{{ $spjup -> untuk_pembayaran}}"></fieldset>
+                    </div>
+                    <label class="col-md-1">Total (Rp.)</label>
+                    <div class="col-md-2">
+                        <fieldset disabled><input type="text" class="form-control" value="{{ number_format($spjup -> total, 0, ',', '.')}}"></fieldset>
                     </div>
                 </div>
             </div>
@@ -41,11 +45,21 @@
     </div>
 </div>
 
+@if($errors->count())
+    <div class="col-md-12 alert alert-danger" role="alert">
+        <ul>
+        @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-primary">
             <div class="panel-body">
-                <form action="{{ route('spjup_detail_simpan', $spjup->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('spjup_detail_simpan') }}" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                     <input type="hidden"  name="id_spj" value="{{ $spjup->id }}">
                     <div class="form-group">
@@ -60,8 +74,8 @@
                     </div>&nbsp
                     <div class="form-group">
                         <div class="col-md-4">
-                            <label class="control-label">Jumlah Jam</label>                        
-                            <input type="text" class="form-control" name="jumlah_jam">
+                            <label class="control-label">Volume</label>                        
+                            <input type="text" class="form-control" name="volume">
                         </div>
                         <div class="col-md-4">
                             <label class=" control-label">Satuan</label>
@@ -95,7 +109,7 @@
                                 <th>No.</th>
                                 <th>Nama</th>
                                 <th>Jabatan</th>
-                                <th>Jumlah Jam</th>
+                                <th>Volume</th>
                                 <th>Satuan (Rp.)</th>
                                 <th>Terima Kotor (Rp.)</th>
                                 <th>Pajak (Rp.)</th>
@@ -109,7 +123,7 @@
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $detail -> nama }}</td>
                                 <td>{{ $detail -> jabatan }}</td>
-                                <td>{{ $detail -> jumlah_jam }}</td>
+                                <td>{{ $detail -> volume }}</td>
                                 <td>{{ number_format($detail -> satuan, 0, ',', '.') }}</td>
                                 <td>{{ number_format($detail -> terima_kotor, 0, ',', '.') }}</td>
                                 <td>{{ number_format($detail -> pajak, 0, ',', '.') }}</td>
@@ -118,11 +132,11 @@
                                     <table margin="0">
                                      <tr>
                                         <td>
-                                            <a href="" class="btn btn-primary">Edit</a>
+                                            <a href="{{ route('spjup_detail_edit', $detail->id ) }}" class="btn btn-primary">Edit</a>
                                         </td>
                                         <td>&nbsp</td>
                                         <td>
-                                            <form method="POST" action="">
+                                            <form method="POST" action="{{ route('spjup_detail_delete', $detail->id ) }}">
                                                 <input name="_method" type="hidden" value="DELETE">
                                                 <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
                                                 <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete">

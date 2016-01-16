@@ -31,6 +31,7 @@
                                 <th>Kode Kegiatan</th>
                                 <th>Kode Akun</th>
                                 <th>Untuk Pembayaran</th>
+                                <th>Total (Rp.)</th>
                                 <th>Detail</th>
                                 <th>Aksi</th>
                             </tr>
@@ -40,13 +41,23 @@
                             <tr>   
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $spjup -> ke_bagian->detail }}</td>
-                                <td>{{ $spjup -> sub_input->input->sub_output->output->kode_output. "." .$spjup -> sub_input->input->sub_output->kode_suboutput. "." .$spjup -> sub_input->input->kode_input. "." .$spjup -> sub_input->kode_subinput }}</td>
+                                <td>{{ $spjup -> sub_input->input->sub_output->output->kode_output. "." .$spjup -> sub_input->input->sub_output->kode_suboutput. "." .$spjup -> sub_input->input->kode_input.$spjup -> sub_input->kode_subinput }}</td>
                                 <td>{{ $spjup -> akun->kode_akun }}</td>
                                 <td>{{ $spjup -> untuk_pembayaran }}</td>
+                                <td>{{ number_format($spjup -> total, 0, ',', '.') }}</td>
                                 <td>
-                                    <a href="{{ route('spjup_detail', $spjup->id) }}" title="Lihat/tambahkan detail" class="btn btn-link">
-                                        Lihat/Tambah
-                                    </a>
+                                   
+                                <table>
+                                <tr>
+                                <td>
+                                    <a href="{{ route('spjup_detail', $spjup->id) }}" class="btn btn-primary" class="btn btn-link">Lihat</a>
+                                </td>
+                                <td>&nbsp</td>
+                                <td>
+                                    <a href="{{ route('excelup', $spjup->id) }}" class="btn btn-success">Download</a>
+                                </td>
+                                </tr>
+                                </table>
                                 </td>
                                 <td style="text-align:center;vertical-align:middle">
                                     <table>

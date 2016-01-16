@@ -33,16 +33,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($daftar_belanja as $belanja)
                     <tr>
-                        <td>1</td>
-                        <td>Diajukan</td>
-                        <td>350</td>
-                        <td>1</td>
-                        <td>5742.002.002.051A</td>
-                        <td>521111</td>
-                        <td>Djawita/dkk</td>
-                        <td>Honorarium Pramubakti Program Studi Teknik Sipil Non Reg. FT Unlam</td>
-                        <td>5.950.000</td>
+                        <td>{{ $no++ }}</td>
+                        <td>{{ $belanja -> status }}</td>
+                        <td>{{ $belanja -> no_tanda_bukti }}</td>
+                        <td>{{ $belanja -> no_bku }}</td>
+                        <td>{{ $belanja -> Kode_MA }}</td>
+                        <td>{{ $belanja -> MAK }}</td>
+                        <td>{{ $belanja -> penerima }}</td>
+                        <td>{{ $belanja -> uraian }}</td>
+                        <td>{{ number_format($belanja -> jumlah, 0, ',', '.') }}</td>
                         <td style="text-align:center;vertical-align:middle">
                             <table margin="0">
                             <tr><td>
@@ -59,6 +60,7 @@
                             </table>                                    
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

@@ -16,7 +16,7 @@
                 <div class="panel-body">
                     <form action="" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="id_user" value="{{ csrf_token() }}">
+                        <input type="hidden" name="id_user" value="">
                         <div class="form-group">
                             <label class="col-md-1">Output</label>
                             <div class="col-md-3">
@@ -58,10 +58,10 @@
                             </div><div></div>
                             <label class="col-md-1">Akun</label>
                             <div class="col-md-3">
-                                <select name="akun" class="form-control">
+                                <select name="MAK" class="form-control">
                                     <option value="">-- Pilih  --</option>
                                     @foreach($akun as $u_akun)
-                                    <option value="{{ $u_akun->id }}">({{ $u_akun->kode_akun }})  {{ $u_akun->uraian_akun }}</option>
+                                    <option value="{{ $u_akun->kode_akun }}">({{ $u_akun->kode_akun }})  {{ $u_akun->uraian_akun }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -90,16 +90,6 @@
                                 <input type="text" name="penerima" class="form-control">
                             </div>
                         </div>&nbsp
-                        <!-- <div class="form-group">
-                            <label class="col-md-2">MAK</label>
-                            <div class="col-md-4">
-                                <input type="text" name="MAK" class="form-control">
-                            </div>
-                            <label class="col-md-2">Kode MA</label>
-                            <div class="col-md-4">
-                                <input type="text" name="Kode_MA" class="form-control">
-                            </div>
-                        </div>&nbsp -->
                         <div class="form-group">
                             <label class="col-md-2">Uraian</label>
                             <div class="col-md-4">
@@ -107,7 +97,10 @@
                             </div>
                             <label class="col-md-2">Jumlah</label>
                             <div class="col-md-4">
-                                <input type="text" name="jumlah" class="form-control">
+                                <div class="input-group ">
+                                    <span class="input-group-addon" id="basic-addon1">Rp.</span>
+                                    <input type="text" class="form-control" name="jumlah">
+                                </div>
                             </div>
                         </div>&nbsp
                         

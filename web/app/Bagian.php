@@ -24,4 +24,9 @@ class Bagian extends Model
     {
         return $this->hasMany('App\SPJ_UP', 'id_bagian');
     }
+
+    public function spj_ls()
+    {
+        return $this->hasMany('App\SPJ_LS', 'id_bagian');
+    }
 }

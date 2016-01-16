@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TambahKolomDetailSpjup extends Migration
+class TambahKolomDetailSpjup2 extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,7 @@ class TambahKolomDetailSpjup extends Migration
     public function up()
     {
         Schema::table('detail_spj', function (Blueprint $table) {
-            $table->timestamps();
-            $table->dropColumn('jumlah_jam');
+            $table->double('volume')->after('jabatan');
         });
     }
 
@@ -26,9 +25,7 @@ class TambahKolomDetailSpjup extends Migration
     public function down()
     {
         Schema::table('detail_spj', function (Blueprint $table) {
-            $table -> dropColumn('created_at');
-            $table -> dropColumn('updated_at');
-            $table->integer('jumlah_jam');
+            $table->dropColumn('volume');
         });
     }
 }

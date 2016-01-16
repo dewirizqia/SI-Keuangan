@@ -35,5 +35,6 @@ class BelanjaController extends Controller
     {
         return view('belanja.belanja_bagian_daftar');
     }
+    
 }
 

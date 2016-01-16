@@ -29,8 +29,12 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'keuangan' => \App\Http\Middleware\KeuanganMiddleware::class,
+        'wdekan' => \App\Http\Middleware\WDDekanMiddleware::class,
         'role' => Zizaco\Entrust\Middleware\EntrustRole::class,
         'permission' => Zizaco\Entrust\Middleware\EntrustPermission::class,
         'ability' => Zizaco\Entrust\Middleware\EntrustAbility::class,
+        
     ];
 }

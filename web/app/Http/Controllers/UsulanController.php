@@ -30,7 +30,7 @@ class UsulanController extends Controller
  
         public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('keuangan');
     }
 
     public function daftar_usulan()
@@ -125,7 +125,8 @@ class UsulanController extends Controller
         $detail = Detail_Usulan::whereId_usulan($usulan->id)->get();
         $d_subinput = Sub_Input::whereId($subkom)->firstOrFail();
         $d_akun = Akun::whereId($akun)->firstOrFail();
-        return view('usulan.buat_detail_usulan_bagian', compact('no','bagian','tahun', 'id_subkomp', 'id_akun', 'd_subinput', 'd_akun', 'detail', 'usulan'));
+        $total = Detail_Usulan::whereId_usulan($usulan->id)->sum('jumlah');
+        return view('usulan.buat_detail_usulan_bagian', compact('total','no','bagian','tahun', 'id_subkomp', 'id_akun', 'd_subinput', 'd_akun', 'detail', 'usulan'));
     }
 
     public function usulan_bagian_simpan(Request $request)
@@ -172,7 +173,7 @@ class UsulanController extends Controller
         return redirect()->route('daftar_usulan');
     }
 
-    //RKAKL
+    //////////////////////////////////////RKAKL///////////////////////////////////////////////////
     public function daftar_rkakl()
     {
         $no = "1";
@@ -209,13 +210,19 @@ class UsulanController extends Controller
         $no_subinput = 0;
         $output = Output::latest()->get();
         $rkakl = Rkakl::whereId($id)->firstOrFail();
+        $tahun = $rkakl->tahun;
         $id_rkakl = $rkakl->id;
         $detail = Detail_Rkakl::whereId_rkakl($id_rkakl)->get();
         $suboutput = Sub_Output::latest()->get();
         $input = Input::latest()->get();
         $subinput = Sub_Input::latest()->get();
         $akun = Akun::latest()->get();
-        return view('usulan.buat_rkakl', compact('detail','rkakl','output','databagian', 'suboutput','input', 'subinput', 'akun', 'no_suboutput', 'no_input', 'no_subinput', 'no_akun'));
+        $total = Detail_Rkakl::whereId_rkakl($id_rkakl)->sum('jumlah_biaya');
+        $usulan = Usulan::whereTahun($tahun);
+        // $id_usulan = $usulan->id;
+        // $detail_usulan = Detail_Usulan::whereId_usulan($id_usulan);
+        return $usulan;
+        // return view('usulan.buat_rkakl', compact('total','detail','rkakl','output','databagian', 'suboutput','input', 'subinput', 'akun', 'no_suboutput', 'no_input', 'no_subinput', 'no_akun', 'usulan', 'detail_usulan'));
     }
 
     public function buat_detail_rkakl($tahun, $subkom, $akun)

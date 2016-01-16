@@ -19,9 +19,14 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PaguRequest;
 
 class PaguController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('keuangan');
+    }
     public function daftar_pagu()
     {
         $no = "1";
@@ -79,7 +84,23 @@ class PaguController extends Controller
         $daftar_pagu = Pagu::orderBy('id', 'dsc')->get();
         $daftar_pagu_output = Pagu_Output::orderBy('id', 'dsc')->get();
         $daftar_pagu_kegiatan = Pagu_Kegiatan::orderBy('id', 'dsc')->get();
-        return view('pagu.daftar_pagu_kegiatan', compact('daftar_pagu','ssuboutput','daftar_pagu_output','sinput','ssubinput', 'no', 'daftar_pagu_kegiatan'));
+        $sakun = Akun::latest()->get();
+        return view('pagu.daftar_pagu_kegiatan', compact('daftar_pagu','ssuboutput','daftar_pagu_output','sinput','ssubinput', 'no', 'daftar_pagu_kegiatan', 'sakun'));
+    }
+
+    public function simpan_pagu_kegiatan(PaguKegiatanRequest $request)
+    {
+        $input = $request->all();
+        dd($input);
+        try 
+        {
+        Pagu_Kegiatan::create($input);
+        } 
+        catch (QueryException $e) {
+            return redirect()->route('daftar_pagu_kegiatan');
+        }
+        
+        return redirect()->route('daftar_pagu_kegiatan'); 
     }
    
 

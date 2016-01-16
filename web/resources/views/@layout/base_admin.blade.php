@@ -299,9 +299,6 @@
                         <li>
                             <a href="{{ route('daftar_bagian')}}"><i class="glyphicon glyphicon-list-alt"></i>Manajemen Bagian</a>
                         </li>
-                         <li>
-                            <a href="#"><i class="glyphicon glyphicon-list-alt"></i>Manajemen Bagian</a>
-                        </li>
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-sort"></i> Manajemen Kode Output<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -344,7 +341,10 @@
 		@section('isi')
             <div class="col-lg-12">
                         <h2>Selamat datang di halaman administrator</h2>
-                        <h3>Sistem Informasi Keuangan Universitas Lambung Mangkurat.</h3>
+                        
+                         <h3>Sistem Informasi Keuangan Universitas Lambung Mangkurat.</h3>
+                         
+                        
                     </div>
         @show
 

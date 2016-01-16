@@ -8,7 +8,7 @@ class Detail_User extends Model
 {
     protected $table = 'detail_user';
 
-    protected $fillable = [ 'id_user', 'jabatan', 'bagian_id'];
+    protected $fillable = [ 'id_user', 'jabatan'];
 
     public function user()
     {

@@ -1,11 +1,13 @@
 @extends('home.keuangan')
 <link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
+<script type="text/javascript" src="css/jquery-1.9.1.min.js"></script>
+<script src="css/jquery-calx-1.1.9.min.js"></script>
 @section('isi')
 <br>
 <br>
 <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
+                    <div class="panel panel-primary">
                         @if ($daftar_pagu_output->count())
                         <div class="panel-heading">
                             Daftar Pagu Output:                            
@@ -27,9 +29,9 @@
                 @foreach ($daftar_pagu_output as $pagu_output)
                     <tr>
                         <td>{{ $no++ }}</td>
-                        <td><a href="">{{ $pagu_output->pagu->tahun }}</a></td>
-                        <td><a href="">{{ $pagu_output->ke_output->uraian }}</a></td>
-                        <td><a href="">{{ $pagu_output->jumlah }}</a></td>
+                        <td>{{ $pagu_output->pagu->tahun }}</td>
+                        <td>{{ $pagu_output->ke_output->uraian }}</td>
+                        <td id="jumlah[{{$no++}}]" data-format="0,0[.]00">{{ $pagu_output->jumlah }}</td>
                     </tr>
                 @endforeach
             </tbody>
@@ -52,4 +54,10 @@
 
 @section('script')
 @parent
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('#calx').calx();
+    });
+    </script>
+
 @stop

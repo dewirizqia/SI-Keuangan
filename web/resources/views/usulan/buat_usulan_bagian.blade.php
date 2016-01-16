@@ -80,7 +80,11 @@
     <button type="submit" class="btn btn-primary">Tambah Detail</button>
     <button class="btn btn-primary"><a href="{{ route('status_usulan', $usulan->id) }}">Selesai</a></button>
 </form>
+<br>
+<br>
 
+<br>
+<br>
 <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">

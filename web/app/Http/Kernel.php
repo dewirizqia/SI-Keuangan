@@ -29,6 +29,7 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'super_admin' => \App\Http\Middleware\SuperAdminMiddleware::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'keuangan' => \App\Http\Middleware\KeuanganMiddleware::class,
         'wdekan' => \App\Http\Middleware\WDDekanMiddleware::class,

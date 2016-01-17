@@ -7,6 +7,16 @@
         Tambah Batasan Pagu Kegiatan
     </div>
     <div class="panel-body">
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> Sepertinya ada kesalahan.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form role="form" method="POST" action="" accept-charset="UTF-8" enctype ="multipart/form-data">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">    
             
@@ -42,18 +52,20 @@
                         @endforeach
                     </select>
                 </div>
-            </div>&nbsp
+            </div>
+            &nbsp
+            &nbsp
             <div class="form-group">
                 <label class="col-md-1">Akun</label>
                 <div  class="col-md-3">
                     <select class="form-control" name="id_akun" id="akun">
                         <option value="">--</option>
                         @foreach($sakun as $akun)
-                        <option value="{{ $akun->id }}" class="{{ $u_subinput->id_input }}">{{ $u_subinput->uraian }}</option>
+                        <option value="{{ $akun->id }}">{{ $akun->uraian }}</option>
                         @endforeach
                     </select>
                 </div>
-            </div>&nbsp
+            </div>
             <div class="form-group">
                 <label class="col-md-1">Tahun</label>
                 <div  class="col-md-3">

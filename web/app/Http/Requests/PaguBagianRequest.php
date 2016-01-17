@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class PaguRequest extends Request
+class PaguBagianRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,16 @@ class PaguRequest extends Request
     public function rules()
     {
         return [
-            'batasan' => 'required|numeric',
-            'tahun' => 'required|numeric'
+            'id_bagian' => 'required',
+            'id_pagu' => 'required',
+            'jumlah' => 'required',
         ];
     }
     public function attributes(){
         return [
-            'batasan' => 'Alokasi',
-            'tahun' => 'Tahun'
+            'id_bagian' => 'Prodi/Bagian',
+            'id_pagu' => 'Tahun',
+            'jumlah' => 'Alokasi',
             ];
     }
 }

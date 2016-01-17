@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\DetailUsulanRequest;
+use App\Http\Requests\UsulanRequest;
 use App\Http\Controllers\Controller;
-
+use Auth;
 //model
 use App\Pagu;
 use App\User;
@@ -30,13 +32,22 @@ class UsulanController extends Controller
  
         public function __construct()
     {
-        $this->middleware('keuangan');
+        $this->middleware('keuangan', ['except' =>[
+            'buat_detail_usulan_bagian',
+            'detail_usulan_bagian_simpan',
+            'usulan_bagian_simpan',
+            'daftar_usulan_bagian',
+            'delete_usulan_bagian',
+            'buat_usulan_bagian',
+            'nilai_detail',
+            'buat_detail'
+            ]]);
     }
 
     public function daftar_usulan()
     {
         $no = "1";
-        $dftrusulan = Usulan::latest()->get();
+        $dftrusulan = Usulan::whereStatus('usulan')->get();
         return view('usulan.daftar_usulan', compact('no','dftrusulan'));
     }
 
@@ -45,20 +56,10 @@ class UsulanController extends Controller
         $no = "1";
         $dftrusulan = Usulan::whereId_bagian($id_bagian)->get();
         $bagian = Bagian::whereId($id_bagian)->get();
+        // return $id_bagian;
         return view('usulan.daftar_usulan_bagian', compact('bagian','id_bagian','no', 'dftrusulan'));
     }
-    public function tambah_usulan_bagian(Request $request, $id_bagian)
-    {
-        $input = $request->all();
-        $simpan = Usulan::create([
-            'tahun' => $input['tahun'],
-            'revisi' => '0',
-            'status' => 'sementara',
-            'id_bagian' => $id_bagian,
-            ]);
-
-        return redirect()->route('daftar_usulan_bagian', compact('id_bagian'));
-    }
+    
     public function delete_usulan_bagian($id)
     {
         $dftrusulan = Usulan::whereId($id);
@@ -86,20 +87,21 @@ class UsulanController extends Controller
         $usulan = Usulan::whereId($id)->firstOrFail();
         $id_usulan = $usulan->id;
         $detail = Detail_Usulan::whereId_usulan($id_usulan)->get();
-        // $id_bagian = $usulan->id_bagian;
+        $id_bagian = $usulan->id_bagian;
         // $databagian = Bagian::whereId($id_bagian)->firstOrFail();
         $suboutput = Sub_Output::latest()->get();
         $input = Input::latest()->get();
         $subinput = Sub_Input::latest()->get();
         $akun = Akun::latest()->get();
-        return view('usulan.buat_usulan_bagian', compact('no','detail','usulan','output','databagian', 'suboutput','input', 'subinput', 'akun', 'no_suboutput', 'no_input', 'no_subinput', 'no_akun'));
+        // return $id_bagian;
+        return view('usulan.buat_usulan_bagian', compact('id_bagian', 'no','detail','usulan','output','databagian', 'suboutput','input', 'subinput', 'akun', 'no_suboutput', 'no_input', 'no_subinput', 'no_akun'));
     }
 
-    public function nilai_detail(Request $request, $usulan)
+    public function nilai_detail(Request $request, $id)
     {   
         $id_subkomp = $request->input('sub_input');
         $id_akun = $request->input('akun');
-        $usulan = Usulan::whereId($usulan)->firstOrFail();
+        $usulan = Usulan::whereId($id)->firstOrFail();
         $tahun = $usulan->tahun;
         $id_bagian = $usulan->id_bagian;
         return redirect()->route('buat_detail_usulan_bagian', compact('id_bagian','tahun', 'id_subkomp', 'id_akun'));
@@ -121,11 +123,13 @@ class UsulanController extends Controller
         // $suboutput = Sub_Output::latest()->get();
         // $d_input = Input::latest()->get();
         $no = 0;
-        $usulan = Usulan::whereTahun($tahun)->firstOrFail();
+        $usulan = Usulan::whereTahun($tahun)->whereId_bagian($bagian)->firstOrFail();
         $detail = Detail_Usulan::whereId_usulan($usulan->id)->get();
         $d_subinput = Sub_Input::whereId($subkom)->firstOrFail();
         $d_akun = Akun::whereId($akun)->firstOrFail();
         $total = Detail_Usulan::whereId_usulan($usulan->id)->sum('jumlah');
+        
+
         return view('usulan.buat_detail_usulan_bagian', compact('total','no','bagian','tahun', 'id_subkomp', 'id_akun', 'd_subinput', 'd_akun', 'detail', 'usulan'));
     }
 
@@ -145,33 +149,64 @@ class UsulanController extends Controller
     public function detail_usulan_bagian_simpan(Request $request, $bagian, $tahun, $subkom, $akun)
     {
         $input = $request->all();
-        $usulan = Usulan::whereTahun($tahun)->firstOrFail();
-        $simpan = Detail_Usulan::create([
-            'id_usulan' => $usulan->id,
-            'nominal' => $input['nominal'],
-            'satuan' => $input['satuan'],
-            'detail' => $input['detail'],
-            'harga_satuan' => $input['harga_satuan'],
-            'jumlah' => $input['jumlah'],
-            'jenis_komponen' => $input['jenis_komponen'],
-            'id_subinput' => $subkom,
-            'id_akun' => $akun,
-            ]);
+        $usulan = Usulan::whereTahun($tahun)->whereId_bagian($bagian)->firstOrFail();
+        $id_usulan = $usulan->id;
+        $input['id_usulan'] = $usulan->id;
+        $input['id_subinput'] = $subkom;
+        $input['id_akun'] = $akun;
+        Detail_Usulan::create($input);
+        // try 
+        // {
+        // Detail_Usulan::create($input);
+        // } 
+        // catch (QueryException $e) {
+        // return redirect()->route('buat_detail_usulan_bagian', compact('bagian', 'tahun', 'subkom', 'akun'));
+        // }
         // return $id_usulan;
         // dd($simpan_rincian);
         return redirect()->route('buat_detail_usulan_bagian', compact('bagian', 'tahun', 'subkom', 'akun'));
     }
 
 
-    //UBAH STATUS USULAN
-    //usulan
-    public function status_usulan($id)
+    public function detail_usulan_tahun($tahun)
     {
-        $usulan = Usulan::whereId($id)->firstOrFail();
-        $usulan->status = 'usulan';
-        $usulan->save();
-        return redirect()->route('daftar_usulan');
+        $no = 1;
+        $daftar_usulan = Usulan::whereTahun($tahun)->whereStatus('usulan')->with('detail_usulan')->get();
+        foreach ($daftar_usulan as $usulan) {
+            $id_usulan = $usulan->id;
+            $total_rab = Detail_Usulan::whereId_usulan($id_usulan)->sum('jumlah');
+            
+        }
+        
+        return view('usulan.detail_usulan_tahun', compact('no','daftar_usulan', 'total_rab','tahun'));
     }
+
+    public function detail_usulan_edit($id)
+{
+    $detail_usulan = Detail_Usulan::FindOrFail($id);
+    return view('usulan.edit_detail_usulan', compact('detail_usulan'));
+}
+    public function detail_usulan_update(DetailUsulanRequest $request, $id)
+{
+    $detail_usulan = Detail_Usulan::FindOrFail($id);
+    $tahun = $detail_usulan->usulan->tahun;
+    $input = $request->all();
+    $detail_usulan->update($input);
+    return redirect()->route('detail_usulan_tahun', compact('tahun'));
+    
+}
+    public function detail_usulan_delete($id)
+{
+    $detail_usulan = Detail_Usulan::FindOrFail($id);
+    $tahun = $detail_usulan->usulan->tahun;
+    $detail_usulan->delete();
+    return redirect()->route('detail_usulan_tahun', compact('tahun'));
+}
+
+
+    //////////////////////////////////////////UBAH STATUS USULAN////////////////////////////////////////////
+    //usulan
+    
 
     //////////////////////////////////////RKAKL///////////////////////////////////////////////////
     public function daftar_rkakl()
@@ -184,13 +219,28 @@ class UsulanController extends Controller
 
     public function tambah_rkakl(Request $request)
     {
+        $this->validate($request, [
+        'tahun' => 'required',
+        ]);
         $input = $request->all();
-        $simpan = Rkakl::create([
-            'id_pagu' => $input['id_pagu'],
-            'revisi' => '0',
-            ]);
-
-        return redirect()->route('daftar_rkakl');
+        $id_pagu = $request->input('tahun');
+        $rkakl = Rkakl::whereId_pagu($id_pagu)->get();
+        $pagu = Pagu::whereId($id_pagu)->firstOrFail();
+        $tahun = $pagu->tahun;
+        $usulan = Usulan::whereTahun($tahun)->whereStatus('disetujui');
+        if ($usulan->count()){
+            if ($rkakl->count()){
+                return redirect()->back()
+                ->with('pesan', 'Data RKA-KL Sudah ada!');
+            }
+            $input['revisi'] = '0';
+            $input['id_pagu'] = $id_pagu;
+            Rkakl::create($input);
+            return redirect()->route('daftar_rkakl');    
+        }
+        
+        return redirect()->back()
+            ->with('pesan', 'Data Usulan belum disetujui!');
     }
 
     public function nilai_rkakl(Request $request, $rkakl)
@@ -210,7 +260,9 @@ class UsulanController extends Controller
         $no_subinput = 0;
         $output = Output::latest()->get();
         $rkakl = Rkakl::whereId($id)->firstOrFail();
-        $tahun = $rkakl->tahun;
+        $id_pagu = $rkakl->id_pagu;
+        $pagu = Pagu::whereId($id_pagu)->firstOrFail();
+        $tahun = $pagu->tahun;
         $id_rkakl = $rkakl->id;
         $detail = Detail_Rkakl::whereId_rkakl($id_rkakl)->get();
         $suboutput = Sub_Output::latest()->get();
@@ -218,11 +270,13 @@ class UsulanController extends Controller
         $subinput = Sub_Input::latest()->get();
         $akun = Akun::latest()->get();
         $total = Detail_Rkakl::whereId_rkakl($id_rkakl)->sum('jumlah_biaya');
-        $usulan = Usulan::whereTahun($tahun);
-        // $id_usulan = $usulan->id;
-        // $detail_usulan = Detail_Usulan::whereId_usulan($id_usulan);
-        return $usulan;
-        // return view('usulan.buat_rkakl', compact('total','detail','rkakl','output','databagian', 'suboutput','input', 'subinput', 'akun', 'no_suboutput', 'no_input', 'no_subinput', 'no_akun', 'usulan', 'detail_usulan'));
+        $daftar_usulan = Usulan::whereTahun($tahun)->whereStatus('usulan')->with('detail_usulan')->get();
+        foreach ($daftar_usulan as $usulan) {
+            $id_usulan = $usulan->id;
+            $total_rab = Detail_Usulan::whereId_usulan($id_usulan)->sum('jumlah');
+            
+        }
+        return view('usulan.buat_rkakl', compact('total_rab','tahun','total','detail','rkakl','output','databagian', 'suboutput','input', 'subinput', 'akun', 'no_suboutput', 'no_input', 'no_subinput', 'no_akun', 'usulan', 'daftar_usulan'));
     }
 
     public function buat_detail_rkakl($tahun, $subkom, $akun)
@@ -247,8 +301,6 @@ class UsulanController extends Controller
         $pagu = Pagu::whereTahun($tahun)->firstOrFail();
         $id_pagu = $pagu->id;
         $rkakl = Rkakl::whereId_pagu($id_pagu)->firstOrFail();
-        ['id_rkakl', 'id_akun', 'id_subinput', 'detail', 
-        'volume', 'satuan', 'harga_satuan', 'jumlah_biaya'];
         $simpan = Detail_Rkakl::create([
             'id_rkakl' => $rkakl->id,
             'id_akun' => $akun,
@@ -266,6 +318,15 @@ class UsulanController extends Controller
         return redirect()->route('buat_detail_rkakl', compact('bagian', 'tahun', 'subkom', 'akun'));
     }
 
+    public function delete_rkakl($id)
+    {
+        
+        $rkakl = Rkakl::FindOrFail($id);
+        $rkakl->delete();
+        // return "tes";
+        return redirect()->route('daftar_rkakl');
+    }
+
     //REVISI
     public function daftar_revisi()
     {
@@ -273,15 +334,4 @@ class UsulanController extends Controller
         $daftar_revisi = Usulan::whereStatus('revisi')->latest()->get();
         return view('usulan.daftar_revisi', compact('no','daftar_revisi'));
     }
-
-    //USULAN PER BAGIAN
-    public function daftar_usulan_perbagian($id_bagian)
-    {
-        $no = "1";
-        $dftrusulan = Usulan::whereId_bagian($id_bagian)->get();
-        $bagian = Bagian::whereId($id_bagian)->get();
-        return view('usulan.daftar_usulan_perbagian', compact('bagian','id_bagian','no', 'dftrusulan'));
-    }
-
-
 }

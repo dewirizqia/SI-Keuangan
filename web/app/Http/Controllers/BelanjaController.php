@@ -47,6 +47,7 @@ class BelanjaController extends Controller
         return view('belanja.belanja_buat', compact('output', 'suboutput','input', 'subinput', 'akun'));
     }
 
+
     public function belanja_simpan(BelanjaRequest $request)
     {
         $qoutput = Output::FindOrFail($request['output']);
@@ -126,8 +127,7 @@ class BelanjaController extends Controller
         
         return redirect()->route('belanja_daftar');
     }
-    
-    
+        
     public function belanja_komentar($id)
     {
         $belanja = Belanja::FindOrFail($id);
@@ -149,7 +149,6 @@ class BelanjaController extends Controller
         
         return redirect()->route('belanja_komentar', compact('id'));
     }
-
 
 }
 

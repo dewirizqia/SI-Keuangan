@@ -28,7 +28,7 @@ class KodeOutputController extends Controller
 {
       public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('super_admin');
     }
 #kegiatan
 public function daftar_kegiatan()
@@ -273,7 +273,6 @@ public function delete_subinput($id)
     
         $ssubinput = Sub_Input::FindOrFail($id);
         $ssubinput->delete();
-        
         return redirect()->route('daftar_subinput');
 }
 #akun

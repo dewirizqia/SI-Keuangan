@@ -85,7 +85,7 @@ class AuthController extends Controller
 
         if (Auth::user()->hasRole('admin'))
         {
-            return redirect()->intended('/');
+            return redirect()->intended('admin');
         }
         elseif (Auth::user()->hasRole('subbag'))
         {
@@ -93,7 +93,7 @@ class AuthController extends Controller
         }
         elseif (Auth::user()->hasRole('bagian'))
         {
-            return redirect()->intended('admin');
+            return redirect()->intended('bagian');
         }
         elseif (Auth::user()->hasRole('wd2'))
         {

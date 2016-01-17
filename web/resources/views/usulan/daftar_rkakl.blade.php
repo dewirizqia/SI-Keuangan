@@ -5,12 +5,27 @@
 @section('isi')
 <br>
 <div class="panel panel-primary">
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <strong>Whoops!</strong> Sepertinya ada yang salah.<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    @if (Session::has('pesan'))
+         <div class="alert alert-info">
+            <h3>{{ Session::get('pesan') }}</h3>
+         </div>   
+    @endif
 <form role="form" method="POST" action="{{ route('tambah_rkakl') }}" accept-charset="UTF-8" enctype ="multipart/form-data">
     <!-- <input type="hidden" name="_token" value="<? php echo csrf_token(); ?>"> -->
     {{ csrf_field() }}
         <div class="form-group">
             <div class="col-md-3">
-               <select class="form-control" name="id_pagu">
+               <select class="form-control" name="tahun">
 			        <option value="">--</option>
 			    	@foreach($spagu as $pagu)
 			        <option value="{{ $pagu->id }}">{{ $pagu->tahun }}</option>
@@ -64,7 +79,7 @@
             <tbody>
                 @foreach($dftr_rkakl as $data)
                     <tr>
-                        <td>{{ $no++ }}</td>
+                        <td width="30px">{{ $no++ }}</td>
                         <td>{{ $data->pagu->tahun }}</td>
                         <td>{{ $data->revisi }}</td>
                         <td><a href="{{ route('buat_rkakl', $data->id) }}" class="btn btn-success">detail</a>
@@ -73,10 +88,10 @@
                         <td> 
                             <table> 
                                 <td>
-                                    <form method="POST" action="" accept-charset="UTF-8" style="margin:0 auto">
+                                   <form method="POST" action="{{route('delete_rkakl', $data->id)}}" accept-charset="UTF-8" style="margin:0 auto">
                                         <input name="_method" type="hidden" value="DELETE">
                                         <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
-                                        <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete">
+                                        <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete RKAKL">
                                     </form> 
                                 </td>
                             </table>

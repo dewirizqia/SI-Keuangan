@@ -40,7 +40,7 @@
 
                     </div>&nbsp    
                     <div class="col-md-6">
-                            <input type="submit" value="Export to Excel" class="form-control btn-success">
+                            <input type="submit" value="Download" class="form-control btn-success">
                     </div>                
                 </form>
 

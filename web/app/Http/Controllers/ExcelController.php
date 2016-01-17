@@ -18,8 +18,11 @@ use App\SPJ_LS_Detail;
 use App\SPJ_LS;
 use App\SPJ_UP;
 use App\SPJ_UP_Detail;
-
-
+use App\Usulan;
+use App\Bagian;
+use App\Belanja;
+use App\Pagu;
+use App\Pagu_Bagian;
 use Excel;
 
 class ExcelController extends Controller
@@ -53,21 +56,23 @@ $sheet->setWidth(array(
  
 ));
 
-
-
+$usulan = Usulan::whereId($id)->firstOrFail();
+$bagian = Bagian::whereId($usulan->id_bagian)->firstOrFail();
+$prodi = $usulan->tahun;
+$prodi = strtoupper($prodi);
 
 $sheet->row(1, array(
-'RINCIAN KERTAS KERJA UNIT SATKER'));
+'RENCANA ANGGARAN BELANJA'));
 
 
 $sheet->row(2, array(
 'UNIVERSITAS LAMBUNG MANGKURAT'));
 
 $sheet->row(3, array(
-'TAHUN ANGGARAN 2016'));
+'TAHUN ANGGARAN '.$prodi));
 
 $sheet->row(4, array(
-'UNIT SATKER : FAKULTAS TEKNIK'));
+$bagian->detail));
 
 $sheet->cells('A1:A4', function($cells) {
      $cells->setFont(array(
@@ -1048,6 +1053,244 @@ $sheet->appendRow($nos,array(
 $sheet->appendRow(array(
 '','','','NIP  19750719 200003 1 001'));
 
+$sheet->setFontFamily('Arial');
+
+// Font size
+$sheet->setFontSize(12);
+
+
+
+         });
+    })->export('xls');
+
+  }
+//--------------------------TUTUP-------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-------------------------------SPTB---------------------------------------
+           public function sptb()
+    {
+
+
+        Excel::create('SPTB', function($excel) {
+
+          // Set the title
+          $excel->setTitle('Expot to Excel');
+          // Chain the setters
+          $excel->setCreator('Evan Sumangkut')
+                ->setCompany('TI unlam');
+          // Call them separately
+          $excel->setDescription('A demonstration to change the file properties');
+ 
+          $excel->sheet('SPTB', function ($sheet) {
+ 
+
+
+$sheet->setWidth(array(
+    'A'     =>  6,
+    'B'     =>  4,
+    'C'     =>  15,
+    'D'     =>  10,
+    'E'     =>  15,
+    'f' => 30,
+    'g' => 10,
+    'h' => 10,
+    'i' => 20,
+    'j' => 15,
+    'k' => 15,
+    'l' => 15,
+    'm' => 15
+
+ 
+));
+
+
+
+
+
+$sheet->row(2, array(
+'SURAT PERNYATAAN TANGGUNG JAWAB BELANJA (SPTB)'));
+
+$sheet->mergeCells('a2:m2');
+
+$sheet->row(3, array(
+'DAFTAR ISIAN PENGGUNAAN ANGGARAN PNBP'));
+
+$sheet->mergeCells('a3:m3');
+$sheet->row(4, array(
+'Nomor SPTB          / PNP/2015'));
+$sheet->mergeCells('a4:m4');
+
+$sheet->cells('a2:a4', function($cells) {
+  $cells->setAlignment('center');
+   $cells->setFont(array(
+    'bold'       =>  true
+));
+});
+
+
+
+$sheet->row(6, array(
+'','','1. Kode Kantor','',': 400095'));
+
+$sheet->row(7, array(
+'','','2. Nama kantor / satker','',': Universitas Lambung Mangkurat / Teknik'));
+
+$sheet->row(8, array(
+'','','3. Tgl dan nomor DIPA PNBP','',': 15-04-2015 / 042.04.2.400095/2015'));
+
+$sheet->row(9, array(
+'','','4. Klasifikasi Anggaran','',': 5308.015.   ( Layanan Pendidikan )'));
+
+$sheet->row(11, array(
+'','','','Yang bertanda tangan dibawah ini atas nama Kuasa Pengguna Anggaran Satuan Kerja Universitas Lambung '));
+
+$sheet->row(12, array(
+'','','menyatakan bahwa saya bertanggungjawab secara formal dan material atas segala pengeluaran yang telah dibayar '));
+
+$sheet->row(13, array(
+'','','Pengeluaran kepada yang berhak menerima serta kebenaran perhitungan dan setoran pajak yang telah dipungut atas pembayaran tersebut'));
+
+$sheet->row(14, array(
+'','','dengan perincian sebagai berikut :'));
+
+
+
+
+
+
+$sheet->row(16, array(
+'NO.BKU.','NO','Kode Mata Anggaran','MAK','PENERIMA','URAIAN','TANDA BUKTI','','JUMLAH','PPN','PPh 21','PPh 22','PPh 23'));
+
+$sheet->mergeCells('g16:h16');
+
+$sheet->row(17, array(
+'SAS','','','','','','Tgl','Nomor'));
+
+$sheet->setBorder('a16:m17', 'thin');
+
+
+$pagu = Pagu::whereTahun(2015)->firstOrFail();
+$pagu_bagian = Pagu_Bagian::whereId_pagu($pagu->id)->firstOrFail();
+$belanja = Belanja::whereId_pagu_bagian($pagu_bagian->id)->orderBy('id', 'asc')->get();
+$no = 1;
+$nos = 18;
+$ambilan = Belanja::whereId_pagu_bagian($pagu_bagian->id)->orderBy('id', 'asc')->firstOrFail();
+$ns = $ambilan->MAK;
+foreach ($belanja as $blj) {
+  
+if($ns == $blj->MAK){
+
+$sheet->appendRow(array(
+$blj->no_bku,$no,$blj->Kode_MA,$blj->MAK,$blj->penerima,$blj->uraian,$blj->tgl,$blj->no_tanda_bukti,$blj->jumlah,'','','',''));
+
+$sheet->setBorder('a'.$nos.':m'.$nos, 'thin');
+
+$no++;
+$nos++;
+}
+else{
+$sheet->appendRow(array(
+'jumlah','','','','','','','','Rp. 4324118','Rp 272728','Rp -','Rp -','Rp 109.090'  ));
+$ns = $blj->MAK;
+$no++;
+$nos++;
+
+$sheet->appendRow(array(
+$blj->no_bku,$no,$blj->Kode_MA,$blj->MAK,$blj->penerima,$blj->uraian,$blj->tgl,$blj->no_tanda_bukti,$blj->jumlah,'','','',''));
+
+$sheet->setBorder('a'.$nos.':m'.$nos, 'thin');
+$no++;
+$nos++;
+}
+
+
+}
+
+$sheet->appendRow(array(
+'jumlah','','','','','','','','Rp. 4324118','Rp 272728','Rp -','Rp -','Rp 109.090'  ));
+$ns = $blj->MAK;
+$sheet->setBorder('a'.$nos.':m'.$nos, 'thin');
+$nos++;
+$sheet->appendRow(array(
+'jumlah','','','','','','','','Rp. 4324118','Rp 272728','Rp -','Rp -','Rp 109.090'  ));
+
+$sheet->setBorder('a'.$nos.':m'.$nos, 'thin');
+
+$nos = $nos + 2;
+$sheet->appendRow($nos,array(
+'Bukti-bukti pengeluaran anggaran dan asli setoran pajak (SSB/BPN) tersebut di atas disimpan oleh Pengguna Anggaran/Kuasa Pengguna Anggaran'  ));
+$nos++;
+$sheet->appendRow(array(
+'untuk kelengkapan administrasi dan pemeriksaan aparat pengawasan fungsional.'  ));
+$nos = $nos +2;
+$sheet->appendRow($nos,array(
+'Demikian surat pernyataan ini dibuat dengan sebenarnya.' ));
+$nos = $nos +2;
+$sheet->appendRow($nos,array(
+'','','','','Pejabat Pembuat Komitmen','','Banjarmasin,        Desember 2015' ));
+$nos++;
+$sheet->appendRow(array(
+'','','','','','','Bendahara Pengeluaran '  ));
+$nos = $nos +5;
+$sheet->appendRow($nos,array(
+'','','','','Muhammad Syaifullah, MT','','Pahrudin Ali Hamid, SE' ));
+
+$sheet->appendRow(array(
+'','','','','NIP. 197501302002121003','','NIP.  1975081820050110003'  )); 
 $sheet->setFontFamily('Arial');
 
 // Font size

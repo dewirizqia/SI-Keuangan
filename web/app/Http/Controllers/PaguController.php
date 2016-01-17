@@ -216,5 +216,7 @@ class PaguController extends Controller
         
         return redirect()->route('daftar_pagu_kegiatan'); 
     
-    }
+
+}
+
 }

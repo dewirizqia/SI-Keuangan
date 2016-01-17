@@ -46,7 +46,7 @@
                             <td>{{ $spjls -> no_sk}}</td>
                             <td>{{ $spjls -> tgl_sk}}</td>
                             <td>{{ $spjls -> nama_kegiatan}}</td>
-                            <td>
+                            <td style="text-align:center;vertical-align:middle">
                                 <table>
                                 <tr>
                                 <td>

@@ -30,9 +30,12 @@ Route::get('/ktu', function () {return view('home.ktu');});
 
 // Route::get('login', function () {return view('auth/login');});
 
-Route::get('/', 'Auth\AuthController@getLogin');
+
+ Route::get('/', 'Auth\AuthController@getLogin');
+
 // Route::post('auth/login', 'Auth\AuthController@postLogin');
 // Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
@@ -268,6 +271,7 @@ Route::get('excells/{id}', ['as'=>'excells', 'uses'=> 'ExcelController@ls']);
 Route::get('excelnominatif/{id}', ['as'=>'excelnominatif', 'uses'=> 'ExcelController@nominatif']);
 
 
-Route::get('export', ['as'=>'export', 'uses'=> 'ReportController@export']);
 
 Route::get('status/{id}', array('as'=>'status', 'uses'=> 'BelanjaController@status_belanja_ppk'));
+
+Route::get('excelsptb', ['as'=>'excelsptb', 'uses'=> 'ExcelController@sptb']);

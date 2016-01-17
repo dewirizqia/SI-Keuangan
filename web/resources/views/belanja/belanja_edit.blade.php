@@ -27,7 +27,7 @@
                     <form action="{{ route('belanja_update', $belanja->id) }}" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="_method" value="PATCH">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="id_user" value="">
+                        <input type="hidden" name="id_user" value="{{ Auth::user()->id }}">
                         <div class="form-group">
                             <label class="col-md-1">Output</label>
                             <div class="col-md-3">

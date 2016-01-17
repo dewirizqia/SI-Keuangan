@@ -179,6 +179,8 @@ Route::post('belanja/buat', array('as'=>'belanja_simpan', 'uses'=> 'BelanjaContr
 Route::get('belanja/edit/{id}', array('as'=>'belanja_edit', 'uses'=> 'BelanjaController@belanja_edit'));
 Route::patch('belanja/edit/{id}', array('as'=>'belanja_update', 'uses'=> 'BelanjaController@belanja_update'));
 Route::delete('belanja/daftar/{id}', array('as'=>'belanja_delete', 'uses'=> 'BelanjaController@belanja_delete'));
+Route::get('belanja/daftar/{id}/komentar', array('as'=>'belanja_komentar', 'uses'=> 'BelanjaController@belanja_komentar'));
+Route::post('belanja/daftar/{id}/komentar', array('as'=>'belanja_komentar_simpan', 'uses'=> 'BelanjaController@belanja_komentar_simpan'));
 //rekap belanja bagian
 Route::get('belanja/bagian/daftar', array('as'=>'belanja_bagian_daftar', 'uses'=> 'BelanjaController@belanja_bagian_daftar'));
 
@@ -205,6 +207,8 @@ Route::post('spj_up/daftar/{id}/detail', array('as'=>'spjup_detail_simpan', 'use
 Route::get('spj_up/detail/{id}/edit', array('as'=>'spjup_detail_edit', 'uses'=> 'SpjController@spjup_detail_edit'));
 Route::patch('spj_up/daftar/{id}/detail', array('as'=>'spjup_detail_update', 'uses'=> 'SpjController@spjup_detail_update'));
 Route::delete('spj_up/daftar/{id}/detail', ['as'=>'spjup_detail_delete', 'uses'=>'SpjController@spjup_detail_delete']);
+Route::get('spj_up/daftar/{id}/komentar', array('as'=>'spjup_komentar', 'uses'=> 'SpjController@spjup_komentar'));
+Route::post('spj_up/daftar/{id}/komentar', array('as'=>'spjup_komentar_simpan', 'uses'=> 'SpjController@spjup_komentar_simpan'));
 //SPJ LS dan Daftar Nominatif
 Route::get('spj_ls/daftar', array('as'=>'spjls_daftar', 'uses'=> 'SpjController@spjls_daftar'));
 Route::get('spj_ls/buat', array('as'=>'spjls_buat', 'uses'=> 'SpjController@spjls_buat'));
@@ -217,6 +221,7 @@ Route::post('spjls/daftar/{id}/detail', array('as'=>'spjls_detail_simpan', 'uses
 Route::get('spj_ls/detail/{id}/edit', array('as'=>'spjls_detail_edit', 'uses'=> 'SpjController@spjls_detail_edit'));
 Route::patch('spj_ls/daftar/{id}/detail', array('as'=>'spjls_detail_update', 'uses'=> 'SpjController@spjls_detail_update'));
 Route::delete('spj_ls/daftar/{id}/detail', ['as'=>'spjls_detail_delete', 'uses'=>'SpjController@spjls_detail_delete']);
-
+Route::get('spj_ls/daftar/{id}/komentar', array('as'=>'spjls_komentar', 'uses'=> 'SpjController@spjls_komentar'));
+Route::post('spj_ls/daftar/{id}/komentar', array('as'=>'spjls_komentar_simpan', 'uses'=> 'SpjController@spjls_komentar_simpan'));
 Route::get('nominatif', array('as'=>'nominatif_menu', 'uses'=> 'SpjController@nominatif_menu'));
 Route::post('nominatif/daftar', array('as'=>'nominatif_daftar', 'uses'=> 'SpjController@nominatif_daftar'));

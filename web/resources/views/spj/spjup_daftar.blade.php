@@ -33,6 +33,7 @@
                                 <th>Untuk Pembayaran</th>
                                 <th>Total (Rp.)</th>
                                 <th>Detail</th>
+                                <th>Komentar</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -49,6 +50,9 @@
                                     <a href="{{ route('spjup_detail', $spjup->id) }}" title="Lihat/tambahkan detail" class="btn btn-link">
                                         Lihat/Tambah
                                     </a>
+                                </td>
+                                <td style="text-align:center;vertical-align:middle">
+                                    <a href="{{ route('spjup_komentar', $spjup->id) }}" class="btn btn-success">Lihat</a>
                                 </td>
                                 <td style="text-align:center;vertical-align:middle">
                                     <table>

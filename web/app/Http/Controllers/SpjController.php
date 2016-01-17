@@ -23,6 +23,7 @@ use App\SPJ_UP_Detail;
 use App\SPJ_LS;
 use App\SPJ_LS_Detail;
 use App\Daftar_Nominatif;
+use App\Komentar;
 
 
 class SpjController extends Controller
@@ -167,6 +168,27 @@ class SpjController extends Controller
         return redirect()->route('spjup_detail', compact('id'));
     }
 
+    public function spjup_komentar($id)
+    {
+        $spjup = SPJ_UP::FindOrFail($id);
+        $daftar_komentar = Komentar::whereJenis('UP')->whereId_jenis($id)->latest()->get();
+        return view('spj.spjup_komentar', compact('spjup', 'daftar_komentar'));
+    }
+
+    public function spjup_komentar_simpan(Request $request)
+    {
+        $input = $request->all();
+        $id = $request['id_jenis'];        
+
+        try {
+            Komentar::create($input);
+        } 
+        catch (QueryException $e) {
+            return redirect()->route('spjup_komentar');
+        }
+        
+        return redirect()->route('spjup_komentar', compact('id'));
+    }
 
 //Halaman SPJ LS
     public function spjls_daftar()
@@ -332,6 +354,28 @@ class SpjController extends Controller
         $detail->delete();
         
         return redirect()->route('spjls_detail', compact('id'));
+    }
+
+    public function spjls_komentar($id)
+    {
+        $spjls = SPJ_LS::FindOrFail($id);
+        $daftar_komentar = Komentar::whereJenis('LS')->whereId_jenis($id)->latest()->get();
+        return view('spj.spjls_komentar', compact('spjls', 'daftar_komentar'));
+    }
+
+    public function spjls_komentar_simpan(Request $request)
+    {
+        $input = $request->all();
+        $id = $request['id_jenis'];        
+
+        try {
+            Komentar::create($input);
+        } 
+        catch (QueryException $e) {
+            return redirect()->route('spjls_komentar');
+        }
+        
+        return redirect()->route('spjls_komentar', compact('id'));
     }
 
     

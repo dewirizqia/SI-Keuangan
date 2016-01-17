@@ -77,7 +77,6 @@ Route::patch('admin/user/daftar/{id}', array('as'=>'update_user', 'uses'=> 'User
 Route::delete('admin/user/daftar/{id}', ['as'=>'delete_user', 'uses'=>'UserController@delete_user']);
 //bagian
 Route::get('admin/bagian/daftar', array('as'=>'daftar_bagian', 'uses'=> 'AdminController@daftar_bagian'));
-Route::get('admin/bagian/buat', array('as'=>'tambah_bagian', 'uses'=> 'AdminController@buat_bagian'));
 Route::post('admin/bagian/daftar', array('as'=>'simpan_bagian', 'uses'=> 'AdminController@simpan_bagian'));
 Route::get('admin/bagian/daftar/{id}/edit', array('as'=>'edit_bagian', 'uses'=> 'AdminController@edit_bagian'));
 Route::patch('admin/bagian/daftar/{id}', array('as'=>'update_bagian', 'uses'=> 'AdminController@update_bagian'));

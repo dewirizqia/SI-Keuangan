@@ -5,7 +5,7 @@
 @section('isi')
 
 <br>
-<form role="form" method="POST" action="{{ route('tambah_bagian') }}" accept-charset="UTF-8" enctype ="multipart/form-data">
+<form role="form" method="POST" action="{{ route('simpan_bagian') }}" accept-charset="UTF-8" enctype ="multipart/form-data">
     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
         <div class="form-group">
             <div class="col-md-3">

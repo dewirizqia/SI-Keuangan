@@ -247,12 +247,14 @@ Route::get('bagian/usulan/bagian/{id_bagian}/{tahun}/{subkom}/{akun}/buat', arra
 Route::post('bagian/usulan/bagian/{id_bagian}/{tahun}/{subkom}/{akun}/buat', array('as'=>'detail_usulan_bagian_simpan', 'uses'=> 'UsulanController@detail_usulan_bagian_simpan'));
 
 //rekap belanja
-Route::get('bagian/belanja/daftar', array('as'=>'belanja_bagian_daftar', 'uses'=> 'BelanjaController@belanja_bagian_daftar'));
+Route::get('bagian/belanja/{id}/daftar', array('as'=>'belanja_bagian_daftar', 'uses'=> 'BelanjaController@belanja_bagian_daftar'));
 Route::get('bagian/belanja/buat', array('as'=>'belanja_buat', 'uses'=> 'BelanjaController@belanja_buat'));
 Route::post('bagian/belanja/buat', array('as'=>'belanja_simpan', 'uses'=> 'BelanjaController@belanja_simpan'));
 Route::get('bagian/belanja/edit/{id}', array('as'=>'belanja_edit', 'uses'=> 'BelanjaController@belanja_edit'));
 Route::patch('bagian/belanja/edit/{id}', array('as'=>'belanja_update', 'uses'=> 'BelanjaController@belanja_update'));
 Route::delete('bagian/belanja/daftar/{id}', array('as'=>'belanja_delete', 'uses'=> 'BelanjaController@belanja_delete'));
+Route::get('bagian/belanja/daftar/{id}/komentar', array('as'=>'belanja_bagian_komentar', 'uses'=> 'BelanjaController@belanja_bagian_komentar'));
+
 
 ////////////////////////////////////EXPORT TO EXCEL///////////////////////////////////////////
 Route::get('excelrab/{id}', ['as'=>'excelrab', 'uses'=> 'ExcelController@rab']);

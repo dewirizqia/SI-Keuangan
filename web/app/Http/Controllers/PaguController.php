@@ -30,6 +30,12 @@ class PaguController extends Controller
     {
         $this->middleware('keuangan');
     }
+
+    public function pw_keuangan($id){
+        // $user = User::whereId($id)->firstOrFail();
+        return "tes";
+        return view('admin.pw_keuangan', compact('user'));
+    }
     public function daftar_pagu()
     {
         $no = "1";
@@ -196,5 +202,7 @@ class PaguController extends Controller
         
         return redirect()->route('daftar_pagu_kegiatan'); 
     
+
 }
+
 }

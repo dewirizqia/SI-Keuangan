@@ -1,7 +1,5 @@
 @extends('home.keuangan')
-@section('head')
-<link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
-@stop
+
 @section('head')
 <link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
 @stop
@@ -18,9 +16,12 @@
     <div class="col-lg-12">
         <div class="panel panel-primary">
             <div class="panel-body">
+                @if(Auth::user()->hasRole('bpp'))
                 <a href="{{ route('spjup_buat') }}" class="btn btn-primary">
                     <span class="glyphicon glyphicon-plus">&nbsp</span>Tambah SPJ
                 </a>
+                @else
+                @endif
                 <br><br>
                 <div class="dataTable_wrapper">
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -33,6 +34,7 @@
                                 <th>Untuk Pembayaran</th>
                                 <th>Total (Rp.)</th>
                                 <th>Detail</th>
+                                <th>Komentar</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -45,6 +47,7 @@
                                 <td>{{ $spjup -> akun->kode_akun }}</td>
                                 <td>{{ $spjup -> untuk_pembayaran }}</td>
                                 <td>{{ number_format($spjup -> total, 0, ',', '.') }}</td>
+
                                 <td style="text-align:center;vertical-align:middle">
                                    
                                 <table>
@@ -55,9 +58,13 @@
                                 <td>&nbsp</td>
                                 <td>
                                     <a href="{{ route('excelup', $spjup->id) }}" class="btn btn-success">Download</a>
+
                                 </td>
                                 </tr>
                                 </table>
+                                </td>
+                                <td style="text-align:center;vertical-align:middle">
+                                    <a href="{{ route('spjup_komentar', $spjup->id) }}" class="btn btn-success">Lihat</a>
                                 </td>
                                 <td style="text-align:center;vertical-align:middle">
                                     <table>

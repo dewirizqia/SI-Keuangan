@@ -6,7 +6,8 @@
 @stop
 @section('isi')
 <br>
-<br>    
+<br>
+@if(Auth::user()->hasRole('subbag'))
 <div class="panel panel-primary">
     <div class="panel-heading">
         Tambah Alokasi
@@ -50,8 +51,8 @@
         </form>
     </div>
 </div>
-
-
+@else
+@endif
 <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
@@ -71,7 +72,10 @@
                     <th>Alokasi</th>
                     <th>PAGU RKAKL</th>
                     <th>SISA PAGU</th>
+                    @if(Auth::user()->hasRole('subbag'))
                     <th>Aksi</th>
+                    @else
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -82,7 +86,8 @@
                         <td>Rp. {{ number_format($pagu->batasan, 0, ',', '.')}}</td>
                         <td>Rp. {{ number_format($pagu->alokasi, 0, ',', '.')}}</td>
                         <td>Rp. {{ number_format($pagu->sisa, 0, ',', '.')}}</td>
-                            <td> 
+                        @if(Auth::user()->hasRole('subbag'))
+                        <td> 
                             <table> 
                                 <td>
                                     <a href="{{ route('edit_pagu', $pagu->id)}}" class="btn btn-primary">Edit</a>
@@ -96,7 +101,9 @@
                                     </form> 
                                 </td>
                             </table>
-                            </td>
+                        </td>
+                        @else
+                        @endif
                     </tr>
                 @endforeach
             </tbody>

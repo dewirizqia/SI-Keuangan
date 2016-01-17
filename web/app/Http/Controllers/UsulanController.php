@@ -44,6 +44,44 @@ class UsulanController extends Controller
             ]]);
     }
 
+
+    public function ubahpassword_keuangan($id){
+        // $user = User::whereId($id)->firstOrFail();
+        return "tes";
+        return view('admin.pw_keuangan', compact('user'));
+    }
+    public function update_password_keuangan(UbahPasswordRequest $request)
+    {
+        $user = Auth::user();
+        $input = $request->all();
+
+        $password_lama = $request->input('password_lama');
+
+        if (!Hash::check($password_lama, $user->password))
+        {
+            return redirect()->route('ubahpassword')->with('error', 'Password lama yang anda masukkan salah.');
+        }
+
+        if ($request->input('password') == '')
+        {
+            $input['password'] = $user->password;
+        }
+        else
+        {
+            $input['password'] = bcrypt($request->input('password'));
+        }
+
+        try 
+        {
+        $user->update($input);
+        } 
+        catch (QueryException $e) {
+            return redirect()->route('ubah_password_user')->with('pesan', 'Username yang anda masukkan sudah ada dalam database.');
+        }
+
+        return redirect()->route('dashboard')->with('pesan', 'Password telah berhasil di ubah');
+        
+    }
     public function daftar_usulan()
     {
         $no = "1";
@@ -205,8 +243,24 @@ class UsulanController extends Controller
 
 
     //////////////////////////////////////////UBAH STATUS USULAN////////////////////////////////////////////
-    //usulan
     
+    public function status_usulan_wddekan($id)
+    {
+        $usulan = Usulan::FindOrFail($id);
+        $usulan->status = 'WD II/Dekan';
+        $usulan->save;
+        $id_bagian = $usulan->id_bagian;
+        $detail_bagian = User::whereId_bagian($id_bagian)->with('detail_user')->get();
+        Mail::send('emails.status_usulan_wddekan', function($message) use ($detail_bagian)
+            {
+                foreach ($detail_bagian as $user_bagian) {
+                $email = $user_bagian->ke_user->email;
+                $message->to($email)->from('19dewi@gmail.com', 'dewi')
+                ->subject('Usulan');
+                }    
+            });
+        return redirect()->back();
+    }
 
     //////////////////////////////////////RKAKL///////////////////////////////////////////////////
     public function daftar_rkakl()
@@ -333,5 +387,10 @@ class UsulanController extends Controller
         $no = "1";
         $daftar_revisi = Usulan::whereStatus('revisi')->latest()->get();
         return view('usulan.daftar_revisi', compact('no','daftar_revisi'));
+    }
+/////////////////////////////////////UBAH STATUS USULAN///////////////////////////////
+    public function status_usulan_wd($id)
+    {
+        
     }
 }

@@ -10,7 +10,7 @@ class Pagu_Kegiatan extends Model
 
     protected $fillable = ['id_subinput', 'id_akun','id_pagu', 'batasan', 'alokasi', 'sisa'];
 
-    public function pagu()
+    public function ke_pagu()
     {
     	return $this->belongsTo('App\Pagu', 'id_pagu');
     }

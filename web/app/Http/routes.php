@@ -30,9 +30,10 @@ Route::get('/ktu', function () {return view('home.ktu');});
 
 // Route::get('login', function () {return view('auth/login');});
 
-// Route::get('auth/login', 'Auth\AuthController@getLogin');
+ Route::get('/', 'Auth\AuthController@getLogin');
 // Route::post('auth/login', 'Auth\AuthController@postLogin');
 // Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

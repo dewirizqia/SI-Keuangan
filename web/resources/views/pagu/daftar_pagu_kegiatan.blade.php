@@ -122,7 +122,7 @@
                     @foreach ($daftar_pagu_kegiatan as $pagu_kegiatan)
                         <tr>
                             <td>{{ $no++ }}</td>
-                            <td>{{ $pagu_kegiatan->pagu->tahun }}</td>
+                            <td>{{ $pagu_kegiatan->ke_pagu->tahun }}</td>
                             <td>{{ $pagu_kegiatan->subinput->uraian }}</td>
                             <td>{{ $pagu_kegiatan->batasan }}</td>
                             <td>{{ $pagu_kegiatan->alokasi }}</td>

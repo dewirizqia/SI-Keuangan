@@ -45,7 +45,7 @@
                                 <td>{{ $spjup -> akun->kode_akun }}</td>
                                 <td>{{ $spjup -> untuk_pembayaran }}</td>
                                 <td>{{ number_format($spjup -> total, 0, ',', '.') }}</td>
-                                <td>
+                                <td style="text-align:center;vertical-align:middle">
                                    
                                 <table>
                                 <tr>

@@ -31,11 +31,6 @@ class BelanjaController extends Controller
         return view('belanja.belanja_daftar', compact('no', 'daftar_belanja'));
     }
 
-    public function belanja_bagian_daftar()
-    {
-        return view('belanja.belanja_bagian_daftar');
-    }
-
     public function belanja_buat()
     {
     	$output = Output::latest()->get();
@@ -148,6 +143,23 @@ class BelanjaController extends Controller
         }
         
         return redirect()->route('belanja_komentar', compact('id'));
+    }
+
+    public function belanja_bagian_daftar($id)
+    {
+        $no = "1";
+        $quser = User::whereId_bagian($id)->FirstOrFail();
+        $id_user = $quser->id;
+        $daftar_belanja = Belanja::whereId_user($id_user)->get();
+        
+        return view('belanja.belanja_bagian_daftar', compact('no', 'daftar_belanja'));
+    }
+
+    public function belanja_bagian_komentar($id)
+    {
+        $belanja = Belanja::FindOrFail($id);
+        $daftar_komentar = Komentar::whereJenis('belanja')->whereId_jenis($id)->latest()->get();
+        return view('belanja.belanja_bagian_komentar', compact('belanja', 'daftar_komentar'));
     }
 
 }

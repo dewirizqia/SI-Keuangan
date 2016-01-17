@@ -45,11 +45,7 @@
                         <td>{{ $usulan->status }}</td>
                         <td>{{ $usulan->revisi }}</td>
                         <td><button><a href="">detail</a></button>
-<<<<<<< HEAD
                         	<button><a href="{{ route('excelrab',$usulan->id) }}">Download</a></button>
-=======
-                        	<button><a href="{{ route('export') }}">Download</a></button>
->>>>>>> 1863e3393a358872d76847864e452220ce27d157
                         </td>
                         <td> 
                             <table> 

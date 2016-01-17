@@ -292,7 +292,14 @@
                     <ul class="nav" id="side-menu">
                     
                         <li>
+                            @if(Auth::user()->hasRole('admin'))
                             <a href="{{ route('dashboard_admin')}}"><i class="glyphicon glyphicon-home"></i> Dashboard</a>
+                            @elseif(Auth::user()->hasRole('bagian'))
+                            <a href="{{ route('dashboard_bagian')}}"><i class="glyphicon glyphicon-home"></i> Dashboard</a>
+                            @else
+                            <a href="{{ route('dashboard_keuangan')}}"><i class="glyphicon glyphicon-home"></i> Dashboard</a>
+                            @endif
+                            
                         </li>
                         @section('sidebar')
                         <li>

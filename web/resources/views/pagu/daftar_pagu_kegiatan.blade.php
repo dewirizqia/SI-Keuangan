@@ -1,5 +1,7 @@
 @extends('home.keuangan')
-
+@section('head')
+<link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
+@stop
 @section('isi')
 <br>
 @if(Auth::user()->hasRole('subbag'))
@@ -117,7 +119,10 @@
                         <th>NO</th>
                         <th>Tahun</th>
                         <th>Kode Kegiatan</th>
-                        <th>PAgu Kegiatan</th>
+                        <th>Pagu Kegiatan</th>
+                        <th>Alokasi</th>
+                        <th>Sisa</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -125,12 +130,13 @@
                         <tr>
                             <td>{{ $no++ }}</td>
                             <td>{{ $pagu_kegiatan->pagu->tahun }}</td>
-                            <td>{{ $pagu_kegiatan->subinput->uraian }}</td>
+                            <td>{{ $pagu_kegiatan->subinput->input->sub_output->output->kode_output }}.{{ $pagu_kegiatan->subinput->input->sub_output->kode_suboutput }}.{{ $pagu_kegiatan->subinput->input->kode_input }}.{{ $pagu_kegiatan->subinput->kode_subinput }}.{{ $pagu_kegiatan->akun->kode_akun }}</td>
                             <td>{{ $pagu_kegiatan->batasan }}</td>
                             <td>{{ $pagu_kegiatan->alokasi }}</td>
+                            <td>{{ $pagu_kegiatan->sisa }}</td>
                             <td> 
                                 <table> 
-                                    <td>
+                                    <tr><td>
                                         <a href="{{ route('edit_pagu_kegiatan', $pagu_kegiatan->id)}}" class="btn btn-primary">Edit</a>
                                     </td>
                                     <td>&nbsp</td>
@@ -141,6 +147,7 @@
                                             <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete">
                                         </form> 
                                     </td>
+                                    </tr>
                                 </table>
                             </td>
                         </tr>
@@ -156,6 +163,7 @@
 @stop
 
 @section('script')
+@parent
 <!-- script dropdown select -->
 <xscript type="text/javascript" src="{{ asset('css/js/dropdown/jquery.min.js') }}"></script>
 <xscript type="text/javascript" src="{{ asset('css/js/dropdown/zepto-1.0.1.js') }}"></script>

@@ -16,6 +16,7 @@ use App\Belanja;
 use App\User;
 use App\Detail_User;
 
+use Mail;
 use Auth;
 use App\Pagu;
 use App\Pagu_Bagian;
@@ -33,8 +34,8 @@ class BelanjaController extends Controller
         $no = "1";
         $daftar_belanja = Belanja::latest()->get();
         // $id_bagian = Auth::user()->nama;
-        
-        return view('belanja.belanja_daftar', compact('no', 'daftar_belanja'));
+        $pagu = Pagu::latest()->get();        
+        return view('belanja.belanja_daftar', compact('no', 'daftar_belanja', 'pagu'));
     }
 
     public function belanja_bagian_daftar()
@@ -137,11 +138,12 @@ class BelanjaController extends Controller
     public function status_belanja_subbag($id)
     {
         $belanja = Belanja::FindOrFail($id);
-        $belanja->status = 'subbag';
-        $belanja->save;
+        $status = "subbag";
+        $belanja->status = $status;
+        $belanja->save();
 
         $detail_bpp = Detail_User::whereJabatan('bpp')->get();
-        Mail::send('emails.status_belanja_subbag', function($message) use ($detail_bpp)
+        Mail::send('emails.status_belanja_subbag', [],function($message) use ($detail_bpp)
             {
                 foreach ($detail_bpp as $user_bpp) {
                 $email = $user_bpp->ke_user->email;

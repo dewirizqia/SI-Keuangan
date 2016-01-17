@@ -185,9 +185,9 @@ Route::get('keuangan/belanja/buat', array('as'=>'belanja_buat', 'uses'=> 'Belanj
 Route::post('keuangan/belanja/simpan', array('as'=>'simpan_belanja', 'uses'=> 'BelanjaController@simpan_belanja'));
 
 //ubah status
-Route::get('keuangan/belanja/daftar/{id}/subbag', array('as'=>'status_belanja_subbag', 'uses'=> 'BelanjaController@status_belanja_subbag'));
-Route::get('keuangan/belanja/daftar/{id}/bpp', array('as'=>'status_belanja_bpp', 'uses'=> 'BelanjaController@status_belanja_bpp'));
-Route::get('keuangan/belanja/daftar/{id}/ppk', array('as'=>'status_belanja_ppk', 'uses'=> 'BelanjaController@status_belanja_ppk'));
+Route::patch('keuangan/status/belanja/{id}/subbag', array('as'=>'status_belanja_subbag', 'uses'=> 'BelanjaController@status_belanja_subbag'));
+Route::get('keuangan/status/belanja/{id}/bpp', array('as'=>'status_belanja_bpp', 'uses'=> 'BelanjaController@status_belanja_bpp'));
+Route::get('keuangan/status/belanja/{id}/ppk', array('as'=>'status_belanja_ppk', 'uses'=> 'BelanjaController@status_belanja_ppk'));
 
 Route::get('keuangan/belanja/daftar/{id}/komentar', array('as'=>'belanja_komentar', 'uses'=> 'BelanjaController@belanja_komentar'));
 Route::post('keuangan/belanja/daftar/{id}/komentar', array('as'=>'belanja_komentar_simpan', 'uses'=> 'BelanjaController@belanja_komentar_simpan'));

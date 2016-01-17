@@ -16,6 +16,20 @@
     	<a href="{{ route('belanja_buat') }}" class="btn btn-primary">
             <span class="glyphicon glyphicon-plus">&nbsp</span>Tambah Belanja
         </a>
+        <form>
+            <label class="col-md-1">Tahun</label>
+            <div  class="col-md-3">
+                 <select class="form-control" name="tahun">
+                    <option value="">--</option>
+                    @foreach($pagu as $data)
+                    <option value="{{ $data->id }}" >{{ $data->tahun }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div  class="col-md-3">
+                <input type="submit" value="Export" class="form-control btn-primary">
+            </div>
+        </form>
         @else
         @endif
         <br><br>
@@ -57,7 +71,9 @@
                         <td>{{ number_format($belanja -> jumlah, 0, ',', '.') }}</td>
                         <td style="text-align:center;vertical-align:middle">
                             <a href="{{ route('belanja_komentar', $belanja->id) }}" class="btn btn-success">Lihat</a>
-                        </td>              
+                        </td>
+
+
                         <td style="text-align:center;vertical-align:middle">
                             <table margin="0">
                             <tr><td>
@@ -71,9 +87,9 @@
                                             </td>
                                             <td>&nbsp</td>
                                         @else
-                                            <a href="{{ route('status_belanja_subbag', $belanja->id) }}" class="btn btn-primary" disabled>Sesuai</a>
+                                            <fieldset disabled><a href="{{ route('status_belanja_subbag', $belanja->id) }}" class="btn btn-primary" value="sesuai" disabled>Sesuai</a></fieldset>
                                             </td>
-                                <td>&nbsp</td>
+                                        <td>&nbsp</td>
                                         @endif
                                             <a href="{{ route('belanja_edit', $belanja->id) }}" class="btn btn-primary">Edit</a>
                                             </td>

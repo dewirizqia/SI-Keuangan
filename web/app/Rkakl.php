@@ -14,4 +14,8 @@ class Rkakl extends Model
     {
     	return $this->belongsTo('App\Pagu', 'id_pagu');
     }
+    public function detail()
+    {
+    	return $this->HasMany('App\Detail_Rkakl');
+    }
 }

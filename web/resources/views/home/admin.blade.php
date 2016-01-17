@@ -5,7 +5,7 @@
                             <a href="{{ route('daftar_usulan_perbagian', Auth::user()->id_bagian ) }}"><i class="glyphicon glyphicon-folder-open"></i> Usulan Anggaran</span></a>
                         </li>
                         <li>
-                            <a href="{{ route('belanja_bagian_daftar') }}"><i class="glyphicon glyphicon-tasks"></i>Rekap Belanja</a>
+                            <a href="{{ route('belanja_bagian_daftar', Auth::user()->id_bagian ) }}"><i class="glyphicon glyphicon-tasks"></i>Rekap Belanja</a>
                         </li>
                         <li>
                             <a href=""><i class="glyphicon glyphicon-calendar"></i> Serapan Dana<span class="fa arrow"></span></a>

@@ -25,7 +25,7 @@
         <label>Tahun</label>
         <input class="form-control" name="tahun" value="{{ $usulan->tahun }}" disabled>
     </div>
-<!-- 
+
     <div class="form-group">
     	<label>OUTPUT</label>
     <select class="form-control" name="output" id="output">
@@ -54,7 +54,17 @@
         <option value="{{ $u_input->id }}" class="{{ $u_input->id_suboutput }}">{{ $u_input->uraian }}</option>
         @endforeach
     </select>
-    </div> -->
+    </div>
+
+    <div class="form-group">
+        <label>SUB KOMPONEN INPUT</label>
+    <select class="form-control" name="sub_input">
+        <option value="">--</option>
+        @foreach($subinput as $u_subinput)
+        <option value="{{ $u_subinput->id }}" class="{{ $u_subinput->id_input }}">{{ $u_subinput->uraian }}</option>
+        @endforeach
+    </select>
+    </div>
 
     <div class="form-group">
         <label>AKUN</label>
@@ -66,15 +76,6 @@
     </select>
     </div>
 
-    <div class="form-group">
-    	<label>SUB KOMPONEN INPUT</label>
-    <select class="form-control" name="sub_input">
-        <option value="">--</option>
-    	@foreach($subinput as $u_subinput)
-        <option value="{{ $u_subinput->id }}" class="{{ $u_subinput->id_input }}">{{ $u_subinput->uraian }}</option>
-        @endforeach
-    </select>
-    </div>
 
     
     <br>

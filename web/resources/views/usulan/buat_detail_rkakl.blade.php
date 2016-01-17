@@ -11,9 +11,12 @@
         Rincian Anggaran RKA-KL Tahun: {{ $rkakl->pagu->tahun }}
     </div>
     <div class="panel-body">
-	    Total = {{ $total}}
-	    <br>Akun: {{ $d_akun->uraian_akun }}, 
-	    <br>Total Sub Komponen Input {{ $d_subinput->uraian }} =
+	    Total = Rp. {{ number_format($total, 0, ',', '.')}}
+	    @if($total > 0)
+            <button class="btn btn-primary"><a href="{{ route('rkakl_selesai', $rkakl->id) }}">RKA-KL Selesai</a></button>           
+        @else
+        
+        @endif
 
     </div>
 </div>
@@ -66,7 +69,7 @@
 
         <div class="form-group">
             <label>Jumlah</label>
-            <input class="form-control" name="jumlah_biaya">
+            <input class="form-control" name="jumlah_biaya" id="jumlah_biaya" data-formula="$harga_satuan*$volume">
         </div>
         <br>
         <button type="submit" class="btn btn-primary">Tambah Detail</button>
@@ -147,7 +150,11 @@
 
 
 @section('script')
-
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#calx').calx();
+    });
+</script>
 <script type="text/javascript" class="init">
 $(document).ready(function() {
     $('#usulan').DataTable( {

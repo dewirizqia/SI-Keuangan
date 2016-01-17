@@ -11,6 +11,8 @@ use App\Input;
 use App\Sub_Input;
 use App\Akun;
 use App\Pagu;
+use App\Rkakl;
+use App\Detail_Rkakl;
 use App\Pagu_Kegiatan;
 use App\Pagu_Output;
 use App\Pagu_Bagian;
@@ -36,15 +38,22 @@ class PaguController extends Controller
         return "tes";
         return view('admin.pw_keuangan', compact('user'));
     }
+
     public function daftar_pagu()
     {
         $no = "1";
         $alokasi = "1";
         $spagu = Pagu::orderBy('tahun', 'desc')->get();
-        foreach ($spagu as $pagu) {
-            $alokasi = $pagu->alokasi;
-            $batasan = $pagu->batasan;
-        }
+        // foreach ($spagu as $pagu) {
+        //     $id_pagu = $pagu->id;
+        //     $rkakl = Rkakl::whereId_pagu($id_pagu)->get();
+        //     $id_rkakl = $rkakl->id;
+        //     $total = Detail_Rkakl::whereId_rkakl($id_rkakl)->sum('jumlah');
+        // }
+        // return $spagu;
+        
+        
+        // return view('tes', compact('spagu', 'total'));
         return view('pagu.daftar_pagu', compact('user','spagu', 'no', 'alokasi'));
     }
 
@@ -57,6 +66,7 @@ class PaguController extends Controller
             return redirect()->back()
             ->with('pesan', 'Data Pagu Sudah ada!');
         }
+        $input['sisa'] = $request->input('batasan');
         Pagu::create($input);
         return redirect()->route('daftar_pagu'); 
     }
@@ -195,7 +205,7 @@ class PaguController extends Controller
     public function simpan_pagu_kegiatan(PaguKegiatanRequest $request)
     {
         $input = $request->all();
-        dd($input);
+        // dd($input);
         try 
         {
         Pagu_Kegiatan::create($input);

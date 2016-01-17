@@ -66,11 +66,12 @@ class BagianController extends Controller
     }
 
     //USULAN PER BAGIAN
-    public function daftar_usulan_perbagian($id_bagian)
+    public function daftar_usulan_perbagian($id)
     {
         $no = "1";
-        $dftrusulan = Usulan::whereId_bagian($id_bagian)->get();
-        $bagian = Bagian::whereId($id_bagian)->get();
+        $dftrusulan = Usulan::whereId_bagian($id)->get();
+        $bagian = Bagian::whereId($id)->get();
+        $id_bagian = $id;
         return view('usulan.daftar_usulan_perbagian', compact('bagian','id_bagian','no', 'dftrusulan'));
     }
     public function tes(UsulanRequest $request, $id){

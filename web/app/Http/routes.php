@@ -165,6 +165,7 @@ Route::post('keuangan/rkakl/detail/daftar/{tahun}/{subkom}/{akun}/buat', array('
 Route::get('keuangan/rkakl/daftar/{rkakl}/buat', array('as'=>'buat_rkakl', 'uses'=> 'UsulanController@buat_rkakl'));
 Route::post('keuangan/rkakl/daftar/{rkakl}/nilai', array('as'=>'nilai_rkakl', 'uses'=> 'UsulanController@nilai_rkakl'));
 
+Route::get('keuangan/rkakl/selesai/{id}', array('as'=>'rkakl_selesai', 'uses'=> 'UsulanController@rkakl_selesai'));
 //Usulan
 Route::get('keuangan/usulan/daftar', array('as'=>'daftar_usulan', 'uses'=> 'UsulanController@daftar_usulan'));
 Route::post('keuangan/usulan/daftar', array('as'=>'tambah_usulan', 'uses'=> 'UsulanController@tambah_usulan'));
@@ -185,6 +186,7 @@ Route::get('keuangan/belanja/buat', array('as'=>'belanja_buat', 'uses'=> 'Belanj
 Route::post('keuangan/belanja/simpan', array('as'=>'simpan_belanja', 'uses'=> 'BelanjaController@simpan_belanja'));
 
 //ubah status
+Route::patch('keuangan/status/usulan/{id}/subbag', array('as'=>'status_usulan_subbag', 'uses'=> 'UsulanController@status_usulan_subbag'));
 Route::patch('keuangan/status/belanja/{id}/subbag', array('as'=>'status_belanja_subbag', 'uses'=> 'BelanjaController@status_belanja_subbag'));
 Route::get('keuangan/status/belanja/{id}/bpp', array('as'=>'status_belanja_bpp', 'uses'=> 'BelanjaController@status_belanja_bpp'));
 Route::get('keuangan/status/belanja/{id}/ppk', array('as'=>'status_belanja_ppk', 'uses'=> 'BelanjaController@status_belanja_ppk'));

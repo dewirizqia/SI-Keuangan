@@ -9,13 +9,19 @@
         <h1 class="page-header">Daftar Belanja</h1>
     </div>
 </div>
+@if(Auth::user()->hasRole('subbag'))
+<div class="row">
+    <div class="col-lg-12">
+        <a href="{{ route('belanja_buat') }}" class="btn btn-primary">
+            <span class="glyphicon glyphicon-plus">&nbsp</span>Tambah Belanja
+        </a>
+    </div>
+</div><br>
+@endif
 
 <div class="panel panel-primary">
     <div class="panel-body">	
-        @if(Auth::user()->hasRole('subbag'))
-    	<a href="{{ route('belanja_buat') }}" class="btn btn-primary">
-            <span class="glyphicon glyphicon-plus">&nbsp</span>Tambah Belanja
-        </a>
+        @if(Auth::user()->hasRole('subbag'))    
         <form>
             <label class="col-md-1">Tahun</label>
             <div  class="col-md-3">
@@ -27,12 +33,12 @@
                 </select>
             </div>
             <div  class="col-md-3">
-                <input type="submit" value="Export" class="form-control btn-primary">
+                <input type="submit" value="Download" class="form-control btn-success">
             </div>
         </form>
         @else
         @endif
-        <br><br>
+        <br><br><br>
         <div class="dataTable_wrapper">
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
@@ -75,8 +81,9 @@
 
 
                         <td style="text-align:center;vertical-align:middle">
-                            <table margin="0">
-                            <tr><td>
+                            <table margin="0" >
+                            <tr>
+                                <td>
                                     @if(Auth::user()->hasRole('subbag'))
                                         @if($belanja->status = 'diajukan')
                                             <form role="form" method="POST" action="{{ route('status_belanja_subbag', $belanja->id) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
@@ -84,23 +91,24 @@
                                                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                                                 <button class="btn btn-primary" type="submit" value="Sesuai">Sesuai</button>
                                             </form>
-                                            </td>
-                                            <td>&nbsp</td>
+                                        </td>
+                                        <td>&nbsp</td>
                                         @else
                                             <fieldset disabled><a href="{{ route('status_belanja_subbag', $belanja->id) }}" class="btn btn-primary" value="sesuai" disabled>Sesuai</a></fieldset>
                                             </td>
                                         <td>&nbsp</td>
                                         @endif
+                                            <td>
                                             <a href="{{ route('belanja_edit', $belanja->id) }}" class="btn btn-primary">Edit</a>
                                             </td>
-                                            <td>&nbsp</td>
+                                                <td>&nbsp</td>
                                             <td>
-                                    <form method="POST" action="{{ route('belanja_delete', $belanja->id) }}" accept-charset="UTF-8" style="margin:0 auto">
-                                        <input name="_method" type="hidden" value="DELETE">
-                                        <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
-                                        <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete">
-                                    </form> 
-                            </td>
+                                                <form method="POST" action="{{ route('belanja_delete', $belanja->id) }}" accept-charset="UTF-8" style="margin:0 auto">
+                                                    <input name="_method" type="hidden" value="DELETE">
+                                                    <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
+                                                    <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete">
+                                                </form> 
+                                            </td>
                                     @elseif(Auth::user()->hasRole('bpp'))
                                         @if($belanja->status = 'subbag')
                                             <form role="form" method="POST" action="{{ route('status_belanja_bpp', $belanja->id) }}" accept-charset="UTF-8" enctype ="multipart/form-data">

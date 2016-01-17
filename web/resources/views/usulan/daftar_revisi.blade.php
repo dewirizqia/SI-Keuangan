@@ -83,7 +83,10 @@
 	                    <th>STATUS</th>
 	                    <th>REVISI</th>
 	                    <th>DETAIL</th>
+                        @if(Auth::user()->hasRole('subbag'))
 	                    <th>Aksi</th>
+                        @else
+                        @endif
 	                </tr>
 	            </thead>
 	            <tfoot>
@@ -94,7 +97,10 @@
 	                    <th>STATUS</th>
 	                    <th>REVISI</th>
 	                    <th>DETAIL</th>
+                        @if(Auth::user()->hasRole('subbag'))
 	                    <th>Aksi</th>
+                        @else
+                        @endif
 	                </tr>
 	            </tfoot>
             <tbody>
@@ -105,6 +111,7 @@
                         <td>revisi</td>
                         <td>1</td>
                         <td><sbutton><a href="">detail</a></button></td>
+                        @if(Auth::user()->hasRole('subbag'))
                         <td> 
                             <table> 
                                 <td>
@@ -116,6 +123,8 @@
                                 </td>
                             </table>
                         </td>
+                        @else
+                        @endif
                     </tr>
             </tbody>
             </table>

@@ -38,7 +38,8 @@ class KeuanganMiddleware
         }
 
         if (auth()->check() &&  Auth::user()->hasRole('subbag') OR Auth::user()->hasRole('dekan')
-        OR Auth::user()->hasRole('wd2') ) 
+        OR Auth::user()->hasRole('wd2') OR Auth::user()->hasRole('ktu') OR Auth::user()->hasRole('bpp')
+        OR Auth::user()->hasRole('ppk')) 
         {
             
             return $next($request);

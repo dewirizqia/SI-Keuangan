@@ -27,7 +27,44 @@ class AdminController extends Controller
     {
         $this->middleware('super_admin');
     }
-    
+
+
+        public function ubahpassword_admin($id){
+        $user = User::whereId($id)->firstOrFail();
+        return view('admin.ubahpassword_admin', compact('user'));
+    }
+    public function update_password_admin(UbahPasswordRequest $request)
+    {
+        $user = Auth::user();
+        $input = $request->all();
+
+        $password_lama = $request->input('password_lama');
+
+        if (!Hash::check($password_lama, $user->password))
+        {
+            return redirect()->route('ubahpassword')->with('error', 'Password lama yang anda masukkan salah.');
+        }
+
+        if ($request->input('password') == '')
+        {
+            $input['password'] = $user->password;
+        }
+        else
+        {
+            $input['password'] = bcrypt($request->input('password'));
+        }
+
+        try 
+        {
+        $user->update($input);
+        } 
+        catch (QueryException $e) {
+            return redirect()->route('ubah_password_user')->with('pesan', 'Username yang anda masukkan sudah ada dalam database.');
+        }
+
+        return redirect()->route('dashboard')->with('pesan', 'Password telah berhasil di ubah');
+    }
+        
     #Prodi/Subbagian
     public function daftar_bagian()
     {

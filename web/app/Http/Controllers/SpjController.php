@@ -28,6 +28,11 @@ use App\Komentar;
 
 class SpjController extends Controller
 {
+
+        public function __construct()
+    {
+        $this->middleware('keuangan');
+    }
 //Halaman SPJ
     public function spjup_buat()
     {

@@ -1,11 +1,9 @@
 @extends('home.admin')
-@section('head')
-<link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
-@stop
+
+
 @section('isi')
 <br>
 <br>
-
 <div class="panel panel-primary">
     @if (count($errors) > 0)
         <div class="alert alert-danger">

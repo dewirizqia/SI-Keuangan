@@ -52,7 +52,7 @@
         <div class="form-group">
             <div class="col-md-6">
             <label>Nominal</label> 
-            <input class="form-control" name="nominal" id="nominal" value="{{ $detail_usulan->nominal }}">
+            <input class="form-control" name="nominal" id="nominal" value="{{ $detail_usulan->nominal }}" id="nominal">
             </div>    
         </div>
         <div class="form-group">
@@ -64,7 +64,7 @@
 
         <div class="form-group">
             <label>Jumlah</label>
-            <input class="form-control" name="jumlah" value="{{ $detail_usulan->jumlah }}">
+            <input class="form-control" name="jumlah" value="{{ $detail_usulan->jumlah }}" id="jumlah" data-formula="$harga_satuan*$nominal">
         </div>
         <br>
         <button type="submit" class="btn btn-primary">Simpan</button>

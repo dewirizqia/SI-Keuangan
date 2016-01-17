@@ -129,9 +129,9 @@
                             <td>{{ $no++ }}</td>
                             <td>{{ $pagu_kegiatan->pagu->tahun }}</td>
                             <td>{{ $pagu_kegiatan->subinput->input->sub_output->output->kode_output }}.{{ $pagu_kegiatan->subinput->input->sub_output->kode_suboutput }}.{{ $pagu_kegiatan->subinput->input->kode_input }}.{{ $pagu_kegiatan->subinput->kode_subinput }}.{{ $pagu_kegiatan->akun->kode_akun }}</td>
-                            <td>{{ $pagu_kegiatan->batasan }}</td>
-                            <td>{{ $pagu_kegiatan->alokasi }}</td>
-                            <td>{{ $pagu_kegiatan->sisa }}</td>
+                            <td>Rp. {{ number_format($pagu_kegiatan->batasan, 0, ',', '.')}}</td>
+                            <td>Rp. {{ number_format($pagu_kegiatan->alokasi, 0, ',', '.')}}</td>
+                            <td>Rp. {{ number_format($pagu_kegiatan->sisa, 0, ',', '.')}}</td>
                             <td> 
                                 <table> 
                                     <tr><td>

@@ -73,14 +73,10 @@ class AdminController extends Controller
         return view('admin.daftar_bagian', compact('daftar_bagian', 'no'));
     }
 
-    public function tambah_bagian(Request $request)
+    public function simpan_bagian(Request $request)
     {
         $input = $request->all();
-        $simpan = Bagian::create([
-            'bagian' => $input['bagian'],
-            'detail' => $input['detail']
-            ]);
-
+        Bagian::create($input);
         return redirect()->route('daftar_bagian');
     }
 
@@ -91,5 +87,20 @@ class AdminController extends Controller
         $dbagian = Bagian::FindOrFail($id);
         return view('admin.edit_bagian', compact('dbagian','daftar_bagian', 'no'));
     }
+    public function update_bagian(Request $request, $id)
+    {
+        $bagian = Bagian::FindOrFail($id);
+        $input = $request->all();
+        $bagian->update($input);
+        return redirect()->route('daftar_bagian');
+    }
+    public function delete_bagian($id)
+{
+    
+        $bagian = Bagian::FindOrFail($id);
+        $bagian->delete();
+        
+        return redirect()->route('daftar_bagian');
+}
 
 }

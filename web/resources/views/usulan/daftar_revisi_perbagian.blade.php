@@ -54,10 +54,10 @@
                         <td> 
                             <table> 
                                 <td>
-                                    <form method="POST" action="" accept-charset="UTF-8" style="margin:0 auto">
+                                    <form method="POST" action="{{route('delete_usulan_perbagian', $revisi->id)}}" accept-charset="UTF-8" style="margin:0 auto">
                                         <input name="_method" type="hidden" value="DELETE">
                                         <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
-                                        <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete">
+                                        <input id="confirm" class="btn btn-danger" data-toggle="confirmation" data-popout="true" type="submit" value="Delete" disabled>
                                     </form> 
                                 </td>
                             </table>

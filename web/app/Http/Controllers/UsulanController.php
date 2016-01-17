@@ -9,6 +9,7 @@ use App\Http\Requests\DetailUsulanRequest;
 use App\Http\Requests\UsulanRequest;
 use App\Http\Controllers\Controller;
 use Auth;
+use Mail;
 //model
 use App\Pagu;
 use App\User;
@@ -20,6 +21,7 @@ use App\Akun;
 use App\Usulan;
 use App\Rkakl;
 use App\Detail_Usulan;
+use App\Detail_User;
 use App\Detail_Rkakl;
 use App\Bagian;
 use App\Pagu_Bagian;
@@ -343,8 +345,8 @@ class UsulanController extends Controller
         $total = Detail_Rkakl::whereId_rkakl($id_rkakl)->sum('jumlah_biaya');
         $d_subinput = Sub_Input::whereId($subkom)->firstOrFail();
         $d_akun = Akun::whereId($akun)->firstOrFail();
-        $pagu->alokasi = $total;
-        $pagu->save();
+        // $pagu->alokasi = $total;
+        // $pagu->save();
         // return $total;
         return view('usulan.buat_detail_rkakl', compact('tahun', 'id_subkomp', 'id_akun', 'd_subinput', 'd_akun', 'detail', 'rkakl', 'total'));
     }
@@ -377,6 +379,11 @@ class UsulanController extends Controller
         
         $rkakl = Rkakl::FindOrFail($id);
         $rkakl->delete();
+        $id_pagu = $rkakl->id_pagu;
+        $pagu = Pagu::FindOrFail($id_pagu);
+        $pagu->alokasi = "0";
+        $pagu->sisa = "0";
+        $pagu->save();
         // return "tes";
         return redirect()->route('daftar_rkakl');
     }
@@ -389,8 +396,38 @@ class UsulanController extends Controller
         return view('usulan.daftar_revisi', compact('no','daftar_revisi'));
     }
 /////////////////////////////////////UBAH STATUS USULAN///////////////////////////////
+    public function status_usulan_subbag($id)
+    {
+        $usulan = Usulan::FindOrFail($id);
+        $usulan->status = "subbag";
+        $usulan->save();
+        $detail_wd2 = Detail_User::whereJabatan('wd2')->get();
+        Mail::send('emails.status_usulan_subbag', [],function($message) use ($detail_wd2)
+            {
+                foreach ($detail_wd2 as $user_wd2) {
+                $email = $detail_wd2->ke_user->email;
+                $message->to($email)->from('19dewi@gmail.com', 'dewi')
+                ->subject('Usulan');
+                }    
+            });
+        return redirect()->back();
+        
+    }
+
     public function status_usulan_wd($id)
     {
         
+    }
+//////////////////////////////////STATUS RKA-KL///////////////////////////////////////
+    public function rkakl_selesai($id)
+    {
+        $rkakl = Rkakl::FindOrFail($id);
+        $total = Detail_Rkakl::whereId_rkakl($id)->sum('jumlah_biaya');
+        $id_pagu = $rkakl->id_pagu;
+        $pagu = Pagu::FindOrFail($id_pagu);
+        $pagu->alokasi = $total;
+        $pagu->sisa = $total;
+        $pagu->save();
+        return redirect()->route('daftar_rkakl');
     }
 }

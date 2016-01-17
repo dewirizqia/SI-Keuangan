@@ -6,6 +6,7 @@
 @section('isi')
 <br>
 <form role="form" method="POST" action="{{ route('update_bagian', $dbagian->id) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
+    <input type="hidden" name="_method" value="PATCH">
     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
         <div class="form-group">
             <div class="col-md-3">

@@ -6,22 +6,6 @@
 @section('isi')
 <br>
 <br>
-<div class="panel panel-primary">
-<form role="form" method="POST" action="{{ route('tambah_usulan_bagian',$id_bagian) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
-    <!-- <input type="hidden" name="_token" value="<? php echo csrf_token(); ?>"> -->
-    {{ csrf_field() }}
-        <div class="form-group">
-            <div class="col-md-3">
-               <input class="form-control" name="tahun" placeholder="Masukkan Tahun Usulan">
-            </div>
-            <div class="col-md-3">
-                <button type="submit" class="btn btn-primary">Tambah Usulan</button>
-            </div>
-        </div>
-</form>
-
-<br>
-<br>
 <br>
 </div>
 
@@ -52,7 +36,22 @@
                         <td><a href="">{{ $usulan->tahun }}</a></td>
                         <td>{{ $usulan->status }}</td>
                         <td>{{ $usulan->revisi }}</td>
-                        <td><button><a href="{{ route('buat_usulan_bagian', $usulan->id) }}">detail</a></button></td>
+                        <td>
+                            @if($usulan->status = 'usulan')
+                            <form role="form" method="POST" action="{{ route('status_usulan_subbag', $usulan->id) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
+                                <input type="hidden" name="_method" value="PATCH">
+                                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                                <button class="btn btn-primary" type="submit" value="Sesuai">Setujui Usulan</button>
+                            </form>
+                            @else
+                            <form role="form" method="POST" action="{{ route('status_usulan_subbag', $usulan->id) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
+                                <input type="hidden" name="_method" value="PATCH">
+                                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                                <button class="btn btn-primary" type="submit" value="Sesuai">Setujui Usulan</button>
+                            </form>
+                            @endif
+                            <button><a href="{{ route('buat_usulan_bagian', $usulan->id) }}">detail</a></button>
+                        </td>
                         <td> 
                             <table> 
                                 <td>

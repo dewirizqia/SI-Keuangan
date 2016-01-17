@@ -46,7 +46,15 @@ class User extends Model implements AuthenticatableContract,
     }
     public function ke_bagian()
     {
-        return $this->hasOne('App\Bagian', 'id');
+        return $this->belongsTo('App\Bagian', 'id_bagian');
+    }
+    public function belanja()
+    {
+        return $this->hasMany('App\Komentar', 'id_user');
+    }    
+    public function komentar()
+    {
+        return $this->hasMany('App\Komentar', 'id_user');
     }
     
 }

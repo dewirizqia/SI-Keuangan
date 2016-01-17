@@ -25,13 +25,16 @@
                     <tr>
                         <th>No.</th>
                         <th>Status</th>
+                        <th>Sub Bagian/Program Studi</th>
                         <th>Nomor Tanda Bukti</th>
+                        <th>Tanggal</th>
                         <th>Nomor BKU</th>
                         <th>Kode MA</th>
                         <th>MAK</th>
                         <th>Penerima</th>
                         <th>Uraian</th>
                         <th>Jumlah (Rp.)</th>
+                        <th>Komentar</th>
                         @if(Auth::user()->hasRole('ktu') OR Auth::user()->hasRole('wd2') OR Auth::user()->hasRole('dekan'))
                         @else
                         <th>Aksi</th>
@@ -43,13 +46,18 @@
                     <tr>
                         <td>{{ $no++ }}</td>
                         <td>{{ $belanja -> status }}</td>
+                        <td>{{ $belanja -> user->ke_bagian->detail}}</td>
                         <td>{{ $belanja -> no_tanda_bukti }}</td>
+                        <td>{{ $belanja -> tgl }}</td>
                         <td>{{ $belanja -> no_bku }}</td>
                         <td>{{ $belanja -> Kode_MA }}</td>
                         <td>{{ $belanja -> MAK }}</td>
                         <td>{{ $belanja -> penerima }}</td>
                         <td>{{ $belanja -> uraian }}</td>
                         <td>{{ number_format($belanja -> jumlah, 0, ',', '.') }}</td>
+                        <td style="text-align:center;vertical-align:middle">
+                            <a href="{{ route('belanja_komentar', $belanja->id) }}" class="btn btn-success">Lihat</a>
+                        </td>              
                         <td style="text-align:center;vertical-align:middle">
                             <table margin="0">
                             <tr><td>

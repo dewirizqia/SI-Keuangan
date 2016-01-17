@@ -8,7 +8,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h2 class="page-header">Komentar SPJ LS</h2>
+        <h2 class="page-header">Komentar Rekap Belanja</h2>
     </div>
 </div>
 
@@ -17,32 +17,31 @@
         <div class="panel panel-primary">
             <div class="panel-body">
                 <form action="" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
-                        <label class="col-md-2">Subbag/ Prodi</label>
-                        <label class="col-md-4">: {{ $spjls->ke_bagian->detail}}</label>                        
-                        <label class="col-md-2">Kode Anggaran</label>
-                        <label class="col-md-4">: {{ $spjls->kode_anggaran}}</label>
+                        <label class="col-md-1">Subbag/ Prodi</label>
+                        <label class="col-md-3">: {{ $belanja->id_user }}</label>                        
+                        <label class="col-md-2">Kode Mata Anggaran</label>
+                        <label class="col-md-3">: {{ $belanja->Kode_MA }}</label>
+                        <label class="col-md-1">MAK</label>
+                        <label class="col-md-2">: {{ $belanja->MAK }}</label>
+                    </div>&nbsp
+                    <div class="form-group">                        
+                        <label class="col-md-2">Penerima</label>
+                        <label class="col-md-4">: {{ $belanja->penerima }}</label>
+                        <label class="col-md-2">Uraian</label>
+                        <label class="col-md-4">: {{ $belanja->uraian }}</label>
                     </div>&nbsp
                     <div class="form-group">
-                        <label class="col-md-1">Nomor SK</label>
-                        <label class="col-md-3">: {{ $spjls -> no_sk}}</label>
-                        <label class="col-md-1">Nama Kegiatan</label>
-                        <label class="col-md-3">: {{ $spjls -> nama_kegiatan}}</label>
-                        <label class="col-md-1">Jumlah Penerima</label>
-                        <label class="col-md-3">: {{ $spjls -> jmlh_penerima}}</label>
+                        <label class="col-md-2">Nomor Tanda Bukti</label>
+                        <label class="col-md-4">: {{ $belanja->no_tanda_bukti }}</label>
+                        <label class="col-md-2">Tanggal Tanda Bukti</label>
+                        <label class="col-md-4">: {{ $belanja->tgl }}</label>                        
                     </div>&nbsp
                     <div class="form-group">
-                        <label class="col-md-1">Jumlah Kotor</label>
-                        <label class="col-md-3">: Rp. {{ number_format($spjls -> jmlh_kotor, 0, ',', '.') }}</label>
-                        <label class="col-md-1">PPh</label>
-                        <label class="col-md-3">: Rp. {{ number_format($spjls -> pph, 0, ',', '.') }}</label>
-                        <label class="col-md-1">Jumlah Bersih</label>
-                        <label class="col-md-3">: Rp. {{ number_format($spjls -> jmlh_bersih, 0, ',', '.') }}</label>
-                    </div>&nbsp
-                    <div class="form-group">
-                        <label class="col-md-1">Keterangan</label>
-                        <label class="col-md-3">: {{ $spjls -> keterangan}}</label>                    
+                        <label class="col-md-2">Jumlah</label>
+                        <label class="col-md-4">: {{ $belanja->jumlah }}</label>
+                        <label class="col-md-2">Pajak</label>
+                        <label class="col-md-4">: </label>                    
                     </div>&nbsp
                 </form>
             </div>
@@ -64,11 +63,11 @@
     <div class="col-lg-12">
         <div class="panel panel-primary">
             <div class="panel-body">
-                <form action="{{ route('spjls_komentar_simpan') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('belanja_komentar_simpan') }}" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="id_user" value="{{ Auth::user()->id }}">
-                    <input type="hidden" name="jenis" value="LS">
-                    <input type="hidden" name="id_jenis" value="{{ $spjls->id }}">
+                    <input type="hidden" name="jenis" value="belanja">
+                    <input type="hidden" name="id_jenis" value="{{ $belanja->id }}">
                     <div class="form-group">
                         <label class="control-label">Komentar</label>
                         <textarea name="komentar" class="form-control"></textarea>
@@ -113,4 +112,3 @@
 @section('script')
 
 @stop 
-

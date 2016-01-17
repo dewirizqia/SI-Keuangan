@@ -1,7 +1,9 @@
 @extends('home.keuangan')
+
 @section('head')
 <link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
 @stop
+
 @section('isi')
 <div class="row">
     <div class="col-lg-12">
@@ -30,6 +32,7 @@
                         <th>Tanggal SK</th>
                         <th>Nama Kegiatan</th>
                         <th>Detail</th>
+                        <th>Komentar</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -55,6 +58,9 @@
                                 </td>
                                 </tr>
                                 </table>
+                            </td>
+                            <td style="text-align:center;vertical-align:middle">
+                                <a href="{{ route('spjls_komentar', $spjls->id) }}" class="btn btn-success">Lihat</a>
                             </td>
                             <td style="text-align:center;vertical-align:middle">
                                 <table margin="0">

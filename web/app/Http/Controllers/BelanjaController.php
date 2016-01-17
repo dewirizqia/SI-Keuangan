@@ -13,6 +13,10 @@ use App\Input;
 use App\Sub_Input;
 use App\Akun;
 use App\Belanja;
+use App\User;
+use App\Detail_User;
+
+use Auth;
 
 
 use App\Http\Requests;
@@ -20,10 +24,13 @@ use App\Http\Controllers\Controller;
 
 class BelanjaController extends Controller
 {
+
     public function belanja_daftar()
     {
         $no = "1";
         $daftar_belanja = Belanja::latest()->get();
+        // $id_bagian = Auth::user()->nama;
+        
         return view('belanja.belanja_daftar', compact('no', 'daftar_belanja'));
     }
 
@@ -110,7 +117,58 @@ class BelanjaController extends Controller
         
         return redirect()->route('belanja_daftar');
     }
+    public function status_belanja_subbag($id)
+    {
+        $belanja = Belanja::FindOrFail($id);
+        $belanja->status = 'subbag';
+        $belanja->save;
+
+        $detail_bpp = Detail_User::whereJabatan('bpp')->get();
+        Mail::send('emails.status_belanja_subbag', function($message) use ($detail_bpp)
+            {
+                foreach ($detail_bpp as $user_bpp) {
+                $email = $user_bpp->ke_user->email;
+                $message->to($email)->from('19dewi@gmail.com', 'dewi')
+                ->subject('Rekap Belanja');
+                }    
+            });
+        return redirect()->route('belanja_daftar');
+    }
     
+    public function status_belanja_bpp($id)
+    {
+        $belanja = Belanja::FindOrFail($id);
+        $belanja->status = 'bpp';
+        $belanja->save;
+
+        $detail_ppk = Detail_User::whereJabatan('ppk')->get();
+        Mail::send('emails.status_belanja_bpp', function($message) use ($detail_ppk)
+            {
+                foreach ($detail_ppk as $user_ppk) {
+                $email = $user_ppk->ke_user->email;
+                $message->to($email)->from('19dewi@gmail.com', 'dewi')
+                ->subject('Rekap Belanja');
+                }    
+            });
+        return redirect()->route('belanja_daftar');
+    }
+    public function status_belanja_ppk($id)
+    {
+        $belanja = Belanja::FindOrFail($id);
+        $belanja->status = 'ppk';
+        $belanja->save;
+        $id_bagian = Auth::user()->id_bagian;
+        $detail_bagian = User::whereId_bagian($id_bagian)->with('detail_user')->get();
+        Mail::send('emails.status_belanja_ppk', function($message) use ($detail_bagian)
+            {
+                foreach ($detail_bagian as $user_bagian) {
+                $email = $user_bagian->ke_user->email;
+                $message->to($email)->from('19dewi@gmail.com', 'dewi')
+                ->subject('Rekap Belanja');
+                }    
+            });
+        return redirect()->route('belanja_daftar');
+    }
 }
 
     

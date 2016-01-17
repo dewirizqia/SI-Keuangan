@@ -27,6 +27,43 @@ class BagianController extends Controller
         $this->middleware('admin');
     }
 
+    public function ubahpassword_bagian($id){
+        $user = User::whereId($id)->firstOrFail();
+        return view('admin.ubahpassword_bagian', compact('user'));
+    }
+    public function update_password_bagian(UbahPasswordRequest $request)
+    {
+        $user = Auth::user();
+        $input = $request->all();
+
+        $password_lama = $request->input('password_lama');
+
+        if (!Hash::check($password_lama, $user->password))
+        {
+            return redirect()->route('ubahpassword')->with('error', 'Password lama yang anda masukkan salah.');
+        }
+
+        if ($request->input('password') == '')
+        {
+            $input['password'] = $user->password;
+        }
+        else
+        {
+            $input['password'] = bcrypt($request->input('password'));
+        }
+
+        try 
+        {
+        $user->update($input);
+        } 
+        catch (QueryException $e) {
+            return redirect()->route('ubah_password_user')->with('pesan', 'Username yang anda masukkan sudah ada dalam database.');
+        }
+
+        return redirect()->route('dashboard')->with('pesan', 'Password telah berhasil di ubah');
+        
+    }
+
     //USULAN PER BAGIAN
     public function daftar_usulan_perbagian($id_bagian)
     {
@@ -84,17 +121,14 @@ class BagianController extends Controller
         $usulan->save();
         $tahun = $usulan->tahun;
         $prodi = $usulan->ke_bagian->detail;
-        Mail::send('emails.status_usulan', ['tahun'=> $tahun, 'prodi'=> $prodi], function($message) use ($detail_subbag)
-        {
-            foreach ($detail_subbag as $user_subbag) {
-            $email = $user_subbag->ke_user->email;
-            $message->to($email)->from('19dewi@gmail.com', 'dewi')
-            ->subject('Usulan');
-            
-        }
-            
-        }
-            );
+            Mail::send('emails.status_usulan', ['tahun'=> $tahun, 'prodi'=> $prodi], function($message) use ($detail_subbag)
+            {
+                foreach ($detail_subbag as $user_subbag) {
+                $email = $user_subbag->ke_user->email;
+                $message->to($email)->from('19dewi@gmail.com', 'dewi')
+                ->subject('Usulan');
+                }    
+            });
         return redirect()->route('daftar_usulan_perbagian');
     }
 

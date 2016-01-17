@@ -2,6 +2,7 @@
 
 @section('isi')
 <br>
+@if(Auth::user()->hasRole('subbag'))
 <div class="panel panel-primary">
     <div class="panel-heading">
         Tambah Batasan Pagu Kegiatan
@@ -95,7 +96,8 @@
         </form>
     </div>
 </div>
-
+@else
+@endif   
 
 
 

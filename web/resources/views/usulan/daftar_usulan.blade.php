@@ -22,7 +22,10 @@
 	                    <th>STATUS</th>
 	                    <th>REVISI</th>
 	                    <th>DETAIL</th>
-	                    <th>Aksi</th>
+	                    @if(Auth::user()->hasRole('subbag'))
+                        <th>Aksi</th>
+                        @else
+                        @endif
 	                </tr>
 	            </thead>
 	            <tfoot>
@@ -33,7 +36,10 @@
 	                    <th>STATUS</th>
 	                    <th>REVISI</th>
 	                    <th>DETAIL</th>
+                        @if(Auth::user()->hasRole('subbag'))
 	                    <th>Aksi</th>
+                        @else
+                        @endif
 	                </tr>
 	            </tfoot>
             <tbody>
@@ -45,12 +51,12 @@
                         <td>{{ $usulan->status }}</td>
                         <td>{{ $usulan->revisi }}</td>
                         <td><button><a href="">detail</a></button>
-<<<<<<< HEAD
+                            @if(Auth::user()->hasRole('subbag'))
                         	<button><a href="{{ route('excelrab',$usulan->id) }}">Download</a></button>
-=======
-                        	<button><a href="{{ route('export') }}">Download</a></button>
->>>>>>> 1863e3393a358872d76847864e452220ce27d157
+                            @else
+                            @endif
                         </td>
+                        @if(Auth::user()->hasRole('subbag'))
                         <td> 
                             <table> 
                                 <td>
@@ -62,6 +68,8 @@
                                 </td>
                             </table>
                         </td>
+                        @else
+                        @endif
                     </tr>
                 @endforeach
             </tbody>

@@ -57,7 +57,7 @@
                 </button>
                  <a class="navbar-brand" ><img src="{{asset('user/images/logo.png') }}" alt="" width="100" height="100"/></a>
 
-                <a class="navbar-brand" href="{{ route('home')}}"><b>Sistem Informasi Keuangan<br>
+                <a class="navbar-brand" href="{{ route('dashboard_admin')}}"><b>Sistem Informasi Keuangan<br>
                 <b>Fakultas Teknik<br>
                 Universitas Lambung Mangkurat</b></a>
                 <br>
@@ -270,7 +270,9 @@
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li class="divider"></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-lock"></i> Ubah Password</a>
+                        <li>
+                        
+                        <a href=""><i class="glyphicon glyphicon-lock"></i> Ubah Password</a>
                         </li>
                         <li><a href="{{ url('auth/logout')}}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
@@ -290,7 +292,7 @@
                     <ul class="nav" id="side-menu">
                     
                         <li>
-                            <a href="{{ route('home')}}"><i class="glyphicon glyphicon-home"></i> Dashboard</a>
+                            <a href="{{ route('dashboard_admin')}}"><i class="glyphicon glyphicon-home"></i> Dashboard</a>
                         </li>
                         @section('sidebar')
                         <li>

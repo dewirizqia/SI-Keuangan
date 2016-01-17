@@ -198,15 +198,8 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-<<<<<<< HEAD
-        'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
-=======
         'Entrust'   => Zizaco\Entrust\EntrustServiceProvider::class,
         'Excel'     => Maatwebsite\Excel\Facades\Excel::class
-
->>>>>>> 1863e3393a358872d76847864e452220ce27d157
-
-
     ],
 
 ];

@@ -4,8 +4,10 @@
 <script type="text/javascript" src="css/jquery-1.9.1.min.js"></script>
 <script src="css/jquery-calx-1.1.9.min.js"></script>
 @stop
+
 @section('isi')
 
+@if(Auth::user()->hasRole('subbag'))
 <div class="panel panel-primary">
     <div class="panel-heading">
         Tambah Alokasi Pagu Prodi/Bagian
@@ -67,7 +69,8 @@
         </form>
     </div>
 </div>
-
+@else
+@endif
 
 <div class="row">
                 <div class="col-lg-12">
@@ -87,7 +90,10 @@
                     <th>Tahun</th>
                     <th>Bagian</th>
                     <th>Pagu Bagian</th>
+                    @if(Auth::user()->hasRole('subbag'))
                     <th>Aksi</th>
+                    @else
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -97,6 +103,7 @@
                         <td>{{ $pagu_bagian->ke_pagu->tahun }}</td>
                         <td><a href="{{ route('detail_pagu_bagian', $pagu_bagian->id)}}">{{ $pagu_bagian->ke_bagian->detail }}</a></td>
                         <td>Rp. {{ number_format($pagu_bagian->jumlah, 0, ',', '.')}}</td>
+                        @if(Auth::user()->hasRole('subbag'))
                         <td> 
                             <table> 
                                 <td>
@@ -104,6 +111,8 @@
                                 </td>
                             </table>
                         </td>
+                        @else
+                        @endif   
                     </tr>
                 @endforeach
             </tbody>

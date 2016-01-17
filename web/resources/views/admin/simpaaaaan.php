@@ -1,3 +1,12 @@
+<!-- @if(Auth::user()->hasRole('admin'))
+                        <a href="{{ route('ubah_password_admin', Auth::user()->id)}}"><i class="glyphicon glyphicon-lock"></i> Ubah Password</a>
+                        @elseif(Auth::user()->hasRole('bagian'))
+                        <a href="{{ route('ubah_password_bagian', Auth::user()->id)}}"><i class="glyphicon glyphicon-lock"></i> Ubah Password</a>
+                        @else
+                        <a href="{{ route('ubah_password_bagian', Auth::user()->id)}}"><i class="glyphicon glyphicon-lock"></i> Ubah Password</a>
+                        @endif -->
+
+
 <form id="calx">
     <h3>Build your own PC</h3>
     <table border = 1>

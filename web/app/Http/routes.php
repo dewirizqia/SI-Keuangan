@@ -20,9 +20,9 @@ if (Schema::hasTable('Bagian'))
 }
 
 
-Route::get('/admin', ['as'=>'home','middleware' => 'super_admin', function () {return view('@layout.base_admin');}]);
-Route::get('/bagian', function () {return view('home.admin');});
-Route::get('/keuangan', function () {return view('home.keuangan');});
+Route::get('/admin', ['as'=>'dashboard_admin','middleware' => 'super_admin', function () {return view('@layout.base_admin');}]);
+Route::get('/bagian', ['as'=>'dashboard_bagian','middleware' => 'admin', function () {return view('home.admin');}]);
+Route::get('/keuangan', ['as'=>'dashboard_keuangan','middleware' => 'keuangan', function () {return view('home.keuangan');}]);
 Route::get('/wd2', function () {return view('home.wd2');});
 Route::get('/dekan', function () {return view('home.dekan');});
 Route::get('/bpp', function () {return view('home.bpp');});
@@ -38,6 +38,7 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController'
 	]);
+
 
 // Password reset link request routes...
 Route::get('password/email', 'Auth\PasswordController@getEmail');
@@ -55,7 +56,13 @@ route::get('/mail', function() {
 	}
 		);
 });
-Route::get('export', ['as'=>'export', 'uses'=> 'ReportController@export']);
+
+// Route::get('admin/pw/{$id}', array('as'=>'ubah_password_admin', 'uses'=> 'AdminController@ubahpassword_admin'));
+// Route::patch('admin/pw/{$id}', array('as'=>'update_password_admin', 'uses'=> 'AdminController@update_password_admin'));
+// Route::get('bagian/pw/{$id}', array('as'=>'ubah_password_bagian', 'uses'=> 'BagianController@ubahpassword_bagian'));
+// Route::patch('bagian/pw/{$id}', array('as'=>'update_password_bagian', 'uses'=> 'BagianController@update_password_bagian'));
+// Route::get('keuangan/pw/', function () {return view('home.dekan');});
+// Route::patch('keuangan/pw/{$id}', array('as'=>'update_password_keuangan', 'uses'=> 'UsulanController@update_password_keuangan'));
 
 /////////////////////////////////////HALAMAN SUPER ADMIN/////////////////////////////
 //user
@@ -176,6 +183,10 @@ Route::delete('keuangan/revisi/daftar/{idd}', ['as'=>'delete_revisi', 'uses'=>'U
 Route::get('keuangan/belanja/daftar', array('as'=>'belanja_daftar', 'uses'=> 'BelanjaController@belanja_daftar'));
 Route::get('keuangan/belanja/buat', array('as'=>'belanja_buat', 'uses'=> 'BelanjaController@belanja_buat'));
 Route::post('keuangan/belanja/simpan', array('as'=>'simpan_belanja', 'uses'=> 'BelanjaController@simpan_belanja'));
+//ubah status
+Route::get('keuangan/belanja/daftar/{id}/subbag', array('as'=>'status_belanja_subbag', 'uses'=> 'BelanjaController@status_belanja_subbag'));
+Route::get('keuangan/belanja/daftar/{id}/bpp', array('as'=>'status_belanja_bpp', 'uses'=> 'BelanjaController@status_belanja_bpp'));
+Route::get('keuangan/belanja/daftar/{id}/ppk', array('as'=>'status_belanja_ppk', 'uses'=> 'BelanjaController@status_belanja_ppk'));
 
 //SPJ UP
 Route::get('keuangan/spj_up/daftar', array('as'=>'spjup_daftar', 'uses'=> 'SpjController@spjup_daftar'));
@@ -245,3 +256,6 @@ Route::get('excells/{id}', ['as'=>'excells', 'uses'=> 'ExcelController@ls']);
 
 Route::get('excelnominatif/{id}', ['as'=>'excelnominatif', 'uses'=> 'ExcelController@nominatif']);
 
+Route::get('export', ['as'=>'export', 'uses'=> 'ReportController@export']);
+
+Route::get('status/{id}', array('as'=>'status', 'uses'=> 'BelanjaController@status_belanja_ppk'));

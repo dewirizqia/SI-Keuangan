@@ -18,9 +18,12 @@
     <div class="col-lg-12">
         <div class="panel panel-primary">
             <div class="panel-body">
+                @if(Auth::user()->hasRole('bpp'))
                 <a href="{{ route('spjup_buat') }}" class="btn btn-primary">
                     <span class="glyphicon glyphicon-plus">&nbsp</span>Tambah SPJ
                 </a>
+                @else
+                @endif
                 <br><br>
                 <div class="dataTable_wrapper">
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">

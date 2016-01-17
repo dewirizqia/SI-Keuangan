@@ -231,10 +231,10 @@ Route::get('bagian/serapan/bagian/{id}/daftar', array('as'=>'daftar_serapan_bagi
 //usulan
 Route::get('bagian/usulan/{id}/daftar', array('as'=>'daftar_usulan_perbagian', 'uses'=> 'BagianController@daftar_usulan_perbagian'));
 Route::post('bagian/usulan/{id}/daftar', array('as'=>'tambahkan_usulan_perbagian', 'uses'=> 'BagianController@tes'));
-Route::delete('bagian/usulan/{id}/daftar/{idd}', ['as'=>'delete_usulan_perbagian', 'uses'=>'BagianController@delete_usulan_perbagian']);
+Route::delete('bagian/usulan/daftar/{id}', ['as'=>'delete_usulan_perbagian', 'uses'=>'BagianController@delete_usulan_perbagian']);
 //REVISI
 Route::get('bagian/revisi/{id}/daftar', array('as'=>'daftar_revisi_perbagian', 'uses'=> 'BagianController@daftar_revisi_perbagian'));
-Route::get('bagian/revisi/daftar/{revisi}', array('as'=>'buat_revisi_perbagian', 'uses'=> 'BagianController@daftar_revisi_perbagian'));
+Route::get('bagian/revisi/daftar/{id}', array('as'=>'buat_revisi_perbagian', 'uses'=> 'BagianController@buat_revisi_perbagian'));
 //Ubah Status Usulan (Bagian)
 Route::get('bagian/usulan/daftar/ubah/{id}', array('as'=>'status_usulan', 'uses'=> 'BagianController@status_usulan'));
 

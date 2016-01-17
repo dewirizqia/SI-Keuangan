@@ -161,7 +161,7 @@ class BelanjaController extends Controller
         $belanja->save;
 
         $detail_ppk = Detail_User::whereJabatan('ppk')->get();
-        Mail::send('emails.status_belanja_bpp', function($message) use ($detail_ppk)
+        Mail::send('emails.status_belanja_bpp', [],function($message) use ($detail_ppk)
             {
                 foreach ($detail_ppk as $user_ppk) {
                 $email = $user_ppk->ke_user->email;
@@ -178,7 +178,7 @@ class BelanjaController extends Controller
         $belanja->save;
         $id_bagian = Auth::user()->id_bagian;
         $detail_bagian = User::whereId_bagian($id_bagian)->with('detail_user')->get();
-        Mail::send('emails.status_belanja_ppk', function($message) use ($detail_bagian)
+        Mail::send('emails.status_belanja_ppk', [],function($message) use ($detail_bagian)
             {
                 foreach ($detail_bagian as $user_bagian) {
                 $email = $user_bagian->ke_user->email;
@@ -201,12 +201,28 @@ class BelanjaController extends Controller
         $input = $request->all();
         $id = $request['id_jenis'];        
 
+        $belanja = Belanja::FindOrFail($id);
+        $id_user = $belanja->id_user;
+        $user = User::FindOrFail($id_user);
+        $id_bagian = $user->id_bagian;
+        // return $id_bagian;
+
         try {
             Komentar::create($input);
         } 
         catch (QueryException $e) {
             return redirect()->route('belanja_komentar');
         }
+        $detail_bagian = User::whereId_bagian($id_bagian)->get();
+        // return $detail_bagian;
+        Mail::send('emails.tambah_komentar_belanja', [],function($message) use ($detail_bagian)
+            {
+                foreach ($detail_bagian as $user_bagian) {
+                $email = $user_bagian->email;
+                $message->to($email)->from('19dewi@gmail.com', 'dewi')
+                ->subject('Komentar Rekap Belanja');
+                }    
+            });
         
         return redirect()->route('belanja_komentar', compact('id'));
     }

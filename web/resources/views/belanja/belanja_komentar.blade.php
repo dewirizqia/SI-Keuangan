@@ -63,7 +63,7 @@
     <div class="col-lg-12">
         <div class="panel panel-primary">
             <div class="panel-body">
-                <form action="{{ route('belanja_komentar_simpan') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('belanja_komentar_simpan', $belanja->id) }}" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="id_user" value="{{ Auth::user()->id }}">
                     <input type="hidden" name="jenis" value="belanja">

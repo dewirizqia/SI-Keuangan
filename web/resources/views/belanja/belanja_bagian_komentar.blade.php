@@ -63,21 +63,6 @@
     <div class="col-lg-12">
         <div class="panel panel-primary">
             <div class="panel-body">
-                <form action="{{ route('belanja_komentar_simpan', $belanja->id) }}" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <input type="hidden" name="id_user" value="{{ Auth::user()->id }}">
-                    <input type="hidden" name="jenis" value="belanja">
-                    <input type="hidden" name="id_jenis" value="{{ $belanja->id }}">
-                    <div class="form-group">
-                        <label class="control-label">Komentar</label>
-                        <textarea name="komentar" class="form-control"></textarea>
-                    </div>                    
-                    <div class="form-group">
-                        <div class="col-md-6">
-                            <input type="submit" value="Tambahkan" class="form-control btn-primary">
-                        </div>
-                    </div>              
-                </form><br><br><hr>                
 
                 <table class="table table-striped table-bordered table-hover" >
                     <thead>

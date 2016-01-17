@@ -188,9 +188,9 @@ Route::get('keuangan/belanja/buat', array('as'=>'belanja_buat', 'uses'=> 'Belanj
 Route::post('keuangan/belanja/simpan', array('as'=>'simpan_belanja', 'uses'=> 'BelanjaController@simpan_belanja'));
 
 //ubah status
-Route::get('keuangan/belanja/daftar/{id}/subbag', array('as'=>'status_belanja_subbag', 'uses'=> 'BelanjaController@status_belanja_subbag'));
-Route::get('keuangan/belanja/daftar/{id}/bpp', array('as'=>'status_belanja_bpp', 'uses'=> 'BelanjaController@status_belanja_bpp'));
-Route::get('keuangan/belanja/daftar/{id}/ppk', array('as'=>'status_belanja_ppk', 'uses'=> 'BelanjaController@status_belanja_ppk'));
+Route::patch('keuangan/status/belanja/{id}/subbag', array('as'=>'status_belanja_subbag', 'uses'=> 'BelanjaController@status_belanja_subbag'));
+Route::get('keuangan/status/belanja/{id}/bpp', array('as'=>'status_belanja_bpp', 'uses'=> 'BelanjaController@status_belanja_bpp'));
+Route::get('keuangan/status/belanja/{id}/ppk', array('as'=>'status_belanja_ppk', 'uses'=> 'BelanjaController@status_belanja_ppk'));
 
 Route::get('keuangan/belanja/daftar/{id}/komentar', array('as'=>'belanja_komentar', 'uses'=> 'BelanjaController@belanja_komentar'));
 Route::post('keuangan/belanja/daftar/{id}/komentar', array('as'=>'belanja_komentar_simpan', 'uses'=> 'BelanjaController@belanja_komentar_simpan'));
@@ -234,10 +234,10 @@ Route::get('bagian/serapan/bagian/{id}/daftar', array('as'=>'daftar_serapan_bagi
 //usulan
 Route::get('bagian/usulan/{id}/daftar', array('as'=>'daftar_usulan_perbagian', 'uses'=> 'BagianController@daftar_usulan_perbagian'));
 Route::post('bagian/usulan/{id}/daftar', array('as'=>'tambahkan_usulan_perbagian', 'uses'=> 'BagianController@tes'));
-Route::delete('bagian/usulan/{id}/daftar/{idd}', ['as'=>'delete_usulan_perbagian', 'uses'=>'BagianController@delete_usulan_perbagian']);
+Route::delete('bagian/usulan/daftar/{id}', ['as'=>'delete_usulan_perbagian', 'uses'=>'BagianController@delete_usulan_perbagian']);
 //REVISI
 Route::get('bagian/revisi/{id}/daftar', array('as'=>'daftar_revisi_perbagian', 'uses'=> 'BagianController@daftar_revisi_perbagian'));
-Route::get('bagian/revisi/daftar/{revisi}', array('as'=>'buat_revisi_perbagian', 'uses'=> 'BagianController@daftar_revisi_perbagian'));
+Route::get('bagian/revisi/daftar/{id}', array('as'=>'buat_revisi_perbagian', 'uses'=> 'BagianController@buat_revisi_perbagian'));
 //Ubah Status Usulan (Bagian)
 Route::get('bagian/usulan/daftar/ubah/{id}', array('as'=>'status_usulan', 'uses'=> 'BagianController@status_usulan'));
 
@@ -250,12 +250,14 @@ Route::get('bagian/usulan/bagian/{id_bagian}/{tahun}/{subkom}/{akun}/buat', arra
 Route::post('bagian/usulan/bagian/{id_bagian}/{tahun}/{subkom}/{akun}/buat', array('as'=>'detail_usulan_bagian_simpan', 'uses'=> 'UsulanController@detail_usulan_bagian_simpan'));
 
 //rekap belanja
-Route::get('bagian/belanja/daftar', array('as'=>'belanja_bagian_daftar', 'uses'=> 'BelanjaController@belanja_bagian_daftar'));
+Route::get('bagian/belanja/{id}/daftar', array('as'=>'belanja_bagian_daftar', 'uses'=> 'BelanjaController@belanja_bagian_daftar'));
 Route::get('bagian/belanja/buat', array('as'=>'belanja_buat', 'uses'=> 'BelanjaController@belanja_buat'));
 Route::post('bagian/belanja/buat', array('as'=>'belanja_simpan', 'uses'=> 'BelanjaController@belanja_simpan'));
 Route::get('bagian/belanja/edit/{id}', array('as'=>'belanja_edit', 'uses'=> 'BelanjaController@belanja_edit'));
 Route::patch('bagian/belanja/edit/{id}', array('as'=>'belanja_update', 'uses'=> 'BelanjaController@belanja_update'));
 Route::delete('bagian/belanja/daftar/{id}', array('as'=>'belanja_delete', 'uses'=> 'BelanjaController@belanja_delete'));
+Route::get('bagian/belanja/daftar/{id}/komentar', array('as'=>'belanja_bagian_komentar', 'uses'=> 'BelanjaController@belanja_bagian_komentar'));
+
 
 ////////////////////////////////////EXPORT TO EXCEL///////////////////////////////////////////
 Route::get('excelrab/{id}', ['as'=>'excelrab', 'uses'=> 'ExcelController@rab']);

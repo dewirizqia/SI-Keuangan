@@ -49,7 +49,7 @@
 	                            </li>
 	                            @foreach ($sbagian as $bagian)
 	                            <li>
-	                                <a href="#">{{ $bagian->detail }}</a>
+	                                <a href="{{ route('belanja_bagian_daftar', $bagian->id) }}">{{ $bagian->detail }}</a>
 	                            </li>
 	                            @endforeach
 	                        </ul>

@@ -16,6 +16,7 @@ use App\Belanja;
 use App\User;
 use App\Detail_User;
 
+use Mail;
 use Auth;
 use App\Pagu;
 use App\Pagu_Bagian;
@@ -33,13 +34,8 @@ class BelanjaController extends Controller
         $no = "1";
         $daftar_belanja = Belanja::latest()->get();
         // $id_bagian = Auth::user()->nama;
-        
-        return view('belanja.belanja_daftar', compact('no', 'daftar_belanja'));
-    }
-
-    public function belanja_bagian_daftar()
-    {
-        return view('belanja.belanja_bagian_daftar');
+        $pagu = Pagu::latest()->get();        
+        return view('belanja.belanja_daftar', compact('no', 'daftar_belanja', 'pagu'));
     }
 
     public function belanja_buat()
@@ -137,11 +133,12 @@ class BelanjaController extends Controller
     public function status_belanja_subbag($id)
     {
         $belanja = Belanja::FindOrFail($id);
-        $belanja->status = 'subbag';
-        $belanja->save;
+        $status = "subbag";
+        $belanja->status = $status;
+        $belanja->save();
 
         $detail_bpp = Detail_User::whereJabatan('bpp')->get();
-        Mail::send('emails.status_belanja_subbag', function($message) use ($detail_bpp)
+        Mail::send('emails.status_belanja_subbag', [],function($message) use ($detail_bpp)
             {
                 foreach ($detail_bpp as $user_bpp) {
                 $email = $user_bpp->ke_user->email;
@@ -159,7 +156,7 @@ class BelanjaController extends Controller
         $belanja->save;
 
         $detail_ppk = Detail_User::whereJabatan('ppk')->get();
-        Mail::send('emails.status_belanja_bpp', function($message) use ($detail_ppk)
+        Mail::send('emails.status_belanja_bpp', [],function($message) use ($detail_ppk)
             {
                 foreach ($detail_ppk as $user_ppk) {
                 $email = $user_ppk->ke_user->email;
@@ -176,7 +173,7 @@ class BelanjaController extends Controller
         $belanja->save;
         $id_bagian = Auth::user()->id_bagian;
         $detail_bagian = User::whereId_bagian($id_bagian)->with('detail_user')->get();
-        Mail::send('emails.status_belanja_ppk', function($message) use ($detail_bagian)
+        Mail::send('emails.status_belanja_ppk', [],function($message) use ($detail_bagian)
             {
                 foreach ($detail_bagian as $user_bagian) {
                 $email = $user_bagian->ke_user->email;
@@ -199,14 +196,47 @@ class BelanjaController extends Controller
         $input = $request->all();
         $id = $request['id_jenis'];        
 
+        $belanja = Belanja::FindOrFail($id);
+        $id_user = $belanja->id_user;
+        $user = User::FindOrFail($id_user);
+        $id_bagian = $user->id_bagian;
+        // return $id_bagian;
+
         try {
             Komentar::create($input);
         } 
         catch (QueryException $e) {
             return redirect()->route('belanja_komentar');
         }
+        $detail_bagian = User::whereId_bagian($id_bagian)->get();
+        // return $detail_bagian;
+        Mail::send('emails.tambah_komentar_belanja', [],function($message) use ($detail_bagian)
+            {
+                foreach ($detail_bagian as $user_bagian) {
+                $email = $user_bagian->email;
+                $message->to($email)->from('19dewi@gmail.com', 'dewi')
+                ->subject('Komentar Rekap Belanja');
+                }    
+            });
         
         return redirect()->route('belanja_komentar', compact('id'));
+    }
+    
+    public function belanja_bagian_daftar($id)
+    {
+        $no = "1";
+        $quser = User::whereId_bagian($id)->FirstOrFail();
+        $id_user = $quser->id;
+        $daftar_belanja = Belanja::whereId_user($id_user)->get();
+        
+        return view('belanja.belanja_bagian_daftar', compact('no', 'daftar_belanja'));
+    }
+
+    public function belanja_bagian_komentar($id)
+    {
+        $belanja = Belanja::FindOrFail($id);
+        $daftar_komentar = Komentar::whereJenis('belanja')->whereId_jenis($id)->latest()->get();
+        return view('belanja.belanja_bagian_komentar', compact('belanja', 'daftar_komentar'));
     }
 }
 

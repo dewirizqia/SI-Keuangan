@@ -147,8 +147,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         
         Bestmomo\Scafold\ScafoldServiceProvider::class,
-        Zizaco\Entrust\EntrustServiceProvider::class,
-        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 

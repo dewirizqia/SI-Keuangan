@@ -16,6 +16,7 @@ use App\Pagu_Bagian;
 use App\Pagu;
 
 use Mail;
+use Auth;
 
 
 use App\Http\Controllers\Controller;
@@ -132,12 +133,22 @@ class BagianController extends Controller
         return redirect()->route('daftar_usulan_perbagian');
     }
 
+    public function delete_usulan_perbagian($id)
+    {
+        $id_usulan = $id;
+        $usulan = Usulan::FindOrFail($id_usulan);
+        $usulan->delete();
+        $user = Auth::user();
+        $id = $user->id_bagian;
+        return redirect()->route('daftar_usulan_perbagian', compact('id'));
+    }
+
     /////////////////////////////SERAPAN DANA////////////////////////////////////////////
     public function daftar_serapan_bagian($id)
     {
         $no_u = "1";
         $no_r = "1";
-        $no = 1;
+        $no = "1";
         $bagian = Bagian::whereId($id)->firstOrFail();  
         $daftar_pagu_bagian = Pagu_Bagian::whereId_bagian($id)->orderBy('id_pagu', 'dsc')->get(); 
         $tahun = date("Y");
@@ -147,11 +158,24 @@ class BagianController extends Controller
     }    
     public function daftar_revisi_perbagian($id){
         $no = "1";
+        $no_r = "1";
         $id_bagian = $id;
         $dftrusulan = Usulan::whereId_bagian($id)->get();
         $dftr_revisi = Usulan::whereId_bagian($id)->where('revisi', '>', '0')->get();
         $bagian = Bagian::whereId($id)->get();
-        return view('usulan.daftar_revisi_perbagian', compact('dftr_revisi','bagian','id_bagian','no', 'dftrusulan'));        
+        return view('usulan.daftar_revisi_perbagian', compact('no_r','dftr_revisi','bagian','id_bagian','no', 'dftrusulan'));        
 
+    }
+    public function buat_revisi_perbagian($id){
+        $revisi = Usulan::FindOrFail($id);
+        $no_revisi = $revisi->revisi;
+        $tmbh_revisi = $no_revisi + 1;
+        $revisi->revisi = $tmbh_revisi;
+        $revisi->status = "direvisi";
+        $revisi->save();
+        $user = Auth::user();
+        $id = $user->id_bagian;
+        // return redirect()->route('daftar_revisi_perbagian', compact('id'));
+        return redirect()->back();
     }
 }

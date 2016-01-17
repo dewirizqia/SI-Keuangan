@@ -41,6 +41,10 @@ class PaguController extends Controller
         $no = "1";
         $alokasi = "1";
         $spagu = Pagu::orderBy('tahun', 'desc')->get();
+        foreach ($spagu as $pagu) {
+            $alokasi = $pagu->alokasi;
+            $batasan = $pagu->batasan;
+        }
         return view('pagu.daftar_pagu', compact('user','spagu', 'no', 'alokasi'));
     }
 

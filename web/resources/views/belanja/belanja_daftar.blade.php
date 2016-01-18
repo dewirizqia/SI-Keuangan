@@ -22,7 +22,7 @@
 <div class="panel panel-primary">
     <div class="panel-body">	
         @if(Auth::user()->hasRole('subbag'))    
-        <form>
+        <form action="{{ route('excelsptb') }}" method="GET" enctype="multipart/form-data">
             <label class="col-md-1">Tahun</label>
             <div  class="col-md-3">
                  <select class="form-control" name="tahun">

@@ -1124,7 +1124,6 @@ $sheet->setFontSize(12);
            public function sptb()
     {
 
-
         Excel::create('SPTB', function($excel) {
 
           // Set the title
@@ -1230,6 +1229,9 @@ $no = 1;
 $nos = 18;
 $ambilan = Belanja::whereId_pagu_bagian($pagu_bagian->id)->orderBy('id', 'asc')->firstOrFail();
 $ns = $ambilan->MAK;
+$total = 0;
+$totalh = 0;
+$totals= 0;
 foreach ($belanja as $blj) {
   
 if($ns == $blj->MAK){
@@ -1238,36 +1240,57 @@ $sheet->appendRow(array(
 $blj->no_bku,$no,$blj->Kode_MA,$blj->MAK,$blj->penerima,$blj->uraian,$blj->tgl,$blj->no_tanda_bukti,$blj->jumlah,'','','',''));
 
 $sheet->setBorder('a'.$nos.':m'.$nos, 'thin');
-
+$total = $total + $blj->jumlah;
 $no++;
 $nos++;
-}
+} 
 else{
 $sheet->appendRow(array(
-'jumlah','','','','','','','','Rp. 4324118','Rp 272728','Rp -','Rp -','Rp 109.090'  ));
+'jumlah','','','','','','','',$total  ));
+$totalh = $total;
+
+$sheet->cells('i'.$nos, function($cells) {
+   $cells->setFont(array(
+    'bold'       =>  true
+));
+});
 $ns = $blj->MAK;
+$sheet->setBorder('a'.$nos.':m'.$nos, 'thin');
 $no++;
 $nos++;
 
+$total = 0;
 $sheet->appendRow(array(
 $blj->no_bku,$no,$blj->Kode_MA,$blj->MAK,$blj->penerima,$blj->uraian,$blj->tgl,$blj->no_tanda_bukti,$blj->jumlah,'','','',''));
 
 $sheet->setBorder('a'.$nos.':m'.$nos, 'thin');
+$total = $total + $blj->jumlah;
 $no++;
 $nos++;
-}
 
+$totals = $totals + $totalh;
+}
 
 }
 
 $sheet->appendRow(array(
-'jumlah','','','','','','','','Rp. 4324118','Rp 272728','Rp -','Rp -','Rp 109.090'  ));
+'jumlah','','','','','','','',$total));
 $ns = $blj->MAK;
+$sheet->cells('i'.$nos, function($cells) {
+   $cells->setFont(array(
+    'bold'       =>  true
+));
+});
 $sheet->setBorder('a'.$nos.':m'.$nos, 'thin');
 $nos++;
+$totals = $totals + $total;
 $sheet->appendRow(array(
-'jumlah','','','','','','','','Rp. 4324118','Rp 272728','Rp -','Rp -','Rp 109.090'  ));
-
+'jumlah','','','','','','','',$totals));
+$sheet->cells('i'.$nos, function($cells) {
+   $cells->setFont(array(
+    'bold'       =>  true
+));
+});
 $sheet->setBorder('a'.$nos.':m'.$nos, 'thin');
 
 $nos = $nos + 2;

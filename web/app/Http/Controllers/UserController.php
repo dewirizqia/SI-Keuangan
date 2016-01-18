@@ -37,7 +37,7 @@ class UserController extends Controller
         return view('user.tambah_user', compact('sbagian', 'roles'));
     }
 
-    public function simpan_user(Request $request)
+    public function simpan_user(UserRequest $request)
     {
         $input = $request->all();
         $input['password'] = bcrypt($request->input('password'));

@@ -12,6 +12,7 @@ use App\Usulan;
 use App\Bagian;
 use App\User;
 use App\Detail_User;
+use App\Detail_Usulan;
 use App\Pagu_Bagian;
 use App\Pagu;
 
@@ -72,7 +73,8 @@ class BagianController extends Controller
         $dftrusulan = Usulan::whereId_bagian($id)->get();
         $bagian = Bagian::whereId($id)->get();
         $id_bagian = $id;
-        return view('usulan.daftar_usulan_perbagian', compact('bagian','id_bagian','no', 'dftrusulan'));
+        $daftar_pagu = Pagu::latest()->get();
+        return view('usulan.daftar_usulan_perbagian', compact('daftar_pagu','bagian','id_bagian','no', 'dftrusulan'));
     }
     public function tes(UsulanRequest $request, $id){
         $input = $request->all();
@@ -82,10 +84,12 @@ class BagianController extends Controller
             return redirect()->back()
             ->with('pesan', 'Data usulan Sudah ada!');
         }
+        // $input['id_pagu'] = '0';
         $input['revisi'] = '0';
         $input['status'] = 'sementara';
         $input['id_bagian'] = $id; 
         Usulan::create($input);
+        // dd($input);
         return redirect()->route('daftar_usulan_perbagian', compact('id'));
     }
 
@@ -112,6 +116,16 @@ class BagianController extends Controller
         return $id;
         // return redirect()->route('daftar_usulan_bagian', compact('id_bagian'));
     }
+
+    public function simpan_usulan_bagian(Request $request, $usulan)
+    {
+        $input = $request->all();
+        $input['id_usulan'] = $usulan;
+        Detail_Usulan::create($input);
+        return redirect()->route('buat_usulan_bagian', compact('usulan'));
+        
+    }
+
     public function status_usulan($id)
     {
         // $user = User::latest()->get();

@@ -88,7 +88,8 @@ class UsulanController extends Controller
     {
         $no = "1";
         $dftrusulan = Usulan::whereStatus('usulan')->get();
-        return view('usulan.daftar_usulan', compact('no','dftrusulan'));
+        $daftar_pagu = Pagu::latest()->get();
+        return view('usulan.daftar_usulan', compact('daftar_pagu','no','dftrusulan'));
     }
 
     public function daftar_usulan_bagian($id_bagian)
@@ -96,8 +97,9 @@ class UsulanController extends Controller
         $no = "1";
         $dftrusulan = Usulan::whereId_bagian($id_bagian)->get();
         $bagian = Bagian::whereId($id_bagian)->get();
+        $daftar_pagu = Pagu::latest()->get();
         // return $id_bagian;
-        return view('usulan.daftar_usulan_bagian', compact('bagian','id_bagian','no', 'dftrusulan'));
+        return view('usulan.daftar_usulan_bagian', compact('daftar_pagu','bagian','id_bagian','no', 'dftrusulan'));
     }
     
     public function delete_usulan_bagian($id)
@@ -401,11 +403,12 @@ class UsulanController extends Controller
         $usulan = Usulan::FindOrFail($id);
         $usulan->status = "subbag";
         $usulan->save();
+        // return "subbag";
         $detail_wd2 = Detail_User::whereJabatan('wd2')->get();
         Mail::send('emails.status_usulan_subbag', [],function($message) use ($detail_wd2)
             {
                 foreach ($detail_wd2 as $user_wd2) {
-                $email = $detail_wd2->ke_user->email;
+                $email = $user_wd2->ke_user->email;
                 $message->to($email)->from('19dewi@gmail.com', 'dewi')
                 ->subject('Usulan');
                 }    

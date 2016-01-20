@@ -33,7 +33,6 @@
 	                                <a href="{{ route('daftar_usulan') }}">Daftar Usulan</a>
 	                            </li>
 	                            @foreach ($sbagian as $bagian)
-
 	                            <li>
 	                                <a href="{{ route('daftar_usulan_bagian',$bagian->id) }}">{{ $bagian->detail }}</a>
 	                            </li>
@@ -42,10 +41,10 @@
 	                        <!-- /.nav-second-level -->
 	                    </li>
 	                    <li>
-	                        <a href="#"><i class="glyphicon glyphicon-tasks"></i> Rekap Belanja<span class="fa arrow"></span></a>
+	                        <a href="#"><i class="glyphicon glyphicon-tasks"></i> Permintaan Belanja<span class="fa arrow"></span></a>
 	                        <ul class="nav nav-second-level">
 	                        	<li>
-	                                <a href="{{ route('belanja_daftar') }}">Daftar Rekap Belanja</a>
+	                                <a href="{{ route('belanja_daftar') }}">Daftar Permintaan Belanja</a>
 	                            </li>
 	                            @foreach ($sbagian as $bagian)
 	                            <li>
@@ -65,9 +64,9 @@
 
                             <a href="#"><i class="glyphicon glyphicon-envelope"></i> Surat <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-	                            <li>
+	                            <!-- <li>
 	                                <a href="{{ route('nominatif_menu') }}">Daftar Nominatif</a>
-	                            </li>
+	                            </li> -->
 	                            <li>
 	                                <a href="{{ route('spjup_daftar') }}">SPJ UP</a>
 	                            </li>

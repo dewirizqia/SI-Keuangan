@@ -59,6 +59,7 @@ class UserController extends Controller
         return redirect()->route('daftar_user'); 
     }
 
+
     public function edit_user($id)
     {
         $user = User::FindOrFail($id);
@@ -80,4 +81,18 @@ class UserController extends Controller
             
             return redirect()->route('daftar_user');
     }    
+    public function update_user(Request $request, $name)
+    {
+        $user = User::whereName($name)->firstOrFail();
+        $input = $request->all();
+
+        try 
+        {
+        $user->update($input);
+        } 
+        catch (QueryException $e) {
+            return redirect()->back();
+        }
+        return redirect()->route('daftar_user');
+    }
 }

@@ -263,6 +263,8 @@ Route::get('bagian/belanja/daftar/{id}/komentar', array('as'=>'belanja_bagian_ko
 ////////////////////////////////////EXPORT TO EXCEL///////////////////////////////////////////
 Route::get('excelrab/{id}', ['as'=>'excelrab', 'uses'=> 'ExcelController@rab']);
 
+Route::get('excelrkakl/{id}', ['as'=>'excelrkakl', 'uses'=> 'ExcelController@rkakl']);
+
 Route::get('excelup/{id}', ['as'=>'excelup', 'uses'=> 'ExcelController@up']);
 
 Route::get('excells/{id}', ['as'=>'excells', 'uses'=> 'ExcelController@ls']);

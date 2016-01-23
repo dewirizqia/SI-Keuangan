@@ -5,17 +5,6 @@
 @section('isi')
 <br>
 <br>
-<form role="form" method="POST" action="{{ route('tambahkan_usulan_perbagian', $id_bagian)}}" accept-charset="UTF-8" enctype ="multipart/form-data">
-    {{ csrf_field() }}
-        <div class="form-group">
-            <div class="col-md-3">
-               <input class="form-control" name="tahun" placeholder="Masukkan Tahun Usulan">
-            </div>
-            <div class="col-md-3">
-                <button type="submit" class="btn btn-primary">Tambah Usulan</button>
-            </div>
-        </div>
-</form>
 
 <br>
 <br>

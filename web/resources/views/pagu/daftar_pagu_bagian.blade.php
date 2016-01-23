@@ -47,7 +47,7 @@
             <div class="form-group">
                 <label class="col-md-1">Tahun</label>
                 <div  class="col-md-3">
-                    <select class="form-control" name="id_pagu" id="tahun" disabled>
+                    <select class="form-control" name="id_pagu" id="tahun" >
                         <option value="">--</option>
                         @foreach($daftar_pagu as $pagu)
                         <option value="{{ $pagu->id }}">{{ $pagu->tahun }}</option>

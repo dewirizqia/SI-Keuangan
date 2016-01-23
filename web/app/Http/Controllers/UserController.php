@@ -12,6 +12,7 @@ use App\Role;
 //
 
 use App\Http\Requests;
+use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller

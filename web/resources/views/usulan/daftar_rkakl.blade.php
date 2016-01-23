@@ -86,9 +86,9 @@
                         <td width="30px">{{ $no++ }}</td>
                         <td>{{ $data->pagu->tahun }}</td>
                         <td>{{ $data->revisi }}</td>
-                        <td><a href="{{ route('buat_rkakl', $data->id) }}" class="btn btn-success">detail</a>
+                        <td><a href="{{ route('buat_rkakl', $data->id) }}" class="btn btn-primary">detail</a>
                         @if (Auth::user()->hasRole('subbag'))
-                        <a href="" class="btn btn-primary">Download</a></td>
+                        <a href="{{ route('excelrkakl', $data->id) }}" class="btn btn-success">Download</a></td>
                         <td> 
                             <table> 
                                 <td>

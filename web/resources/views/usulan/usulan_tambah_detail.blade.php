@@ -36,14 +36,28 @@
 <label>Detail</label>
 <br/><input style="width:600px" name="detail" type="text">
 <br/><br/>
-<div class="col-md-2 contact-grid">
-<label>VOL</label>
-<br/><input style="width:100px" name="nominal" type="text">
-</div>
+<table>
+<tr>
+<td><input style="width:50px" name="n1" type="text">&nbsp</td>
+<td><input style="width:50px" name="k1" type="text"></td>
+<td>&nbsp X &nbsp </td>
+<td><input style="width:50px" name="n2" type="text">&nbsp</td>
+<td><input style="width:50px" name="k2" type="text"></td>
+<td>&nbsp X &nbsp </td>
+<td><input style="width:50px" name="n3" type="text">&nbsp</td>
+<td><input style="width:50px" name="k3" type="text"></td>
+<td>&nbsp X &nbsp </td>
+<td><input style="width:50px" name="n4" type="text">&nbsp</td>
+<td><input style="width:50px" name="k4" type="text"></td>
+</tr>
+</table>
 
-<div class="col-md-2 contact-grid">
+<br/>
+
+
+<div class="col-md-1 contact-grid">
 <label>SAT</label>
-<br/><input style="width:100px" name="satuan" type="text">
+<br/><input style="width:80px" name="satuan" type="text">
 </div>
 
 <div class="col-md-2 contact-grid">

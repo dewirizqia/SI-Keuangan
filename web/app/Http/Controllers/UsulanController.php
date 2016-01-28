@@ -154,12 +154,50 @@ class UsulanController extends Controller
         $input = $request->all();
         $input['jenis_komponen'] = "utama";
 
-        $nominal = $input['nominal'];
+        $n1 = $input['n1'];
+        $n2 = $input['n2'];
+        $n3 = $input['n3'];
+        $n4 = $input['n4'];
+
+        $k1 = $input['k1'];
+        $k2 = $input['k2'];
+        $k3 = $input['k3'];
+        $k4 = $input['k4'];
+
+
+         if($n1 != ""){
+            $kal1= $n1." ".$k1;
+            $nf1 = $n1;
+        }else{$kal1="";$nf1="1";}
+
+        if($n2 != ""){
+            $kal2= " X ".$n2." ".$k2;
+            $nf2 = $n2;
+        }else{$kal2="";$nf2="1";}
+
+        if($n3 != ""){
+            $kal3= " X ".$n3." ".$k3;
+            $nf3 = $n3;
+        }else{$kal3="";$nf3="1";}
+
+        if($n4 != ""){
+            $kal4= " X ".$n4." ".$k4;
+            $nf4 = $n4;
+        }else{$kal4="";$nf4="1";}
+
+        $detail = $input['detail'];
+        
+        $nominal = $nf1 * $nf2 * $nf3 * $nf4;
         $harga = $input['harga_satuan'];
 
         $total = $harga*$nominal;
 
+        $input['nominal'] = $nominal;
         $input['jumlah'] = $total;
+
+       
+        $input['detail'] = $detail . " [".$kal1. $kal2. $kal3. $kal4."]";
+        
        
         Detail_Usulan::create($input);
   
@@ -184,8 +222,17 @@ class UsulanController extends Controller
         $input = Input::orderBy('kode_input','asc')->get();
         $sub_input = Sub_Input::orderBy('kode_subinput','asc')->get();
         $prodi = Auth::user()->id;
+        $usulan = Detail_Usulan::orderBy('id_akun','asc')->get();
+        $akun = Akun::orderBy('id','asc')->get();
+        $lama = "";
+        $baru = "";
+        $total =0;
+        $totals=0;   
 
-        return view('usulan.usulan_tambah',compact('output','sub_output','input','sub_input','tahun','prodi'));
+
+
+        return view('usulan.usulan_tambah',compact('output','sub_output','input','sub_input','tahun','prodi','usulan',
+            'akun','lama','baru','total','totals'));
 //        $no = 0;
   //      $no_suboutput = 0;
     //    $no_input = 0;

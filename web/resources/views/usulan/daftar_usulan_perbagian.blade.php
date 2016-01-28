@@ -1,6 +1,7 @@
 @extends('home.admin')
-
-
+@section('head')
+<link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
+@stop
 @section('isi')
 <br>
 <br>
@@ -22,10 +23,18 @@
     @endif
 <form role="form" method="POST" action="{{ route('tambahkan_usulan_perbagian', $id_bagian)}}" accept-charset="UTF-8" enctype ="multipart/form-data">
     {{ csrf_field() }}
-        <div class="form-group">
-            <div class="col-md-3">
-               <input class="form-control" name="tahun" placeholder="Masukkan Tahun Usulan">
+    <div class="form-group">
+                <label class="col-md-1">Tahun</label>
+                <div  class="col-md-3">
+                    <select class="form-control" name="tahun" id="tahun">
+                        <option value="">--</option>
+                        @foreach($daftar_pagu as $pagu)
+                        <option value="{{ $pagu->tahun }}">{{ $pagu->tahun }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
+        <div class="form-group">
             <div class="col-md-3">
                 <button type="submit" class="btn btn-primary">Tambah Usulan</button>
             </div>
@@ -45,7 +54,7 @@
     <div class="panel-body">
         @if ($dftrusulan->count())
         <div class="dataTable_wrapper">                
-            <form id="calx">
+         <!--   <form id="calx">-->
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                 <tr>
@@ -80,7 +89,7 @@
                 @endforeach
             </tbody>
             </table>
-            </form>
+         <!--   </form>-->
         </div>
         @else
             <div class="panel-heading"><h3><center>Data Usulan Belum di Tambahkan</center></h3></div>

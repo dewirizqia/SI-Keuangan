@@ -44,6 +44,7 @@ class PaguController extends Controller
         $no = "1";
         $alokasi = "1";
         $spagu = Pagu::orderBy('tahun', 'desc')->get();
+        $tahun = date("Y");
         // foreach ($spagu as $pagu) {
         //     $id_pagu = $pagu->id;
         //     $rkakl = Rkakl::whereId_pagu($id_pagu)->get();
@@ -51,10 +52,10 @@ class PaguController extends Controller
         //     $total = Detail_Rkakl::whereId_rkakl($id_rkakl)->sum('jumlah');
         // }
         // return $spagu;
-        
+        // return $tahun;
         
         // return view('tes', compact('spagu', 'total'));
-        return view('pagu.daftar_pagu', compact('user','spagu', 'no', 'alokasi'));
+        return view('pagu.daftar_pagu', compact('tahun','user','spagu', 'no', 'alokasi'));
     }
 
     public function simpan_pagu(PaguRequest $request)
@@ -85,6 +86,10 @@ class PaguController extends Controller
         $pagu = Pagu::FindOrFail($id);
         $input = $request->all();
         $batasan = $request->input('batasan');
+        $batasan_awal = $pagu->batasan;
+        if($batasan < $batasan_awal){
+            $pagu->sisa = $batasan;
+        }
         $pagu->batasan = $batasan;
         $pagu->save();
         return redirect()->route('daftar_pagu');
@@ -196,7 +201,7 @@ class PaguController extends Controller
         $sinput = Input::orderBy('kode_input', 'asc')->get();
         $ssubinput = Sub_Input::orderBy('kode_subinput', 'asc')->get();
         $daftar_pagu = Pagu::orderBy('id', 'dsc')->get();
-        $daftar_pagu_output = Pagu_Output::orderBy('id', 'dsc')->get();
+        // $daftar_pagu_output = Pagu_Output::orderBy('id', 'dsc')->get();
         $daftar_pagu_kegiatan = Pagu_Kegiatan::orderBy('id', 'dsc')->get();
         $sakun = Akun::latest()->get();
         return view('pagu.daftar_pagu_kegiatan', compact('daftar_pagu','ssuboutput','daftar_pagu_output','sinput','ssubinput', 'no', 'daftar_pagu_kegiatan', 'sakun'));

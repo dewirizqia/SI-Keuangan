@@ -8,7 +8,7 @@ class Detail_Usulan extends Model
 {
     protected $table = 'detail_usulan';
 
-    protected $fillable = ['id_usulan', 'nominal', 'satuan', 'detail', 'harga_satuan', 'jumlah', 'jenis_komponen', 'id_subinput', 'id_akun'];
+    protected $fillable = ['id_usulan', 'nominal', 'satuan', 'detail', 'harga_satuan', 'jumlah', 'jenis_komponen', 'id_subinput', 'id_akun','prodi'];
 
     public function usulan()
     {

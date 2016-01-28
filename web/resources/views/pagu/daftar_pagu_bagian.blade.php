@@ -47,7 +47,11 @@
             <div class="form-group">
                 <label class="col-md-1">Tahun</label>
                 <div  class="col-md-3">
+<<<<<<< HEAD
                     <select class="form-control" name="id_pagu" id="tahun" >
+=======
+                    <select class="form-control" name="id_pagu" id="tahun">
+>>>>>>> 6477118a8bc9ca01ac4ab037ac5cf77205169402
                         <option value="">--</option>
                         @foreach($daftar_pagu as $pagu)
                         <option value="{{ $pagu->id }}">{{ $pagu->tahun }}</option>

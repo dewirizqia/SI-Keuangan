@@ -2,6 +2,8 @@
 
 @section('head')
 <link href="{{ asset('css/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
+<script type="text/javascript" src="css/jquery-1.9.1.min.js"></script>
+<script src="css/jquery-calx-1.1.9.min.js"></script>
 @stop
 
 
@@ -18,7 +20,7 @@
 	    </div>
 	@endif
 
-<form role="form" method="POST" action="{{ route('nilai_detail', $usulan->id) }}" accept-charset="UTF-8" enctype ="multipart/form-data">
+<form id="calx" role="form" method="POST" action="{{ route('simpan_usulan_bagian', $usulan->id)}}" accept-charset="UTF-8" enctype ="multipart/form-data">
 	<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
 
 	<div class="form-group">
@@ -27,38 +29,8 @@
     </div>
 
     <div class="form-group">
-    	<label>OUTPUT</label>
-    <select class="form-control" name="output" id="output">
-        <option value="">--</option>
-    	@foreach($output as $u_output)
-        <option value="{{ $u_output->id }}">{{ $u_output->uraian }}</option>
-        @endforeach
-    </select>
-    </div>
-
-    <div class="form-group">
-    	<label>SUB OUTPUT</label>
-     <select class="form-control" name="sub_output" id="sub_output">
-        <option value="">--</option>
-    	@foreach($suboutput as $u_suboutput)
-        <option value="{{ $u_suboutput->id }}" class="{{ $u_suboutput->id_output }}">{{ $u_suboutput->uraian }}</option>
-        @endforeach
-    </select>
-    </div>
-
-    <div class="form-group">
-    	<label>KOMPONEN INPUT</label>
-    <select class="form-control" name="input" id="input">
-        <option value="">--</option>
-    	@foreach($input as $u_input)
-        <option value="{{ $u_input->id }}" class="{{ $u_input->id_suboutput }}">{{ $u_input->uraian }}</option>
-        @endforeach
-    </select>
-    </div>
-
-    <div class="form-group">
         <label>SUB KOMPONEN INPUT</label>
-    <select class="form-control" name="sub_input">
+    <select class="form-control" name="id_subinput">
         <option value="">--</option>
         @foreach($subinput as $u_subinput)
         <option value="{{ $u_subinput->id }}" class="{{ $u_subinput->id_input }}">{{ $u_subinput->uraian }}</option>
@@ -68,7 +40,7 @@
 
     <div class="form-group">
         <label>AKUN</label>
-    <select class="form-control" name="akun">
+    <select class="form-control" name="id_akun">
         <option value="">--</option>
         @foreach($akun as $u_akun)
         <option value="{{ $u_akun->id }}">({{ $u_akun->kode_akun }})  {{ $u_akun->uraian_akun }}</option>
@@ -76,8 +48,40 @@
     </select>
     </div>
 
+    <div class="form-group">
+            <label>Komponen</label>
+        <select class="form-control" name="jenis_komponen">
+            <option value="utama">Utama</option>
+            <option value="pendukung">Pendukung</option>
+        </select>
+        </div>
 
-    
+        <div class="form-group">
+            <label>Detail</label>
+            <input class="form-control" name="detail">
+        </div>
+
+        <div class="form-group">
+            <label>Harga Satuan</label>
+             <input class="form-control" name="harga_satuan" id="harga_satuan">
+        </div>
+        <div class="form-group">
+            <div class="col-md-6">
+            <label>Nominal</label> 
+            <input class="form-control" name="nominal" id="nominal"> 
+            </div>    
+        </div>
+        <div class="form-group">
+            <div class="col-md-6">
+               <label>Satuan</label>
+               <input class="form-control" name="satuan">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Jumlah</label>
+            <input class="form-control" name="jumlah" id="jumlah" data-formula="$harga_satuan*$nominal">
+        </div>
     <br>
     <button type="submit" class="btn btn-primary">Tambah Detail</button>
     </form>

@@ -75,7 +75,7 @@ class BelanjaController extends Controller
             return redirect()->route('belanja_buat');
         }
             
-        return redirect()->route('belanja_daftar');
+        return redirect()->route('belanja_bagian_daftar');
     }
 
     public function belanja_edit($id)
@@ -153,7 +153,7 @@ class BelanjaController extends Controller
     {
         $belanja = Belanja::FindOrFail($id);
         $belanja->status = 'bpp';
-        $belanja->save;
+        $belanja->save();
 
         $detail_ppk = Detail_User::whereJabatan('ppk')->get();
         Mail::send('emails.status_belanja_bpp', [],function($message) use ($detail_ppk)
@@ -170,17 +170,24 @@ class BelanjaController extends Controller
     {
         $belanja = Belanja::FindOrFail($id);
         $belanja->status = 'ppk';
-        $belanja->save;
+        $belanja->save();
         $id_bagian = Auth::user()->id_bagian;
-        $detail_bagian = User::whereId_bagian($id_bagian)->with('detail_user')->get();
+        $detail_bagian = User::whereId_bagian($id_bagian)->get();
         Mail::send('emails.status_belanja_ppk', [],function($message) use ($detail_bagian)
             {
                 foreach ($detail_bagian as $user_bagian) {
-                $email = $user_bagian->ke_user->email;
+                $email = $user_bagian->email;
                 $message->to($email)->from('19dewi@gmail.com', 'dewi')
                 ->subject('Rekap Belanja');
                 }    
             });
+        $id = $belanja->id_pagu_bagian;
+        $total_pagu_bagian = Belanja::whereId_pagu_bagian($id)->sum('jumlah');
+        $pagu_bagian = Pagu_Bagian::FindOrFail($id);
+        $pagu = $pagu_bagian->pagu;
+        $sisa = $pagu - $total_pagu_bagian;
+        $pagu_bagian->sisa = $sisa;
+        $pagu_bagian->save();
         return redirect()->route('belanja_daftar');
     }
         

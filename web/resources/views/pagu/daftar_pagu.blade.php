@@ -34,7 +34,11 @@
             <div class="form-group">
                 <label class="col-md-2" background="">Tahun</label>
                 <div  class="col-md-4">
-                    <input type="text" class="form-control" name="tahun">
+                    <!-- <input type="text" class="form-control" name="tahun"> -->
+                    <select class="form-control" name="tahun">
+                        <option type="{{$tahun}}">{{$tahun}}</option>
+                        <option type="{{$tahun+1}}">{{$tahun+1}}</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">

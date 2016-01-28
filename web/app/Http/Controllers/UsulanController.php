@@ -29,6 +29,7 @@ use App\Pagu_Output;
 use App\Rincian_Perhitungan;
 
 
+
 class UsulanController extends Controller
 {
  
@@ -38,11 +39,18 @@ class UsulanController extends Controller
             'buat_detail_usulan_bagian',
             'detail_usulan_bagian_simpan',
             'usulan_bagian_simpan',
+            'buat_usulan_detail',
             'daftar_usulan_bagian',
+            'simpanusulandetail',
+            'deleteusulandetail',
             'delete_usulan_bagian',
             'buat_usulan_bagian',
+            'tambah_usulan_detail',
             'nilai_detail',
-            'buat_detail'
+            'buat_detail',
+            'tambahsubinput',
+            'simpansubinput',
+            'deletesubinput'
             ]]);
     }
 
@@ -88,7 +96,8 @@ class UsulanController extends Controller
     {
         $no = "1";
         $dftrusulan = Usulan::whereStatus('usulan')->get();
-        return view('usulan.daftar_usulan', compact('no','dftrusulan'));
+        $daftar_pagu = Pagu::latest()->get();
+        return view('usulan.daftar_usulan', compact('daftar_pagu','no','dftrusulan'));
     }
 
     public function daftar_usulan_bagian($id_bagian)
@@ -96,8 +105,9 @@ class UsulanController extends Controller
         $no = "1";
         $dftrusulan = Usulan::whereId_bagian($id_bagian)->get();
         $bagian = Bagian::whereId($id_bagian)->get();
+        $daftar_pagu = Pagu::latest()->get();
         // return $id_bagian;
-        return view('usulan.daftar_usulan_bagian', compact('bagian','id_bagian','no', 'dftrusulan'));
+        return view('usulan.daftar_usulan_bagian', compact('daftar_pagu','bagian','id_bagian','no', 'dftrusulan'));
     }
     
     public function delete_usulan_bagian($id)
@@ -116,26 +126,113 @@ class UsulanController extends Controller
         return view('usulan.detail_usulan', compact('id','no', 'usulan', 'detail_usulan'));
     }
 
+
+         public function buat_usulan_detail($id)
+    {
+        $prodi = Auth::user()->id;
+        $sub_input = Sub_Input::whereId($id)->firstOrFail();
+        $usulan = Detail_Usulan::whereId_subinput($id)->whereProdi($prodi)->orderBy('id_akun','asc')->get();
+        $akun = Akun::orderBy('id','asc')->get();
+        $lama = "";
+        $baru = "";
+        $total =0;
+        $totals=0;   
+   
+        return view('usulan.usulan_tambah_uraian',compact('usulan','sub_input','akun','lama','baru','total','totals'));
+    }
+
+         public function tambah_usulan_detail($id)
+    {
+        $id_subinput = $id;
+        $akun = Akun::orderBy('kode_akun','asc')->get();
+        $total = 0;
+        return view('usulan.usulan_tambah_detail',compact('akun','id_subinput','total'));
+    }
+
+      public function simpanusulandetail(Request $request)
+    {
+        $input = $request->all();
+        $input['jenis_komponen'] = "utama";
+
+        $nominal = $input['nominal'];
+        $harga = $input['harga_satuan'];
+
+        $total = $harga*$nominal;
+
+        $input['jumlah'] = $total;
+       
+        Detail_Usulan::create($input);
+  
+        return redirect()->back();
+    }
+
+
+    public function deleteusulandetail($id)
+    {
+        $usulan = Detail_Usulan::whereId($id)->firstOrFail();
+        $usulan->delete();
+
+        return redirect()->back();
+    }
+
+
         public function buat_usulan_bagian($id)
     {
-        $no = 0;
-        $no_suboutput = 0;
-        $no_input = 0;
-        $no_akun = 0;
-        $no_subinput = 0;
-        $output = Output::latest()->get();
-        $usulan = Usulan::whereId($id)->firstOrFail();
-        $id_usulan = $usulan->id;
-        $detail = Detail_Usulan::whereId_usulan($id_usulan)->get();
-        $id_bagian = $usulan->id_bagian;
+        $tahun = $id;
+         $output = Output::orderBy('kode_output','asc')->get();
+        $sub_output = Sub_output::orderBy('kode_suboutput','asc')->get();
+        $input = Input::orderBy('kode_input','asc')->get();
+        $sub_input = Sub_Input::orderBy('kode_subinput','asc')->get();
+        $prodi = Auth::user()->id;
+
+        return view('usulan.usulan_tambah',compact('output','sub_output','input','sub_input','tahun','prodi'));
+//        $no = 0;
+  //      $no_suboutput = 0;
+    //    $no_input = 0;
+      //  $no_akun = 0;
+//        $no_subinput = 0;
+  //      $output = Output::latest()->get();
+    //    $usulan = Usulan::whereId($id)->firstOrFail();
+      //  $id_usulan = $usulan->id;
+//        $detail = Detail_Usulan::whereId_usulan($id_usulan)->get();
+  //      $id_bagian = $usulan->id_bagian;
         // $databagian = Bagian::whereId($id_bagian)->firstOrFail();
-        $suboutput = Sub_Output::latest()->get();
-        $input = Input::latest()->get();
-        $subinput = Sub_Input::latest()->get();
-        $akun = Akun::latest()->get();
+//        $suboutput = Sub_Output::latest()->get();
+  //      $input = Input::latest()->get();
+    //    $subinput = Sub_Input::latest()->get();
+      //  $akun = Akun::latest()->get();
         // return $id_bagian;
-        return view('usulan.buat_usulan_bagian', compact('id_bagian', 'no','detail','usulan','output','databagian', 'suboutput','input', 'subinput', 'akun', 'no_suboutput', 'no_input', 'no_subinput', 'no_akun'));
+       // return view('usulan.buat_usulan_bagian', compact('id_bagian', 'no','detail','usulan','output','databagian', 'suboutput','input', 'subinput', 'akun', 'no_suboutput', 'no_input', 'no_subinput', 'no_akun'));
     }
+
+         public function tambahsubinput($id)
+    {
+        $id = $id;
+
+
+        return view('usulan.usulan_tambah_subinput',compact('id'));
+    }
+
+
+      public function simpansubinput(Request $request)
+    {
+        $input = $request->all();
+        
+
+        Sub_Input::create($input);
+  
+        return redirect()->back();
+    }
+
+    public function deletesubinput($id)
+    {
+        $subinput = Sub_Input::whereId($id)->firstOrFail();
+       
+        $subinput->delete();
+
+        return redirect()->back();
+    }
+
 
     public function nilai_detail(Request $request, $id)
     {   
@@ -401,11 +498,12 @@ class UsulanController extends Controller
         $usulan = Usulan::FindOrFail($id);
         $usulan->status = "subbag";
         $usulan->save();
+        // return "subbag";
         $detail_wd2 = Detail_User::whereJabatan('wd2')->get();
         Mail::send('emails.status_usulan_subbag', [],function($message) use ($detail_wd2)
             {
                 foreach ($detail_wd2 as $user_wd2) {
-                $email = $detail_wd2->ke_user->email;
+                $email = $user_wd2->ke_user->email;
                 $message->to($email)->from('19dewi@gmail.com', 'dewi')
                 ->subject('Usulan');
                 }    
@@ -430,4 +528,8 @@ class UsulanController extends Controller
         $pagu->save();
         return redirect()->route('daftar_rkakl');
     }
+
+
+
+
 }
